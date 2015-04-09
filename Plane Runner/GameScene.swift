@@ -20,4 +20,23 @@ class GameScene: SKScene {
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
     }
+    
+    // MARK: Scene setup helpers
+    func setBackground(){
+        // TODO: Set background.
+    }
+    
+    func setObsticles() {
+        // TODO: Set moutain plains up and down.
+    }
+    
+    func createClouds() {
+        // TODO: Create clouds
+    }
+    
+    func createPlane() {
+        // TODO: Create plane
+    }
+    
+    
 }
