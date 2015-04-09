@@ -45,6 +45,7 @@ class GameScene: SKScene {
             bg = SKSpriteNode(texture: bgTexture)
             bg.position = CGPoint(x: bgTexture.size().width/2 + bgTexture.size().width * i, y: CGRectGetMidY(self.frame))
             bg.size.height = self.frame.height
+            bg.zPosition = -2
             
             bg.runAction(movebgForever)
             
