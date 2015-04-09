@@ -14,6 +14,9 @@ class GameScene: SKScene {
     
     var movingObjects = SKNode()
     
+    let planGroup:UInt32 = 1
+    let collidableObjectsGroup:UInt32 = 2
+    
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
         
@@ -32,7 +35,6 @@ class GameScene: SKScene {
     
     // MARK: Scene setup helpers
     func setBackground(){
-        // TODO: Set background.
         var bgTexture = SKTexture(imageNamed: "mainBackground")
         
         // Create action to replace background
@@ -51,6 +53,17 @@ class GameScene: SKScene {
             
             movingObjects.addChild(bg)
         }
+    }
+    
+    func setGround() {
+        // Create ground
+        var ground = SKNode()
+        ground.position = CGPointMake(0, 0)
+        ground.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(self.frame.size.width, 1))
+        ground.physicsBody?.dynamic = false
+        ground.physicsBody?.categoryBitMask = collidableObjectsGroup
+        
+        self.addChild(ground)
     }
     
     func setObsticles() {
