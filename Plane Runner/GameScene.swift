@@ -11,6 +11,7 @@ import SpriteKit
 class GameScene: SKScene {
     
     var bg = SKSpriteNode()
+    var plane = SKSpriteNode()
     
     var movingObjects = SKNode()
     
@@ -23,6 +24,7 @@ class GameScene: SKScene {
         self.addChild(movingObjects)
         
         setBackground()
+        createPlane()
     }
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
@@ -76,6 +78,23 @@ class GameScene: SKScene {
     
     func createPlane() {
         // TODO: Create plane
+        let planeTexture = SKTexture(imageNamed: "planeRed1")
+        let planeTexture1 = SKTexture(imageNamed: "planeRed2")
+        let planeTexture2 = SKTexture(imageNamed: "planeRed3")
+        
+        // Animate plans propeller
+        let animation = SKAction.animateWithTextures([planeTexture, planeTexture1, planeTexture2], timePerFrame: 0.05)
+        let makePropellerSpin = SKAction.repeatActionForever(animation)
+        
+        // Set planes possition
+        plane = SKSpriteNode(texture: planeTexture)
+        plane.position = CGPointMake(size.width/4, size.height/2)
+        
+        plane.runAction(makePropellerSpin)
+        
+        plane.zPosition = 5
+        
+        self.addChild(plane)
     }
     
     
