@@ -1,6 +1,6 @@
 # Eric Garcia #
-## Full Sail University | MDVBS ##
-## 1504 MGD ##
+Full Sail University | MDVBS
+1504 MGD
 
 ### What is this repository for? ###
 
