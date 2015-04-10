@@ -18,6 +18,12 @@ class GameScene: SKScene {
     let planeGroup:UInt32 = 1
     let collidableObjectsGroup:UInt32 = 2
     
+    struct PhysicsCategory {
+        static let All          :UInt32 = UInt32.max
+        static let Plane        :UInt32 = 1
+        static let Collidable   :UInt32 = 2
+    }
+    
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
         
@@ -74,9 +80,11 @@ class GameScene: SKScene {
         // Create ground
         var ground = SKNode()
         ground.position = CGPointMake(0, 0)
-        ground.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(size.width, 1))
+//        ground.physicsBody = SKPhysicsBody(edgeFromPoint: CGPointMake(0, 0), toPoint: CGPointMake(0, self.frame.width))
+//        ground.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(self.frame.width, 1))
+        ground.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
         ground.physicsBody?.dynamic = false
-        ground.physicsBody?.categoryBitMask = collidableObjectsGroup
+        ground.physicsBody?.categoryBitMask = PhysicsCategory.Collidable
         
         self.addChild(ground)
     }
@@ -107,9 +115,9 @@ class GameScene: SKScene {
         plane.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(plane.size.width, plane.size.height))
         plane.physicsBody?.dynamic = true
         plane.physicsBody?.allowsRotation = false
-        plane.physicsBody?.categoryBitMask = planeGroup
-        plane.physicsBody?.collisionBitMask = collidableObjectsGroup
-        plane.physicsBody?.contactTestBitMask = collidableObjectsGroup
+        plane.physicsBody?.categoryBitMask = PhysicsCategory.Plane
+        plane.physicsBody?.collisionBitMask = PhysicsCategory.Collidable
+        plane.physicsBody?.contactTestBitMask = PhysicsCategory.Collidable
         
         // Set elevation
         plane.zPosition = 5
