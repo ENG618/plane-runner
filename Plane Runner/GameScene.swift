@@ -39,7 +39,7 @@ class GameScene: SKScene {
         setBackground()
         setGround()
         createPlane()
-        setObsticles()
+        setObstacles()
         
         // Uncomment to show physics
         view.showsPhysics = true
@@ -90,18 +90,18 @@ class GameScene: SKScene {
         self.addChild(ground)
     }
     
-    func setObsticles() {
+    func setObstacles() {
         // TODO: Set moutain plains up and down.
         
-        let moveObsticle = SKAction.moveByX(-self.frame.width, y: 0, duration: NSTimeInterval(self.frame.size.width/100))
-        let removeObsticle = SKAction.removeFromParent()
-        let moveAndRemoveObsticle = SKAction.sequence([moveObsticle, removeObsticle])
+        let moveObstacle = SKAction.moveByX(-self.frame.width, y: 0, duration: NSTimeInterval(self.frame.size.width/100))
+        let removeObstacle = SKAction.removeFromParent()
+        let moveAndRemoveObsticle = SKAction.sequence([moveObstacle, removeObstacle])
         
         // Create upper obsticle
         let upperObsticle = SKSpriteNode(imageNamed: "rockDown")
-        upperObsticle.position = CGPoint(x: CGRectGetMidX(self.frame) + self.frame.size.width, y: CGRectGetMidY(self.frame) + upperObsticle.size.height)
+        upperObsticle.position = CGPoint(x: CGRectGetMidX(self.frame) + self.frame.size.width, y: CGRectGetHeight(self.frame) - upperObsticle.size.height)
 //        upperObsticle.runAction(moveAndRemoveObsticle)
-        upperObsticle.runAction(moveObsticle)
+        upperObsticle.runAction(moveObstacle)
         
         upperObsticle.physicsBody = SKPhysicsBody(rectangleOfSize: upperObsticle.size)
         upperObsticle.physicsBody?.dynamic = false
