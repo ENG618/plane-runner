@@ -33,13 +33,11 @@ class GameScene: SKScene {
         
         self.physicsWorld.contactDelegate = self
         self.addChild(movingObjects)
-        
-        setBackground()
-        setGround()
-        
         // Change gravity
         self.physicsWorld.gravity = CGVectorMake(0, -1.6)
         
+        setBackground()
+        setGround()
         createPlane()
         setObsticles()
         
@@ -145,5 +143,7 @@ extension GameScene: SKPhysicsContactDelegate {
 
     func didBeginContact(contact: SKPhysicsContact) {
         println("Plane crashed")
+        let planeCrash = SKAction.repeatAction(SKAction.playSoundFileNamed("planeCrash.mp3", waitForCompletion: true), count: 1)
+        runAction(planeCrash)
     }
 }
