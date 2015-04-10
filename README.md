@@ -1,6 +1,6 @@
-# README #
-
-This README would normally document whatever steps are necessary to get your application up and running.
+# Eric Garcia #
+## Full Sail University | MDVBS ##
+## 1504 MGD ##
 
 ### What is this repository for? ###
 
@@ -8,22 +8,7 @@ This README would normally document whatever steps are necessary to get your app
 * Version
 * [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
 
-### How do I get set up? ###
+### Credits ###
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+* Background track [Viberz Pad](http://www.melodyloops.com/tracks/viberz-pad/) by: [Dave Brenner](http://www.melodyloops.com/composers/dave-brenner/) from: [melodyloops](http://www.melodyloops.com/)
+* Plane Crash sound effect (Vehicle Crash (Large)) from: [freeSFX](http://www.freesfx.co.uk)
