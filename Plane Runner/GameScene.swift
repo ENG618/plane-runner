@@ -94,11 +94,20 @@ class GameScene: SKScene {
         // TODO: Set moutain plains up and down.
         
         let moveObsticle = SKAction.moveByX(-self.frame.width, y: 0, duration: NSTimeInterval(self.frame.size.width/100))
+        let removeObsticle = SKAction.removeFromParent()
+        let moveAndRemoveObsticle = SKAction.sequence([moveObsticle, removeObsticle])
         
         // Create upper obsticle
         let upperObsticle = SKSpriteNode(imageNamed: "rockDown")
-        //upperObsticle.position = CGPointMake(<#x: CGFloat#>, <#y: CGFloat#>)
+        upperObsticle.position = CGPoint(x: CGRectGetMidX(self.frame) + self.frame.size.width, y: CGRectGetMidY(self.frame) + upperObsticle.size.height)
+//        upperObsticle.runAction(moveAndRemoveObsticle)
+        upperObsticle.runAction(moveObsticle)
         
+        upperObsticle.physicsBody = SKPhysicsBody(rectangleOfSize: upperObsticle.size)
+        upperObsticle.physicsBody?.dynamic = false
+        upperObsticle.physicsBody?.categoryBitMask = PhysicsCategory.Collidable
+        
+        movingObjects.addChild(upperObsticle)
         
         
         
