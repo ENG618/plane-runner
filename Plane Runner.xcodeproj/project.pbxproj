@@ -15,6 +15,7 @@
 		5C4052DA1AD73B260088EE70 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C4052D91AD73B260088EE70 /* Images.xcassets */; };
 		5C4052DD1AD73B260088EE70 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C4052DB1AD73B260088EE70 /* LaunchScreen.xib */; };
 		5C4052E91AD73B260088EE70 /* Plane_RunnerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4052E81AD73B260088EE70 /* Plane_RunnerTests.swift */; };
+		5C4052F31AD7A12D0088EE70 /* backgroundTrack.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5C4052F21AD7A12C0088EE70 /* backgroundTrack.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		5C4052E21AD73B260088EE70 /* Plane RunnerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Plane RunnerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C4052E71AD73B260088EE70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C4052E81AD73B260088EE70 /* Plane_RunnerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plane_RunnerTests.swift; sourceTree = "<group>"; };
+		5C4052F21AD7A12C0088EE70 /* backgroundTrack.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = backgroundTrack.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 		5C4052CB1AD73B260088EE70 /* Plane Runner */ = {
 			isa = PBXGroup;
 			children = (
+				5C4052F41AD7A1360088EE70 /* sounds */,
 				5C4052CE1AD73B260088EE70 /* AppDelegate.swift */,
 				5C4052D01AD73B260088EE70 /* GameScene.sks */,
 				5C4052D21AD73B260088EE70 /* GameScene.swift */,
@@ -116,6 +119,14 @@
 				5C4052E71AD73B260088EE70 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5C4052F41AD7A1360088EE70 /* sounds */ = {
+			isa = PBXGroup;
+			children = (
+				5C4052F21AD7A12C0088EE70 /* backgroundTrack.mp3 */,
+			);
+			name = sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -200,6 +211,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C4052DD1AD73B260088EE70 /* LaunchScreen.xib in Resources */,
+				5C4052F31AD7A12D0088EE70 /* backgroundTrack.mp3 in Resources */,
 				5C4052DA1AD73B260088EE70 /* Images.xcassets in Resources */,
 				5C4052D11AD73B260088EE70 /* GameScene.sks in Resources */,
 				5C4052D81AD73B260088EE70 /* Main.storyboard in Resources */,

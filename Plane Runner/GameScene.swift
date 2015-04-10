@@ -27,17 +27,21 @@ class GameScene: SKScene {
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
         
+        // Play background track
+        let backgrountTrack = SKAction.repeatActionForever(SKAction.playSoundFileNamed("backgroundTrack.mp3", waitForCompletion: true))
+        self.runAction(backgrountTrack)
+        
         self.physicsWorld.contactDelegate = self
         self.addChild(movingObjects)
         
         setBackground()
-        //setGround()
-        self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
+        setGround()
         
         // Change gravity
         self.physicsWorld.gravity = CGVectorMake(0, -1.6)
         
         createPlane()
+        setObsticles()
         
         // Uncomment to show physics
         view.showsPhysics = true
@@ -81,7 +85,6 @@ class GameScene: SKScene {
         var ground = SKNode()
         ground.position = CGPointMake(0, 0)
 //        ground.physicsBody = SKPhysicsBody(edgeFromPoint: CGPointMake(0, 0), toPoint: CGPointMake(0, self.frame.width))
-//        ground.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(self.frame.width, 1))
         ground.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
         ground.physicsBody?.dynamic = false
         ground.physicsBody?.categoryBitMask = PhysicsCategory.Collidable
@@ -91,10 +94,21 @@ class GameScene: SKScene {
     
     func setObsticles() {
         // TODO: Set moutain plains up and down.
+        
+        let moveObsticle = SKAction.moveByX(-self.frame.width, y: 0, duration: NSTimeInterval(self.frame.size.width/100))
+        
+        // Create upper obsticle
+        let upperObsticle = SKSpriteNode(imageNamed: "rockDown")
+        //upperObsticle.position = CGPointMake(<#x: CGFloat#>, <#y: CGFloat#>)
+        
+        
+        
+        
     }
     
     func createClouds() {
         // TODO: Create clouds
+        
     }
     
     func createPlane() {
