@@ -15,20 +15,33 @@ class GameScene: SKScene {
     
     var movingObjects = SKNode()
     
-    let planGroup:UInt32 = 1
+    let planeGroup:UInt32 = 1
     let collidableObjectsGroup:UInt32 = 2
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
         
+        self.physicsWorld.contactDelegate = self
         self.addChild(movingObjects)
         
         setBackground()
+        //setGround()
+        self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
+        
+        // Change gravity
+        self.physicsWorld.gravity = CGVectorMake(0, -1.6)
+        
         createPlane()
+        
+        // Uncomment to show physics
+        view.showsPhysics = true
     }
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
         /* Called when a touch begins */
+        
+        plane.physicsBody?.velocity = CGVectorMake(0, 0)
+        plane.physicsBody?.applyImpulse(CGVectorMake(0, 75))
     }
    
     override func update(currentTime: CFTimeInterval) {
@@ -61,7 +74,7 @@ class GameScene: SKScene {
         // Create ground
         var ground = SKNode()
         ground.position = CGPointMake(0, 0)
-        ground.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(self.frame.size.width, 1))
+        ground.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(size.width, 1))
         ground.physicsBody?.dynamic = false
         ground.physicsBody?.categoryBitMask = collidableObjectsGroup
         
@@ -77,7 +90,6 @@ class GameScene: SKScene {
     }
     
     func createPlane() {
-        // TODO: Create plane
         let planeTexture = SKTexture(imageNamed: "planeRed1")
         let planeTexture1 = SKTexture(imageNamed: "planeRed2")
         let planeTexture2 = SKTexture(imageNamed: "planeRed3")
@@ -92,14 +104,24 @@ class GameScene: SKScene {
         
         plane.runAction(makePropellerSpin)
         
+        plane.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(plane.size.width, plane.size.height))
+        plane.physicsBody?.dynamic = true
+        plane.physicsBody?.allowsRotation = false
+        plane.physicsBody?.categoryBitMask = planeGroup
+        plane.physicsBody?.collisionBitMask = collidableObjectsGroup
+        plane.physicsBody?.contactTestBitMask = collidableObjectsGroup
+        
+        // Set elevation
         plane.zPosition = 5
         
         self.addChild(plane)
     }
-    
-    
 }
 
+// MARK: SKPhysicsContactDelegate extension
 extension GameScene: SKPhysicsContactDelegate {
-    
+
+    func didBeginContact(contact: SKPhysicsContact) {
+        println("Plane crashed")
+    }
 }
