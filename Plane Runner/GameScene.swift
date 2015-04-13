@@ -120,7 +120,7 @@ class GameScene: SKScene {
         // Create upper obsticle
         var upperObstacleTexture = SKTexture(imageNamed: "rockDown")
         var upperObstacle = SKSpriteNode(texture: upperObstacleTexture)
-        upperObstacle.position = CGPoint(x: CGRectGetMaxX(self.frame), y: CGRectGetMaxY(self.frame))
+        upperObstacle.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMaxY(self.frame) - upperObstacle.size.height)
 //        upperObstacle.position = CGPoint(x: CGRectGetMidX(self.frame) + self.frame.size.width, y: CGRectGetHeight(self.frame) - upperObstacle.size.height)
 //        upperObstacle.runAction(moveAndRemoveObsticle)
 //        upperObstacle.runAction(moveObstacle)
@@ -134,7 +134,7 @@ class GameScene: SKScene {
         // Create upper obsticle
         var lowerObstacleTexture = SKTexture(imageNamed: "rock")
         var lowerObstacle = SKSpriteNode(texture: lowerObstacleTexture)
-        lowerObstacle.position = CGPoint(x: CGRectGetMaxX(self.frame), y: CGRectGetMaxY(self.frame))
+        lowerObstacle.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMinY(self.frame) + lowerObstacle.size.height)
 //        lowerObstacle.position = CGPoint(x: CGRectGetMidX(self.frame) + self.frame.size.width + 400, y: lowerObstacle.size.height / 2)
 //        lowerObstacle.runAction(moveAndRemoveObsticle)
 //        lowerObstacle.runAction(moveObstacle)
