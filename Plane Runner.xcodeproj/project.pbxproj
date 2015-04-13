@@ -17,6 +17,7 @@
 		5C4052E91AD73B260088EE70 /* Plane_RunnerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4052E81AD73B260088EE70 /* Plane_RunnerTests.swift */; };
 		5C4052F31AD7A12D0088EE70 /* backgroundTrack.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5C4052F21AD7A12C0088EE70 /* backgroundTrack.mp3 */; };
 		5C4052F61AD7A7710088EE70 /* planeCrash.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5C4052F51AD7A7710088EE70 /* planeCrash.mp3 */; };
+		5C4052F81AD841280088EE70 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C4052F71AD841280088EE70 /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		5C4052E81AD73B260088EE70 /* Plane_RunnerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plane_RunnerTests.swift; sourceTree = "<group>"; };
 		5C4052F21AD7A12C0088EE70 /* backgroundTrack.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = backgroundTrack.mp3; sourceTree = "<group>"; };
 		5C4052F51AD7A7710088EE70 /* planeCrash.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = planeCrash.mp3; sourceTree = "<group>"; };
+		5C4052F71AD841280088EE70 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C4052F81AD841280088EE70 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,6 +70,7 @@
 		5C4052C01AD73B260088EE70 = {
 			isa = PBXGroup;
 			children = (
+				5C4052F71AD841280088EE70 /* AVFoundation.framework */,
 				5C4052CB1AD73B260088EE70 /* Plane Runner */,
 				5C4052E51AD73B260088EE70 /* Plane RunnerTests */,
 				5C4052CA1AD73B260088EE70 /* Products */,
@@ -434,6 +438,7 @@
 				5C4052EE1AD73B260088EE70 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5C4052EF1AD73B260088EE70 /* Build configuration list for PBXNativeTarget "Plane RunnerTests" */ = {
 			isa = XCConfigurationList;
@@ -442,6 +447,7 @@
 				5C4052F11AD73B260088EE70 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -7,6 +7,7 @@
 //
 
 import SpriteKit
+import AVFoundation
 
 class GameScene: SKScene {
     
@@ -15,8 +16,7 @@ class GameScene: SKScene {
     
     var movingObjects = SKNode()
     
-    let planeGroup:UInt32 = 1
-    let collidableObjectsGroup:UInt32 = 2
+    var audioPlayer = AVAudioPlayer()
     
     struct PhysicsCategory {
         static let All          :UInt32 = UInt32.max
@@ -28,8 +28,10 @@ class GameScene: SKScene {
         /* Setup your scene here */
         
         // Play background track
-        let backgrountTrack = SKAction.repeatActionForever(SKAction.playSoundFileNamed("backgroundTrack.mp3", waitForCompletion: true))
-        self.runAction(backgrountTrack)
+//        let backgrountTrack = SKAction.repeatActionForever(SKAction.playSoundFileNamed("backgroundTrack.mp3", waitForCompletion: true))
+//        self.runAction(backgrountTrack)
+        
+        loopBackgroundTrack()
         
         self.physicsWorld.contactDelegate = self
         self.addChild(movingObjects)
@@ -39,13 +41,19 @@ class GameScene: SKScene {
         setBackground()
         setGround()
         createPlane()
-        setObstacles()
+        
+        
+        // Creat obsticles
+        var timer = NSTimer.scheduledTimerWithTimeInterval(6, target: self, selector: Selector(setObstacles()), userInfo: nil, repeats: true)
+        
+//        NSTimer.scheduledTimerWithTimeInterval(<#ti: NSTimeInterval#>, target: <#AnyObject#>, selector: <#Selector#>, userInfo: <#AnyObject?#>, repeats: <#Bool#>)
+//        setObstacles()
         
         // Uncomment to show physics
         view.showsPhysics = true
     }
     
-    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         /* Called when a touch begins */
         
         plane.physicsBody?.velocity = CGVectorMake(0, 0)
@@ -57,6 +65,19 @@ class GameScene: SKScene {
     }
     
     // MARK: Scene setup helpers
+    
+    func loopBackgroundTrack() {
+        
+        let path = NSBundle.mainBundle().pathForResource("backgroundTrack", ofType: ".mp3")
+        let url = NSURL.fileURLWithPath(path!)
+        var error: NSError?
+        
+        audioPlayer = AVAudioPlayer(contentsOfURL: url, error: &error)
+        audioPlayer.volume = 0.2
+        audioPlayer.prepareToPlay()
+        audioPlayer.play()
+    }
+    
     func setBackground(){
         var bgTexture = SKTexture(imageNamed: "mainBackground")
         
@@ -93,23 +114,35 @@ class GameScene: SKScene {
     func setObstacles() {
         // TODO: Set moutain plains up and down.
         
-        let moveObstacle = SKAction.moveByX(-self.frame.width, y: 0, duration: NSTimeInterval(self.frame.size.width/100))
-        let removeObstacle = SKAction.removeFromParent()
-        let moveAndRemoveObsticle = SKAction.sequence([moveObstacle, removeObstacle])
+        var moveObstacle = SKAction.moveByX(-self.frame.width * 2, y: 0, duration: NSTimeInterval(self.frame.size.width/100))
+        var removeObstacle = SKAction.removeFromParent()
+        var moveAndRemoveObsticle = SKAction.sequence([moveObstacle, removeObstacle])
         
         // Create upper obsticle
-        let upperObsticle = SKSpriteNode(imageNamed: "rockDown")
-        upperObsticle.position = CGPoint(x: CGRectGetMidX(self.frame) + self.frame.size.width, y: CGRectGetHeight(self.frame) - upperObsticle.size.height)
-//        upperObsticle.runAction(moveAndRemoveObsticle)
-        upperObsticle.runAction(moveObstacle)
+        var upperObstacleTexture = SKTexture(imageNamed: "rockDown")
+        var upperObstacle = SKSpriteNode(texture: upperObstacleTexture)
+        upperObstacle.position = CGPoint(x: CGRectGetMidX(self.frame) + self.frame.size.width, y: CGRectGetHeight(self.frame) - upperObstacle.size.height)
+        upperObstacle.runAction(moveAndRemoveObsticle)
+//        upperObstacle.runAction(moveObstacle)
         
-        upperObsticle.physicsBody = SKPhysicsBody(rectangleOfSize: upperObsticle.size)
-        upperObsticle.physicsBody?.dynamic = false
-        upperObsticle.physicsBody?.categoryBitMask = PhysicsCategory.Collidable
+        upperObstacle.physicsBody = SKPhysicsBody(rectangleOfSize: upperObstacle.size)
+        upperObstacle.physicsBody?.dynamic = false
+        upperObstacle.physicsBody?.categoryBitMask = PhysicsCategory.Collidable
         
-        movingObjects.addChild(upperObsticle)
+        movingObjects.addChild(upperObstacle)
         
+        // Create upper obsticle
+        var lowerObstacleTexture = SKTexture(imageNamed: "rock")
+        var lowerObstacle = SKSpriteNode(texture: lowerObstacleTexture)
+        lowerObstacle.position = CGPoint(x: CGRectGetMidX(self.frame) + self.frame.size.width + 400, y: lowerObstacle.size.height / 2)
+        lowerObstacle.runAction(moveAndRemoveObsticle)
+//        lowerObstacle.runAction(moveObstacle)
         
+        lowerObstacle.physicsBody = SKPhysicsBody(rectangleOfSize: lowerObstacle.size)
+        lowerObstacle.physicsBody?.dynamic = false
+        lowerObstacle.physicsBody?.categoryBitMask = PhysicsCategory.Collidable
+        
+        movingObjects.addChild(lowerObstacle)
         
     }
     
