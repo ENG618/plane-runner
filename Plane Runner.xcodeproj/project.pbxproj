@@ -18,6 +18,7 @@
 		5C4052F31AD7A12D0088EE70 /* backgroundTrack.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5C4052F21AD7A12C0088EE70 /* backgroundTrack.mp3 */; };
 		5C4052F61AD7A7710088EE70 /* planeCrash.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5C4052F51AD7A7710088EE70 /* planeCrash.mp3 */; };
 		5C4052F81AD841280088EE70 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C4052F71AD841280088EE70 /* AVFoundation.framework */; };
+		5CCD8DC11ADB8DFC0001362D /* Helicopter.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5CCD8DC01ADB8DFC0001362D /* Helicopter.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		5C4052F21AD7A12C0088EE70 /* backgroundTrack.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = backgroundTrack.mp3; sourceTree = "<group>"; };
 		5C4052F51AD7A7710088EE70 /* planeCrash.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = planeCrash.mp3; sourceTree = "<group>"; };
 		5C4052F71AD841280088EE70 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		5CCD8DC01ADB8DFC0001362D /* Helicopter.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Helicopter.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +132,7 @@
 		5C4052F41AD7A1360088EE70 /* sounds */ = {
 			isa = PBXGroup;
 			children = (
+				5CCD8DC01ADB8DFC0001362D /* Helicopter.mp3 */,
 				5C4052F51AD7A7710088EE70 /* planeCrash.mp3 */,
 				5C4052F21AD7A12C0088EE70 /* backgroundTrack.mp3 */,
 			);
@@ -221,6 +224,7 @@
 				5C4052F31AD7A12D0088EE70 /* backgroundTrack.mp3 in Resources */,
 				5C4052DA1AD73B260088EE70 /* Images.xcassets in Resources */,
 				5C4052D11AD73B260088EE70 /* GameScene.sks in Resources */,
+				5CCD8DC11ADB8DFC0001362D /* Helicopter.mp3 in Resources */,
 				5C4052D81AD73B260088EE70 /* Main.storyboard in Resources */,
 				5C4052F61AD7A7710088EE70 /* planeCrash.mp3 in Resources */,
 			);

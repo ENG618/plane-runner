@@ -54,6 +54,9 @@ class GameScene: SKScene {
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         /* Called when a touch begins */
         
+        let planeFly = SKAction.repeatAction(SKAction.playSoundFileNamed("Helicopter.mp3", waitForCompletion: true), count: 1)
+        runAction(planeFly)
+        
         plane.physicsBody?.velocity = CGVectorMake(0, 0)
         plane.physicsBody?.applyImpulse(CGVectorMake(0, 75))
     }
