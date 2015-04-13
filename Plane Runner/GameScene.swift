@@ -42,12 +42,10 @@ class GameScene: SKScene {
         setGround()
         createPlane()
         
+        setObstacles()
         
-        // Creat obsticles
-        var timer = NSTimer.scheduledTimerWithTimeInterval(6, target: self, selector: Selector(setObstacles()), userInfo: nil, repeats: true)
-        
-//        NSTimer.scheduledTimerWithTimeInterval(<#ti: NSTimeInterval#>, target: <#AnyObject#>, selector: <#Selector#>, userInfo: <#AnyObject?#>, repeats: <#Bool#>)
-//        setObstacles()
+        // Creat obsticles at interval
+        //var timer = NSTimer.scheduledTimerWithTimeInterval(6, target: self, selector: Selector(setObstacles()), userInfo: nil, repeats: true)
         
         // Uncomment to show physics
         view.showsPhysics = true
@@ -74,6 +72,7 @@ class GameScene: SKScene {
         
         audioPlayer = AVAudioPlayer(contentsOfURL: url, error: &error)
         audioPlayer.volume = 0.2
+        audioPlayer.numberOfLoops = -1
         audioPlayer.prepareToPlay()
         audioPlayer.play()
     }
@@ -121,8 +120,9 @@ class GameScene: SKScene {
         // Create upper obsticle
         var upperObstacleTexture = SKTexture(imageNamed: "rockDown")
         var upperObstacle = SKSpriteNode(texture: upperObstacleTexture)
-        upperObstacle.position = CGPoint(x: CGRectGetMidX(self.frame) + self.frame.size.width, y: CGRectGetHeight(self.frame) - upperObstacle.size.height)
-        upperObstacle.runAction(moveAndRemoveObsticle)
+        upperObstacle.position = CGPoint(x: CGRectGetMaxX(self.frame), y: CGRectGetMaxY(self.frame))
+//        upperObstacle.position = CGPoint(x: CGRectGetMidX(self.frame) + self.frame.size.width, y: CGRectGetHeight(self.frame) - upperObstacle.size.height)
+//        upperObstacle.runAction(moveAndRemoveObsticle)
 //        upperObstacle.runAction(moveObstacle)
         
         upperObstacle.physicsBody = SKPhysicsBody(rectangleOfSize: upperObstacle.size)
@@ -134,8 +134,9 @@ class GameScene: SKScene {
         // Create upper obsticle
         var lowerObstacleTexture = SKTexture(imageNamed: "rock")
         var lowerObstacle = SKSpriteNode(texture: lowerObstacleTexture)
-        lowerObstacle.position = CGPoint(x: CGRectGetMidX(self.frame) + self.frame.size.width + 400, y: lowerObstacle.size.height / 2)
-        lowerObstacle.runAction(moveAndRemoveObsticle)
+        lowerObstacle.position = CGPoint(x: CGRectGetMaxX(self.frame), y: CGRectGetMaxY(self.frame))
+//        lowerObstacle.position = CGPoint(x: CGRectGetMidX(self.frame) + self.frame.size.width + 400, y: lowerObstacle.size.height / 2)
+//        lowerObstacle.runAction(moveAndRemoveObsticle)
 //        lowerObstacle.runAction(moveObstacle)
         
         lowerObstacle.physicsBody = SKPhysicsBody(rectangleOfSize: lowerObstacle.size)
