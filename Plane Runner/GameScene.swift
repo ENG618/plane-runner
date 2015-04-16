@@ -18,14 +18,21 @@ class GameScene: SKScene {
     
     var audioPlayer = AVAudioPlayer()
     
+    // Scene resources
+    var planeCrash = SKAction()
+    
     struct PhysicsCategory {
         static let All          :UInt32 = UInt32.max
         static let Plane        :UInt32 = 0x1
         static let Collidable   :UInt32 = 0x1 << 1
+        static let Boundry      :UInt32 = 0x1 << 2
     }
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
+        
+        // Loads all scenes resources
+        loadResources()
         
         // Play background track
 //        let backgrountTrack = SKAction.repeatActionForever(SKAction.playSoundFileNamed("backgroundTrack.mp3", waitForCompletion: true))
@@ -44,7 +51,7 @@ class GameScene: SKScene {
         
         setObstacles()
         
-        // Creat obsticles at interval
+        // Create obstacles at interval
         //var timer = NSTimer.scheduledTimerWithTimeInterval(6, target: self, selector: Selector(setObstacles()), userInfo: nil, repeats: true)
         
         // Uncomment to show physics
@@ -124,9 +131,9 @@ class GameScene: SKScene {
         var upperObstacleTexture = SKTexture(imageNamed: "rockDown")
         var upperObstacle = SKSpriteNode(texture: upperObstacleTexture)
         upperObstacle.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMaxY(self.frame) - upperObstacle.size.height)
-//        upperObstacle.position = CGPoint(x: CGRectGetMidX(self.frame) + self.frame.size.width, y: CGRectGetHeight(self.frame) - upperObstacle.size.height)
-//        upperObstacle.runAction(moveAndRemoveObsticle)
-//        upperObstacle.runAction(moveObstacle)
+        //        upperObstacle.position = CGPoint(x: CGRectGetMidX(self.frame) + self.frame.size.width, y: CGRectGetHeight(self.frame) - upperObstacle.size.height)
+        //        upperObstacle.runAction(moveAndRemoveObsticle)
+        //        upperObstacle.runAction(moveObstacle)
         
         upperObstacle.physicsBody = SKPhysicsBody(rectangleOfSize: upperObstacle.size)
         upperObstacle.physicsBody?.dynamic = false
@@ -138,16 +145,16 @@ class GameScene: SKScene {
         var lowerObstacleTexture = SKTexture(imageNamed: "rock")
         var lowerObstacle = SKSpriteNode(texture: lowerObstacleTexture)
         lowerObstacle.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMinY(self.frame) + lowerObstacle.size.height)
-//        lowerObstacle.position = CGPoint(x: CGRectGetMidX(self.frame) + self.frame.size.width + 400, y: lowerObstacle.size.height / 2)
-//        lowerObstacle.runAction(moveAndRemoveObsticle)
-//        lowerObstacle.runAction(moveObstacle)
+        //        lowerObstacle.position = CGPoint(x: CGRectGetMidX(self.frame) + self.frame.size.width + 400, y: lowerObstacle.size.height / 2)
+        //        lowerObstacle.runAction(moveAndRemoveObsticle)
+        //        lowerObstacle.runAction(moveObstacle)
         
         lowerObstacle.physicsBody = SKPhysicsBody(rectangleOfSize: lowerObstacle.size)
         lowerObstacle.physicsBody?.dynamic = false
         lowerObstacle.physicsBody?.categoryBitMask = PhysicsCategory.Collidable
         
         movingObjects.addChild(lowerObstacle)
-        
+
     }
     
     func createClouds() {
@@ -164,7 +171,7 @@ class GameScene: SKScene {
         let animation = SKAction.animateWithTextures([planeTexture, planeTexture1, planeTexture2], timePerFrame: 0.05)
         let makePropellerSpin = SKAction.repeatActionForever(animation)
         
-        // Set planes possition
+        // Set planes position
         plane = SKSpriteNode(texture: planeTexture)
         plane.position = CGPointMake(size.width/4, size.height/2)
         
@@ -174,13 +181,19 @@ class GameScene: SKScene {
         plane.physicsBody?.dynamic = true
         plane.physicsBody?.allowsRotation = false
         plane.physicsBody?.categoryBitMask = PhysicsCategory.Plane
-        plane.physicsBody?.collisionBitMask = PhysicsCategory.Collidable
+//        plane.physicsBody?.collisionBitMask = PhysicsCategory.Collidable
         plane.physicsBody?.contactTestBitMask = PhysicsCategory.Collidable
         
         // Set elevation
         plane.zPosition = 5
         
         self.addChild(plane)
+    }
+    
+    // MARK: Cache scene data
+    func loadResources(){
+        // Plane crash sound effect
+        planeCrash = SKAction.repeatAction(SKAction.playSoundFileNamed("planeCrash.mp3", waitForCompletion: true), count: 1)
     }
 }
 
@@ -189,7 +202,6 @@ extension GameScene: SKPhysicsContactDelegate {
 
     func didBeginContact(contact: SKPhysicsContact) {
         println("Plane crashed")
-        let planeCrash = SKAction.repeatAction(SKAction.playSoundFileNamed("planeCrash.mp3", waitForCompletion: true), count: 1)
         runAction(planeCrash)
     }
 }
