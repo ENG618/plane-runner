@@ -3,7 +3,7 @@ Full Sail University | MDVBS | 1504 MGD
 
 ### Week 1 ###
 * Project link - To be posted
-* Video Review - To be posted
+* [Video Review](http://youtu.be/87pXpsE6WP0)
 
 ### Week 2 ###
 * Project link - To be posted

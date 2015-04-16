@@ -20,8 +20,8 @@ class GameScene: SKScene {
     
     struct PhysicsCategory {
         static let All          :UInt32 = UInt32.max
-        static let Plane        :UInt32 = 1
-        static let Collidable   :UInt32 = 2
+        static let Plane        :UInt32 = 0x1
+        static let Collidable   :UInt32 = 0x1 << 1
     }
     
     override func didMoveToView(view: SKView) {
