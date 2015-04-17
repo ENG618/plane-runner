@@ -13,46 +13,51 @@ class GameScene: SKScene {
     
     var bg = SKSpriteNode()
     var plane = SKSpriteNode()
-    
     var movingObjects = SKNode()
-    
     var audioPlayer = AVAudioPlayer()
     
     // Scene resources
-    var planeCrash = SKAction()
+    var planeCrashFX = SKAction()
     
     struct PhysicsCategory {
         static let All          :UInt32 = UInt32.max
         static let Plane        :UInt32 = 0x1
         static let Collidable   :UInt32 = 0x1 << 1
-        static let Boundry      :UInt32 = 0x1 << 2
+        static let Boundary      :UInt32 = 0x1 << 2
+    }
+    
+    struct zLevel {
+        static let Background   : CGFloat = -2
+        static let GroundRoof   : CGFloat = -1
+        static let Pipes        : CGFloat = 2
+        static let Bird         : CGFloat = 5
     }
     
     override func didMoveToView(view: SKView) {
-        /* Setup your scene here */
         
         // Loads all scenes resources
-        loadResources()
+        loadResources(view)
         
         // Play background track
 //        let backgrountTrack = SKAction.repeatActionForever(SKAction.playSoundFileNamed("backgroundTrack.mp3", waitForCompletion: true))
 //        self.runAction(backgrountTrack)
         
-        loopBackgroundTrack()
+        loopBackgroundTrack(view)
         
         self.physicsWorld.contactDelegate = self
         self.addChild(movingObjects)
         // Change gravity
         self.physicsWorld.gravity = CGVectorMake(0, -1.6)
         
-        setBackground()
-        setGround()
-        createPlane()
+        createPlane(view)
+        createBackground(view)
+        createBoundry(view)
         
-        setObstacles()
+        
+//        setObstacles(view)
         
         // Create obstacles at interval
-        //var timer = NSTimer.scheduledTimerWithTimeInterval(6, target: self, selector: Selector(setObstacles()), userInfo: nil, repeats: true)
+        //var timer = NSTimer.scheduledTimerWithTimeInterval(6, target: self, selector: Selector(createObstacles()), userInfo: nil, repeats: true)
         
         // Uncomment to show physics
         view.showsPhysics = true
@@ -74,7 +79,7 @@ class GameScene: SKScene {
     
     // MARK: Scene setup helpers
     
-    func loopBackgroundTrack() {
+    func loopBackgroundTrack(sceneView: SKView) {
         
         let path = NSBundle.mainBundle().pathForResource("backgroundTrack", ofType: ".mp3")
         let url = NSURL.fileURLWithPath(path!)
@@ -87,7 +92,7 @@ class GameScene: SKScene {
         audioPlayer.play()
     }
     
-    func setBackground(){
+    func createBackground(sceneView: SKView){
         var bgTexture = SKTexture(imageNamed: "mainBackground")
         
         // Create action to replace background
@@ -95,12 +100,13 @@ class GameScene: SKScene {
         var replacebg = SKAction.moveByX(bgTexture.size().width, y: 0, duration: 0)
         var movebgForever = SKAction.repeatActionForever(SKAction.sequence([movebg, replacebg]))
         
-        // Create 3 backgrouds for endless scrolling
+        // Create 3 backgrounds for endless scrolling
         for var i:CGFloat = 0; i < 3; i++ {
+            
             bg = SKSpriteNode(texture: bgTexture)
             bg.position = CGPoint(x: bgTexture.size().width/2 + bgTexture.size().width * i, y: CGRectGetMidY(self.frame))
             bg.size.height = self.frame.height
-            bg.zPosition = -2
+            bg.zPosition = zLevel.Background
             
             bg.runAction(movebgForever)
             
@@ -108,19 +114,27 @@ class GameScene: SKScene {
         }
     }
     
-    func setGround() {
+    func createBoundry(sceneView: SKView) {
         // Create ground
-        var ground = SKNode()
-        ground.position = CGPointMake(0, 0)
-//        ground.physicsBody = SKPhysicsBody(edgeFromPoint: CGPointMake(0, 0), toPoint: CGPointMake(0, self.frame.width))
-        ground.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
-        ground.physicsBody?.dynamic = false
-        ground.physicsBody?.categoryBitMask = PhysicsCategory.Collidable
+        var boundary = SKNode()
+        boundary.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
+        boundary.physicsBody?.dynamic = false
+        boundary.physicsBody?.collisionBitMask = PhysicsCategory.Plane
+        boundary.physicsBody?.contactTestBitMask = PhysicsCategory.Plane
+        boundary.physicsBody?.categoryBitMask = PhysicsCategory.Boundary | PhysicsCategory.Collidable
         
-        self.addChild(ground)
+        self.addChild(boundary)
+        
+//        var ground = SKNode()
+//        println("Plane height \(plane.size.height)")
+//        ground.physicsBody = SKPhysicsBody(edgeFromPoint: CGPointMake(0, plane.size.height), toPoint: CGPointMake(self.frame.width, plane.size.height))
+//        ground.physicsBody?.categoryBitMask = PhysicsCategory.Boundry
+//        ground.physicsBody?.dynamic = false
+//
+//        self.addChild(ground)
     }
     
-    func setObstacles() {
+    func createObstacles(sceneView: SKView) {
         // TODO: Set moutain plains up and down.
         
         var moveObstacle = SKAction.moveByX(-self.frame.width * 2, y: 0, duration: NSTimeInterval(self.frame.size.width/100))
@@ -157,12 +171,12 @@ class GameScene: SKScene {
 
     }
     
-    func createClouds() {
+    func createClouds(sceneView: SKView) {
         // TODO: Create clouds
         
     }
     
-    func createPlane() {
+    func createPlane(sceneView: SKView) {
         let planeTexture = SKTexture(imageNamed: "planeRed1")
         let planeTexture1 = SKTexture(imageNamed: "planeRed2")
         let planeTexture2 = SKTexture(imageNamed: "planeRed3")
@@ -181,27 +195,27 @@ class GameScene: SKScene {
         plane.physicsBody?.dynamic = true
         plane.physicsBody?.allowsRotation = false
         plane.physicsBody?.categoryBitMask = PhysicsCategory.Plane
-//        plane.physicsBody?.collisionBitMask = PhysicsCategory.Collidable
-        plane.physicsBody?.contactTestBitMask = PhysicsCategory.Collidable
+        plane.physicsBody?.collisionBitMask = PhysicsCategory.Collidable | PhysicsCategory.Boundary
+        plane.physicsBody?.contactTestBitMask = PhysicsCategory.Collidable | PhysicsCategory.Boundary
         
         // Set elevation
-        plane.zPosition = 5
+        plane.zPosition = zLevel.Bird
         
         self.addChild(plane)
     }
     
     // MARK: Cache scene data
-    func loadResources(){
+    func loadResources(view: SKView){
         // Plane crash sound effect
-        planeCrash = SKAction.repeatAction(SKAction.playSoundFileNamed("planeCrash.mp3", waitForCompletion: true), count: 1)
+        planeCrashFX = SKAction.repeatAction(SKAction.playSoundFileNamed("planeCrash.mp3", waitForCompletion: true), count: 1)
     }
 }
 
-// MARK: SKPhysicsContactDelegate extension
+// MARK: SKPhysicsContactDelegate
 extension GameScene: SKPhysicsContactDelegate {
 
     func didBeginContact(contact: SKPhysicsContact) {
         println("Plane crashed")
-        runAction(planeCrash)
+        runAction(planeCrashFX)
     }
 }
