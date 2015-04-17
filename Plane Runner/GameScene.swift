@@ -125,19 +125,13 @@ class GameScene: SKScene {
         boundary.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
         boundary.physicsBody?.dynamic = false
         boundary.physicsBody?.categoryBitMask = PhysicsCategory.Boundary
-        boundary.physicsBody?.collisionBitMask = PhysicsCategory.Plane
-        boundary.physicsBody?.contactTestBitMask = PhysicsCategory.Plane
         
         self.addChild(boundary)
     }
     
     func createGround(sceneView: SKView) {
         // TODO: Load floor and roof.
-        ground.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(ground.size.width, ground.size.height))
-        ground.physicsBody?.dynamic = true
-        ground.physicsBody?.categoryBitMask = PhysicsCategory.Ground
-        ground.physicsBody?.collisionBitMask = PhysicsCategory.Plane
-        ground.physicsBody?.contactTestBitMask = PhysicsCategory.Plane
+        
         
         // Create action to replace background
         var moveGround = SKAction.moveByX(-groundTexture.size().width, y: 0, duration: 9)
@@ -148,10 +142,14 @@ class GameScene: SKScene {
         for var i:CGFloat = 0; i < 3; i++ {
             
             ground = SKSpriteNode(texture: groundTexture)
-            ground.position = CGPoint(x: groundTexture.size().width/2 + groundTexture.size().width * i, y: groundTexture.size().height / 2 + 90)
+            ground.position = CGPoint(x: groundTexture.size().width/2 + groundTexture.size().width * i, y: groundTexture.size().height / 2 + 95)
             ground.zPosition = zLevel.Ground
             
             ground.runAction(moveGroundForever)
+            
+            ground.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(ground.size.width, ground.size.height))
+            ground.physicsBody?.dynamic = false
+            ground.physicsBody?.categoryBitMask = PhysicsCategory.Ground
             
             movingObjects.addChild(ground)
         }
@@ -217,8 +215,8 @@ class GameScene: SKScene {
         plane.physicsBody?.dynamic = true
         plane.physicsBody?.allowsRotation = false
         plane.physicsBody?.categoryBitMask = PhysicsCategory.Plane
-        plane.physicsBody?.collisionBitMask = PhysicsCategory.Collidable | PhysicsCategory.Boundary
-        plane.physicsBody?.contactTestBitMask = PhysicsCategory.Collidable | PhysicsCategory.Boundary
+        plane.physicsBody?.collisionBitMask = PhysicsCategory.Collidable | PhysicsCategory.Boundary | PhysicsCategory.Ground
+        plane.physicsBody?.contactTestBitMask = PhysicsCategory.Collidable | PhysicsCategory.Boundary | PhysicsCategory.Ground
         
         // Set elevation
         plane.zPosition = zLevel.Bird
@@ -241,6 +239,8 @@ extension GameScene: SKPhysicsContactDelegate {
     
     func didBeginContact(contact: SKPhysicsContact) {
         println("Plane crashed")
+        
+        
         runAction(planeCrashFX)
     }
 }
