@@ -15,8 +15,15 @@ class GameScene: SKScene {
     var plane = SKSpriteNode()
     var groundTexture = SKTexture()
     var ground = SKSpriteNode()
+    var gameOverText = SKSpriteNode()
+    
+    var labelHolder = SKSpriteNode()
+    
     var movingObjects = SKNode()
+    
     var audioPlayer = AVAudioPlayer()
+    
+    var gameOver = false
     
     // Scene resources
     var planeCrashFX = SKAction()
@@ -39,24 +46,25 @@ class GameScene: SKScene {
     override func didMoveToView(view: SKView) {
         
         // Loads all scenes resources
-        loadResources(view)
+        loadResources()
         
         // Play background track
         //        let backgrountTrack = SKAction.repeatActionForever(SKAction.playSoundFileNamed("backgroundTrack.mp3", waitForCompletion: true))
         //        self.runAction(backgrountTrack)
         
-        loopBackgroundTrack(view)
+        loopBackgroundTrack()
         
         self.physicsWorld.contactDelegate = self
         self.addChild(movingObjects)
         // Change gravity
         self.physicsWorld.gravity = CGVectorMake(0, -1.6)
+        self.physicsBody?.restitution = 0.0
         
         
-        createBackground(view)
-        createBoundry(view)
-        createGround(view)
-        createPlane(view)
+        createBackground()
+        createBoundry()
+        createGround()
+        createPlane()
         
         
         //        setObstacles(view)
@@ -71,11 +79,30 @@ class GameScene: SKScene {
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         /* Called when a touch begins */
         
-        let planeFly = SKAction.repeatAction(SKAction.playSoundFileNamed("Helicopter.mp3", waitForCompletion: true), count: 1)
-        runAction(planeFly)
-        
-        plane.physicsBody?.velocity = CGVectorMake(0, 0)
-        plane.physicsBody?.applyImpulse(CGVectorMake(0, 75))
+        if gameOver {
+            
+            movingObjects.removeAllChildren()
+            
+            createBackground()
+            createGround()
+            
+            plane.position = CGPointMake(size.width/4, size.height/2)
+            plane.physicsBody?.velocity = CGVectorMake(0, 0)
+            
+            labelHolder.removeAllChildren()
+            
+            movingObjects.speed = 1
+            
+            gameOver = false
+            
+        } else {
+            
+            let planeFly = SKAction.repeatAction(SKAction.playSoundFileNamed("Helicopter.mp3", waitForCompletion: true), count: 1)
+            runAction(planeFly)
+            
+            plane.physicsBody?.velocity = CGVectorMake(0, 0)
+            plane.physicsBody?.applyImpulse(CGVectorMake(0, 75))
+        }
     }
     
     override func update(currentTime: CFTimeInterval) {
@@ -84,7 +111,7 @@ class GameScene: SKScene {
     
     // MARK: Scene setup helpers
     
-    func loopBackgroundTrack(sceneView: SKView) {
+    func loopBackgroundTrack() {
         
         let path = NSBundle.mainBundle().pathForResource("backgroundTrack", ofType: ".mp3")
         let url = NSURL.fileURLWithPath(path!)
@@ -97,7 +124,7 @@ class GameScene: SKScene {
         audioPlayer.play()
     }
     
-    func createBackground(sceneView: SKView){
+    func createBackground(){
         var bgTexture = SKTexture(imageNamed: "mainBackground")
         
         // Create action to replace background
@@ -119,7 +146,7 @@ class GameScene: SKScene {
         }
     }
     
-    func createBoundry(sceneView: SKView) {
+    func createBoundry() {
         // Create ground
         var boundary = SKNode()
         boundary.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
@@ -129,7 +156,7 @@ class GameScene: SKScene {
         self.addChild(boundary)
     }
     
-    func createGround(sceneView: SKView) {
+    func createGround() {
         // TODO: Load floor and roof.
         
         
@@ -149,13 +176,14 @@ class GameScene: SKScene {
             
             ground.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(ground.size.width, ground.size.height))
             ground.physicsBody?.dynamic = false
+            ground.physicsBody?.restitution = 0.0
             ground.physicsBody?.categoryBitMask = PhysicsCategory.Ground
             
             movingObjects.addChild(ground)
         }
     }
     
-    func createObstacles(sceneView: SKView) {
+    func createObstacles() {
         // TODO: Set mountain plains up and down.
         
         var moveObstacle = SKAction.moveByX(-self.frame.width * 2, y: 0, duration: NSTimeInterval(self.frame.size.width/100))
@@ -192,11 +220,11 @@ class GameScene: SKScene {
         
     }
     
-    func createClouds(sceneView: SKView) {
+    func createClouds() {
         // TODO: Create clouds
     }
     
-    func createPlane(sceneView: SKView) {
+    func createPlane() {
         let planeTexture = SKTexture(imageNamed: "planeRed1")
         let planeTexture1 = SKTexture(imageNamed: "planeRed2")
         let planeTexture2 = SKTexture(imageNamed: "planeRed3")
@@ -214,6 +242,7 @@ class GameScene: SKScene {
         plane.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(plane.size.width, plane.size.height))
         plane.physicsBody?.dynamic = true
         plane.physicsBody?.allowsRotation = false
+        plane.physicsBody?.restitution = 0.0
         plane.physicsBody?.categoryBitMask = PhysicsCategory.Plane
         plane.physicsBody?.collisionBitMask = PhysicsCategory.Collidable | PhysicsCategory.Boundary | PhysicsCategory.Ground
         plane.physicsBody?.contactTestBitMask = PhysicsCategory.Collidable | PhysicsCategory.Boundary | PhysicsCategory.Ground
@@ -225,12 +254,19 @@ class GameScene: SKScene {
     }
     
     // MARK: Cache scene data
-    func loadResources(view: SKView){
+    func loadResources(){
         // Plane crash sound effect
         planeCrashFX = SKAction.repeatAction(SKAction.playSoundFileNamed("planeCrash.mp3", waitForCompletion: true), count: 1)
         
         // Ground
         groundTexture = SKTexture(imageNamed: "groundGrass")
+        
+        // Add label holder
+        self.addChild(labelHolder)
+        
+        // Game Over
+        let gameOverTexture = SKTexture(imageNamed: "textGameOver")
+        gameOverText = SKSpriteNode(texture: gameOverTexture)
     }
 }
 
@@ -242,5 +278,18 @@ extension GameScene: SKPhysicsContactDelegate {
         
         
         runAction(planeCrashFX)
+//        plane.physicsBody?.velocity = CGVectorMake(0, 0)
+        plane.physicsBody?.applyImpulse(CGVectorMake(0, -500))
+
+        
+        if gameOver == false {
+            gameOver = true
+            movingObjects.speed = 0
+            
+            gameOverText.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))
+            
+            labelHolder.addChild(gameOverText)
+        }
+        
     }
 }
