@@ -216,7 +216,7 @@ class GameScene: SKScene {
             
             // Create lower obstacle
             let rock = SKSpriteNode(texture: rockTexture)
-            rock.position = CGPoint(x: self.frame.width + rock.size.width * 4, y: rock.size.height - 10d)
+            rock.position = CGPoint(x: self.frame.width + rock.size.width * 4, y: rock.size.height - 10)
             rock.zPosition = zLevel.Rocks
             rock.runAction(moveAndRemove)
             // Physics
