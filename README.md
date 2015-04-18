@@ -2,12 +2,12 @@
 Full Sail University | MDVBS | 1504 MGD
 
 ### Week 1 ###
-* Project link - To be posted
+* [Project link](https://bitbucket.org/eng618/plane-runner/commits/a39b619d15975afb8b964e444f2bcddb22dbddcc) *Privet Bitbucket repo*
 * [Video Review](http://youtu.be/87pXpsE6WP0)
 
 ### Week 2 ###
-* Project link - To be posted
-* Video Review - To be posted
+* [Project link](https://bitbucket.org/eng618/plane-runner/commits/edcf67b1179f57f13bbe946c94d12508f7c4b915) *Privet Bitbucket repo*
+* [Video Review](https://youtu.be/tjtKz4rC6w8)
 
 ### Week 3 ###
 * Project link - To be posted
