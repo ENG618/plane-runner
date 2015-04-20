@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>671514D5-C1F3-451F-94E9-B782E7C47EDF</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>Plane Runner</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>E1D74541366C76AC0A0209FEB89D45F4C8E5E7CA</key>
 		<string>bitbucket.org:eng618/plane-runner.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Plane Runner.xcodeproj/project.xcworkspace</string>
+	<string>Plane Runner.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>E1D74541366C76AC0A0209FEB89D45F4C8E5E7CA</key>
