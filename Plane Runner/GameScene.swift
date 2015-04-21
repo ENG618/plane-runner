@@ -13,6 +13,7 @@ class GameScene: SKScene {
     
     var bg = SKSpriteNode()
     var plane = SKSpriteNode()
+    var testPlane:Plane!
     var groundTexture = SKTexture()
     var ground = SKSpriteNode()
     var rockTexture = SKTexture()
@@ -56,9 +57,9 @@ class GameScene: SKScene {
         createBoundry(view)
         createGround(view)
 //        createPlane(view)
-        planeColors = PlaneColor.red()
-        plane = Plane(textureNames: PlaneColor.blue())
-        
+        let planeColors = PlaneColor()
+        testPlane = Plane(textureNames: planeColors.red())
+        self.addChild(testPlane)
         obstacleSetUp(view)
         
         
@@ -70,6 +71,8 @@ class GameScene: SKScene {
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         /* Called when a touch begins */
+        
+        println("View Height: \(view!.bounds.height) Width: \(view!.bounds.width)")
         
         if gameOver {
             
