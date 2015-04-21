@@ -22,6 +22,7 @@
 		5C50FA931AE5ABFE0068FD66 /* Plane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50FA921AE5ABFE0068FD66 /* Plane.swift */; };
 		5C50FA961AE5F1620068FD66 /* PhysicsCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50FA951AE5F1620068FD66 /* PhysicsCategory.swift */; };
 		5C50FA981AE5FC330068FD66 /* ZLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50FA971AE5FC330068FD66 /* ZLevel.swift */; };
+		5C50FA9A1AE5FF7E0068FD66 /* PlaneColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50FA991AE5FF7E0068FD66 /* PlaneColor.swift */; };
 		5CCD8DC11ADB8DFC0001362D /* Helicopter.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5CCD8DC01ADB8DFC0001362D /* Helicopter.mp3 */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +56,7 @@
 		5C50FA921AE5ABFE0068FD66 /* Plane.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plane.swift; sourceTree = "<group>"; };
 		5C50FA951AE5F1620068FD66 /* PhysicsCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsCategory.swift; sourceTree = "<group>"; };
 		5C50FA971AE5FC330068FD66 /* ZLevel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZLevel.swift; sourceTree = "<group>"; };
+		5C50FA991AE5FF7E0068FD66 /* PlaneColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaneColor.swift; sourceTree = "<group>"; };
 		5CCD8DC01ADB8DFC0001362D /* Helicopter.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Helicopter.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -155,6 +157,7 @@
 				5C50FA921AE5ABFE0068FD66 /* Plane.swift */,
 				5C50FA951AE5F1620068FD66 /* PhysicsCategory.swift */,
 				5C50FA971AE5FC330068FD66 /* ZLevel.swift */,
+				5C50FA991AE5FF7E0068FD66 /* PlaneColor.swift */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -265,6 +268,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C50FA9A1AE5FF7E0068FD66 /* PlaneColor.swift in Sources */,
 				5C50FA961AE5F1620068FD66 /* PhysicsCategory.swift in Sources */,
 				5C4052D31AD73B260088EE70 /* GameScene.swift in Sources */,
 				5C4052D51AD73B260088EE70 /* GameViewController.swift in Sources */,
