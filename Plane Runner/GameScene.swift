@@ -30,23 +30,11 @@ class GameScene: SKScene {
     // Scene resources
     var planeCrashFX = SKAction()
     
-    struct PhysicsCategory {
-        static let All          :UInt32 = UInt32.max
-        static let Plane        :UInt32 = 0x1
-        static let Collidable   :UInt32 = 0x1 << 1
-        static let Boundary     :UInt32 = 0x1 << 2
-        static let Ground       :UInt32 = 0x1 << 3
-    }
-    
-    struct zLevel {
-        static let Background   : CGFloat = -2.0
-        static let Clouds       : CGFloat = -1.0
-        static let Rocks        : CGFloat = 0.0
-        static let Ground       : CGFloat = 1.0
-        static let Plane         : CGFloat = 5.0
-    }
-    
     override func didMoveToView(view: SKView) {
+        
+        println("Size height: \(size.width) Width: \(size.height)")
+        println("View Height: \(view.bounds.height) Width: \(view.bounds.width)")
+
         
         // Loads all scenes resources
         loadResources()
@@ -55,7 +43,7 @@ class GameScene: SKScene {
         //        let backgrountTrack = SKAction.repeatActionForever(SKAction.playSoundFileNamed("backgroundTrack.mp3", waitForCompletion: true))
         //        self.runAction(backgrountTrack)
         
-        loopBackgroundTrack()
+        loopBackgroundTrack(view)
         
         self.physicsWorld.contactDelegate = self
         self.addChild(movingObjects)
@@ -64,17 +52,19 @@ class GameScene: SKScene {
         self.physicsBody?.restitution = 0.0
         
         
-        createBackground()
-        createBoundry()
-        createGround()
-        createPlane()
+        createBackground(view)
+        createBoundry(view)
+        createGround(view)
+        createPlane(view)
         
-        obstacleSetUp()
+        obstacleSetUp(view)
         
         
         // Uncomment to show physics
         view.showsPhysics = true
     }
+    
+    
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         /* Called when a touch begins */
@@ -83,8 +73,8 @@ class GameScene: SKScene {
             
             movingObjects.removeAllChildren()
             
-            createBackground()
-            createGround()
+            createBackground(view!)
+            createGround(view!)
             
             plane.position = CGPointMake(size.width/4, size.height/2)
             plane.physicsBody?.velocity = CGVectorMake(0, 0)
@@ -111,7 +101,7 @@ class GameScene: SKScene {
     
     // MARK: Scene setup helpers
     
-    func loopBackgroundTrack() {
+    func loopBackgroundTrack(view: SKView) {
         
         let path = NSBundle.mainBundle().pathForResource("backgroundTrack", ofType: ".mp3")
         let url = NSURL.fileURLWithPath(path!)
@@ -124,8 +114,9 @@ class GameScene: SKScene {
         audioPlayer.play()
     }
     
-    func obstacleSetUp() {
-        let distanceToMove = CGFloat(self.frame.width + 5.0 * rockTexture.size().width)
+    func obstacleSetUp(view: SKView) {
+//        let distanceToMove = CGFloat(self.frame.width + 5.0 * rockTexture.size().width)
+        let distanceToMove = CGFloat(view.bounds.width + 5.0 * rockTexture.size().width)
         let moveRocks = SKAction.moveByX(-distanceToMove, y: 0, duration: NSTimeInterval(0.01 * distanceToMove))
         let removeRocks = SKAction.removeFromParent()
         
@@ -133,7 +124,7 @@ class GameScene: SKScene {
         
         // Create Action to spawn new obstacles after delay.
         let spawn = SKAction.runBlock({
-            () in self.createObstacles()
+            () in self.createObstacles(view)
         })
         let delay = SKAction.waitForDuration(NSTimeInterval(7.0))
         let spawnAndDelay = SKAction.sequence([spawn, delay])
@@ -141,7 +132,7 @@ class GameScene: SKScene {
         self.runAction(spawnAndDelayForever)
     }
     
-    func createBackground(){
+    func createBackground(view: SKView){
         var bgTexture = SKTexture(imageNamed: "mainBackground")
         
         // Create action to replace background
@@ -155,7 +146,7 @@ class GameScene: SKScene {
             bg = SKSpriteNode(texture: bgTexture)
             bg.position = CGPoint(x: bgTexture.size().width/2 + bgTexture.size().width * i, y: CGRectGetMidY(self.frame))
             bg.size.height = self.frame.height
-            bg.zPosition = zLevel.Background
+            bg.zPosition = ZLevel.Background
             
             bg.runAction(movebgForever)
             
@@ -163,7 +154,7 @@ class GameScene: SKScene {
         }
     }
     
-    func createBoundry() {
+    func createBoundry(view: SKView) {
         // Create ground
         var boundary = SKNode()
         boundary.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
@@ -173,7 +164,7 @@ class GameScene: SKScene {
         self.addChild(boundary)
     }
     
-    func createGround() {
+    func createGround(view: SKView) {
 
         // Create action to replace ground
         var moveGround = SKAction.moveByX(-groundTexture.size().width, y: 0, duration: 8)
@@ -185,7 +176,7 @@ class GameScene: SKScene {
             
             ground = SKSpriteNode(texture: groundTexture)
             ground.position = CGPoint(x: groundTexture.size().width/2 + groundTexture.size().width * i, y: groundTexture.size().height / 2 + 95)
-            ground.zPosition = zLevel.Ground
+            ground.zPosition = ZLevel.Ground
             
             ground.runAction(moveGroundForever)
             
@@ -198,14 +189,14 @@ class GameScene: SKScene {
         }
     }
     
-    func createObstacles() {
+    func createObstacles(view: SKView) {
         
         if gameOver == false {
             
             // Create upper obstacle
             let rockDown = SKSpriteNode(texture: rockDownTexture)
             rockDown.position = CGPoint(x: self.frame.width + rockDown.size.width, y: CGRectGetMaxY(self.frame) - rockDown.size.height + 50)
-            rockDown.zPosition = zLevel.Rocks
+            rockDown.zPosition = ZLevel.Rocks
             rockDown.runAction(moveAndRemove)
             // Physics
             rockDown.physicsBody = SKPhysicsBody(rectangleOfSize: rockDown.size)
@@ -217,7 +208,7 @@ class GameScene: SKScene {
             // Create lower obstacle
             let rock = SKSpriteNode(texture: rockTexture)
             rock.position = CGPoint(x: self.frame.width + rock.size.width * 4, y: rock.size.height - 10)
-            rock.zPosition = zLevel.Rocks
+            rock.zPosition = ZLevel.Rocks
             rock.runAction(moveAndRemove)
             // Physics
             rock.physicsBody = SKPhysicsBody(rectangleOfSize: rock.size)
@@ -228,11 +219,11 @@ class GameScene: SKScene {
         }
     }
     
-    func createClouds() {
+    func createClouds(view: SKView) {
         // TODO: Create clouds
     }
     
-    func createPlane() {
+    func createPlane(view: SKView) {
         let planeTexture = SKTexture(imageNamed: "planeRed1")
         let planeTexture1 = SKTexture(imageNamed: "planeRed2")
         let planeTexture2 = SKTexture(imageNamed: "planeRed3")
@@ -256,7 +247,7 @@ class GameScene: SKScene {
         plane.physicsBody?.contactTestBitMask = PhysicsCategory.Collidable | PhysicsCategory.Boundary | PhysicsCategory.Ground
         
         // Set elevation
-        plane.zPosition = zLevel.Plane
+        plane.zPosition = ZLevel.Plane
         
         self.addChild(plane)
     }
