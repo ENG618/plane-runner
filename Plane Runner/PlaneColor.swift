@@ -10,19 +10,19 @@ import SpriteKit
 
 struct PlaneColor {
     
-    func red () -> [String] {
+    func red() -> [String] {
         return ["planeRed1", "planeRed2", "planeRed3"]
     }
     
-    func blue () -> [String] {
+    func blue() -> [String] {
         return ["planeBlue1", "planeBlue2", "planeBlue3"]
     }
     
-    func green () -> [String] {
+    func green() -> [String] {
         return ["planeGreen1", "planeGreen2", "planeGreen3"]
     }
     
-    func yellow () -> [String] {
+    func yellow() -> [String] {
         return ["planeYellow1", "planeYellow2", "planeYellow3"]
     }
 }

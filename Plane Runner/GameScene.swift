@@ -55,7 +55,9 @@ class GameScene: SKScene {
         createBackground(view)
         createBoundry(view)
         createGround(view)
-        createPlane(view)
+//        createPlane(view)
+        planeColors = PlaneColor.red()
+        plane = Plane(textureNames: PlaneColor.blue())
         
         obstacleSetUp(view)
         
