@@ -56,10 +56,7 @@ class GameScene: SKScene {
         createBackground(view)
         createBoundry(view)
         createGround(view)
-//        createPlane(view)
-        let planeColors = PlaneColor()
-        testPlane = Plane(textureNames: planeColors.red())
-        self.addChild(testPlane)
+        createPlane(view)
         obstacleSetUp(view)
         
         
@@ -68,7 +65,7 @@ class GameScene: SKScene {
     }
     
     
-    
+    // MARK: Input methods
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         /* Called when a touch begins */
         
@@ -96,7 +93,7 @@ class GameScene: SKScene {
             runAction(planeFly)
             
             plane.physicsBody?.velocity = CGVectorMake(0, 0)
-            plane.physicsBody?.applyImpulse(CGVectorMake(0, 50))
+            plane.physicsBody?.applyImpulse(CGVectorMake(0, 10))
         }
     }
     
@@ -131,7 +128,7 @@ class GameScene: SKScene {
         let spawn = SKAction.runBlock({
             () in self.createObstacles(view)
         })
-        let delay = SKAction.waitForDuration(NSTimeInterval(7.0))
+        let delay = SKAction.waitForDuration(NSTimeInterval(4.0))
         let spawnAndDelay = SKAction.sequence([spawn, delay])
         let spawnAndDelayForever = SKAction.repeatActionForever(spawnAndDelay)
         self.runAction(spawnAndDelayForever)
@@ -164,6 +161,7 @@ class GameScene: SKScene {
         var boundary = SKNode()
         boundary.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
         boundary.physicsBody?.dynamic = false
+        ground.physicsBody?.restitution = 0.0
         boundary.physicsBody?.categoryBitMask = PhysicsCategory.Boundary
         
         self.addChild(boundary)
@@ -177,10 +175,11 @@ class GameScene: SKScene {
         var moveGroundForever = SKAction.repeatActionForever(SKAction.sequence([moveGround, replaceGround]))
         
         // Create 3 grounds for endless scrolling
-        for var i:CGFloat = 0; i < 3; i++ {
+        for var i:CGFloat = 0; i < 7; i++ {
             
             ground = SKSpriteNode(texture: groundTexture)
-            ground.position = CGPoint(x: groundTexture.size().width/2 + groundTexture.size().width * i, y: groundTexture.size().height / 2 + 95)
+            ground.setScale(0.5)
+            ground.position = CGPoint(x: ground.size.width / 2 + ground.size.width * i, y: ground.size.height / 2)
             ground.zPosition = ZLevel.Ground
             
             ground.runAction(moveGroundForever)
@@ -200,7 +199,8 @@ class GameScene: SKScene {
             
             // Create upper obstacle
             let rockDown = SKSpriteNode(texture: rockDownTexture)
-            rockDown.position = CGPoint(x: self.frame.width + rockDown.size.width, y: CGRectGetMaxY(self.frame) - rockDown.size.height + 50)
+            rockDown.setScale(0.5)
+            rockDown.position = CGPoint(x: self.frame.width + rockDown.size.width, y: CGRectGetMaxY(self.frame) - rockDown.size.height/2)
             rockDown.zPosition = ZLevel.Rocks
             rockDown.runAction(moveAndRemove)
             // Physics
@@ -212,7 +212,9 @@ class GameScene: SKScene {
             
             // Create lower obstacle
             let rock = SKSpriteNode(texture: rockTexture)
-            rock.position = CGPoint(x: self.frame.width + rock.size.width * 4, y: rock.size.height - 10)
+            rock.setScale(0.5)
+//            rock.position = CGPoint(x: self.frame.width + rock.size.width * 4, y: rock.size.height/2)
+            rock.position = CGPoint(x: self.frame.width + rock.size.width, y: rock.size.height/2)
             rock.zPosition = ZLevel.Rocks
             rock.runAction(moveAndRemove)
             // Physics
@@ -239,6 +241,7 @@ class GameScene: SKScene {
         
         // Set planes position
         plane = SKSpriteNode(texture: planeTexture)
+        plane.setScale(0.5)
         plane.position = CGPointMake(size.width/4, size.height/2)
         
         plane.runAction(makePropellerSpin)
@@ -289,7 +292,7 @@ extension GameScene: SKPhysicsContactDelegate {
         
         runAction(planeCrashFX)
         //        plane.physicsBody?.velocity = CGVectorMake(0, 0)
-        plane.physicsBody?.applyImpulse(CGVectorMake(0, -200))
+        plane.physicsBody?.applyImpulse(CGVectorMake(0, -50))
         
         
         if gameOver == false {

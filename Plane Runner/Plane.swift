@@ -25,13 +25,6 @@ class Plane : SKSpriteNode {
         fatalError("init(coder:) has not been implemented")
     }
     
-//    private func createPlane() -> SKSpriteNode {
-//        let planeNode = SKSpriteNode(imageNamed: textureNames.first!)
-//        planeNode.zPosition = ZLevel.Plane
-//        
-//        return setPhysics(planeNode)
-//    }
-    
     private func setPhysics(plane: SKSpriteNode) {
         
         plane.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(plane.size.width, plane.size.height))
