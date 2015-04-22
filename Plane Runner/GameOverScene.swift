@@ -14,9 +14,11 @@ class GameOverScene: SKScene {
         super.init(size: size)
         
         if won {
-            // Level was beat
+            // Level was won
+            println("Player won")
         } else {
             // Level was lost
+            println("Player lost")
         }
     }
 
