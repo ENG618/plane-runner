@@ -12,17 +12,21 @@
 		5C4052D31AD73B260088EE70 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4052D21AD73B260088EE70 /* GameScene.swift */; };
 		5C4052D51AD73B260088EE70 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4052D41AD73B260088EE70 /* GameViewController.swift */; };
 		5C4052D81AD73B260088EE70 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C4052D61AD73B260088EE70 /* Main.storyboard */; };
-		5C4052DA1AD73B260088EE70 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C4052D91AD73B260088EE70 /* Images.xcassets */; };
 		5C4052DD1AD73B260088EE70 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C4052DB1AD73B260088EE70 /* LaunchScreen.xib */; };
 		5C4052E91AD73B260088EE70 /* Plane_RunnerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4052E81AD73B260088EE70 /* Plane_RunnerTests.swift */; };
 		5C4052F31AD7A12D0088EE70 /* backgroundTrack.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5C4052F21AD7A12C0088EE70 /* backgroundTrack.mp3 */; };
 		5C4052F61AD7A7710088EE70 /* planeCrash.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5C4052F51AD7A7710088EE70 /* planeCrash.mp3 */; };
 		5C4052F81AD841280088EE70 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C4052F71AD841280088EE70 /* AVFoundation.framework */; };
-		5C50FA911AE5A8A30068FD66 /* planes.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5C50FA901AE5A8A30068FD66 /* planes.atlas */; };
 		5C50FA931AE5ABFE0068FD66 /* Plane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50FA921AE5ABFE0068FD66 /* Plane.swift */; };
 		5C50FA961AE5F1620068FD66 /* PhysicsCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50FA951AE5F1620068FD66 /* PhysicsCategory.swift */; };
 		5C50FA981AE5FC330068FD66 /* ZLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50FA971AE5FC330068FD66 /* ZLevel.swift */; };
 		5C50FA9A1AE5FF7E0068FD66 /* PlaneColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50FA991AE5FF7E0068FD66 /* PlaneColor.swift */; };
+		5CA474E11AE7571A00E71BE7 /* background.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5CA474E01AE7571A00E71BE7 /* background.atlas */; };
+		5CA474E31AE7572600E71BE7 /* letters.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5CA474E21AE7572600E71BE7 /* letters.atlas */; };
+		5CA474E51AE7573200E71BE7 /* numbers.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5CA474E41AE7573200E71BE7 /* numbers.atlas */; };
+		5CA474E71AE7573700E71BE7 /* obstacles.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5CA474E61AE7573700E71BE7 /* obstacles.atlas */; };
+		5CA474E91AE7573D00E71BE7 /* planes.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5CA474E81AE7573D00E71BE7 /* planes.atlas */; };
+		5CA474EB1AE7574400E71BE7 /* ui.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5CA474EA1AE7574400E71BE7 /* ui.atlas */; };
 		5CCD8DC11ADB8DFC0001362D /* Helicopter.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5CCD8DC01ADB8DFC0001362D /* Helicopter.mp3 */; };
 /* End PBXBuildFile section */
 
@@ -44,7 +48,6 @@
 		5C4052D21AD73B260088EE70 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		5C4052D41AD73B260088EE70 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		5C4052D71AD73B260088EE70 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		5C4052D91AD73B260088EE70 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		5C4052DC1AD73B260088EE70 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		5C4052E21AD73B260088EE70 /* Plane RunnerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Plane RunnerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C4052E71AD73B260088EE70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -52,11 +55,16 @@
 		5C4052F21AD7A12C0088EE70 /* backgroundTrack.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = backgroundTrack.mp3; sourceTree = "<group>"; };
 		5C4052F51AD7A7710088EE70 /* planeCrash.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = planeCrash.mp3; sourceTree = "<group>"; };
 		5C4052F71AD841280088EE70 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		5C50FA901AE5A8A30068FD66 /* planes.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = planes.atlas; sourceTree = "<group>"; };
 		5C50FA921AE5ABFE0068FD66 /* Plane.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plane.swift; sourceTree = "<group>"; };
 		5C50FA951AE5F1620068FD66 /* PhysicsCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsCategory.swift; sourceTree = "<group>"; };
 		5C50FA971AE5FC330068FD66 /* ZLevel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZLevel.swift; sourceTree = "<group>"; };
 		5C50FA991AE5FF7E0068FD66 /* PlaneColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaneColor.swift; sourceTree = "<group>"; };
+		5CA474E01AE7571A00E71BE7 /* background.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = background.atlas; sourceTree = "<group>"; };
+		5CA474E21AE7572600E71BE7 /* letters.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = letters.atlas; path = background.atlas/letters.atlas; sourceTree = "<group>"; };
+		5CA474E41AE7573200E71BE7 /* numbers.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = numbers.atlas; sourceTree = "<group>"; };
+		5CA474E61AE7573700E71BE7 /* obstacles.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = obstacles.atlas; sourceTree = "<group>"; };
+		5CA474E81AE7573D00E71BE7 /* planes.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = planes.atlas; sourceTree = "<group>"; };
+		5CA474EA1AE7574400E71BE7 /* ui.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = ui.atlas; sourceTree = "<group>"; };
 		5CCD8DC01ADB8DFC0001362D /* Helicopter.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Helicopter.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -101,15 +109,14 @@
 		5C4052CB1AD73B260088EE70 /* Plane Runner */ = {
 			isa = PBXGroup;
 			children = (
+				5CA474DF1AE7561700E71BE7 /* assets */,
 				5C50FA941AE5B4250068FD66 /* Data */,
 				5C4052F41AD7A1360088EE70 /* sounds */,
-				5C50FA901AE5A8A30068FD66 /* planes.atlas */,
 				5C4052CE1AD73B260088EE70 /* AppDelegate.swift */,
 				5C4052D01AD73B260088EE70 /* GameScene.sks */,
 				5C4052D21AD73B260088EE70 /* GameScene.swift */,
 				5C4052D41AD73B260088EE70 /* GameViewController.swift */,
 				5C4052D61AD73B260088EE70 /* Main.storyboard */,
-				5C4052D91AD73B260088EE70 /* Images.xcassets */,
 				5C4052DB1AD73B260088EE70 /* LaunchScreen.xib */,
 				5C4052CC1AD73B260088EE70 /* Supporting Files */,
 			);
@@ -160,6 +167,19 @@
 				5C50FA991AE5FF7E0068FD66 /* PlaneColor.swift */,
 			);
 			name = Data;
+			sourceTree = "<group>";
+		};
+		5CA474DF1AE7561700E71BE7 /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				5CA474E01AE7571A00E71BE7 /* background.atlas */,
+				5CA474E21AE7572600E71BE7 /* letters.atlas */,
+				5CA474E41AE7573200E71BE7 /* numbers.atlas */,
+				5CA474E61AE7573700E71BE7 /* obstacles.atlas */,
+				5CA474E81AE7573D00E71BE7 /* planes.atlas */,
+				5CA474EA1AE7574400E71BE7 /* ui.atlas */,
+			);
+			name = assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -245,11 +265,15 @@
 			files = (
 				5C4052DD1AD73B260088EE70 /* LaunchScreen.xib in Resources */,
 				5C4052F31AD7A12D0088EE70 /* backgroundTrack.mp3 in Resources */,
-				5C50FA911AE5A8A30068FD66 /* planes.atlas in Resources */,
-				5C4052DA1AD73B260088EE70 /* Images.xcassets in Resources */,
+				5CA474E71AE7573700E71BE7 /* obstacles.atlas in Resources */,
 				5C4052D11AD73B260088EE70 /* GameScene.sks in Resources */,
+				5CA474E31AE7572600E71BE7 /* letters.atlas in Resources */,
+				5CA474E11AE7571A00E71BE7 /* background.atlas in Resources */,
 				5CCD8DC11ADB8DFC0001362D /* Helicopter.mp3 in Resources */,
+				5CA474E51AE7573200E71BE7 /* numbers.atlas in Resources */,
 				5C4052D81AD73B260088EE70 /* Main.storyboard in Resources */,
+				5CA474EB1AE7574400E71BE7 /* ui.atlas in Resources */,
+				5CA474E91AE7573D00E71BE7 /* planes.atlas in Resources */,
 				5C4052F61AD7A7710088EE70 /* planeCrash.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
