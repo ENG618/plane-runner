@@ -178,7 +178,7 @@ class GameScene: SKScene {
         for var i:CGFloat = 0; i < 7; i++ {
             
             ground = SKSpriteNode(texture: groundTexture)
-            ground.setScale(0.5)
+//            ground.setScale(0.5)
             ground.position = CGPoint(x: ground.size.width / 2 + ground.size.width * i, y: ground.size.height / 2)
             ground.zPosition = ZLevel.Ground
             
@@ -199,7 +199,7 @@ class GameScene: SKScene {
             
             // Create upper obstacle
             let rockDown = SKSpriteNode(texture: rockDownTexture)
-            rockDown.setScale(0.5)
+//            rockDown.setScale(0.5)
             rockDown.position = CGPoint(x: self.frame.width + rockDown.size.width, y: CGRectGetMaxY(self.frame) - rockDown.size.height/2)
             rockDown.zPosition = ZLevel.Rocks
             rockDown.runAction(moveAndRemove)
@@ -212,7 +212,7 @@ class GameScene: SKScene {
             
             // Create lower obstacle
             let rock = SKSpriteNode(texture: rockTexture)
-            rock.setScale(0.5)
+//            rock.setScale(0.5)
 //            rock.position = CGPoint(x: self.frame.width + rock.size.width * 4, y: rock.size.height/2)
             rock.position = CGPoint(x: self.frame.width + rock.size.width, y: rock.size.height/2)
             rock.zPosition = ZLevel.Rocks
@@ -241,7 +241,7 @@ class GameScene: SKScene {
         
         // Set planes position
         plane = SKSpriteNode(texture: planeTexture)
-        plane.setScale(0.5)
+//        plane.setScale(0.5)
         plane.position = CGPointMake(size.width/4, size.height/2)
         
         plane.runAction(makePropellerSpin)
