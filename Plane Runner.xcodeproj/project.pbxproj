@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		5C4052CF1AD73B260088EE70 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4052CE1AD73B260088EE70 /* AppDelegate.swift */; };
-		5C4052D11AD73B260088EE70 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5C4052D01AD73B260088EE70 /* GameScene.sks */; };
 		5C4052D31AD73B260088EE70 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4052D21AD73B260088EE70 /* GameScene.swift */; };
 		5C4052D51AD73B260088EE70 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4052D41AD73B260088EE70 /* GameViewController.swift */; };
 		5C4052D81AD73B260088EE70 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C4052D61AD73B260088EE70 /* Main.storyboard */; };
@@ -27,6 +26,8 @@
 		5CA474E91AE7573D00E71BE7 /* planes.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5CA474E81AE7573D00E71BE7 /* planes.atlas */; };
 		5CA474EB1AE7574400E71BE7 /* ui.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5CA474EA1AE7574400E71BE7 /* ui.atlas */; };
 		5CA474EF1AE75BE200E71BE7 /* letters.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5CA474EE1AE75BE200E71BE7 /* letters.atlas */; };
+		5CADD6981AE8013C00707677 /* LevelOneScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CADD6971AE8013C00707677 /* LevelOneScene.swift */; };
+		5CADD69B1AE80C9100707677 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CADD69A1AE80C9100707677 /* GameOverScene.swift */; };
 		5CCD8DC11ADB8DFC0001362D /* Helicopter.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5CCD8DC01ADB8DFC0001362D /* Helicopter.mp3 */; };
 /* End PBXBuildFile section */
 
@@ -44,7 +45,6 @@
 		5C4052C91AD73B260088EE70 /* Plane Runner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Plane Runner.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C4052CD1AD73B260088EE70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C4052CE1AD73B260088EE70 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5C4052D01AD73B260088EE70 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		5C4052D21AD73B260088EE70 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		5C4052D41AD73B260088EE70 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		5C4052D71AD73B260088EE70 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -65,6 +65,8 @@
 		5CA474E81AE7573D00E71BE7 /* planes.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = planes.atlas; sourceTree = "<group>"; };
 		5CA474EA1AE7574400E71BE7 /* ui.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = ui.atlas; sourceTree = "<group>"; };
 		5CA474EE1AE75BE200E71BE7 /* letters.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = letters.atlas; sourceTree = "<group>"; };
+		5CADD6971AE8013C00707677 /* LevelOneScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelOneScene.swift; sourceTree = "<group>"; };
+		5CADD69A1AE80C9100707677 /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
 		5CCD8DC01ADB8DFC0001362D /* Helicopter.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Helicopter.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -112,13 +114,14 @@
 				5CA474DF1AE7561700E71BE7 /* assets */,
 				5C50FA941AE5B4250068FD66 /* Data */,
 				5C4052F41AD7A1360088EE70 /* sounds */,
+				5CADD6991AE8016300707677 /* Levels */,
 				5C4052CE1AD73B260088EE70 /* AppDelegate.swift */,
-				5C4052D01AD73B260088EE70 /* GameScene.sks */,
 				5C4052D21AD73B260088EE70 /* GameScene.swift */,
 				5C4052D41AD73B260088EE70 /* GameViewController.swift */,
 				5C4052D61AD73B260088EE70 /* Main.storyboard */,
 				5C4052DB1AD73B260088EE70 /* LaunchScreen.xib */,
 				5C4052CC1AD73B260088EE70 /* Supporting Files */,
+				5CADD69A1AE80C9100707677 /* GameOverScene.swift */,
 			);
 			path = "Plane Runner";
 			sourceTree = "<group>";
@@ -180,6 +183,14 @@
 				5CA474EA1AE7574400E71BE7 /* ui.atlas */,
 			);
 			name = assets;
+			sourceTree = "<group>";
+		};
+		5CADD6991AE8016300707677 /* Levels */ = {
+			isa = PBXGroup;
+			children = (
+				5CADD6971AE8013C00707677 /* LevelOneScene.swift */,
+			);
+			name = Levels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -266,7 +277,6 @@
 				5C4052DD1AD73B260088EE70 /* LaunchScreen.xib in Resources */,
 				5C4052F31AD7A12D0088EE70 /* backgroundTrack.mp3 in Resources */,
 				5CA474E71AE7573700E71BE7 /* obstacles.atlas in Resources */,
-				5C4052D11AD73B260088EE70 /* GameScene.sks in Resources */,
 				5CA474E11AE7571A00E71BE7 /* background.atlas in Resources */,
 				5CCD8DC11ADB8DFC0001362D /* Helicopter.mp3 in Resources */,
 				5CA474E51AE7573200E71BE7 /* numbers.atlas in Resources */,
@@ -295,9 +305,11 @@
 				5C50FA9A1AE5FF7E0068FD66 /* PlaneColor.swift in Sources */,
 				5C50FA961AE5F1620068FD66 /* PhysicsCategory.swift in Sources */,
 				5C4052D31AD73B260088EE70 /* GameScene.swift in Sources */,
+				5CADD6981AE8013C00707677 /* LevelOneScene.swift in Sources */,
 				5C4052D51AD73B260088EE70 /* GameViewController.swift in Sources */,
 				5C50FA931AE5ABFE0068FD66 /* Plane.swift in Sources */,
 				5C4052CF1AD73B260088EE70 /* AppDelegate.swift in Sources */,
+				5CADD69B1AE80C9100707677 /* GameOverScene.swift in Sources */,
 				5C50FA981AE5FC330068FD66 /* ZLevel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
