@@ -69,52 +69,7 @@ class GameScene: SKScene {
         view.showsPhysics = true
     }
     
-    
-    // MARK: Input methods
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        /* Called when a touch begins */
-        
-        println("View Height: \(view!.bounds.height) Width: \(view!.bounds.width)")
-        
-        if gameOver {
-            
-            movingObjects.removeAllChildren()
-            
-            createBackground(view!)
-            createGround(view!)
-            
-            plane.position = CGPointMake(size.width/4, size.height/2)
-            plane.physicsBody?.velocity = CGVectorMake(0, 0)
-            
-            labelHolder.removeAllChildren()
-            
-            movingObjects.speed = 1
-            
-            gameOver = false
-            
-        } else {
-            isTouching = true
-//            let planeFly = SKAction.repeatAction(SKAction.playSoundFileNamed("Helicopter.mp3", waitForCompletion: true), count: 1)
-//            runAction(planeFly)
-//            
-//            plane.physicsBody?.velocity = CGVectorMake(0, 0)
-//            plane.physicsBody?.applyImpulse(CGVectorMake(0, 10))
-        }
-    }
-    
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
-        isTouching = false
-    }
-    
-    override func update(currentTime: CFTimeInterval) {
-        /* Called before each frame is rendered */
-        if isTouching {
-            plane.physicsBody?.applyForce(CGVectorMake(0, 50))
-        }
-    }
-    
     // MARK: Scene setup helpers
-    
     func loopBackgroundTrack(view: SKView) {
         
         let path = NSBundle.mainBundle().pathForResource("backgroundTrack", ofType: ".mp3")
@@ -295,6 +250,51 @@ class GameScene: SKScene {
     }
 }
 
+// MARK: Input Methods
+extension GameScene {
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        /* Called when a touch begins */
+        
+        println("View Height: \(view!.bounds.height) Width: \(view!.bounds.width)")
+        
+        if gameOver {
+            
+            movingObjects.removeAllChildren()
+            
+            createBackground(view!)
+            createGround(view!)
+            
+            plane.position = CGPointMake(size.width/4, size.height/2)
+            plane.physicsBody?.velocity = CGVectorMake(0, 0)
+            
+            labelHolder.removeAllChildren()
+            
+            movingObjects.speed = 1
+            
+            gameOver = false
+            
+        } else {
+            isTouching = true
+            //            let planeFly = SKAction.repeatAction(SKAction.playSoundFileNamed("Helicopter.mp3", waitForCompletion: true), count: 1)
+            //            runAction(planeFly)
+            //
+            //            plane.physicsBody?.velocity = CGVectorMake(0, 0)
+            //            plane.physicsBody?.applyImpulse(CGVectorMake(0, 10))
+        }
+    }
+    
+    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+        isTouching = false
+    }
+    
+    override func update(currentTime: CFTimeInterval) {
+        /* Called before each frame is rendered */
+        if isTouching {
+            plane.physicsBody?.applyForce(CGVectorMake(0, 50))
+        }
+    }
+}
+
 // MARK: SKPhysicsContactDelegate
 extension GameScene: SKPhysicsContactDelegate {
     
@@ -315,6 +315,5 @@ extension GameScene: SKPhysicsContactDelegate {
             
             labelHolder.addChild(gameOverText)
         }
-        
     }
 }
