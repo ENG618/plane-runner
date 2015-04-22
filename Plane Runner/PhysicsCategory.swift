@@ -14,4 +14,5 @@ struct PhysicsCategory {
     static let Collidable   :UInt32 = 0x1 << 1
     static let Boundary     :UInt32 = 0x1 << 2
     static let Ground       :UInt32 = 0x1 << 3
+    static let ButtonEnabled:UInt32 = 0x1 << 4
 }

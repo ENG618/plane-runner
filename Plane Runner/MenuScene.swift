@@ -12,12 +12,17 @@ import AVFoundation
 class MenuScene: SKScene {
     
     let bgTexture = SKTexture(imageNamed: "mainBackground")
-    let titleNode = SKSpriteNode()
+    let titleNode = SKNode()
+    let startNode = SKNode()
+    let buttonTexture = SKTexture(imageNamed: "buttonLarge")
     
     override func didMoveToView(view: SKView) {
         
+        self.physicsWorld.contactDelegate = self
+        
         createBackground()
         createTitle()
+        createStartButton()
         
         
 //        var label = SKLabelNode(text: "Hello World")
@@ -27,7 +32,7 @@ class MenuScene: SKScene {
     
     // MARK: Setup Helpers
     func createBackground() {
-        var bg = SKSpriteNode(texture: bgTexture)
+        let bg = SKSpriteNode(texture: bgTexture)
         bg.position = CGPoint(x: size.width/2, y: size.height/2)
         bg.zPosition = ZLevel.Background
         bg.size = size
@@ -89,5 +94,45 @@ class MenuScene: SKScene {
     func getLetterTexture(letter: String) -> SKTexture {
         let letterTextuer = SKTexture(imageNamed: letter)
         return letterTextuer
+    }
+    
+    func createStartButton() {
+        let startBtn = SKSpriteNode(texture: buttonTexture)
+        startBtn.position = CGPoint(x: size.width/2, y: size.height/2 - size.height/3)
+        startNode.addChild(startBtn)
+        
+        let startText = SKLabelNode(text: "Start")
+        startNode.addChild(startText)
+        
+//        startNode.physicsBody = SKPhysicsBody(rectangleOfSize: buttonTexture.size())
+//        startNode.physicsBody?.categoryBitMask = PhysicsCategory.ButtonEnabled
+        
+        self.addChild(startNode)
+    }
+}
+
+// MARK: Input Methods
+extension MenuScene {
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        for touch: AnyObject in touches {
+            let location = touch.locationInNode(self)
+            if startNode.containsPoint(location) {
+                println("Start button touched")
+                
+                let scene = LevelOneScene(size: size)
+                self.view?.presentScene(scene, transition: SKTransition.doorsOpenHorizontalWithDuration(1.0))
+            }
+        }
+    }
+    
+    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+        
+    }
+}
+
+// MARK: SKPhysicsDelegate
+extension MenuScene: SKPhysicsContactDelegate {
+    func didBeginContact(contact: SKPhysicsContact) {
+        println("button pressed")
     }
 }
