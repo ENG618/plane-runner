@@ -26,6 +26,7 @@ class GameScene: SKScene {
     
     var audioPlayer = AVAudioPlayer()
     
+    var isTouching = false
     var gameOver = false
     
     // Scene resources
@@ -40,10 +41,6 @@ class GameScene: SKScene {
         // Loads all scenes resources
         loadResources()
         
-        // Play background track
-        //        let backgrountTrack = SKAction.repeatActionForever(SKAction.playSoundFileNamed("backgroundTrack.mp3", waitForCompletion: true))
-        //        self.runAction(backgrountTrack)
-        
         loopBackgroundTrack(view)
         
         self.physicsWorld.contactDelegate = self
@@ -56,6 +53,14 @@ class GameScene: SKScene {
         createBackground(view)
         createBoundry(view)
         createGround(view)
+        
+//        var newPlane = Plane(textureNames: ["planeYellow1", "planeYellow2", "planeYellow3"])
+//        newPlane.position = CGPointMake(size.width/4, size.height/2)
+//        newPlane = newPlane.start()
+//        self.addChild(newPlane)
+        
+        
+        
         createPlane(view)
         obstacleSetUp(view)
         
@@ -88,17 +93,24 @@ class GameScene: SKScene {
             gameOver = false
             
         } else {
-            
-            let planeFly = SKAction.repeatAction(SKAction.playSoundFileNamed("Helicopter.mp3", waitForCompletion: true), count: 1)
-            runAction(planeFly)
-            
-            plane.physicsBody?.velocity = CGVectorMake(0, 0)
-            plane.physicsBody?.applyImpulse(CGVectorMake(0, 10))
+            isTouching = true
+//            let planeFly = SKAction.repeatAction(SKAction.playSoundFileNamed("Helicopter.mp3", waitForCompletion: true), count: 1)
+//            runAction(planeFly)
+//            
+//            plane.physicsBody?.velocity = CGVectorMake(0, 0)
+//            plane.physicsBody?.applyImpulse(CGVectorMake(0, 10))
         }
+    }
+    
+    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+        isTouching = false
     }
     
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
+        if isTouching {
+            plane.physicsBody?.applyForce(CGVectorMake(0, 50))
+        }
     }
     
     // MARK: Scene setup helpers
@@ -146,8 +158,8 @@ class GameScene: SKScene {
         for var i:CGFloat = 0; i < 3; i++ {
             
             bg = SKSpriteNode(texture: bgTexture)
-            bg.position = CGPoint(x: bgTexture.size().width/2 + bgTexture.size().width * i, y: CGRectGetMidY(self.frame))
-            bg.size.height = self.frame.height
+            bg.position = CGPoint(x: bgTexture.size().width/2 + bgTexture.size().width * i, y: size.height/2)
+            bg.size.height = size.height
             bg.zPosition = ZLevel.Background
             
             bg.runAction(movebgForever)
@@ -269,10 +281,10 @@ class GameScene: SKScene {
         groundTexture = SKTexture(imageNamed: "groundGrass")
         
         // Rock
-        rockTexture = SKTexture(imageNamed: "rock")
+        rockTexture = SKTexture(imageNamed: "rockGrass")
         
         // Rock Down
-        rockDownTexture = SKTexture(imageNamed: "rockDown")
+        rockDownTexture = SKTexture(imageNamed: "rockGrassDown")
         
         // Add label holder
         self.addChild(labelHolder)

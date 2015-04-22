@@ -39,14 +39,14 @@ class Plane : SKSpriteNode {
     }
     
     // MARK: Animation
-    func start() -> Plane {
+    func start()/* -> Plane */{
         animate()
-        return self
+//        return self
     }
     
-    func stop() -> Plane {
+    func stop()/* -> Plane */{
         self.removeAllActions()
-        return self
+//        return self
     }
     
     private func animate() {

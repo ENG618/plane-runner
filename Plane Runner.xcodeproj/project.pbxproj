@@ -22,11 +22,11 @@
 		5C50FA981AE5FC330068FD66 /* ZLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50FA971AE5FC330068FD66 /* ZLevel.swift */; };
 		5C50FA9A1AE5FF7E0068FD66 /* PlaneColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50FA991AE5FF7E0068FD66 /* PlaneColor.swift */; };
 		5CA474E11AE7571A00E71BE7 /* background.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5CA474E01AE7571A00E71BE7 /* background.atlas */; };
-		5CA474E31AE7572600E71BE7 /* letters.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5CA474E21AE7572600E71BE7 /* letters.atlas */; };
 		5CA474E51AE7573200E71BE7 /* numbers.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5CA474E41AE7573200E71BE7 /* numbers.atlas */; };
 		5CA474E71AE7573700E71BE7 /* obstacles.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5CA474E61AE7573700E71BE7 /* obstacles.atlas */; };
 		5CA474E91AE7573D00E71BE7 /* planes.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5CA474E81AE7573D00E71BE7 /* planes.atlas */; };
 		5CA474EB1AE7574400E71BE7 /* ui.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5CA474EA1AE7574400E71BE7 /* ui.atlas */; };
+		5CA474EF1AE75BE200E71BE7 /* letters.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5CA474EE1AE75BE200E71BE7 /* letters.atlas */; };
 		5CCD8DC11ADB8DFC0001362D /* Helicopter.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5CCD8DC01ADB8DFC0001362D /* Helicopter.mp3 */; };
 /* End PBXBuildFile section */
 
@@ -60,11 +60,11 @@
 		5C50FA971AE5FC330068FD66 /* ZLevel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZLevel.swift; sourceTree = "<group>"; };
 		5C50FA991AE5FF7E0068FD66 /* PlaneColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaneColor.swift; sourceTree = "<group>"; };
 		5CA474E01AE7571A00E71BE7 /* background.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = background.atlas; sourceTree = "<group>"; };
-		5CA474E21AE7572600E71BE7 /* letters.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = letters.atlas; path = background.atlas/letters.atlas; sourceTree = "<group>"; };
 		5CA474E41AE7573200E71BE7 /* numbers.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = numbers.atlas; sourceTree = "<group>"; };
 		5CA474E61AE7573700E71BE7 /* obstacles.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = obstacles.atlas; sourceTree = "<group>"; };
 		5CA474E81AE7573D00E71BE7 /* planes.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = planes.atlas; sourceTree = "<group>"; };
 		5CA474EA1AE7574400E71BE7 /* ui.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = ui.atlas; sourceTree = "<group>"; };
+		5CA474EE1AE75BE200E71BE7 /* letters.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = letters.atlas; sourceTree = "<group>"; };
 		5CCD8DC01ADB8DFC0001362D /* Helicopter.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Helicopter.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -173,7 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				5CA474E01AE7571A00E71BE7 /* background.atlas */,
-				5CA474E21AE7572600E71BE7 /* letters.atlas */,
+				5CA474EE1AE75BE200E71BE7 /* letters.atlas */,
 				5CA474E41AE7573200E71BE7 /* numbers.atlas */,
 				5CA474E61AE7573700E71BE7 /* obstacles.atlas */,
 				5CA474E81AE7573D00E71BE7 /* planes.atlas */,
@@ -267,10 +267,10 @@
 				5C4052F31AD7A12D0088EE70 /* backgroundTrack.mp3 in Resources */,
 				5CA474E71AE7573700E71BE7 /* obstacles.atlas in Resources */,
 				5C4052D11AD73B260088EE70 /* GameScene.sks in Resources */,
-				5CA474E31AE7572600E71BE7 /* letters.atlas in Resources */,
 				5CA474E11AE7571A00E71BE7 /* background.atlas in Resources */,
 				5CCD8DC11ADB8DFC0001362D /* Helicopter.mp3 in Resources */,
 				5CA474E51AE7573200E71BE7 /* numbers.atlas in Resources */,
+				5CA474EF1AE75BE200E71BE7 /* letters.atlas in Resources */,
 				5C4052D81AD73B260088EE70 /* Main.storyboard in Resources */,
 				5CA474EB1AE7574400E71BE7 /* ui.atlas in Resources */,
 				5CA474E91AE7573D00E71BE7 /* planes.atlas in Resources */,
