@@ -85,9 +85,9 @@ class LevelOneScene: SKScene {
     }
     
     func obstacleSetUp(view: SKView) {
-        //        let distanceToMove = CGFloat(self.frame.width + 5.0 * rockTexture.size().width)
         let distanceToMove = CGFloat(view.bounds.width + 5.0 * rockTexture.size().width)
-        let moveRocks = SKAction.moveByX(-distanceToMove, y: 0, duration: NSTimeInterval(0.01 * distanceToMove))
+//        let distanceToMove = SKAction.moveByX(-rockTexture.size().width, y: 0, duration: <#NSTimeInterval#>)
+        let moveRocks = SKAction.moveByX(-distanceToMove, y: 0, duration: 8 /*NSTimeInterval(0.01 * distanceToMove)*/)
         let removeRocks = SKAction.removeFromParent()
         
         moveAndRemove = SKAction.sequence([moveRocks, removeRocks])
@@ -115,7 +115,7 @@ class LevelOneScene: SKScene {
             
             bg = SKSpriteNode(texture: bgTexture)
             bg.position = CGPoint(x: bgTexture.size().width/2 + bgTexture.size().width * i, y: size.height/2)
-            bg.size.height = size.height
+            bg.size = size
             bg.zPosition = ZLevel.Background
             
             bg.runAction(movebgForever)
@@ -167,7 +167,6 @@ class LevelOneScene: SKScene {
             
             // Create upper obstacle
             let rockDown = SKSpriteNode(texture: rockDownTexture)
-            //            rockDown.setScale(0.5)
             rockDown.position = CGPoint(x: self.frame.width + rockDown.size.width, y: CGRectGetMaxY(self.frame) - rockDown.size.height/2)
             rockDown.zPosition = ZLevel.Rocks
             rockDown.runAction(moveAndRemove)
@@ -180,8 +179,6 @@ class LevelOneScene: SKScene {
             
             // Create lower obstacle
             let rock = SKSpriteNode(texture: rockTexture)
-            //            rock.setScale(0.5)
-            //            rock.position = CGPoint(x: self.frame.width + rock.size.width * 4, y: rock.size.height/2)
             rock.position = CGPoint(x: self.frame.width + rock.size.width, y: rock.size.height/2)
             rock.zPosition = ZLevel.Rocks
             rock.runAction(moveAndRemove)
