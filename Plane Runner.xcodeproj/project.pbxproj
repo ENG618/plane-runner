@@ -28,6 +28,7 @@
 		5CA474EF1AE75BE200E71BE7 /* letters.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5CA474EE1AE75BE200E71BE7 /* letters.atlas */; };
 		5CADD6981AE8013C00707677 /* LevelOneScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CADD6971AE8013C00707677 /* LevelOneScene.swift */; };
 		5CADD69B1AE80C9100707677 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CADD69A1AE80C9100707677 /* GameOverScene.swift */; };
+		5CADD69F1AE8BA1600707677 /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CADD69E1AE8BA1600707677 /* HUD.swift */; };
 		5CCD8DC11ADB8DFC0001362D /* Helicopter.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5CCD8DC01ADB8DFC0001362D /* Helicopter.mp3 */; };
 /* End PBXBuildFile section */
 
@@ -67,6 +68,7 @@
 		5CA474EE1AE75BE200E71BE7 /* letters.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = letters.atlas; sourceTree = "<group>"; };
 		5CADD6971AE8013C00707677 /* LevelOneScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelOneScene.swift; sourceTree = "<group>"; };
 		5CADD69A1AE80C9100707677 /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
+		5CADD69E1AE8BA1600707677 /* HUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HUD.swift; sourceTree = "<group>"; };
 		5CCD8DC01ADB8DFC0001362D /* Helicopter.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Helicopter.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -168,6 +170,7 @@
 				5C50FA951AE5F1620068FD66 /* PhysicsCategory.swift */,
 				5C50FA971AE5FC330068FD66 /* ZLevel.swift */,
 				5C50FA991AE5FF7E0068FD66 /* PlaneColor.swift */,
+				5CADD69E1AE8BA1600707677 /* HUD.swift */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -303,6 +306,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C50FA9A1AE5FF7E0068FD66 /* PlaneColor.swift in Sources */,
+				5CADD69F1AE8BA1600707677 /* HUD.swift in Sources */,
 				5C50FA961AE5F1620068FD66 /* PhysicsCategory.swift in Sources */,
 				5C4052D31AD73B260088EE70 /* MenuScene.swift in Sources */,
 				5CADD6981AE8013C00707677 /* LevelOneScene.swift in Sources */,

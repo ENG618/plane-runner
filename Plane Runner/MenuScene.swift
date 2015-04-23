@@ -98,10 +98,15 @@ class MenuScene: SKScene {
     
     func createStartButton() {
         let startBtn = SKSpriteNode(texture: buttonTexture)
+        startBtn.setScale(1.5)
         startBtn.position = CGPoint(x: size.width/2, y: size.height/2 - size.height/3)
+        startBtn.zPosition = 0
         startNode.addChild(startBtn)
         
         let startText = SKLabelNode(text: "Start")
+        startText.position = CGPoint(x: size.width/2, y: size.height/2 - size.height/3)
+        startText.color = SKColor.whiteColor()
+        startText.zPosition = 1
         startNode.addChild(startText)
         
 //        startNode.physicsBody = SKPhysicsBody(rectangleOfSize: buttonTexture.size())
