@@ -10,11 +10,13 @@ import SpriteKit
 
 class HUD {
     
+    // MARK: Class Variables
     var distanceTraveled: Int
     var starsCollected: Int
     let distanceLabel: SKNode
     let starsLabel: SKNode
     
+    // MARK: Init
     init() {
         // Set initial values
         distanceTraveled = 0
@@ -22,12 +24,14 @@ class HUD {
         distanceLabel = SKNode()
         starsLabel = SKNode()
         
-        
+        // Setup
         setUpDistanceLable(distanceLabel)
+        setUpStarsLabel(starsLabel)
     }
     
+    // MARK: Distance
     private func setUpDistanceLable(parent: SKNode) {
-        // TODO: Set up label node
+        // TODO: Setup label node
     }
     
     func increaseDistance() {
@@ -41,8 +45,9 @@ class HUD {
         // TODO: Update distance label
     }
     
+    // MARK: Stars
     private func setUpStarsLabel(parent: SKNode) {
-        // TODO: Set up stars label
+        // TODO: Setup stars label
     }
     
     func increaseStar() {
