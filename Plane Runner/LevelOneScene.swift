@@ -1,6 +1,6 @@
 //
-//  LevelOne.swift
-//  
+//  LevelOneScene.swift
+//  Plane Runner
 //
 //  Created by Eric Garcia on 4/22/15.
 //

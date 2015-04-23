@@ -1,5 +1,5 @@
 //
-//  GameScene.swift
+//  MenuScene.swift
 //  Plane Runner
 //
 //  Created by Eric Garcia on 4/9/15.
