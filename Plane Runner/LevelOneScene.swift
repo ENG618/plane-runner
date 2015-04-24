@@ -22,6 +22,7 @@ class LevelOneScene: SKScene {
     var gameOverText = SKSpriteNode()
     
     var hud = SKNode()
+    var score = 0
     var hudScoreLabel = SKSpriteNode()
     var hudPauseButn = SKSpriteNode()
     var labelHolder = SKSpriteNode()
@@ -58,6 +59,7 @@ class LevelOneScene: SKScene {
         createBackground(view)
         createBoundry(view)
         createGround(view)
+        createDistanceMarkers(view)
         
         //        var testnode = SKSpriteNode()
         //
@@ -103,6 +105,7 @@ class LevelOneScene: SKScene {
         // Create Action to spawn new obstacles after delay.
         let spawn = SKAction.runBlock({
             () in self.createObstacles(view)
+            self.createDistanceMarkers(view)
         })
         let delay = SKAction.waitForDuration(NSTimeInterval(4.0))
         let spawnAndDelay = SKAction.sequence([spawn, delay])
@@ -203,6 +206,29 @@ class LevelOneScene: SKScene {
         // TODO: Create clouds
     }
     
+    func createDistanceMarkers(view: SKView) {
+//        var moveGround = SKAction.moveByX(-groundTexture.size().width, y: 0, duration: 8)
+//        var replaceGround = SKAction.moveByX(groundTexture.size().width, y: 0, duration: 0)
+//        var moveGroundForever = SKAction.repeatActionForever(SKAction.sequence([moveGround, replaceGround]))
+        
+        
+        let moveMarker = SKAction.moveByX(-size.width/2, y: 0, duration: 8)
+        let removeMarker = SKAction.removeFromParent()
+        let moveAndRemoveMarker = SKAction.repeatActionForever(SKAction.sequence([moveMarker, removeMarker]))
+        
+        
+        let distanceMarker = SKNode()
+        distanceMarker.physicsBody = SKPhysicsBody(edgeFromPoint: CGPointMake(CGRectGetMidX(self.frame), 0), toPoint: CGPointMake(CGRectGetMidX(self.frame), CGRectGetMaxY(self.frame)))
+        distanceMarker.physicsBody?.dynamic = false
+        distanceMarker.physicsBody?.categoryBitMask = PhysicsCategory.Distance
+
+        distanceMarker.physicsBody?.contactTestBitMask = PhysicsCategory.Plane
+        distanceMarker.physicsBody?.dynamic = true
+        distanceMarker.runAction(moveAndRemoveMarker)
+        
+        movingObjects.addChild(distanceMarker)
+    }
+    
     func createPlane(view: SKView) {
         let planeTexture = SKTexture(imageNamed: "planeRed1")
         let planeTexture1 = SKTexture(imageNamed: "planeRed2")
@@ -225,7 +251,7 @@ class LevelOneScene: SKScene {
         plane.physicsBody?.restitution = 0.0
         plane.physicsBody?.categoryBitMask = PhysicsCategory.Plane
         plane.physicsBody?.collisionBitMask = PhysicsCategory.Collidable | PhysicsCategory.Boundary | PhysicsCategory.Ground
-        plane.physicsBody?.contactTestBitMask = PhysicsCategory.Collidable | PhysicsCategory.Boundary | PhysicsCategory.Ground
+        plane.physicsBody?.contactTestBitMask = PhysicsCategory.Collidable | PhysicsCategory.Boundary | PhysicsCategory.Ground | PhysicsCategory.Distance
         
         // Set elevation
         plane.zPosition = ZLevel.Plane
@@ -338,21 +364,35 @@ extension LevelOneScene {
 extension LevelOneScene: SKPhysicsContactDelegate {
     
     func didBeginContact(contact: SKPhysicsContact) {
-        println("Plane crashed")
         
         
-        runAction(planeCrashFX)
-        //        plane.physicsBody?.velocity = CGVectorMake(0, 0)
-        plane.physicsBody?.applyImpulse(CGVectorMake(0, -50))
+        var notPlane = SKPhysicsBody()
         
+        if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask {
+            notPlane = contact.bodyB
+        } else {
+            notPlane = contact.bodyA
+        }
         
-        if gameOver == false {
-            gameOver = true
-            movingObjects.speed = 0
+        if notPlane.categoryBitMask == PhysicsCategory.Distance {
+            // TODO: Add to distance lable
+            println("distance increased")
+        } else {
+            println("Plane crashed")
             
-            gameOverText.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))
+            runAction(planeCrashFX)
+            plane.physicsBody?.velocity = CGVectorMake(0, 0)
+            plane.physicsBody?.applyImpulse(CGVectorMake(0, -50))
             
-            labelHolder.addChild(gameOverText)
+            
+            if gameOver == false {
+                gameOver = true
+                movingObjects.speed = 0
+                
+                gameOverText.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))
+                
+                labelHolder.addChild(gameOverText)
+            }
         }
     }
 }
