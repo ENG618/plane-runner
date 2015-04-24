@@ -13,18 +13,31 @@ class Plane {
     private let textureNames: [String]
     private var planeNode: SKSpriteNode
     
+    var position:CGPoint {
+        get {
+            return planeNode.position
+        }
+        set {
+            planeNode.position = newValue
+        }
+    }
+    
     init(textureNames: [String]) {
         self.textureNames = textureNames
 //        plane = SKSpriteNode(imageNamed: textureNames.first!)
         let planeTexture = SKTexture(imageNamed: textureNames.first!)
         planeNode = SKSpriteNode(texture: planeTexture)
 //        super.init(texture: planeTexture, color: nil, size: planeTexture.size())
-        planeNode.zPosition = ZLevel.Plane
+//        planeNode.zPosition = ZLevel.Plane
         setPhysics(planeNode)
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func getPlane() -> SKSpriteNode {
+        return planeNode
     }
     
     private func setPhysics(plane: SKSpriteNode) {
@@ -41,14 +54,14 @@ class Plane {
     }
     
     // MARK: Animation
-    func start()/* -> Plane */{
+    func start() -> SKSpriteNode {
         animate()
-//        return self
+        return planeNode
     }
     
-    func stop()/* -> Plane */{
+    func stop() -> SKSpriteNode {
         planeNode.removeAllActions()
-//        return self
+        return planeNode
     }
     
     private func animate() {

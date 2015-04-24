@@ -55,10 +55,14 @@ class LevelOneScene: SKScene {
         createBoundry(view)
         createGround(view)
         
-        //        var newPlane = Plane(textureNames: ["planeYellow1", "planeYellow2", "planeYellow3"])
-        //        newPlane.position = CGPointMake(size.width/4, size.height/2)
-        //        newPlane = newPlane.start()
-        //        self.addChild(newPlane)
+//        var testnode = SKSpriteNode()
+//        
+//        let newPlane = Plane(textureNames: ["planeYellow1", "planeYellow2", "planeYellow3"])
+//        newPlane.position = CGPointMake(size.width/4, size.height/2)
+////        newPlane.start()
+//        testnode.addChild(newPlane)
+//        
+//        self.addChild(newPlane)
         
         
         
