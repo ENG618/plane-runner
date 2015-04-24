@@ -8,17 +8,19 @@
 
 import SpriteKit
 
-class Plane : SKSpriteNode {
+class Plane {
     
     private let textureNames: [String]
+    private var planeNode: SKSpriteNode
     
     init(textureNames: [String]) {
         self.textureNames = textureNames
 //        plane = SKSpriteNode(imageNamed: textureNames.first!)
         let planeTexture = SKTexture(imageNamed: textureNames.first!)
-        super.init(texture: planeTexture, color: nil, size: planeTexture.size())
-        self.zPosition = ZLevel.Plane
-        self.setPhysics(self)
+        planeNode = SKSpriteNode(texture: planeTexture)
+//        super.init(texture: planeTexture, color: nil, size: planeTexture.size())
+        planeNode.zPosition = ZLevel.Plane
+        setPhysics(planeNode)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -45,7 +47,7 @@ class Plane : SKSpriteNode {
     }
     
     func stop()/* -> Plane */{
-        self.removeAllActions()
+        planeNode.removeAllActions()
 //        return self
     }
     
@@ -53,6 +55,6 @@ class Plane : SKSpriteNode {
         // Animate plans propeller
         let animation = SKAction.animateWithTextures(textureNames, timePerFrame: 0.05)
         let makePropellerSpin = SKAction.repeatActionForever(animation)
-        self.runAction(makePropellerSpin)
+        planeNode.runAction(makePropellerSpin)
     }
 }

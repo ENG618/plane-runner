@@ -98,12 +98,12 @@ class MenuScene: SKScene {
     
     func createStartButton() {
         let startBtn = SKSpriteNode(texture: buttonTexture)
-        startBtn.setScale(1.5)
-        startBtn.position = CGPoint(x: size.width/2, y: size.height/2 - size.height/3)
+        startBtn.setScale(2.0)
+        startBtn.position = CGPoint(x: size.width/2, y: size.height/2 - size.height/3 + 7)
         startBtn.zPosition = 0
         startNode.addChild(startBtn)
         
-        let startText = SKLabelNode(text: "Start")
+        let startText = SKLabelNode(text: "Play")
         startText.position = CGPoint(x: size.width/2, y: size.height/2 - size.height/3)
         startText.color = SKColor.whiteColor()
         startText.zPosition = 1

@@ -21,3 +21,6 @@ Full Sail University | MDVBS | 1504 MGD
 * Background track [Viberz Pad](http://www.melodyloops.com/tracks/viberz-pad/) by: [Dave Brenner](http://www.melodyloops.com/composers/dave-brenner/) from: [melodyloops](http://www.melodyloops.com/)
 * Plane Crash sound effect (Vehicle Crash (Large)) from: [freeSFX](http://www.freesfx.co.uk)
 * Plane flying sound effect (Helicopter Against Missile Sound) from: [SoundBible.com](http://soundbible.com/2023-Helicopter-Against-Missile.html)
+* Game Art[Kenney.nl](http://opengameart.org/content/tappy-plane)
+* Game Icons [Kenney.nl](http://kenney.nl/assets/game-icons)
+
