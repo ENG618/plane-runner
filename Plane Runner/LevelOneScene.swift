@@ -288,8 +288,10 @@ extension LevelOneScene {
                 println("Pause/Play")
                 if self.paused {
                     self.paused = false
+                    audioPlayer.play()
                 } else {
                     self.paused = true
+                    audioPlayer.pause()
                 }
             } else {
                 if gameOver {
