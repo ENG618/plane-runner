@@ -21,6 +21,9 @@ class LevelOneScene: SKScene {
     var rockDownTexture = SKTexture()
     var gameOverText = SKSpriteNode()
     
+    var hud = SKNode()
+    var hudScoreLabel = SKSpriteNode()
+    var hudPauseButn = SKSpriteNode()
     var labelHolder = SKSpriteNode()
     var moveAndRemove = SKAction()
     var movingObjects = SKNode()
@@ -43,7 +46,7 @@ class LevelOneScene: SKScene {
         loadResources()
         
         loopBackgroundTrack(view)
-//        LevelHelper.playBackgroundMusic(view)
+        //        LevelHelper.playBackgroundMusic(view)
         
         self.physicsWorld.contactDelegate = self
         self.addChild(movingObjects)
@@ -51,19 +54,19 @@ class LevelOneScene: SKScene {
         self.physicsWorld.gravity = CGVectorMake(0, -1.6)
         self.physicsBody?.restitution = 0.0
         
-        
+        createHUD(view)
         createBackground(view)
         createBoundry(view)
         createGround(view)
         
-//        var testnode = SKSpriteNode()
-//        
-//        let newPlane = Plane(textureNames: ["planeYellow1", "planeYellow2", "planeYellow3"])
-//        newPlane.position = CGPointMake(size.width/4, size.height/2)
-////        newPlane.start()
-//        testnode.addChild(newPlane)
-//        
-//        self.addChild(newPlane)
+        //        var testnode = SKSpriteNode()
+        //
+        //        let newPlane = Plane(textureNames: ["planeYellow1", "planeYellow2", "planeYellow3"])
+        //        newPlane.position = CGPointMake(size.width/4, size.height/2)
+        ////        newPlane.start()
+        //        testnode.addChild(newPlane)
+        //
+        //        self.addChild(newPlane)
         
         
         
@@ -91,7 +94,7 @@ class LevelOneScene: SKScene {
     
     func obstacleSetUp(view: SKView) {
         let distanceToMove = CGFloat(view.bounds.width + 5.0 * rockTexture.size().width)
-//        let distanceToMove = SKAction.moveByX(-rockTexture.size().width, y: 0, duration: <#NSTimeInterval#>)
+        //        let distanceToMove = SKAction.moveByX(-rockTexture.size().width, y: 0, duration: <#NSTimeInterval#>)
         let moveRocks = SKAction.moveByX(-distanceToMove, y: 0, duration: 8 /*NSTimeInterval(0.01 * distanceToMove)*/)
         let removeRocks = SKAction.removeFromParent()
         
@@ -230,6 +233,24 @@ class LevelOneScene: SKScene {
         self.addChild(plane)
     }
     
+    func createHUD(view: SKView) {
+        
+        let pauseTexture = SKTexture(imageNamed: "buttonSmall")
+        hudPauseButn = SKSpriteNode(texture: pauseTexture)
+        hudPauseButn.position = CGPoint(x: CGRectGetMaxX(self.frame) - hudPauseButn.size.width / 2 - 10, y: CGRectGetMaxY(self.frame) - hudPauseButn.size.height / 2 - 10)
+        
+        
+        hud.addChild(hudPauseButn)
+        
+        
+        
+        
+        
+        hud.zPosition = ZLevel.HUD
+        self.addChild(hud)
+        
+    }
+    
     // MARK: Cache scene data
     func loadResources(){
         // Plane crash sound effect
@@ -261,29 +282,41 @@ extension LevelOneScene {
         
         println("View Height: \(view!.bounds.height) Width: \(view!.bounds.width)")
         
-        if gameOver {
-            
-            movingObjects.removeAllChildren()
-            
-            createBackground(view!)
-            createGround(view!)
-            
-            plane.position = CGPointMake(size.width/4, size.height/2)
-            plane.physicsBody?.velocity = CGVectorMake(0, 0)
-            
-            labelHolder.removeAllChildren()
-            
-            movingObjects.speed = 1
-            
-            gameOver = false
-            
-        } else {
-            isTouching = true
-            //            let planeFly = SKAction.repeatAction(SKAction.playSoundFileNamed("Helicopter.mp3", waitForCompletion: true), count: 1)
-            //            runAction(planeFly)
-            //
-            //            plane.physicsBody?.velocity = CGVectorMake(0, 0)
-            //            plane.physicsBody?.applyImpulse(CGVectorMake(0, 10))
+        for touch: AnyObject in touches {
+            let location = touch.locationInNode(self)
+            if hudPauseButn.containsPoint(location) {
+                println("Pause/Play")
+                if self.paused {
+                    self.paused = false
+                } else {
+                    self.paused = true
+                }
+            } else {
+                if gameOver {
+                    
+                    movingObjects.removeAllChildren()
+                    
+                    createBackground(view!)
+                    createGround(view!)
+                    
+                    plane.position = CGPointMake(size.width/4, size.height/2)
+                    plane.physicsBody?.velocity = CGVectorMake(0, 0)
+                    
+                    labelHolder.removeAllChildren()
+                    
+                    movingObjects.speed = 1
+                    
+                    gameOver = false
+                    
+                } else if !self.paused {
+                    isTouching = true
+                    //            let planeFly = SKAction.repeatAction(SKAction.playSoundFileNamed("Helicopter.mp3", waitForCompletion: true), count: 1)
+                    //            runAction(planeFly)
+                    //
+                    //            plane.physicsBody?.velocity = CGVectorMake(0, 0)
+                    //            plane.physicsBody?.applyImpulse(CGVectorMake(0, 10))
+                }
+            }
         }
     }
     
