@@ -43,6 +43,7 @@ class LevelOneScene: SKScene {
         loadResources()
         
         loopBackgroundTrack(view)
+//        LevelHelper.playBackgroundMusic(view)
         
         self.physicsWorld.contactDelegate = self
         self.addChild(movingObjects)
