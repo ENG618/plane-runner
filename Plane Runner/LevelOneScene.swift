@@ -22,8 +22,8 @@ class LevelOneScene: SKScene {
     var gameOverText = SKSpriteNode()
     
     var hud = SKNode()
-    var score = 0
-    var hudScoreLabel = SKSpriteNode()
+    var distanceFlown = 0
+    var hudDistanceLabel = SKLabelNode()
     var hudPauseButn = SKSpriteNode()
     var labelHolder = SKSpriteNode()
     var moveAndRemove = SKAction()
@@ -261,13 +261,23 @@ class LevelOneScene: SKScene {
     
     func createHUD(view: SKView) {
         
+        // Create pause button
         let pauseTexture = SKTexture(imageNamed: "buttonSmall")
         hudPauseButn = SKSpriteNode(texture: pauseTexture)
         hudPauseButn.position = CGPoint(x: CGRectGetMaxX(self.frame) - hudPauseButn.size.width / 2 - 10, y: CGRectGetMaxY(self.frame) - hudPauseButn.size.height / 2 - 10)
         
-        
+        // Add to hud
         hud.addChild(hudPauseButn)
         
+        // Create distance label
+        hudDistanceLabel.text = "Distance: \(distanceFlown) meters"
+        hudDistanceLabel.fontColor = SKColor.blackColor()
+        hudDistanceLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
+        hudDistanceLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Top
+        hudDistanceLabel.position = CGPoint(x: 10, y: CGRectGetMaxY(self.frame) - 10)
+        
+        // Add to hud
+        hud.addChild(hudDistanceLabel)
         
         
         
