@@ -11,6 +11,8 @@ import AVFoundation
 
 class LevelOneScene: SKScene {
     
+    var isPaused = false
+    
     let bgTexture = SKTexture(imageNamed: BackgroundImage)
     var bg = SKSpriteNode()
     var plane = SKSpriteNode()
@@ -330,10 +332,24 @@ class LevelOneScene: SKScene {
 // MARK: Pause Game Node
 extension LevelOneScene {
     
+    func pauseGame() {
+        isPaused = true
+        // pause physics
+        self.paused = true
+        if audioPlayer.playing{
+            audioPlayer.pause()
+        }
+        
+    }
     
-    
-    
-    
+    func resumeGame() {
+        isPaused = false
+        // Unpause physics
+        self.paused = false
+        if !audioPlayer.playing {
+            audioPlayer.play()
+        }
+    }
 }
 
 // MARK: Input Methods
@@ -349,11 +365,9 @@ extension LevelOneScene {
             if hudPauseButn.containsPoint(location) {
                 println("Pause/Play")
                 if self.paused {
-                    self.paused = false
-                    audioPlayer.play()
+                    resumeGame()
                 } else {
-                    self.paused = true
-                    audioPlayer.pause()
+                    pauseGame()
                 }
             } else {
                 if gameOver {
