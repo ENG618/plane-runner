@@ -1,12 +1,21 @@
 //
-//  File.swift
+//  Constancts.swift
 //  Plane Runner
 //
-//  Created by Eric Garcia on 4/20/15.
+//  Created by Eric Garcia on 4/26/15.
 //  Copyright (c) 2015 Garcia Enterprise. All rights reserved.
 //
 
-import SpriteKit
+import UIKit
+
+struct ZLevel {
+    static let Background   : CGFloat = -2.0
+    static let Clouds       : CGFloat = -1.0
+    static let Rocks        : CGFloat = 1.0
+    static let Ground       : CGFloat = 0.0
+    static let Plane        : CGFloat = 5.0
+    static let HUD          : CGFloat = 10.0
+}
 
 struct PhysicsCategory {
     static let All          :UInt32 = UInt32.max
