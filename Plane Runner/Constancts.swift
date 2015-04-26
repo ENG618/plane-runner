@@ -8,6 +8,27 @@
 
 import UIKit
 
+// MARK: Images
+let BackgroundImage = "mainBackground"
+let GroundGrassImage = "groundGrass"
+let RockGrassImage = "rockGrass"
+let RockGrassDownImage = "rockGrassDown"
+let TextGameOver = "textGameOver"
+let PlaneOneImage = "planeRed1"
+let PlaneTwoImage = "planeRed2"
+let PlaneThreeImage = "planeRed3"
+let ButtonSmallImage = "buttonSmall"
+let UIBackgroundImage = "Uibg"
+
+// MARK: Sounds
+let PlaneFlyingSoundFX = "Helicopter.mp3"
+let PlaneCrashSoundFX = "planeCrash.mp3"
+let DistanceIncreaseSoundFX = "distanceTick.wav"
+let BackgroundMusicSound = "backgroundTrack"
+
+// MARK: Fonts
+let GameFont = "kenvector_future-thin.tff"
+
 struct ZLevel {
     static let Background   : CGFloat = -2.0
     static let Clouds       : CGFloat = -1.0

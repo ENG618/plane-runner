@@ -11,7 +11,7 @@ import AVFoundation
 
 class LevelOneScene: SKScene {
     
-    let bgTexture = SKTexture(imageNamed: "mainBackground")
+    let bgTexture = SKTexture(imageNamed: BackgroundImage)
     var bg = SKSpriteNode()
     var plane = SKSpriteNode()
     var testPlane:Plane!
@@ -23,7 +23,7 @@ class LevelOneScene: SKScene {
     
     var hud = SKNode()
     var distanceFlown = 0
-    var hudDistanceLabel = SKLabelNode(fontNamed: "kenvector_future_thin")
+    var hudDistanceLabel = SKLabelNode(fontNamed: GameFont)
     var hudPauseButn = SKSpriteNode()
     var labelHolder = SKSpriteNode()
     var moveAndRemove = SKAction()
@@ -34,10 +34,13 @@ class LevelOneScene: SKScene {
     var isTouching = false
     var gameOver = false
     
-    // Scene resources
+    // Scene Resources
     var planeCrashFX = SKAction()
     var distanceIncreasFX = SKAction()
     var planeFlyingFX = SKAction()
+    
+    // Pause Menu Resouces
+    let pauseNode = SKNode()
     
     override func didMoveToView(view: SKView) {
         
@@ -91,7 +94,7 @@ class LevelOneScene: SKScene {
     // MARK: Scene setup helpers
     func loopBackgroundTrack(view: SKView) {
         
-        let path = NSBundle.mainBundle().pathForResource("backgroundTrack", ofType: ".mp3")
+        let path = NSBundle.mainBundle().pathForResource(BackgroundMusicSound, ofType: ".mp3")
         let url = NSURL.fileURLWithPath(path!)
         var error: NSError?
         
@@ -122,7 +125,7 @@ class LevelOneScene: SKScene {
     }
     
     func createBackground(view: SKView){
-        //        var bgTexture = SKTexture(imageNamed: "mainBackground")
+        //        var bgTexture = SKTexture(imageNamed: BackgroundImage)
         
         // Create action to replace background
         var movebg = SKAction.moveByX(-bgTexture.size().width, y: 0, duration: 20)
@@ -238,9 +241,9 @@ class LevelOneScene: SKScene {
     }
     
     func createPlane(view: SKView) {
-        let planeTexture = SKTexture(imageNamed: "planeRed1")
-        let planeTexture1 = SKTexture(imageNamed: "planeRed2")
-        let planeTexture2 = SKTexture(imageNamed: "planeRed3")
+        let planeTexture = SKTexture(imageNamed: PlaneOneImage)
+        let planeTexture1 = SKTexture(imageNamed: PlaneTwoImage)
+        let planeTexture2 = SKTexture(imageNamed: PlaneThreeImage)
         
         // Animate plans propeller
         let animation = SKAction.animateWithTextures([planeTexture, planeTexture1, planeTexture2], timePerFrame: 0.05)
@@ -270,7 +273,7 @@ class LevelOneScene: SKScene {
     func createHUD(view: SKView) {
         
         // Create pause button
-        let pauseTexture = SKTexture(imageNamed: "buttonSmall")
+        let pauseTexture = SKTexture(imageNamed: ButtonSmallImage)
         hudPauseButn = SKSpriteNode(texture: pauseTexture)
         hudPauseButn.position = CGPoint(x: CGRectGetMaxX(self.frame) - hudPauseButn.size.width / 2 - 10, y: CGRectGetMaxY(self.frame) - hudPauseButn.size.height / 2 - 10)
         
@@ -298,30 +301,39 @@ class LevelOneScene: SKScene {
     // MARK: Cache scene data
     func loadResources(){
         // Plane crash sound effect
-        planeCrashFX = SKAction.repeatAction(SKAction.playSoundFileNamed("planeCrash.mp3", waitForCompletion: true), count: 1)
+        planeCrashFX = SKAction.repeatAction(SKAction.playSoundFileNamed(PlaneCrashSoundFX, waitForCompletion: true), count: 1)
         
         // Distance increase sound effect
-        distanceIncreasFX = SKAction.repeatAction(SKAction.playSoundFileNamed("distanceTick.wav", waitForCompletion: true), count: 1)
+        distanceIncreasFX = SKAction.repeatAction(SKAction.playSoundFileNamed(DistanceIncreaseSoundFX, waitForCompletion: true), count: 1)
         
         // Plane flying sound effect
-        planeFlyingFX = SKAction.repeatAction(SKAction.playSoundFileNamed("Helicopter.mp3", waitForCompletion: true), count: 1)
+        planeFlyingFX = SKAction.repeatAction(SKAction.playSoundFileNamed(PlaneFlyingSoundFX, waitForCompletion: true), count: 1)
         
         // Ground
-        groundTexture = SKTexture(imageNamed: "groundGrass")
+        groundTexture = SKTexture(imageNamed: GroundGrassImage)
         
         // Rock
-        rockTexture = SKTexture(imageNamed: "rockGrass")
+        rockTexture = SKTexture(imageNamed: RockGrassImage)
         
         // Rock Down
-        rockDownTexture = SKTexture(imageNamed: "rockGrassDown")
+        rockDownTexture = SKTexture(imageNamed: RockGrassDownImage)
         
         // Add label holder
         self.addChild(labelHolder)
         
         // Game Over
-        let gameOverTexture = SKTexture(imageNamed: "textGameOver")
+        let gameOverTexture = SKTexture(imageNamed: TextGameOver)
         gameOverText = SKSpriteNode(texture: gameOverTexture)
     }
+}
+
+// MARK: Pause Game Node
+extension LevelOneScene {
+    
+    
+    
+    
+    
 }
 
 // MARK: Input Methods
