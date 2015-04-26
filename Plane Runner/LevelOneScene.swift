@@ -36,6 +36,8 @@ class LevelOneScene: SKScene {
     
     // Scene resources
     var planeCrashFX = SKAction()
+    var distanceIncreasFX = SKAction()
+    var planeFlyingFX = SKAction()
     
     override func didMoveToView(view: SKView) {
         
@@ -80,6 +82,12 @@ class LevelOneScene: SKScene {
         view.showsPhysics = true
     }
     
+    func updateDistance() {
+        runAction(distanceIncreasFX)
+        distanceFlown++
+        hudDistanceLabel.text = "Distance: \(distanceFlown) meters"
+    }
+    
     // MARK: Scene setup helpers
     func loopBackgroundTrack(view: SKView) {
         
@@ -88,7 +96,7 @@ class LevelOneScene: SKScene {
         var error: NSError?
         
         audioPlayer = AVAudioPlayer(contentsOfURL: url, error: &error)
-        audioPlayer.volume = 0.2
+        audioPlayer.volume = 0.1
         audioPlayer.numberOfLoops = -1
         audioPlayer.prepareToPlay()
         audioPlayer.play()
@@ -292,6 +300,12 @@ class LevelOneScene: SKScene {
         // Plane crash sound effect
         planeCrashFX = SKAction.repeatAction(SKAction.playSoundFileNamed("planeCrash.mp3", waitForCompletion: true), count: 1)
         
+        // Distance increase sound effect
+        distanceIncreasFX = SKAction.repeatAction(SKAction.playSoundFileNamed("distanceTick.wav", waitForCompletion: true), count: 1)
+        
+        // Plane flying sound effect
+        planeFlyingFX = SKAction.repeatAction(SKAction.playSoundFileNamed("Helicopter.mp3", waitForCompletion: true), count: 1)
+        
         // Ground
         groundTexture = SKTexture(imageNamed: "groundGrass")
         
@@ -336,6 +350,8 @@ extension LevelOneScene {
                     
                     createBackground(view!)
                     createGround(view!)
+                    distanceFlown = 0
+                    hudDistanceLabel.text = "Distance: \(distanceFlown) meters"
                     
                     plane.position = CGPointMake(size.width/4, size.height/2)
                     plane.physicsBody?.velocity = CGVectorMake(0, 0)
@@ -348,11 +364,10 @@ extension LevelOneScene {
                     
                 } else if !self.paused {
                     isTouching = true
-                    //            let planeFly = SKAction.repeatAction(SKAction.playSoundFileNamed("Helicopter.mp3", waitForCompletion: true), count: 1)
-                    //            runAction(planeFly)
+                    runAction(planeFlyingFX)
                     //
-                    //            plane.physicsBody?.velocity = CGVectorMake(0, 0)
-                    //            plane.physicsBody?.applyImpulse(CGVectorMake(0, 10))
+                    // plane.physicsBody?.velocity = CGVectorMake(0, 0)
+                    // plane.physicsBody?.applyImpulse(CGVectorMake(0, 10))
                 }
             }
         }
@@ -385,8 +400,9 @@ extension LevelOneScene: SKPhysicsContactDelegate {
         }
         
         if notPlane.categoryBitMask == PhysicsCategory.Distance {
-            // TODO: Add to distance lable
+            // TODO: Add to distance label
             println("distance increased")
+            updateDistance()
         } else {
             println("Plane crashed")
             

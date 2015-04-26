@@ -16,6 +16,7 @@
 		5C4052F31AD7A12D0088EE70 /* backgroundTrack.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5C4052F21AD7A12C0088EE70 /* backgroundTrack.mp3 */; };
 		5C4052F61AD7A7710088EE70 /* planeCrash.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5C4052F51AD7A7710088EE70 /* planeCrash.mp3 */; };
 		5C4052F81AD841280088EE70 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C4052F71AD841280088EE70 /* AVFoundation.framework */; };
+		5C4C4F581AED334200624154 /* CreditsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4C4F571AED334200624154 /* CreditsScene.swift */; };
 		5C50FA931AE5ABFE0068FD66 /* Plane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50FA921AE5ABFE0068FD66 /* Plane.swift */; };
 		5C50FA961AE5F1620068FD66 /* PhysicsCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50FA951AE5F1620068FD66 /* PhysicsCategory.swift */; };
 		5C50FA981AE5FC330068FD66 /* ZLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50FA971AE5FC330068FD66 /* ZLevel.swift */; };
@@ -32,6 +33,7 @@
 		5CADD6A11AE8BEB300707677 /* LevelTwoScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CADD6A01AE8BEB300707677 /* LevelTwoScene.swift */; };
 		5CADD6A31AE8BEDD00707677 /* LevelThreeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CADD6A21AE8BEDD00707677 /* LevelThreeScene.swift */; };
 		5CADD6A51AE9DFFE00707677 /* LevelHelpper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CADD6A41AE9DFFE00707677 /* LevelHelpper.swift */; };
+		5CADD6A71AEA0E9B00707677 /* distanceTick.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5CADD6A61AEA0E9B00707677 /* distanceTick.wav */; };
 		5CCD8DC11ADB8DFC0001362D /* Helicopter.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5CCD8DC01ADB8DFC0001362D /* Helicopter.mp3 */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +61,8 @@
 		5C4052F21AD7A12C0088EE70 /* backgroundTrack.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = backgroundTrack.mp3; sourceTree = "<group>"; };
 		5C4052F51AD7A7710088EE70 /* planeCrash.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = planeCrash.mp3; sourceTree = "<group>"; };
 		5C4052F71AD841280088EE70 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		5C4C4F571AED334200624154 /* CreditsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreditsScene.swift; sourceTree = "<group>"; };
+		5C4C4F591AED33C300624154 /* kenvector_future_thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = kenvector_future_thin.ttf; sourceTree = "<group>"; };
 		5C50FA921AE5ABFE0068FD66 /* Plane.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plane.swift; sourceTree = "<group>"; };
 		5C50FA951AE5F1620068FD66 /* PhysicsCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsCategory.swift; sourceTree = "<group>"; };
 		5C50FA971AE5FC330068FD66 /* ZLevel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZLevel.swift; sourceTree = "<group>"; };
@@ -75,6 +79,7 @@
 		5CADD6A01AE8BEB300707677 /* LevelTwoScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelTwoScene.swift; sourceTree = "<group>"; };
 		5CADD6A21AE8BEDD00707677 /* LevelThreeScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelThreeScene.swift; sourceTree = "<group>"; };
 		5CADD6A41AE9DFFE00707677 /* LevelHelpper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelHelpper.swift; sourceTree = "<group>"; };
+		5CADD6A61AEA0E9B00707677 /* distanceTick.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = distanceTick.wav; sourceTree = "<group>"; };
 		5CCD8DC01ADB8DFC0001362D /* Helicopter.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Helicopter.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -121,10 +126,10 @@
 			children = (
 				5CA474DF1AE7561700E71BE7 /* assets */,
 				5C50FA941AE5B4250068FD66 /* Data */,
-				5C4052F41AD7A1360088EE70 /* sounds */,
 				5CADD6991AE8016300707677 /* Levels */,
 				5C4052CE1AD73B260088EE70 /* AppDelegate.swift */,
 				5C4052D21AD73B260088EE70 /* MenuScene.swift */,
+				5C4C4F571AED334200624154 /* CreditsScene.swift */,
 				5C4052D41AD73B260088EE70 /* GameViewController.swift */,
 				5C4052D61AD73B260088EE70 /* Main.storyboard */,
 				5C4052DB1AD73B260088EE70 /* LaunchScreen.xib */,
@@ -162,6 +167,7 @@
 		5C4052F41AD7A1360088EE70 /* sounds */ = {
 			isa = PBXGroup;
 			children = (
+				5CADD6A61AEA0E9B00707677 /* distanceTick.wav */,
 				5CCD8DC01ADB8DFC0001362D /* Helicopter.mp3 */,
 				5C4052F51AD7A7710088EE70 /* planeCrash.mp3 */,
 				5C4052F21AD7A12C0088EE70 /* backgroundTrack.mp3 */,
@@ -185,6 +191,8 @@
 		5CA474DF1AE7561700E71BE7 /* assets */ = {
 			isa = PBXGroup;
 			children = (
+				5C4C4F591AED33C300624154 /* kenvector_future_thin.ttf */,
+				5C4052F41AD7A1360088EE70 /* sounds */,
 				5CA474E01AE7571A00E71BE7 /* background.atlas */,
 				5CA474EE1AE75BE200E71BE7 /* letters.atlas */,
 				5CA474E41AE7573200E71BE7 /* numbers.atlas */,
@@ -294,6 +302,7 @@
 				5CA474E51AE7573200E71BE7 /* numbers.atlas in Resources */,
 				5CA474EF1AE75BE200E71BE7 /* letters.atlas in Resources */,
 				5C4052D81AD73B260088EE70 /* Main.storyboard in Resources */,
+				5CADD6A71AEA0E9B00707677 /* distanceTick.wav in Resources */,
 				5CA474EB1AE7574400E71BE7 /* ui.atlas in Resources */,
 				5CA474E91AE7573D00E71BE7 /* planes.atlas in Resources */,
 				5C4052F61AD7A7710088EE70 /* planeCrash.mp3 in Resources */,
@@ -317,6 +326,7 @@
 				5C50FA9A1AE5FF7E0068FD66 /* PlaneColor.swift in Sources */,
 				5CADD69F1AE8BA1600707677 /* HUD.swift in Sources */,
 				5CADD6A31AE8BEDD00707677 /* LevelThreeScene.swift in Sources */,
+				5C4C4F581AED334200624154 /* CreditsScene.swift in Sources */,
 				5C50FA961AE5F1620068FD66 /* PhysicsCategory.swift in Sources */,
 				5C4052D31AD73B260088EE70 /* MenuScene.swift in Sources */,
 				5CADD6981AE8013C00707677 /* LevelOneScene.swift in Sources */,
