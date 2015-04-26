@@ -11,7 +11,7 @@ import AVFoundation
 
 class LevelOneScene: SKScene {
     
-    var isPaused = false
+    var gamePaused = false
     
     let bgTexture = SKTexture(imageNamed: BackgroundImage)
     var bg = SKSpriteNode()
@@ -333,7 +333,7 @@ class LevelOneScene: SKScene {
 extension LevelOneScene {
     
     func pauseGame() {
-        isPaused = true
+        gamePaused = true
         // pause physics
         self.paused = true
         if audioPlayer.playing{
@@ -343,7 +343,7 @@ extension LevelOneScene {
     }
     
     func resumeGame() {
-        isPaused = false
+        gamePaused = false
         // Unpause physics
         self.paused = false
         if !audioPlayer.playing {
