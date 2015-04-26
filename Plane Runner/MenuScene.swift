@@ -103,9 +103,10 @@ class MenuScene: SKScene {
         startBtn.zPosition = 0
         startNode.addChild(startBtn)
         
-        let startText = SKLabelNode(text: "Play")
-        startText.position = CGPoint(x: size.width/2, y: size.height/2 - size.height/3)
+        let startText = SKLabelNode(fontNamed: "kenvector_future_thin")
+        startText.text = "Start"
         startText.color = SKColor.whiteColor()
+        startText.position = CGPoint(x: size.width/2, y: size.height/2 - size.height/3)
         startText.zPosition = 1
         startNode.addChild(startText)
         
