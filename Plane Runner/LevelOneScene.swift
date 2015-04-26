@@ -23,7 +23,7 @@ class LevelOneScene: SKScene {
     
     var hud = SKNode()
     var distanceFlown = 0
-    var hudDistanceLabel = SKLabelNode()
+    var hudDistanceLabel = SKLabelNode(fontNamed: "kenvector_future_thin")
     var hudPauseButn = SKSpriteNode()
     var labelHolder = SKSpriteNode()
     var moveAndRemove = SKAction()
