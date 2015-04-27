@@ -9,42 +9,58 @@
 import SpriteKit
 import AVFoundation
 
+// MARK: Class
 class LevelOneScene: SKScene {
     
     // MARK: Class Variables
-    var gamePaused = false
+    private var gamePaused = false
+    private var isTouching = false
+    private var gameOver = false
     
-    let bgTexture = SKTexture(imageNamed: BackgroundImage)
-    var bg = SKSpriteNode()
-    var plane = SKSpriteNode()
-    var testPlane:Plane!
-    var groundTexture = SKTexture()
-    var ground = SKSpriteNode()
-    var rockTexture = SKTexture()
-    var rockDownTexture = SKTexture()
-    var gameOverText = SKSpriteNode()
+    // Audio Player
+    private var audioPlayer = AVAudioPlayer()
     
-    var hud = SKNode()
-    var distanceFlown = 0
-    var hudDistanceLabel = SKLabelNode(fontNamed: GameFont)
-    var hudPauseButn = SKSpriteNode()
-    var labelHolder = SKSpriteNode()
-    var moveAndRemove = SKAction()
-    var movingObjects = SKNode()
+    // Level Textures
+    private let bgTexture = SKTexture(imageNamed: BackgroundImage)
+    private var groundTexture = SKTexture(imageNamed: GroundGrassImage)
+    private var rockTexture = SKTexture(imageNamed: RockGrassImage)
+    private var rockDownTexture = SKTexture(imageNamed: RockGrassDownImage)
+    private var gameOverTexture = SKTexture(imageNamed: TextGameOver)
     
-    var audioPlayer = AVAudioPlayer()
+    // Level Image Nodes
+    private var gameOverText = SKSpriteNode()
     
-    var isTouching = false
-    var gameOver = false
+    // Empty Nodes
+    private var bg = SKSpriteNode()
+    private var plane = SKSpriteNode()
+    private var testPlane:Plane!
     
-    // Scene Resources
+    private var ground = SKSpriteNode()
+    
+    // HUD
+    private var hud = SKNode()
+    private var hudDistanceLabel = SKLabelNode(fontNamed: GameFont)
+    private var distanceFlown = 0
+    private var hudPauseButn = SKSpriteNode()
+    
+    // Sound Actions
     var planeCrashFX = SKAction()
     var distanceIncreasFX = SKAction()
     var planeFlyingFX = SKAction()
     
+    // Actions
+    private var moveAndRemove = SKAction()
+    private var movingObjects = SKNode()
+    
+    // Labels
+    private var labelHolderGameOver = SKSpriteNode()
+    
     // Pause Menu Resouces
     let pauseNode = SKNode()
+}
     
+// MARK: Scene Methods & Setup
+extension LevelOneScene {
     override func didMoveToView(view: SKView) {
         
         println("Size height: \(size.width) Width: \(size.height)")
@@ -99,21 +115,11 @@ class LevelOneScene: SKScene {
         // Plane flying sound effect
         planeFlyingFX = SKAction.repeatAction(SKAction.playSoundFileNamed(PlaneFlyingSoundFX, waitForCompletion: true), count: 1)
         
-        // Ground
-        groundTexture = SKTexture(imageNamed: GroundGrassImage)
-        
-        // Rock
-        rockTexture = SKTexture(imageNamed: RockGrassImage)
-        
-        // Rock Down
-        rockDownTexture = SKTexture(imageNamed: RockGrassDownImage)
+        // Game Over
+        gameOverText = SKSpriteNode(texture: gameOverTexture)
         
         // Add label holder
-        self.addChild(labelHolder)
-        
-        // Game Over
-        let gameOverTexture = SKTexture(imageNamed: TextGameOver)
-        gameOverText = SKSpriteNode(texture: gameOverTexture)
+        self.addChild(labelHolderGameOver)
     }
 }
 
@@ -388,7 +394,7 @@ extension LevelOneScene {
                     plane.position = CGPointMake(size.width/4, size.height/2)
                     plane.physicsBody?.velocity = CGVectorMake(0, 0)
                     
-                    labelHolder.removeAllChildren()
+                    labelHolderGameOver.removeAllChildren()
                     
                     movingObjects.speed = 1
                     
@@ -448,7 +454,7 @@ extension LevelOneScene: SKPhysicsContactDelegate {
                 
                 gameOverText.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))
                 
-                labelHolder.addChild(gameOverText)
+                labelHolderGameOver.addChild(gameOverText)
             }
         }
     }
