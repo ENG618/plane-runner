@@ -11,6 +11,7 @@ import AVFoundation
 
 class LevelOneScene: SKScene {
     
+    // MARK: Class Variables
     var gamePaused = false
     
     let bgTexture = SKTexture(imageNamed: BackgroundImage)
@@ -87,13 +88,37 @@ class LevelOneScene: SKScene {
         view.showsPhysics = true
     }
     
-    func updateDistance() {
-        runAction(distanceIncreasFX)
-        distanceFlown++
-        hudDistanceLabel.text = "Distance: \(distanceFlown) meters"
+    // MARK: Cache scene data
+    func loadResources(){
+        // Plane crash sound effect
+        planeCrashFX = SKAction.repeatAction(SKAction.playSoundFileNamed(PlaneCrashSoundFX, waitForCompletion: true), count: 1)
+        
+        // Distance increase sound effect
+        distanceIncreasFX = SKAction.repeatAction(SKAction.playSoundFileNamed(DistanceIncreaseSoundFX, waitForCompletion: true), count: 1)
+        
+        // Plane flying sound effect
+        planeFlyingFX = SKAction.repeatAction(SKAction.playSoundFileNamed(PlaneFlyingSoundFX, waitForCompletion: true), count: 1)
+        
+        // Ground
+        groundTexture = SKTexture(imageNamed: GroundGrassImage)
+        
+        // Rock
+        rockTexture = SKTexture(imageNamed: RockGrassImage)
+        
+        // Rock Down
+        rockDownTexture = SKTexture(imageNamed: RockGrassDownImage)
+        
+        // Add label holder
+        self.addChild(labelHolder)
+        
+        // Game Over
+        let gameOverTexture = SKTexture(imageNamed: TextGameOver)
+        gameOverText = SKSpriteNode(texture: gameOverTexture)
     }
-    
-    // MARK: Scene setup helpers
+}
+
+// MARK: Scene setup helpers
+extension LevelOneScene {
     func loopBackgroundTrack(view: SKView) {
         
         let path = NSBundle.mainBundle().pathForResource(BackgroundMusicSound, ofType: ".mp3")
@@ -220,9 +245,9 @@ class LevelOneScene: SKScene {
     }
     
     func createDistanceMarkers(view: SKView) {
-//        var moveGround = SKAction.moveByX(-groundTexture.size().width, y: 0, duration: 8)
-//        var replaceGround = SKAction.moveByX(groundTexture.size().width, y: 0, duration: 0)
-//        var moveGroundForever = SKAction.repeatActionForever(SKAction.sequence([moveGround, replaceGround]))
+        //        var moveGround = SKAction.moveByX(-groundTexture.size().width, y: 0, duration: 8)
+        //        var replaceGround = SKAction.moveByX(groundTexture.size().width, y: 0, duration: 0)
+        //        var moveGroundForever = SKAction.repeatActionForever(SKAction.sequence([moveGround, replaceGround]))
         
         
         let moveMarker = SKAction.moveByX(-size.width/2, y: 0, duration: 8)
@@ -234,7 +259,7 @@ class LevelOneScene: SKScene {
         distanceMarker.physicsBody = SKPhysicsBody(edgeFromPoint: CGPointMake(CGRectGetMidX(self.frame), 0), toPoint: CGPointMake(CGRectGetMidX(self.frame), CGRectGetMaxY(self.frame)))
         distanceMarker.physicsBody?.dynamic = false
         distanceMarker.physicsBody?.categoryBitMask = PhysicsCategory.Distance
-
+        
         distanceMarker.physicsBody?.contactTestBitMask = PhysicsCategory.Plane
         distanceMarker.physicsBody?.dynamic = true
         distanceMarker.runAction(moveAndRemoveMarker)
@@ -299,33 +324,14 @@ class LevelOneScene: SKScene {
         self.addChild(hud)
         
     }
-    
-    // MARK: Cache scene data
-    func loadResources(){
-        // Plane crash sound effect
-        planeCrashFX = SKAction.repeatAction(SKAction.playSoundFileNamed(PlaneCrashSoundFX, waitForCompletion: true), count: 1)
-        
-        // Distance increase sound effect
-        distanceIncreasFX = SKAction.repeatAction(SKAction.playSoundFileNamed(DistanceIncreaseSoundFX, waitForCompletion: true), count: 1)
-        
-        // Plane flying sound effect
-        planeFlyingFX = SKAction.repeatAction(SKAction.playSoundFileNamed(PlaneFlyingSoundFX, waitForCompletion: true), count: 1)
-        
-        // Ground
-        groundTexture = SKTexture(imageNamed: GroundGrassImage)
-        
-        // Rock
-        rockTexture = SKTexture(imageNamed: RockGrassImage)
-        
-        // Rock Down
-        rockDownTexture = SKTexture(imageNamed: RockGrassDownImage)
-        
-        // Add label holder
-        self.addChild(labelHolder)
-        
-        // Game Over
-        let gameOverTexture = SKTexture(imageNamed: TextGameOver)
-        gameOverText = SKSpriteNode(texture: gameOverTexture)
+}
+
+// MARK: Distance
+extension LevelOneScene {
+    func updateDistance() {
+        runAction(distanceIncreasFX)
+        distanceFlown++
+        hudDistanceLabel.text = "Distance: \(distanceFlown) meters"
     }
 }
 
@@ -426,7 +432,6 @@ extension LevelOneScene: SKPhysicsContactDelegate {
         }
         
         if notPlane.categoryBitMask == PhysicsCategory.Distance {
-            // TODO: Add to distance label
             println("distance increased")
             updateDistance()
         } else {
