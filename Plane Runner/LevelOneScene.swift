@@ -68,7 +68,9 @@ extension LevelOneScene {
         loadResources()
         
         audioPlayer = LevelHelper.prepareAudioPlayer(view)
-        audioPlayer.play()
+        if audioPlayer.prepareToPlay() {
+            audioPlayer.play()
+        }
         
         self.physicsWorld.contactDelegate = self
         self.addChild(movingObjects)
