@@ -22,10 +22,10 @@ class LevelOneScene: SKScene {
     
     // Level Textures
     private let bgTexture = SKTexture(imageNamed: BackgroundImage)
-    private var groundTexture = SKTexture(imageNamed: GroundGrassImage)
-    private var rockTexture = SKTexture(imageNamed: RockGrassImage)
-    private var rockDownTexture = SKTexture(imageNamed: RockGrassDownImage)
-    private var gameOverTexture = SKTexture(imageNamed: TextGameOver)
+    private let groundTexture = SKTexture(imageNamed: GroundGrassImage)
+    private let rockTexture = SKTexture(imageNamed: RockGrassImage)
+    private let rockDownTexture = SKTexture(imageNamed: RockGrassDownImage)
+    private let gameOverTexture = SKTexture(imageNamed: TextGameOver)
     
     // Level Image Nodes
     private var gameOverText = SKSpriteNode()
@@ -33,8 +33,6 @@ class LevelOneScene: SKScene {
     // Empty Nodes
     private var bg = SKSpriteNode()
     private var plane = SKSpriteNode()
-    private var testPlane:Plane!
-    
     private var ground = SKSpriteNode()
     
     // HUD
@@ -63,15 +61,14 @@ class LevelOneScene: SKScene {
 extension LevelOneScene {
     override func didMoveToView(view: SKView) {
         
-        println("Size height: \(size.width) Width: \(size.height)")
-        println("View Height: \(view.bounds.height) Width: \(view.bounds.width)")
-        
+//        println("Size height: \(size.width) Width: \(size.height)")
+//        println("View Height: \(view.bounds.height) Width: \(view.bounds.width)")
         
         // Loads all scenes resources
         loadResources()
         
-        loopBackgroundTrack(view)
-        //        LevelHelper.playBackgroundMusic(view)
+        audioPlayer = LevelHelper.prepareAudioPlayer(view)
+        audioPlayer.play()
         
         self.physicsWorld.contactDelegate = self
         self.addChild(movingObjects)
@@ -84,18 +81,6 @@ extension LevelOneScene {
         createBoundry(view)
         createGround(view)
         createDistanceMarkers(view)
-        
-        //        var testnode = SKSpriteNode()
-        //
-        //        let newPlane = Plane(textureNames: ["planeYellow1", "planeYellow2", "planeYellow3"])
-        //        newPlane.position = CGPointMake(size.width/4, size.height/2)
-        ////        newPlane.start()
-        //        testnode.addChild(newPlane)
-        //
-        //        self.addChild(newPlane)
-        
-        
-        
         createPlane(view)
         obstacleSetUp(view)
         
@@ -125,18 +110,6 @@ extension LevelOneScene {
 
 // MARK: Scene setup helpers
 extension LevelOneScene {
-    func loopBackgroundTrack(view: SKView) {
-        
-        let path = NSBundle.mainBundle().pathForResource(BackgroundMusicSound, ofType: ".mp3")
-        let url = NSURL.fileURLWithPath(path!)
-        var error: NSError?
-        
-        audioPlayer = AVAudioPlayer(contentsOfURL: url, error: &error)
-        audioPlayer.volume = 0.1
-        audioPlayer.numberOfLoops = -1
-        audioPlayer.prepareToPlay()
-        audioPlayer.play()
-    }
     
     func obstacleSetUp(view: SKView) {
         let distanceToMove = CGFloat(view.bounds.width + 5.0 * rockTexture.size().width)
@@ -368,9 +341,6 @@ extension LevelOneScene {
 extension LevelOneScene {
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        /* Called when a touch begins */
-        
-        println("View Height: \(view!.bounds.height) Width: \(view!.bounds.width)")
         
         for touch: AnyObject in touches {
             let location = touch.locationInNode(self)
@@ -401,9 +371,11 @@ extension LevelOneScene {
                     gameOver = false
                     
                 } else if !self.paused {
+                    // Used for contiuous flying while touching screen.
                     isTouching = true
                     runAction(planeFlyingFX)
-                    //
+                    
+                    // Uncomment for single tap mode.
                     // plane.physicsBody?.velocity = CGVectorMake(0, 0)
                     // plane.physicsBody?.applyImpulse(CGVectorMake(0, 10))
                 }

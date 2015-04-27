@@ -11,16 +11,21 @@ import AVFoundation
 
 class LevelHelper {
     
-    class func playBackgroundMusic(view: SKView) {
+    class func prepareAudioPlayer(view: SKView) -> AVAudioPlayer {
+        
+        var audioPlayer: AVAudioPlayer? = AVAudioPlayer()
+        
         if let path = NSBundle.mainBundle().pathForResource("backgroundTrack", ofType: ".mp3") {
             let url = NSURL.fileURLWithPath(path)
             var error: NSError?
             
-            var audioPlayer = AVAudioPlayer(contentsOfURL: url, error: &error)
-            audioPlayer.volume = 0.2
-            audioPlayer.numberOfLoops = -1
-            audioPlayer.prepareToPlay()
-            audioPlayer.play()
+            audioPlayer = AVAudioPlayer(contentsOfURL: url, error: &error)
+            audioPlayer!.volume = 0.2
+            audioPlayer!.numberOfLoops = -1
+            audioPlayer!.prepareToPlay()
+            
+            return audioPlayer!
         }
+        return audioPlayer!
     }
 }
