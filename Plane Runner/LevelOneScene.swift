@@ -115,7 +115,6 @@ extension LevelOneScene {
     
     func obstacleSetUp(view: SKView) {
         let distanceToMove = CGFloat(view.bounds.width + 5.0 * rockTexture.size().width)
-        //        let distanceToMove = SKAction.moveByX(-rockTexture.size().width, y: 0, duration: <#NSTimeInterval#>)
         let moveRocks = SKAction.moveByX(-distanceToMove, y: 0, duration: 8 /*NSTimeInterval(0.01 * distanceToMove)*/)
         let removeRocks = SKAction.removeFromParent()
         

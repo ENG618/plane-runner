@@ -28,4 +28,21 @@ class LevelHelper {
         }
         return audioPlayer!
     }
+    
+    class func getReadyAction(view: SKView) -> SKAction {
+        // Method resouces
+        let getReadyTexture = SKTexture(imageNamed: TextGetReady)
+        let one = SKTexture(imageNamed: OneImage)
+        let two = SKTexture(imageNamed: TwoImage)
+        let three = SKTexture(imageNamed: ThreeImage)
+        
+        var getReadyAction = SKAction()
+        
+//        let getReadyAction = SKAction(
+        
+        // TODO: Setup getready!
+        
+        
+        return getReadyAction
+    }
 }
