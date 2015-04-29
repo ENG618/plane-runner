@@ -62,25 +62,34 @@ class LevelOneScene: SKScene {
 extension LevelOneScene {
     override func didMoveToView(view: SKView) {
         
+        // Add world Node to scene
         self.addChild(worldNode)
         
-//        println("Size height: \(size.width) Width: \(size.height)")
-//        println("View Height: \(view.bounds.height) Width: \(view.bounds.width)")
+        println("Size height: \(size.height) Width: \(size.width)")
+        println("View Height: \(view.bounds.height) Width: \(view.bounds.width)")
+        println("Frame: \(self.frame), View.frame.width: \(view.frame.width) View.frame.height: \(view.frame.height)")
         
         // Loads all scenes resources
         loadResources()
         
+        // Obtaine prepared audio player from helper class
         audioPlayer = LevelHelper.prepareAudioPlayer(view)
+        // Insure its prepared and start playing background audio.
         if audioPlayer.prepareToPlay() {
             audioPlayer.play()
         }
         
+        // Assign contact delegate to current class
         self.physicsWorld.contactDelegate = self
+        
+        // Add moving objects node to world node.
         worldNode.addChild(movingObjects)
+        
         // Change gravity
         self.physicsWorld.gravity = CGVectorMake(0, -1.6)
         self.physicsBody?.restitution = 0.0
         
+        // Create level elements
         createHUD(view)
         createBackground(view)
         createBoundry(view)
@@ -88,6 +97,7 @@ extension LevelOneScene {
         createDistanceMarkers(view)
         createPlane(view)
         obstacleSetUp(view)
+        
         
         let (action, node) = LevelHelper.getReadyAction(view)
         
@@ -152,7 +162,7 @@ extension LevelOneScene {
         for var i:CGFloat = 0; i < 3; i++ {
             
             bg = SKSpriteNode(texture: bgTexture)
-            bg.position = CGPoint(x: bgTexture.size().width/2 + bgTexture.size().width * i, y: size.height/2)
+            bg.position = CGPoint(x: bgTexture.size().width/2 + bgTexture.size().width * i, y: view.frame.height/2)
             bg.size = size
             bg.zPosition = ZLevel.Background
             
@@ -282,6 +292,8 @@ extension LevelOneScene {
         // Set elevation
         plane.zPosition = ZLevel.Plane
         
+        println("Plane size: \(plane.size)")
+        
         worldNode.addChild(plane)
     }
     
@@ -290,7 +302,7 @@ extension LevelOneScene {
         // Create pause button
         let pauseTexture = SKTexture(imageNamed: ButtonSmallImage)
         hudPauseButn = SKSpriteNode(texture: pauseTexture)
-        hudPauseButn.position = CGPoint(x: CGRectGetMaxX(self.frame) - hudPauseButn.size.width / 2 - 10, y: CGRectGetMaxY(self.frame) - hudPauseButn.size.height / 2 - 10)
+        hudPauseButn.position = CGPoint(x: view.frame.width - hudPauseButn.size.width / 2 - 10, y: view.frame.height - hudPauseButn.size.height / 2 - 10)
         
         // Add to hud
         hud.addChild(hudPauseButn)
@@ -334,19 +346,19 @@ extension LevelOneScene {
             audioPlayer.pause()
         }
         // TODO: Create pause dialog
-        let bluredScreenNode = SKEffectNode() // SKSpriteNode(color: SKColor.clearColor(), size: self.size)
-        let filter = CIFilter(name: "CIGaussianBlur")
-        bluredScreenNode.filter = filter //.setValue(BlurAmount, forKey: kCIInputRadiusKey)
-        bluredScreenNode.position = self.view!.center
-        bluredScreenNode.blendMode = .Alpha
-        
-        worldNode.removeFromParent()
-        bluredScreenNode.addChild(worldNode)
-        
-        pauseNode.addChild(bluredScreenNode)
-        
-        pauseNode.zPosition = ZLevel.Pause
-        self.addChild(pauseNode)
+//        let bluredScreenNode = SKEffectNode() // SKSpriteNode(color: SKColor.clearColor(), size: self.size)
+//        let filter = CIFilter(name: "CIGaussianBlur")
+//        bluredScreenNode.filter = filter //.setValue(BlurAmount, forKey: kCIInputRadiusKey)
+//        bluredScreenNode.position = self.view!.center
+//        bluredScreenNode.blendMode = .Alpha
+//        
+//        worldNode.removeFromParent()
+//        bluredScreenNode.addChild(worldNode)
+//        
+//        pauseNode.addChild(bluredScreenNode)
+//        
+//        pauseNode.zPosition = ZLevel.Pause
+//        self.addChild(pauseNode)
     }
     
     func resumeGame() {

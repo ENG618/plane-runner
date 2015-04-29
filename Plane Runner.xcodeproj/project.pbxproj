@@ -21,6 +21,7 @@
 		5C4C4F5C1AEDA03300624154 /* Constancts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4C4F5B1AEDA03300624154 /* Constancts.swift */; };
 		5C50FA931AE5ABFE0068FD66 /* Plane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50FA921AE5ABFE0068FD66 /* Plane.swift */; };
 		5C50FA9A1AE5FF7E0068FD66 /* PlaneColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50FA991AE5FF7E0068FD66 /* PlaneColor.swift */; };
+		5C5516B41AF15AB500E35564 /* LevelScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5516B31AF15AB500E35564 /* LevelScene.swift */; };
 		5CA474E11AE7571A00E71BE7 /* background.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5CA474E01AE7571A00E71BE7 /* background.atlas */; };
 		5CA474E51AE7573200E71BE7 /* numbers.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5CA474E41AE7573200E71BE7 /* numbers.atlas */; };
 		5CA474E71AE7573700E71BE7 /* obstacles.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5CA474E61AE7573700E71BE7 /* obstacles.atlas */; };
@@ -67,6 +68,7 @@
 		5C4C4F5B1AEDA03300624154 /* Constancts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constancts.swift; sourceTree = "<group>"; };
 		5C50FA921AE5ABFE0068FD66 /* Plane.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plane.swift; sourceTree = "<group>"; };
 		5C50FA991AE5FF7E0068FD66 /* PlaneColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaneColor.swift; sourceTree = "<group>"; };
+		5C5516B31AF15AB500E35564 /* LevelScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelScene.swift; sourceTree = "<group>"; };
 		5CA474E01AE7571A00E71BE7 /* background.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = background.atlas; sourceTree = "<group>"; };
 		5CA474E41AE7573200E71BE7 /* numbers.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = numbers.atlas; sourceTree = "<group>"; };
 		5CA474E61AE7573700E71BE7 /* obstacles.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = obstacles.atlas; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 				5CADD6991AE8016300707677 /* Levels */,
 				5C4052CE1AD73B260088EE70 /* AppDelegate.swift */,
 				5C4052D21AD73B260088EE70 /* MenuScene.swift */,
+				5C5516B31AF15AB500E35564 /* LevelScene.swift */,
 				5C4C4F571AED334200624154 /* CreditsScene.swift */,
 				5C4052D41AD73B260088EE70 /* GameViewController.swift */,
 				5C4052D61AD73B260088EE70 /* Main.storyboard */,
@@ -329,6 +332,7 @@
 				5CADD6A31AE8BEDD00707677 /* LevelThreeScene.swift in Sources */,
 				5C4C4F581AED334200624154 /* CreditsScene.swift in Sources */,
 				5C4052D31AD73B260088EE70 /* MenuScene.swift in Sources */,
+				5C5516B41AF15AB500E35564 /* LevelScene.swift in Sources */,
 				5CADD6981AE8013C00707677 /* LevelOneScene.swift in Sources */,
 				5C4052D51AD73B260088EE70 /* GameViewController.swift in Sources */,
 				5CADD6A11AE8BEB300707677 /* LevelTwoScene.swift in Sources */,

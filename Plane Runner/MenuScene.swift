@@ -22,13 +22,17 @@ class MenuScene: SKScene {
     
     override func didMoveToView(view: SKView) {
         
+        println("Size height: \(size.height) Width: \(size.width)")
+        println("View Height: \(view.bounds.height) Width: \(view.bounds.width)")
+        println("Frame: \(self.frame), View.frame.width: \(view.frame.width) View.frame.height: \(view.frame.height)")
+        
         self.addChild(worldNode)
         
         self.physicsWorld.contactDelegate = self
         
-        createBackground()
-        createTitle()
-        createStartButton()
+        createBackground(view)
+        createTitle(view)
+        createStartButton(view)
         
         
 //        var label = SKLabelNode(text: "Hello World")
@@ -37,15 +41,15 @@ class MenuScene: SKScene {
     }
     
     // MARK: Setup Helpers
-    func createBackground() {
+    func createBackground(view: SKView) {
         let bg = SKSpriteNode(texture: bgTexture)
-        bg.position = CGPoint(x: size.width/2, y: size.height/2)
+        bg.position = CGPoint(x: view.frame.width/2, y: view.frame.height/2)
         bg.zPosition = ZLevel.Background
         bg.size = size
         worldNode.addChild(bg)
     }
     
-    func createTitle() {
+    func createTitle(view: SKView) {
         // Plane
         let p = SKSpriteNode(texture: getLetterTexture("p"))
         p.position = CGPoint(x: -156, y: 0)
@@ -93,7 +97,7 @@ class MenuScene: SKScene {
         titleNode.addChild(r2)
         
         // Whole node
-        titleNode.position = CGPoint(x: size.width/2, y: size.height - size.height/3)
+        titleNode.position = CGPoint(x: view.frame.width/2, y: view.frame.height - view.frame.height/3)
         worldNode.addChild(titleNode)
     }
     
@@ -102,17 +106,17 @@ class MenuScene: SKScene {
         return letterTextuer
     }
     
-    func createStartButton() {
+    func createStartButton(view: SKView) {
         let startBtn = SKSpriteNode(texture: buttonTexture)
         startBtn.setScale(2.0)
-        startBtn.position = CGPoint(x: size.width/2, y: size.height/2 - size.height/3 + 7)
+        startBtn.position = CGPoint(x: view.frame.width/2, y: view.frame.height/2 - view.frame.height/3 + 7)
         startBtn.zPosition = 0
         startNode.addChild(startBtn)
         
         let startText = SKLabelNode(fontNamed: "kenvector_future_thin")
         startText.text = "Start"
         startText.color = SKColor.whiteColor()
-        startText.position = CGPoint(x: size.width/2, y: size.height/2 - size.height/3)
+        startText.position = CGPoint(x: view.frame.width/2, y: view.frame.height/2 - view.frame.height/3)
         startText.zPosition = 1
         startNode.addChild(startText)
         
@@ -135,10 +139,6 @@ extension MenuScene {
                 self.view?.presentScene(scene, transition: SKTransition.doorsOpenHorizontalWithDuration(1.0))
             }
         }
-    }
-    
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
-        
     }
 }
 

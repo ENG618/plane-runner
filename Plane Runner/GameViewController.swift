@@ -14,15 +14,17 @@ class GameViewController: UIViewController {
     override func viewWillLayoutSubviews() {
         if let skView = self.view as? SKView {
             if skView.scene == nil {
-                let aspectRatio = skView.bounds.size.height / skView.bounds.size.width
-                let scene = MenuScene(size: CGSize(width: 320, height: 320 * aspectRatio))
+//                let aspectRatio = skView.bounds.size.height / skView.bounds.size.width
+//                let scene = MenuScene(size: CGSize(width: 320 * aspectRatio, height: 320))
+                
+                let scene = MenuScene(size: skView.bounds.size)
                 
                 skView.showsFPS = true
                 skView.showsNodeCount = true
                 skView.showsPhysics = true 
                 skView.ignoresSiblingOrder = true
                 
-                scene.scaleMode = .AspectFill
+                scene.scaleMode = .ResizeFill
                 
                 skView.presentScene(scene)
             }
