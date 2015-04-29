@@ -12,6 +12,8 @@ import AVFoundation
 // MARK: Class
 class LevelOneScene: SKScene {
     
+    private let worldNode = SKNode()
+    
     // MARK: Class Variables
     private var gamePaused = false
     private var isTouching = false
@@ -29,8 +31,6 @@ class LevelOneScene: SKScene {
     
     // Level Image Nodes
     private var gameOverText = SKSpriteNode()
-    
-    // Empty Nodes
     private var bg = SKSpriteNode()
     private var plane = SKSpriteNode()
     private var ground = SKSpriteNode()
@@ -52,6 +52,7 @@ class LevelOneScene: SKScene {
     
     // Labels
     private var labelHolderGameOver = SKSpriteNode()
+    private var labelHolderGetReady = SKSpriteNode()
     
     // Pause Menu Resouces
     let pauseNode = SKNode()
@@ -60,6 +61,8 @@ class LevelOneScene: SKScene {
 // MARK: Scene Methods & Setup
 extension LevelOneScene {
     override func didMoveToView(view: SKView) {
+        
+        self.addChild(worldNode)
         
 //        println("Size height: \(size.width) Width: \(size.height)")
 //        println("View Height: \(view.bounds.height) Width: \(view.bounds.width)")
@@ -73,7 +76,7 @@ extension LevelOneScene {
         }
         
         self.physicsWorld.contactDelegate = self
-        self.addChild(movingObjects)
+        worldNode.addChild(movingObjects)
         // Change gravity
         self.physicsWorld.gravity = CGVectorMake(0, -1.6)
         self.physicsBody?.restitution = 0.0
@@ -86,6 +89,11 @@ extension LevelOneScene {
         createPlane(view)
         obstacleSetUp(view)
         
+        let (action, node) = LevelHelper.getReadyAction(view)
+        
+        node.runAction(action)
+        node.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))
+        labelHolderGetReady.addChild(node)
         
         // Uncomment to show physics
         view.showsPhysics = true
@@ -106,7 +114,8 @@ extension LevelOneScene {
         gameOverText = SKSpriteNode(texture: gameOverTexture)
         
         // Add label holder
-        self.addChild(labelHolderGameOver)
+        worldNode.addChild(labelHolderGameOver)
+        worldNode.addChild(labelHolderGetReady)
     }
 }
 
@@ -161,7 +170,7 @@ extension LevelOneScene {
         ground.physicsBody?.restitution = 0.0
         boundary.physicsBody?.categoryBitMask = PhysicsCategory.Boundary
         
-        self.addChild(boundary)
+        worldNode.addChild(boundary)
     }
     
     func createGround(view: SKView) {
@@ -258,7 +267,6 @@ extension LevelOneScene {
         
         // Set planes position
         plane = SKSpriteNode(texture: planeTexture)
-        //        plane.setScale(0.5)
         plane.position = CGPointMake(size.width/4, size.height/2)
         
         plane.runAction(makePropellerSpin)
@@ -274,7 +282,7 @@ extension LevelOneScene {
         // Set elevation
         plane.zPosition = ZLevel.Plane
         
-        self.addChild(plane)
+        worldNode.addChild(plane)
     }
     
     func createHUD(view: SKView) {
@@ -301,7 +309,7 @@ extension LevelOneScene {
         
         
         hud.zPosition = ZLevel.HUD
-        self.addChild(hud)
+        worldNode.addChild(hud)
         
     }
 }
@@ -325,7 +333,20 @@ extension LevelOneScene {
         if audioPlayer.playing{
             audioPlayer.pause()
         }
+        // TODO: Create pause dialog
+        let bluredScreenNode = SKEffectNode() // SKSpriteNode(color: SKColor.clearColor(), size: self.size)
+        let filter = CIFilter(name: "CIGaussianBlur")
+        bluredScreenNode.filter = filter //.setValue(BlurAmount, forKey: kCIInputRadiusKey)
+        bluredScreenNode.position = self.view!.center
+        bluredScreenNode.blendMode = .Alpha
         
+        worldNode.removeFromParent()
+        bluredScreenNode.addChild(worldNode)
+        
+        pauseNode.addChild(bluredScreenNode)
+        
+        pauseNode.zPosition = ZLevel.Pause
+        self.addChild(pauseNode)
     }
     
     func resumeGame() {

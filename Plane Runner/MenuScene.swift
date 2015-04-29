@@ -11,12 +11,18 @@ import AVFoundation
 
 class MenuScene: SKScene {
     
-    let bgTexture = SKTexture(imageNamed: "mainBackground")
+    // Nodes
+    let worldNode = SKNode()
     let titleNode = SKNode()
     let startNode = SKNode()
-    let buttonTexture = SKTexture(imageNamed: "buttonLarge")
+    
+    // Textures
+    let bgTexture = SKTexture(imageNamed: BackgroundImage)
+    let buttonTexture = SKTexture(imageNamed: ButtonSmallImage)
     
     override func didMoveToView(view: SKView) {
+        
+        self.addChild(worldNode)
         
         self.physicsWorld.contactDelegate = self
         
@@ -36,7 +42,7 @@ class MenuScene: SKScene {
         bg.position = CGPoint(x: size.width/2, y: size.height/2)
         bg.zPosition = ZLevel.Background
         bg.size = size
-        self.addChild(bg)
+        worldNode.addChild(bg)
     }
     
     func createTitle() {
@@ -88,7 +94,7 @@ class MenuScene: SKScene {
         
         // Whole node
         titleNode.position = CGPoint(x: size.width/2, y: size.height - size.height/3)
-        self.addChild(titleNode)
+        worldNode.addChild(titleNode)
     }
     
     func getLetterTexture(letter: String) -> SKTexture {
@@ -113,7 +119,7 @@ class MenuScene: SKScene {
 //        startNode.physicsBody = SKPhysicsBody(rectangleOfSize: buttonTexture.size())
 //        startNode.physicsBody?.categoryBitMask = PhysicsCategory.ButtonEnabled
         
-        self.addChild(startNode)
+        worldNode.addChild(startNode)
     }
 }
 

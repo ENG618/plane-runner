@@ -19,6 +19,7 @@ let PlaneOneImage = "planeRed1"
 let PlaneTwoImage = "planeRed2"
 let PlaneThreeImage = "planeRed3"
 let ButtonSmallImage = "buttonSmall"
+let ButtonLargeImgae = "buttonLarge"
 let UIBackgroundImage = "Uibg"
 let OneImage = "1"
 let TwoImage = "2"
@@ -33,6 +34,9 @@ let BackgroundMusicSound = "backgroundTrack"
 // MARK: Fonts
 let GameFont = "kenvector_future-thin.tff"
 
+// MARK: Other Resouces
+let BlurAmount = 10.0
+
 struct ZLevel {
     static let Background   : CGFloat = -2.0
     static let Clouds       : CGFloat = -1.0
@@ -40,6 +44,7 @@ struct ZLevel {
     static let Ground       : CGFloat = 0.0
     static let Plane        : CGFloat = 5.0
     static let HUD          : CGFloat = 10.0
+    static let Pause        : CGFloat = 15.0
 }
 
 struct PhysicsCategory {

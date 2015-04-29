@@ -29,20 +29,26 @@ class LevelHelper {
         return audioPlayer!
     }
     
-    class func getReadyAction(view: SKView) -> SKAction {
+//    class func getReadyLabel(view: SKView) -> SKLabelNode {
+//        let getReadyLavel =
+//        
+//    }
+    
+    class func getReadyAction(view: SKView) -> (action: SKAction, getReadyNode: SKSpriteNode) {
+        
         // Method resouces
         let getReadyTexture = SKTexture(imageNamed: TextGetReady)
         let one = SKTexture(imageNamed: OneImage)
         let two = SKTexture(imageNamed: TwoImage)
         let three = SKTexture(imageNamed: ThreeImage)
         
-        var getReadyAction = SKAction()
+        let getReadyAction = SKAction.animateWithTextures([getReadyTexture, three, two, one], timePerFrame: 1.0)
+        let removeNode = SKAction.removeFromParent()
         
-//        let getReadyAction = SKAction(
+        let getReadyAndRemoveAction = SKAction.sequence([getReadyAction, removeNode])
         
-        // TODO: Setup getready!
+        var getReadyNode = SKSpriteNode(texture: getReadyTexture)
         
-        
-        return getReadyAction
+        return (getReadyAndRemoveAction, getReadyNode)
     }
 }
