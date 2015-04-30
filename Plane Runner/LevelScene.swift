@@ -26,12 +26,15 @@ class LevelScene: SKScene {
     private let groundTexture = SKTexture(imageNamed: GroundGrassImage)
     private let rockTexture = SKTexture(imageNamed: RockGrassImage)
     private let rockDownTexture = SKTexture(imageNamed: RockGrassDownImage)
+    private let planeTexture = SKTexture(imageNamed: PlaneOneImage)
+    private let planeTexture1 = SKTexture(imageNamed: PlaneTwoImage)
+    private let planeTexture2 = SKTexture(imageNamed: PlaneThreeImage)
     private let gameOverTexture = SKTexture(imageNamed: TextGameOver)
     
     // Level Image Nodes
-//    private var backgroundNode: SKSpriteNode!
     private var backgroundLevelNode: SKSpriteNode!
     private var foregroundLevelNode: SKSpriteNode!
+    private var plane: SKSpriteNode!
     
     // Sound Actions
     var planeCrashFX: SKAction!
@@ -75,6 +78,7 @@ extension LevelScene {
         createObsticles(view)
         createClouds(view)
         createDistanceMarkers(view)
+        createPlane(view)
     }
 }
 
@@ -227,7 +231,7 @@ extension LevelScene {
     func createDistanceMarkers(view: SKView) {
         var i: CGFloat = 10
         
-        while i < sceneLength {
+        while i < sceneLength + view.frame.width {
             let distanceMarkerNode = SKNode()
             distanceMarkerNode.physicsBody = SKPhysicsBody(edgeFromPoint: CGPoint(x: i, y: 0), toPoint: CGPoint(x: i, y: view.frame.height))
             distanceMarkerNode.physicsBody?.dynamic = false
@@ -238,6 +242,14 @@ extension LevelScene {
             
             i = i + 10
         }
+    }
+    
+    func createPlane(view: SKView) {
+        plane = SKSpriteNode(texture: planeTexture)
+        plane.position = CGPoint(x: view.frame.width/4, y: view.frame.height/2)
+        plane.zPosition = ZLevel.Plane
+        
+        worldNode.addChild(plane)
     }
 }
 
@@ -252,6 +264,11 @@ extension LevelScene {
         // Action to move foreground
         let moveFg = SKAction.moveByX(-sceneLength, y: 0, duration: NSTimeInterval(sceneLength/100))
         foregroundLevelNode.runAction(moveFg)
+        
+        // Animate plans propeller
+        let animation = SKAction.animateWithTextures([planeTexture, planeTexture1, planeTexture2], timePerFrame: 0.05)
+        let makePropellerSpin = SKAction.repeatActionForever(animation)
+        plane.runAction(makePropellerSpin)
     }
     
     func pause() {
