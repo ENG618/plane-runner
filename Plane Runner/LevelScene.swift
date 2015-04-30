@@ -229,7 +229,7 @@ extension LevelScene {
     }
     
     func createDistanceMarkers(view: SKView) {
-        var i: CGFloat = 10
+        var i: CGFloat = view.frame.width / 4 + 10
         
         while i < sceneLength + view.frame.width {
             let distanceMarkerNode = SKNode()
@@ -248,6 +248,14 @@ extension LevelScene {
         plane = SKSpriteNode(texture: planeTexture)
         plane.position = CGPoint(x: view.frame.width/4, y: view.frame.height/2)
         plane.zPosition = ZLevel.Plane
+        
+        // Set physics
+        plane.physicsBody = SKPhysicsBody(rectangleOfSize: plane.size)
+        plane.physicsBody?.dynamic = true
+        plane.physicsBody?.restitution = 0.0
+        plane.physicsBody?.categoryBitMask = PhysicsCategory.Plane
+        plane.physicsBody?.collisionBitMask = PhysicsCategory.Collidable | PhysicsCategory.Boundary | PhysicsCategory.Ground
+        plane.physicsBody?.contactTestBitMask = PhysicsCategory.Collidable | PhysicsCategory.Boundary | PhysicsCategory.Ground | PhysicsCategory.Distance
         
         worldNode.addChild(plane)
     }
