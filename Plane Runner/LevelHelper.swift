@@ -29,11 +29,6 @@ class LevelHelper {
         return audioPlayer!
     }
     
-//    class func getReadyLabel(view: SKView) -> SKLabelNode {
-//        let getReadyLavel =
-//        
-//    }
-    
     class func getReadyAction(view: SKView) -> (action: SKAction, getReadyNode: SKSpriteNode) {
         
         // Method resouces

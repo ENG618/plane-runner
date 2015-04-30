@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>EndX</key>
-	<integer>1000</integer>
+	<real>10000</real>
 	<key>Stars</key>
 	<dict>
 		<key>Positions</key>

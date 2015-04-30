@@ -135,7 +135,8 @@ extension MenuScene {
             if startNode.containsPoint(location) {
                 println("Start button touched")
                 
-                let scene = LevelOneScene(size: size)
+//                let scene = LevelOneScene(size: size)
+                let scene = LevelScene(size: size)
                 self.view?.presentScene(scene, transition: SKTransition.doorsOpenHorizontalWithDuration(1.0))
             }
         }
