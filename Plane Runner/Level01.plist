@@ -3,26 +3,26 @@
 <plist version="1.0">
 <dict>
 	<key>EndX</key>
-	<real>10000</real>
+	<integer>2500</integer>
 	<key>Stars</key>
 	<dict>
 		<key>Positions</key>
 		<array>
 			<dict>
 				<key>x</key>
-				<integer>2500</integer>
+				<integer>625</integer>
 				<key>y</key>
 				<integer>50</integer>
 			</dict>
 			<dict>
 				<key>x</key>
-				<integer>5000</integer>
+				<integer>1250</integer>
 				<key>y</key>
 				<integer>50</integer>
 			</dict>
 			<dict>
 				<key>x</key>
-				<integer>7500</integer>
+				<integer>1875</integer>
 				<key>y</key>
 				<integer>50</integer>
 			</dict>
@@ -34,25 +34,25 @@
 		<array>
 			<dict>
 				<key>x</key>
+				<integer>417</integer>
+				<key>y</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>x</key>
+				<integer>834</integer>
+				<key>y</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>x</key>
 				<integer>1667</integer>
 				<key>y</key>
 				<integer>0</integer>
 			</dict>
 			<dict>
 				<key>x</key>
-				<integer>3334</integer>
-				<key>y</key>
-				<integer>0</integer>
-			</dict>
-			<dict>
-				<key>x</key>
-				<integer>6667</integer>
-				<key>y</key>
-				<integer>0</integer>
-			</dict>
-			<dict>
-				<key>x</key>
-				<integer>8334</integer>
+				<integer>2084</integer>
 				<key>y</key>
 				<integer>0</integer>
 			</dict>
@@ -64,19 +64,19 @@
 		<array>
 			<dict>
 				<key>x</key>
-				<integer>2500</integer>
+				<integer>625</integer>
 				<key>y</key>
 				<integer>375</integer>
 			</dict>
 			<dict>
 				<key>x</key>
-				<integer>5000</integer>
+				<integer>1250</integer>
 				<key>y</key>
 				<integer>375</integer>
 			</dict>
 			<dict>
 				<key>x</key>
-				<integer>7500</integer>
+				<integer>1875</integer>
 				<key>y</key>
 				<integer>375</integer>
 			</dict>
