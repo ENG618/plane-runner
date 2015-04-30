@@ -73,6 +73,8 @@ extension LevelScene {
         createBackground(view)
         createGround(view)
         createObsticles(view)
+        createClouds(view)
+        createDistanceMarkers(view)
     }
 }
 
@@ -82,6 +84,7 @@ extension LevelScene {
     func loadResouces(){
         // Get total length of level from dictionary
         endLevelX = levelData["EndX"]!.integerValue!
+        sceneLength = CGFloat(endLevelX)
         
         // Create scene background
         backgroundLevelNode = SKSpriteNode()
@@ -114,7 +117,6 @@ extension LevelScene {
         
         // Set up variables for while loop
         var i: CGFloat = 0
-        sceneLength = CGFloat(endLevelX)
         
         // Number of backgrounds created
         var numBgCreated = 0
@@ -138,7 +140,6 @@ extension LevelScene {
     
     func createGround(view: SKView) {
         var i: CGFloat = 0
-        sceneLength = CGFloat(endLevelX)
         
         var numGroundCreated = 0
         
@@ -158,6 +159,7 @@ extension LevelScene {
             
             i = i + ground.size.width
         }
+        println("Number of grounds created \(numGroundCreated)")
     }
     
     func createObsticles(view: SKView) {
@@ -216,6 +218,26 @@ extension LevelScene {
             foregroundLevelNode.addChild(rockDownNode)
         }
         movingNodes.addChild(foregroundLevelNode)
+    }
+    
+    func createClouds(view: SKView) {
+        // TODO: Create clouds
+    }
+    
+    func createDistanceMarkers(view: SKView) {
+        var i: CGFloat = 10
+        
+        while i < sceneLength {
+            let distanceMarkerNode = SKNode()
+            distanceMarkerNode.physicsBody = SKPhysicsBody(edgeFromPoint: CGPoint(x: i, y: 0), toPoint: CGPoint(x: i, y: view.frame.height))
+            distanceMarkerNode.physicsBody?.dynamic = false
+            distanceMarkerNode.physicsBody?.categoryBitMask = PhysicsCategory.Distance
+            distanceMarkerNode.physicsBody?.contactTestBitMask = PhysicsCategory.Plane
+            
+            foregroundLevelNode.addChild(distanceMarkerNode)
+            
+            i = i + 10
+        }
     }
 }
 
