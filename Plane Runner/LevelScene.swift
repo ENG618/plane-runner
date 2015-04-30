@@ -42,7 +42,7 @@ class LevelScene: SKScene {
     private var labelHolderGameOver = SKSpriteNode()
     private var labelHolderGetReady = SKSpriteNode()
     
-    // Boolians
+    // Booleans
     private var gameStarted = false
     private var gamePause = false
     private var gameOver = false
@@ -70,6 +70,7 @@ extension LevelScene {
         
         loadResouces()
         createBackground(view)
+        createGround(view)
         createObsticles(view)
     }
 }
@@ -80,6 +81,13 @@ extension LevelScene {
     func loadResouces(){
         // Get total length of level from dictionary
         endLevelX = levelData["EndX"]!.integerValue!
+        
+        // Create scene background
+        backgroundLevelNode = SKSpriteNode()
+        backgroundLevelNode.zPosition = ZLevel.Background
+        // Create scene foreground
+        foregroundLevelNode = SKSpriteNode()
+        foregroundLevelNode.zPosition = ZLevel.Foreground
         
         // Plane crash sound effect
         planeCrashFX = SKAction.repeatAction(SKAction.playSoundFileNamed(PlaneCrashSoundFX, waitForCompletion: true), count: 1)
@@ -92,9 +100,6 @@ extension LevelScene {
     }
     
     func createBackground(view: SKView) {
-        // Create scene background
-        backgroundLevelNode = SKSpriteNode()
-        backgroundLevelNode.zPosition = ZLevel.Background
         
         // Set up variables for while loop
         var i: CGFloat = 0
@@ -121,9 +126,11 @@ extension LevelScene {
         movingNodes.addChild(backgroundLevelNode)
     }
     
+    func createGround(view: SKView) {
+        
+    }
+    
     func createObsticles(view: SKView) {
-        foregroundLevelNode = SKSpriteNode()
-        foregroundLevelNode.zPosition = ZLevel.Foreground
         
         // Create lower rocks
         let rocksDictionary = levelData["Rocks"] as! NSDictionary
@@ -145,7 +152,11 @@ extension LevelScene {
             
             println("Rock postion x:\(xPosition) y:\(yPosition)")
             
-            // TODO: move to foregroundLevelNode to move with parallax
+            // Set physics
+            rockNode.physicsBody = SKPhysicsBody(rectangleOfSize: rockNode.size)
+            rockNode.physicsBody?.dynamic = false
+            rockNode.physicsBody?.categoryBitMask = PhysicsCategory.Collidable
+            
             foregroundLevelNode.addChild(rockNode)
         }
         
@@ -167,7 +178,11 @@ extension LevelScene {
             
             println("RockDown postion x:\(xPosition) y:\(yPosition)")
             
-            // TODO: move to foregroundLevelNode to move with parallax
+            // Set physics
+            rockDownNode.physicsBody = SKPhysicsBody(rectangleOfSize: rockDownNode.size)
+            rockDownNode.physicsBody?.dynamic = false
+            rockDownNode.physicsBody?.categoryBitMask = PhysicsCategory.Collidable
+            
             foregroundLevelNode.addChild(rockDownNode)
         }
         movingNodes.addChild(foregroundLevelNode)
@@ -178,7 +193,7 @@ extension LevelScene {
 extension LevelScene {
     
     func play(){
-        // Action to move backgorund
+        // Action to move background
         let moveBg = SKAction.moveByX(-sceneLength, y: 0, duration: NSTimeInterval(sceneLength/50))
         backgroundLevelNode.runAction(moveBg)
         
