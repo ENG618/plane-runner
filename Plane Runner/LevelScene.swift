@@ -19,6 +19,7 @@ class LevelScene: SKScene {
     var levelData: NSDictionary!
     // Win distance
     var endLevelX = 0
+    var sceneLength: CGFloat!
     
     // Level Textures
     private let backgroundTexture = SKTexture(imageNamed: BackgroundImage)
@@ -92,9 +93,9 @@ extension LevelScene {
         // Get total length of level from dictionary
         endLevelX = levelData["EndX"]!.integerValue!
         var i: CGFloat = 0
-        let sceneLength = CGFloat(endLevelX)
+        sceneLength = CGFloat(endLevelX)
         
-        let moveBg = SKAction.moveByX(-sceneLength, y: 0, duration: NSTimeInterval(sceneLength/100))
+        
         
         
         while i < sceneLength + view.frame.width {
@@ -104,18 +105,57 @@ extension LevelScene {
             bg.anchorPoint = CGPoint(x: 0, y: 0)
             bg.position = CGPoint(x: i, y: 0)
             
-//            bg = backgroundNode
-//            bg.anchorPoint = CGPoint(x: 0, y: 0)
-//            bg.position = CGPoint(x: i, y: 0)
-            
             backgroundLevelNode.addChild(bg)
             
             i = i + bg.size.width
         }
         
+        // Action to move backgorund
+        let moveBg = SKAction.moveByX(-sceneLength, y: 0, duration: NSTimeInterval(sceneLength/100))
         backgroundLevelNode.runAction(moveBg)
         
         
         movingNodes.addChild(backgroundLevelNode)
     }
 }
+
+// MARK: Play/Pause/Resume
+extension LevelScene {
+    
+    func play(){
+        // Action to move backgorund
+        let moveBg = SKAction.moveByX(-sceneLength, y: 0, duration: NSTimeInterval(sceneLength/100))
+        backgroundLevelNode.runAction(moveBg)
+    }
+}
+
+// MARK: Input methods
+extension LevelScene {
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        // TODO: Setup touches
+    }
+    
+    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+        // TODO: Setup touches ended
+    }
+    
+    override func update(currentTime: NSTimeInterval) {
+        // TODO: Setup scene update
+    }
+}
+
+// MARK: SKPhysicsContactDelegate
+extension LevelScene: SKPhysicsContactDelegate {
+    func didBeginContact(contact: SKPhysicsContact) {
+        // TODO: Setup contact methods
+    }
+}
+
+
+
+
+
+
+
+
+
