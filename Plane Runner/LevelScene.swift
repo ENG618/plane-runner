@@ -37,20 +37,25 @@ class LevelScene: SKScene {
     var distanceIncreasFX: SKAction!
     var planeFlyingFX: SKAction!
     
-    // Labels 
+    // Labels
     private var labelHolderGameOver = SKSpriteNode()
     private var labelHolderGetReady = SKSpriteNode()
+    
+    // Boolians
+    private var gameStarted = false
+    private var gamePause = false
+    private var gameOver = false
+    private var isTouching = false
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-
+    
     override init(size: CGSize) {
         super.init(size: size)
         levelData = NSDictionary(contentsOfFile: levelPlist!)
         loadResouces()
     }
-    
 }
 
 // MARK: Lifecycle methods
@@ -62,6 +67,7 @@ extension LevelScene {
         // Add moving nodes to world
         worldNode.addChild(movingNodes)
         
+        loadResouces()
         createBackground(view)
     }
 }
@@ -70,6 +76,9 @@ extension LevelScene {
 extension LevelScene {
     
     func loadResouces(){
+        // Get total length of level from dictionary
+        endLevelX = levelData["EndX"]!.integerValue!
+        
         // Plane crash sound effect
         planeCrashFX = SKAction.repeatAction(SKAction.playSoundFileNamed(PlaneCrashSoundFX, waitForCompletion: true), count: 1)
         
@@ -83,20 +92,10 @@ extension LevelScene {
     func createBackground(view: SKView) {
         // Create scene background
         backgroundLevelNode = SKSpriteNode()
-        // Create single backgound
-//        backgroundNode = SKSpriteNode(texture: backgroundTexture)
-//        backgroundNode.position = CGPoint(x: view.frame.width / 2, y: view.frame.height / 2)
-//        println("Background size: x:\(backgroundNode.size.width) y: \(backgroundNode.frame.height)")
-//        backgroundNode.size = view.frame.size
-//        println("Background after resize: x:\(backgroundNode.size.width) y: \(backgroundNode.frame.height)")
         
-        // Get total length of level from dictionary
-        endLevelX = levelData["EndX"]!.integerValue!
+        // Set up variables for while loop
         var i: CGFloat = 0
         sceneLength = CGFloat(endLevelX)
-        
-        
-        
         
         while i < sceneLength + view.frame.width {
             
@@ -110,11 +109,6 @@ extension LevelScene {
             i = i + bg.size.width
         }
         
-        // Action to move backgorund
-        let moveBg = SKAction.moveByX(-sceneLength, y: 0, duration: NSTimeInterval(sceneLength/100))
-        backgroundLevelNode.runAction(moveBg)
-        
-        
         movingNodes.addChild(backgroundLevelNode)
     }
 }
@@ -127,12 +121,24 @@ extension LevelScene {
         let moveBg = SKAction.moveByX(-sceneLength, y: 0, duration: NSTimeInterval(sceneLength/100))
         backgroundLevelNode.runAction(moveBg)
     }
+    
+    func pause() {
+        // TODO: Setup pause
+    }
+    
+    func resume() {
+        // TODO: Setup resume
+    }
 }
 
 // MARK: Input methods
 extension LevelScene {
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         // TODO: Setup touches
+        if !gameStarted {
+            gameStarted = true
+            play()
+        }
     }
     
     override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
