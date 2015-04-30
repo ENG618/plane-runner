@@ -69,6 +69,7 @@ extension LevelScene {
         worldNode.addChild(movingNodes)
         
         loadResouces()
+        createBoundry(view)
         createBackground(view)
         createGround(view)
         createObsticles(view)
@@ -97,6 +98,16 @@ extension LevelScene {
         
         // Plane flying sound effect
         planeFlyingFX = SKAction.repeatAction(SKAction.playSoundFileNamed(PlaneFlyingSoundFX, waitForCompletion: true), count: 1)
+    }
+    
+    func createBoundry(view: SKView) {
+        let boundry = SKNode()
+        boundry.physicsBody = SKPhysicsBody(edgeLoopFromRect: view.frame)
+        boundry.physicsBody?.dynamic = false
+        boundry.physicsBody?.restitution = 0.0
+        boundry.physicsBody?.categoryBitMask = PhysicsCategory.Boundary
+        
+        worldNode.addChild(boundry)
     }
     
     func createBackground(view: SKView) {
@@ -137,6 +148,11 @@ extension LevelScene {
             let ground = SKSpriteNode(texture: groundTexture)
             ground.position = CGPoint(x: i, y: ground.frame.height/2)
             ground.zPosition = ZLevel.Ground
+            
+            // Set physics
+            ground.physicsBody = SKPhysicsBody(rectangleOfSize: ground.size)
+            ground.physicsBody?.dynamic = false
+            ground.physicsBody?.categoryBitMask = PhysicsCategory.Ground
             
             foregroundLevelNode.addChild(ground)
             
