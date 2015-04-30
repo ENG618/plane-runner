@@ -113,8 +113,7 @@ extension LevelScene {
             
             let bg = SKSpriteNode(texture: backgroundTexture)
             bg.size = view.frame.size
-            bg.anchorPoint = CGPoint(x: 0, y: 0)
-            bg.position = CGPoint(x: i, y: 0)
+            bg.position = CGPoint(x: i, y: view.frame.height/2)
             bg.zPosition = ZLevel.Background
             
             backgroundLevelNode.addChild(bg)
@@ -127,7 +126,22 @@ extension LevelScene {
     }
     
     func createGround(view: SKView) {
+        var i: CGFloat = 0
+        sceneLength = CGFloat(endLevelX)
         
+        var numGroundCreated = 0
+        
+        while i < sceneLength + view.frame.width {
+            numGroundCreated++
+            
+            let ground = SKSpriteNode(texture: groundTexture)
+            ground.position = CGPoint(x: i, y: ground.frame.height/2)
+            ground.zPosition = ZLevel.Ground
+            
+            foregroundLevelNode.addChild(ground)
+            
+            i = i + ground.size.width
+        }
     }
     
     func createObsticles(view: SKView) {
