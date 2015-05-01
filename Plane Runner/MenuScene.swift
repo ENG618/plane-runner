@@ -33,14 +33,11 @@ class MenuScene: SKScene {
         createBackground(view)
         createTitle(view)
         createStartButton(view)
-        
-        
-//        var label = SKLabelNode(text: "Hello World")
-//        label.position = CGPoint(x: size.width/2, y: size.height/2)
-//        self.addChild(label)
     }
-    
-    // MARK: Setup Helpers
+}
+
+// MARK: Setup Helpers
+extension MenuScene {
     func createBackground(view: SKView) {
         let bg = SKSpriteNode(texture: bgTexture)
         bg.position = CGPoint(x: view.frame.width/2, y: view.frame.height/2)
@@ -120,8 +117,8 @@ class MenuScene: SKScene {
         startText.zPosition = 1
         startNode.addChild(startText)
         
-//        startNode.physicsBody = SKPhysicsBody(rectangleOfSize: buttonTexture.size())
-//        startNode.physicsBody?.categoryBitMask = PhysicsCategory.ButtonEnabled
+        //        startNode.physicsBody = SKPhysicsBody(rectangleOfSize: buttonTexture.size())
+        //        startNode.physicsBody?.categoryBitMask = PhysicsCategory.ButtonEnabled
         
         worldNode.addChild(startNode)
     }
