@@ -44,7 +44,7 @@ class LevelScene: SKScene {
     // HUD
     private var hud = SKNode()
     private var hudDistanceLabel = SKLabelNode(fontNamed: GameFont)
-    private var distanceFlown: CGFloat = 0
+    private var distanceFlown = 0
     private var hudPauseButn = SKSpriteNode()
     
     // Sound Actions
@@ -81,6 +81,8 @@ extension LevelScene {
         addChild(worldNode)
         // Add moving nodes to world
         worldNode.addChild(movingNodes)
+        // Add gameover node
+        worldNode.addChild(labelHolderGameOver)
         
         // Assign contact delegate to current class
         self.physicsWorld.contactDelegate = self
@@ -418,7 +420,7 @@ extension LevelScene {
             plane.physicsBody?.applyForce(CGVectorMake(0, 50))
         }
         
-        if distanceFlown >= sceneLength / 10 {
+        if distanceFlown >= Int(sceneLength) / 10 {
             won()
         }
     }
@@ -450,7 +452,14 @@ extension LevelScene: SKPhysicsContactDelegate {
                 gameOver = true
                 movingNodes.speed = 0
                 
-                gameOverText.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))
+                isTouching = false
+                
+                // Stop propeller spinning
+                plane.removeAllActions()
+                
+                gameOverText.setScale(2.0)
+                gameOverText.zPosition = ZLevel.Label
+                gameOverText.position = CGPoint(x: view!.frame.width / 2, y: view!.frame.height / 2)
                 
                 labelHolderGameOver.addChild(gameOverText)
             }
