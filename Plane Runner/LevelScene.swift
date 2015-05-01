@@ -44,7 +44,7 @@ class LevelScene: SKScene {
     // HUD
     private var hud = SKNode()
     private var hudDistanceLabel = SKLabelNode(fontNamed: GameFont)
-    private var distanceFlown = 0
+    private var distanceFlown: CGFloat = 0
     private var hudPauseButn = SKSpriteNode()
     
     // Sound Actions
@@ -284,7 +284,7 @@ extension LevelScene {
     }
     
     func createDistanceMarkers(view: SKView) {
-        var i: CGFloat = view.frame.width / 4 + planeTexture.size().width/2
+        var i: CGFloat = view.frame.width / 4 + planeTexture.size().width/2 + 10
         
         while i < sceneLength + view.frame.width {
             let distanceMarkerNode = SKNode()
@@ -358,13 +358,14 @@ extension LevelScene {
     }
     
     func updateDistance() {
-        runAction(distanceIncreasFX)
+//        runAction(distanceIncreasFX)
         distanceFlown++
         hudDistanceLabel.text = "Distance: \(distanceFlown) meters"
     }
     
     func won() {
         // TODO: Setup won conditions
+        println("WON!!")
     }
     
     func lost() {
@@ -415,6 +416,10 @@ extension LevelScene {
     override func update(currentTime: NSTimeInterval) {
         if isTouching {
             plane.physicsBody?.applyForce(CGVectorMake(0, 50))
+        }
+        
+        if distanceFlown >= sceneLength / 10 {
+            won()
         }
     }
 }
