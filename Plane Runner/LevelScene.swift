@@ -54,6 +54,9 @@ class LevelScene: SKScene {
     private var hudDistanceLabel = SKLabelNode(fontNamed: GameFont)
     private var distanceFlown = 0
     private var hudPauseButn = SKNode()
+    private var hudStarNode = SKNode()
+    private var hudStarLabel = SKLabelNode(fontNamed: GameFont)
+    private var starsCollected = 0
     
     // Sound Actions
     var planeCrashFX: SKAction!
@@ -184,6 +187,23 @@ extension LevelScene {
         
         // Add to hud
         hud.addChild(hudDistanceLabel)
+        
+        // Create star lable
+        let star = SKSpriteNode(texture: starTexture)
+        star.position = CGPoint(x: 10 + star.size.width / 2, y: view.frame.height - hudDistanceLabel.frame.height - 20)
+        
+        hudStarLabel.text = "= \(starsCollected)"
+        hudStarLabel.fontColor = SKColor.blackColor()
+        hudStarLabel.fontSize = 14
+        hudStarLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
+        hudStarLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Center
+        hudStarLabel.position = CGPoint(x: 10 + star.size.width, y: view.frame.height - hudDistanceLabel.frame.height - 20)
+        
+        hudStarNode.addChild(star)
+        hudStarNode.addChild(hudStarLabel)
+        
+        // Add to hud
+        hud.addChild(hudStarNode)
         
         hud.zPosition = ZLevel.HUD
         worldNode.addChild(hud)
@@ -437,8 +457,26 @@ extension LevelScene {
     }
     
     func collectStar(star: SKNode) {
-        self.runAction(starFX)
         star.removeFromParent()
+        hudStarNode.addChild(star)
+        star.physicsBody = nil
+        
+        star.position = CGPoint(x: self.frame.size.width / 3, y: 100)
+        
+        
+        self.runAction(starFX)
+        
+        let moveStar = SKAction.moveTo(CGPoint(x: 10, y: view!.frame.height - 20), duration: 1.5)
+//        let shrinkStar = SKAction.scaleXTo(0.5, duration: 1.5)
+        let shrinkStar = SKAction.resizeToWidth(star.frame.width / 2, height: star.frame.height / 2, duration: 1.5)
+        let moveAndShring = SKAction.group([moveStar, shrinkStar])
+        let removeStar = SKAction.removeFromParent()
+        let moveAndRemoveStar = SKAction.sequence([moveAndShring, removeStar])
+        
+        star.runAction(moveAndRemoveStar)
+        
+        starsCollected++
+        hudStarLabel.text = "= \(starsCollected)"
     }
     
     func won() {
@@ -507,11 +545,14 @@ extension LevelScene {
 extension LevelScene: SKPhysicsContactDelegate {
     func didBeginContact(contact: SKPhysicsContact) {
         var notPlane = SKPhysicsBody()
+        var notPlaneNode = SKNode()
         
         if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask {
             notPlane = contact.bodyB
+            notPlaneNode = contact.bodyB.node!
         } else {
             notPlane = contact.bodyA
+            notPlaneNode = contact.bodyA.node!
         }
         
         switch notPlane.categoryBitMask {
@@ -520,8 +561,7 @@ extension LevelScene: SKPhysicsContactDelegate {
             updateDistance()
         case PhysicsCategory.Stars:
             println("Touched a star")
-            // TODO: Handle star
-            collectStar(notPlane.node!)
+            collectStar(notPlaneNode)
         default:
             println("Plane crashed")
             
