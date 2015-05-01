@@ -71,6 +71,10 @@ extension LevelScene {
         // Add moving nodes to world
         worldNode.addChild(movingNodes)
         
+        // Change gravity
+        self.physicsWorld.gravity = CGVectorMake(0, -2.0)
+        self.physicsBody?.restitution = 0.0
+        
         loadResouces()
         createBoundry(view)
         createBackground(view)
@@ -252,10 +256,13 @@ extension LevelScene {
         // Set physics
         plane.physicsBody = SKPhysicsBody(rectangleOfSize: plane.size)
         plane.physicsBody?.dynamic = true
+        plane.physicsBody?.allowsRotation = false
         plane.physicsBody?.restitution = 0.0
         plane.physicsBody?.categoryBitMask = PhysicsCategory.Plane
         plane.physicsBody?.collisionBitMask = PhysicsCategory.Collidable | PhysicsCategory.Boundary | PhysicsCategory.Ground
         plane.physicsBody?.contactTestBitMask = PhysicsCategory.Collidable | PhysicsCategory.Boundary | PhysicsCategory.Ground | PhysicsCategory.Distance
+        
+        plane.physicsBody?.pinned = true
         
         worldNode.addChild(plane)
     }
@@ -270,13 +277,15 @@ extension LevelScene {
         backgroundLevelNode.runAction(moveBg)
         
         // Action to move foreground
-        let moveFg = SKAction.moveByX(-sceneLength, y: 0, duration: NSTimeInterval(sceneLength/100))
+        let moveFg = SKAction.moveByX(-sceneLength, y: 0, duration: NSTimeInterval(sceneLength/150))
         foregroundLevelNode.runAction(moveFg)
         
         // Animate plans propeller
         let animation = SKAction.animateWithTextures([planeTexture, planeTexture1, planeTexture2], timePerFrame: 0.05)
         let makePropellerSpin = SKAction.repeatActionForever(animation)
         plane.runAction(makePropellerSpin)
+        
+        plane.physicsBody?.pinned = false
     }
     
     func pause() {
@@ -296,14 +305,18 @@ extension LevelScene {
             gameStarted = true
             play()
         }
+        
+        isTouching = true
     }
     
     override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
-        // TODO: Setup touches ended
+        isTouching = false
     }
     
     override func update(currentTime: NSTimeInterval) {
-        // TODO: Setup scene update
+        if isTouching {
+            plane.physicsBody?.applyForce(CGVectorMake(0, 40))
+        }
     }
 }
 

@@ -10,19 +10,19 @@
 		<array>
 			<dict>
 				<key>x</key>
-				<integer>625</integer>
+				<integer>750</integer>
 				<key>y</key>
 				<integer>50</integer>
 			</dict>
 			<dict>
 				<key>x</key>
-				<integer>1250</integer>
+				<real>1250</real>
 				<key>y</key>
 				<integer>50</integer>
 			</dict>
 			<dict>
 				<key>x</key>
-				<integer>1875</integer>
+				<integer>1750</integer>
 				<key>y</key>
 				<integer>50</integer>
 			</dict>
@@ -34,25 +34,25 @@
 		<array>
 			<dict>
 				<key>x</key>
-				<integer>417</integer>
+				<integer>500</integer>
 				<key>y</key>
 				<integer>0</integer>
 			</dict>
 			<dict>
 				<key>x</key>
-				<integer>834</integer>
+				<integer>1000</integer>
 				<key>y</key>
 				<integer>0</integer>
 			</dict>
 			<dict>
 				<key>x</key>
-				<integer>1667</integer>
+				<integer>1500</integer>
 				<key>y</key>
 				<integer>0</integer>
 			</dict>
 			<dict>
 				<key>x</key>
-				<integer>2084</integer>
+				<integer>2000</integer>
 				<key>y</key>
 				<integer>0</integer>
 			</dict>
@@ -64,19 +64,19 @@
 		<array>
 			<dict>
 				<key>x</key>
-				<integer>625</integer>
+				<integer>750</integer>
 				<key>y</key>
 				<integer>375</integer>
 			</dict>
 			<dict>
 				<key>x</key>
-				<integer>1250</integer>
+				<real>1250</real>
 				<key>y</key>
 				<integer>375</integer>
 			</dict>
 			<dict>
 				<key>x</key>
-				<integer>1875</integer>
+				<integer>1750</integer>
 				<key>y</key>
 				<integer>375</integer>
 			</dict>
