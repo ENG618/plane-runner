@@ -129,10 +129,10 @@
 				5C4052D21AD73B260088EE70 /* MenuScene.swift */,
 				5C5516B31AF15AB500E35564 /* LevelScene.swift */,
 				5C4C4F571AED334200624154 /* InfoScene.swift */,
-				5CCA783F1AF343DC00E52FBD /* Images.xcassets */,
 				5C4052D41AD73B260088EE70 /* GameViewController.swift */,
 				5C4052D61AD73B260088EE70 /* Main.storyboard */,
 				5C4052DB1AD73B260088EE70 /* LaunchScreen.xib */,
+				5CCA783F1AF343DC00E52FBD /* Images.xcassets */,
 				5C4052CC1AD73B260088EE70 /* Supporting Files */,
 				5CADD69A1AE80C9100707677 /* GameOverScene.swift */,
 			);

@@ -42,7 +42,7 @@ extension InfoScene {
     
     func createBackButton(view: SKView) {
         let backBtn = SKSpriteNode(texture: backBtnTexture)
-        backBtn.position = CGPoint(x: 10 + backBtnTexture.size().width / 2, y: -10 + view.frame.height)
+        backBtn.position = CGPoint(x: 10 + backBtnTexture.size().width / 2, y: -10 - backBtnTexture.size().height / 2 + view.frame.height)
         
         backNode.addChild(backBtn)
     }
@@ -58,7 +58,7 @@ extension InfoScene {
                 
                 //                let scene = LevelOneScene(size: size)
                 let scene = MenuScene(size: size)
-                self.view?.presentScene(scene)
+                self.view?.presentScene(scene, transition: SKTransition.flipVerticalWithDuration(0.7))
             }
         }
     }
