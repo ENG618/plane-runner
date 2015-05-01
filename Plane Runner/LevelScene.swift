@@ -209,6 +209,7 @@ extension LevelScene {
             // Set physics
             ground.physicsBody = SKPhysicsBody(rectangleOfSize: ground.size)
             ground.physicsBody?.dynamic = false
+            ground.physicsBody?.restitution = 0.0
             ground.physicsBody?.categoryBitMask = PhysicsCategory.Ground
             
             foregroundLevelNode.addChild(ground)
@@ -243,6 +244,7 @@ extension LevelScene {
             // Set physics
             rockNode.physicsBody = SKPhysicsBody(rectangleOfSize: rockNode.size)
             rockNode.physicsBody?.dynamic = false
+            rockNode.physicsBody?.restitution = 0.0
             rockNode.physicsBody?.categoryBitMask = PhysicsCategory.Collidable
             
             foregroundLevelNode.addChild(rockNode)
@@ -269,6 +271,7 @@ extension LevelScene {
             // Set physics
             rockDownNode.physicsBody = SKPhysicsBody(rectangleOfSize: rockDownNode.size)
             rockDownNode.physicsBody?.dynamic = false
+            rockDownNode.physicsBody?.restitution = 0.0
             rockDownNode.physicsBody?.categoryBitMask = PhysicsCategory.Collidable
             
             foregroundLevelNode.addChild(rockDownNode)
@@ -281,7 +284,7 @@ extension LevelScene {
     }
     
     func createDistanceMarkers(view: SKView) {
-        var i: CGFloat = view.frame.width / 4 + 10
+        var i: CGFloat = view.frame.width / 4 + planeTexture.size().width/2
         
         while i < sceneLength + view.frame.width {
             let distanceMarkerNode = SKNode()
