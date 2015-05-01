@@ -21,6 +21,7 @@ let PlaneThreeImage = "planeRed3"
 let InfoIconImage = "information"
 let BackIconImage = "arrowLeft"
 let PauseIconImage = "pause"
+let TapTick = "tapTick"
 let ButtonSmallImage = "buttonSmall"
 let ButtonLargeImgae = "buttonLarge"
 let UIBackgroundImage = "Uibg"
@@ -47,6 +48,7 @@ struct ZLevel {
     static let Rocks        : CGFloat = 1.0
     static let Clouds       : CGFloat = 2.0
     static let Plane        : CGFloat = 5.0
+    static let Tutorial     : CGFloat = 6.0
     static let Label        : CGFloat = 9.0
     static let HUD          : CGFloat = 10.0
     static let Pause        : CGFloat = 15.0

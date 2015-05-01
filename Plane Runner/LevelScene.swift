@@ -15,9 +15,13 @@ class LevelScene: SKScene {
     let worldNode = SKNode()
     // Moving Node
     let movingNodes = SKNode()
+    // Tutorial Node
+    let tutorialNode = SKNode()
+    
     // Level Dictionary
     let levelPlist = NSBundle.mainBundle().pathForResource("Level01", ofType: "plist")
     var levelData: NSDictionary!
+    
     // Win distance
     var endLevelX = 0
     var sceneLength: CGFloat!
@@ -36,6 +40,7 @@ class LevelScene: SKScene {
     private let gameOverTexture = SKTexture(imageNamed: TextGameOver)
     private let pauseTexture = SKTexture(imageNamed: ButtonSmallImage)
     private let pauseIconTexture = SKTexture(imageNamed: PauseIconImage)
+    private let tapTexture = SKTexture(imageNamed: TapTick)
     
     // Level Image Nodes
     private var backgroundLevelNode: SKSpriteNode!
@@ -85,6 +90,8 @@ extension LevelScene {
         worldNode.addChild(movingNodes)
         // Add gameover node
         worldNode.addChild(labelHolderGameOver)
+        // Add tutorial node
+        worldNode.addChild(tutorialNode)
         
         // Assign contact delegate to current class
         self.physicsWorld.contactDelegate = self
@@ -109,6 +116,7 @@ extension LevelScene {
         createClouds(view)
         createDistanceMarkers(view)
         createPlane(view)
+        createTutorial(view)
     }
 }
 
@@ -328,6 +336,21 @@ extension LevelScene {
         
         worldNode.addChild(plane)
     }
+    
+    func createTutorial(view: SKView) {
+        let scaleUp = SKAction.resizeByWidth(50, height: 50, duration: 0.5)
+        let scaleDown = SKAction.resizeByWidth(-50, height: -50, duration: 0.5)
+        let repeatScaling = SKAction.repeatActionForever(SKAction.sequence([scaleUp, scaleDown]))
+        
+        
+        let tapTick = SKSpriteNode(texture: tapTexture)
+        tapTick.position = CGPoint(x: view.frame.width / 2, y: view.frame.height / 2)
+        tapTick.zPosition = ZLevel.Tutorial
+        
+        tapTick.runAction(repeatScaling)
+        
+        tutorialNode.addChild(tapTick)
+    }
 }
 
 // MARK: Play/Pause/Resume
@@ -348,6 +371,8 @@ extension LevelScene {
         plane.runAction(makePropellerSpin)
         
         plane.physicsBody?.pinned = false
+        
+        tutorialNode.removeFromParent()
     }
     
     func pause() {
