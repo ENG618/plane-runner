@@ -41,6 +41,7 @@ class LevelScene: SKScene {
     private let pauseTexture = SKTexture(imageNamed: ButtonSmallImage)
     private let pauseIconTexture = SKTexture(imageNamed: PauseIconImage)
     private let tapTexture = SKTexture(imageNamed: TapTick)
+    private let starTexture = SKTexture(imageNamed: StarGold)
     
     // Level Image Nodes
     private var backgroundLevelNode: SKSpriteNode!
@@ -58,6 +59,8 @@ class LevelScene: SKScene {
     var planeCrashFX: SKAction!
     var distanceIncreasFX: SKAction!
     var planeFlyingFX: SKAction!
+    var starFX: SKAction!
+    var clickFX: SKAction!
     
     // Labels
     private var labelHolderGameOver = SKSpriteNode()
@@ -104,7 +107,7 @@ extension LevelScene {
         audioPlayer = LevelHelper.prepareAudioPlayer(view)
         // Insure its prepared and start playing background audio.
         if audioPlayer.prepareToPlay() {
-            audioPlayer.play()
+//            audioPlayer.play()
         }
         
         loadResouces()
@@ -117,6 +120,7 @@ extension LevelScene {
         createDistanceMarkers(view)
         createPlane(view)
         createTutorial(view)
+        createStars(view)
     }
 }
 
@@ -144,6 +148,12 @@ extension LevelScene {
         // Plane flying sound effect
         planeFlyingFX = SKAction.repeatAction(SKAction.playSoundFileNamed(PlaneFlyingSoundFX, waitForCompletion: true), count: 1)
         
+        // Star sound effect
+        starFX = SKAction.repeatAction(SKAction.playSoundFileNamed(StarFX, waitForCompletion: true), count: 1)
+        
+        // Click sound effect
+        clickFX = SKAction.repeatAction(SKAction.playSoundFileNamed(ClickFX, waitForCompletion: true), count: 1)
+        
         // Game Over
         gameOverText = SKSpriteNode(texture: gameOverTexture)
     }
@@ -167,6 +177,7 @@ extension LevelScene {
         // Create distance label
         hudDistanceLabel.text = "Distance: \(distanceFlown) meters"
         hudDistanceLabel.fontColor = SKColor.blackColor()
+        hudDistanceLabel.fontSize = 14
         hudDistanceLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
         hudDistanceLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Top
         hudDistanceLabel.position = CGPoint(x: 10, y: CGRectGetMaxY(self.frame) - 10)
@@ -298,6 +309,32 @@ extension LevelScene {
         movingNodes.addChild(foregroundLevelNode)
     }
     
+    func createStars(view: SKView) {
+        let starDictionary = levelData["Stars"] as! NSDictionary
+        let positionsArray = starDictionary["Positions"] as! [NSDictionary]
+        
+        for star in positionsArray {
+            let starNode = SKSpriteNode(texture: starTexture)
+            starNode.setScale(2.0)
+            
+            let x = star["x"]?.floatValue
+            let y = star["y"]?.floatValue
+            let xPositoin = CGFloat(x!)
+            let yPosition = CGFloat(y!)
+            
+            println("Star postioion x:\(xPositoin) y:\(yPosition)")
+            starNode.position = CGPoint(x: xPositoin, y: yPosition)
+            
+            // Set physics
+            starNode.physicsBody = SKPhysicsBody(rectangleOfSize: starNode.size)
+            starNode.physicsBody?.dynamic = false
+            starNode.physicsBody?.categoryBitMask = PhysicsCategory.Stars
+            starNode.physicsBody?.contactTestBitMask = PhysicsCategory.Plane
+            
+            foregroundLevelNode.addChild(starNode)
+        }
+    }
+    
     func createClouds(view: SKView) {
         // TODO: Create clouds
     }
@@ -330,7 +367,7 @@ extension LevelScene {
         plane.physicsBody?.restitution = 0.0
         plane.physicsBody?.categoryBitMask = PhysicsCategory.Plane
         plane.physicsBody?.collisionBitMask = PhysicsCategory.Collidable | PhysicsCategory.Boundary | PhysicsCategory.Ground
-        plane.physicsBody?.contactTestBitMask = PhysicsCategory.Collidable | PhysicsCategory.Boundary | PhysicsCategory.Ground | PhysicsCategory.Distance
+        plane.physicsBody?.contactTestBitMask = PhysicsCategory.Collidable | PhysicsCategory.Boundary | PhysicsCategory.Ground | PhysicsCategory.Distance | PhysicsCategory.Stars
         
         plane.physicsBody?.pinned = true
         
@@ -353,7 +390,7 @@ extension LevelScene {
     }
 }
 
-// MARK: Play/Pause/Resume
+// MARK: Game Events
 extension LevelScene {
     
     func play(){
@@ -394,9 +431,14 @@ extension LevelScene {
     }
     
     func updateDistance() {
-//        runAction(distanceIncreasFX)
+        //        runAction(distanceIncreasFX)
         distanceFlown++
         hudDistanceLabel.text = "Distance: \(distanceFlown) meters"
+    }
+    
+    func collectStar(star: SKNode) {
+        self.runAction(starFX)
+        star.removeFromParent()
     }
     
     func won() {
@@ -421,6 +463,7 @@ extension LevelScene {
         for touch: AnyObject in touches {
             let location = touch.locationInNode(self)
             if hudPauseButn.containsPoint(location) {
+                self.runAction(clickFX)
                 println("Pause/Play")
                 if self.paused {
                     resume()
@@ -471,10 +514,15 @@ extension LevelScene: SKPhysicsContactDelegate {
             notPlane = contact.bodyA
         }
         
-        if notPlane.categoryBitMask == PhysicsCategory.Distance {
+        switch notPlane.categoryBitMask {
+        case PhysicsCategory.Distance:
             println("distance increased")
             updateDistance()
-        } else {
+        case PhysicsCategory.Stars:
+            println("Touched a star")
+            // TODO: Handle star
+            collectStar(notPlane.node!)
+        default:
             println("Plane crashed")
             
             runAction(planeCrashFX)

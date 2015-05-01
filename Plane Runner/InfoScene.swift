@@ -21,12 +21,17 @@ class InfoScene: SKScene {
     let backBtnTexture = SKTexture(imageNamed: BackIconImage)
     let dialogBackgroundTexture = SKTexture(imageNamed: UIBackgroundImage)
     
+    var clickFX: SKAction!
+    
     override func didMoveToView(view: SKView) {
         self.addChild(worldNode)
         worldNode.addChild(backNode)
         worldNode.addChild(dialogNode)
         
         self.physicsWorld.contactDelegate = self
+        
+        // Click sound effect
+        clickFX = SKAction.repeatAction(SKAction.playSoundFileNamed(ClickFX, waitForCompletion: true), count: 1)
         
         createBackground(view)
         createBackButton(view)
@@ -96,7 +101,7 @@ extension InfoScene {
         var planeCrashAudioCreditText = SKLabelNode(fontNamed: GameFont)
         planeCrashAudioCreditText.fontColor = SKColor.blackColor()
         planeCrashAudioCreditText.fontSize = 18
-        planeCrashAudioCreditText.text = "Plane Crashing: freeSFX"
+        planeCrashAudioCreditText.text = "Plane Crashing: http://www.freefx.co.uk"
         planeCrashAudioCreditText.position = CGPoint(x: view.frame.width / 2, y: lineHeight)
         
         lineHeight = lineHeight - planeCrashAudioCreditText.frame.size.height - 10
@@ -108,6 +113,24 @@ extension InfoScene {
         planeFlyingAudioCreditText.text = "Plane Flying: SoundBible.com"
         planeFlyingAudioCreditText.position = CGPoint(x: view.frame.width / 2, y: lineHeight)
         
+        lineHeight = lineHeight - planeFlyingAudioCreditText.frame.size.height - 10
+        println("Line height: \(lineHeight)")
+        
+        var starAudioCreditText = SKLabelNode(fontNamed: GameFont)
+        starAudioCreditText.fontColor = SKColor.blackColor()
+        starAudioCreditText.fontSize = 18
+        starAudioCreditText.text = "Star: http://www.freefx.co.uk"
+        starAudioCreditText.position = CGPoint(x: view.frame.width / 2, y: lineHeight)
+        
+        lineHeight = lineHeight - starAudioCreditText.frame.size.height - 10
+        println("Line height: \(lineHeight)")
+        
+        var clickAudioCreditText = SKLabelNode(fontNamed: GameFont)
+        clickAudioCreditText.fontColor = SKColor.blackColor()
+        clickAudioCreditText.fontSize = 18
+        clickAudioCreditText.text = "Click: Kenney.nl"
+        clickAudioCreditText.position = CGPoint(x: view.frame.width / 2, y: lineHeight)
+        
         
         dialogNode.addChild(dialogBackground)
         dialogNode.addChild(developerText)
@@ -116,6 +139,8 @@ extension InfoScene {
         dialogNode.addChild(bgAudioCreditText)
         dialogNode.addChild(planeCrashAudioCreditText)
         dialogNode.addChild(planeFlyingAudioCreditText)
+        dialogNode.addChild(starAudioCreditText)
+        dialogNode.addChild(clickAudioCreditText)
     }
 }
 
@@ -126,8 +151,8 @@ extension InfoScene {
             let location = touch.locationInNode(self)
             if backNode.containsPoint(location) {
                 println("Start button touched")
+                self.runAction(clickFX)
                 
-                //                let scene = LevelOneScene(size: size)
                 let scene = MenuScene(size: size)
                 self.view?.presentScene(scene, transition: SKTransition.flipVerticalWithDuration(0.7))
             }

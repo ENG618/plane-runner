@@ -22,6 +22,8 @@ class MenuScene: SKScene {
     let buttonTexture = SKTexture(imageNamed: ButtonSmallImage)
     let infoTexture = SKTexture(imageNamed: InfoIconImage)
     
+    var clickFX: SKAction!
+    
     override func didMoveToView(view: SKView) {
         
         println("Size height: \(size.height) Width: \(size.width)")
@@ -31,6 +33,9 @@ class MenuScene: SKScene {
         self.addChild(worldNode)
         
         self.physicsWorld.contactDelegate = self
+        
+        // Click sound effect
+        clickFX = SKAction.repeatAction(SKAction.playSoundFileNamed(ClickFX, waitForCompletion: true), count: 1)
         
         createBackground(view)
         createTitle(view)
@@ -143,11 +148,11 @@ extension MenuScene {
             let location = touch.locationInNode(self)
             if startNode.containsPoint(location) {
                 println("Start button touched")
-                
-//                let scene = LevelOneScene(size: size)
+                self.runAction(clickFX)
                 let scene = LevelScene(size: size)
                 self.view?.presentScene(scene, transition: SKTransition.doorsOpenHorizontalWithDuration(1.0))
             } else if infoNode.containsPoint(location) {
+                self.runAction(clickFX)
                 let infoScene = InfoScene(size: size)
                 self.view?.presentScene(infoScene, transition: SKTransition.flipVerticalWithDuration(0.7))
             }

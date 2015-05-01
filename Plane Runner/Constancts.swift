@@ -22,6 +22,7 @@ let InfoIconImage = "information"
 let BackIconImage = "arrowLeft"
 let PauseIconImage = "pause"
 let TapTick = "tapTick"
+let StarGold = "starGold"
 let ButtonSmallImage = "buttonSmall"
 let ButtonLargeImgae = "buttonLarge"
 let UIBackgroundImage = "Uibg"
@@ -33,6 +34,8 @@ let ThreeImage = "3"
 let PlaneFlyingSoundFX = "Helicopter.mp3"
 let PlaneCrashSoundFX = "planeCrash.mp3"
 let DistanceIncreaseSoundFX = "distanceTick.wav"
+let StarFX = "star.mp3"
+let ClickFX = "click.wav"
 let BackgroundMusicSound = "backgroundTrack"
 
 // MARK: Fonts
@@ -62,4 +65,5 @@ struct PhysicsCategory {
     static let Ground       :UInt32 = 0x1 << 3
     static let ButtonEnabled:UInt32 = 0x1 << 4
     static let Distance     :UInt32 = 0x1 << 5
+    static let Stars        :UInt32 = 0x1 << 6
 }

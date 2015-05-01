@@ -12,19 +12,19 @@
 				<key>x</key>
 				<integer>750</integer>
 				<key>y</key>
-				<integer>50</integer>
+				<integer>100</integer>
 			</dict>
 			<dict>
 				<key>x</key>
 				<real>1250</real>
 				<key>y</key>
-				<integer>50</integer>
+				<integer>100</integer>
 			</dict>
 			<dict>
 				<key>x</key>
-				<integer>1750</integer>
+				<real>1750</real>
 				<key>y</key>
-				<integer>50</integer>
+				<integer>100</integer>
 			</dict>
 		</array>
 	</dict>

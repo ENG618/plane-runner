@@ -33,6 +33,8 @@
 		5CADD6A51AE9DFFE00707677 /* LevelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CADD6A41AE9DFFE00707677 /* LevelHelper.swift */; };
 		5CADD6A71AEA0E9B00707677 /* distanceTick.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5CADD6A61AEA0E9B00707677 /* distanceTick.wav */; };
 		5CCA78401AF343DC00E52FBD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CCA783F1AF343DC00E52FBD /* Images.xcassets */; };
+		5CCA78431AF36ED500E52FBD /* click.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5CCA78411AF36ED500E52FBD /* click.wav */; };
+		5CCA78471AF373F400E52FBD /* star.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5CCA78461AF373F400E52FBD /* star.mp3 */; };
 		5CCD8DC11ADB8DFC0001362D /* Helicopter.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5CCD8DC01ADB8DFC0001362D /* Helicopter.mp3 */; };
 /* End PBXBuildFile section */
 
@@ -78,6 +80,8 @@
 		5CADD6A41AE9DFFE00707677 /* LevelHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelHelper.swift; sourceTree = "<group>"; };
 		5CADD6A61AEA0E9B00707677 /* distanceTick.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = distanceTick.wav; sourceTree = "<group>"; };
 		5CCA783F1AF343DC00E52FBD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		5CCA78411AF36ED500E52FBD /* click.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = click.wav; sourceTree = "<group>"; };
+		5CCA78461AF373F400E52FBD /* star.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = star.mp3; sourceTree = "<group>"; };
 		5CCD8DC01ADB8DFC0001362D /* Helicopter.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Helicopter.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -167,6 +171,8 @@
 		5C4052F41AD7A1360088EE70 /* sounds */ = {
 			isa = PBXGroup;
 			children = (
+				5CCA78411AF36ED500E52FBD /* click.wav */,
+				5CCA78461AF373F400E52FBD /* star.mp3 */,
 				5CADD6A61AEA0E9B00707677 /* distanceTick.wav */,
 				5CCD8DC01ADB8DFC0001362D /* Helicopter.mp3 */,
 				5C4052F51AD7A7710088EE70 /* planeCrash.mp3 */,
@@ -291,6 +297,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CCA78471AF373F400E52FBD /* star.mp3 in Resources */,
 				5C4052DD1AD73B260088EE70 /* LaunchScreen.xib in Resources */,
 				5C4052F31AD7A12D0088EE70 /* backgroundTrack.mp3 in Resources */,
 				5CA474E71AE7573700E71BE7 /* obstacles.atlas in Resources */,
@@ -303,6 +310,7 @@
 				5CADD6A71AEA0E9B00707677 /* distanceTick.wav in Resources */,
 				5CA474EB1AE7574400E71BE7 /* ui.atlas in Resources */,
 				5CA474E91AE7573D00E71BE7 /* planes.atlas in Resources */,
+				5CCA78431AF36ED500E52FBD /* click.wav in Resources */,
 				5C4052F61AD7A7710088EE70 /* planeCrash.mp3 in Resources */,
 				5C1CC7B21AF08DB700D795FD /* Level01.plist in Resources */,
 			);
