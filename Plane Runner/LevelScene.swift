@@ -110,7 +110,7 @@ extension LevelScene {
         audioPlayer = LevelHelper.prepareAudioPlayer(view)
         // Insure its prepared and start playing background audio.
         if audioPlayer.prepareToPlay() {
-//            audioPlayer.play()
+            audioPlayer.play()
         }
         
         loadResouces()
@@ -482,6 +482,17 @@ extension LevelScene {
     func won() {
         // TODO: Setup won conditions
         println("WON!!")
+        movingNodes.speed = 0
+        isTouching = false
+        plane.physicsBody?.pinned = true
+        plane.removeAllActions()
+        
+        let wonText = SKLabelNode(fontNamed: GameFont)
+        wonText.fontColor = SKColor.blackColor()
+        wonText.fontSize = 60
+        wonText.text = "YOU WON!!"
+        wonText.position = CGPoint(x: self.frame.width / 2, y: self.frame.height / 2)
+        self.addChild(wonText)
     }
     
     func lost() {
