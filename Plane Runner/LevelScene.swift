@@ -40,6 +40,12 @@ class LevelScene: SKScene {
     private var foregroundLevelNode: SKSpriteNode!
     private var plane: SKSpriteNode!
     
+    // HUD
+    private var hud = SKNode()
+    private var hudDistanceLabel = SKLabelNode(fontNamed: GameFont)
+    private var distanceFlown = 0
+    private var hudPauseButn = SKSpriteNode()
+    
     // Sound Actions
     var planeCrashFX: SKAction!
     var distanceIncreasFX: SKAction!
@@ -51,7 +57,7 @@ class LevelScene: SKScene {
     
     // Booleans
     private var gameStarted = false
-    private var gamePause = false
+    private var gamePaused = false
     private var gameOver = false
     private var isTouching = false
     
@@ -90,6 +96,7 @@ extension LevelScene {
         }
         
         loadResouces()
+        createHUD(view)
         createBoundry(view)
         createBackground(view)
         createGround(view)
@@ -123,6 +130,29 @@ extension LevelScene {
         
         // Plane flying sound effect
         planeFlyingFX = SKAction.repeatAction(SKAction.playSoundFileNamed(PlaneFlyingSoundFX, waitForCompletion: true), count: 1)
+    }
+    
+    func createHUD(view: SKView) {
+        // Create pause button
+        let pauseTexture = SKTexture(imageNamed: ButtonSmallImage)
+        hudPauseButn = SKSpriteNode(texture: pauseTexture)
+        hudPauseButn.position = CGPoint(x: view.frame.width - hudPauseButn.size.width / 2 - 10, y: view.frame.height - hudPauseButn.size.height / 2 - 10)
+        
+        // Add to hud
+        hud.addChild(hudPauseButn)
+        
+        // Create distance label
+        hudDistanceLabel.text = "Distance: \(distanceFlown) meters"
+        hudDistanceLabel.fontColor = SKColor.blackColor()
+        hudDistanceLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
+        hudDistanceLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Top
+        hudDistanceLabel.position = CGPoint(x: 10, y: CGRectGetMaxY(self.frame) - 10)
+        
+        // Add to hud
+        hud.addChild(hudDistanceLabel)
+        
+        hud.zPosition = ZLevel.HUD
+        worldNode.addChild(hud)
     }
     
     func createBoundry(view: SKView) {
@@ -303,11 +333,21 @@ extension LevelScene {
     }
     
     func pause() {
-        // TODO: Setup pause
+        gamePaused = true
+        // pause physics
+        self.paused = true
+        if audioPlayer.playing{
+            audioPlayer.pause()
+        }
     }
     
     func resume() {
-        // TODO: Setup resume
+        gamePaused = false
+        // Unpause physics
+        self.paused = false
+        if !audioPlayer.playing {
+            audioPlayer.play()
+        }
     }
     
     func won() {
@@ -328,7 +368,45 @@ extension LevelScene {
             play()
         }
         
-        isTouching = true
+        for touch: AnyObject in touches {
+            let location = touch.locationInNode(self)
+            if hudPauseButn.containsPoint(location) {
+                println("Pause/Play")
+                if self.paused {
+                    resume()
+                } else {
+                    pause()
+                }
+            } else {
+                if gameOver {
+                    
+                    movingNodes.removeAllChildren()
+                    
+                    createBackground(view!)
+                    createGround(view!)
+                    distanceFlown = 0
+                    hudDistanceLabel.text = "Distance: \(distanceFlown) meters"
+                    
+                    plane.position = CGPointMake(size.width/4, size.height/2)
+                    plane.physicsBody?.velocity = CGVectorMake(0, 0)
+                    
+                    labelHolderGameOver.removeAllChildren()
+                    
+                    movingNodes.speed = 1
+                    
+                    gameOver = false
+                    
+                } else if !self.paused {
+                    // Used for contiuous flying while touching screen.
+                    isTouching = true
+                    runAction(planeFlyingFX)
+                    
+                    // Uncomment for single tap mode.
+                    // plane.physicsBody?.velocity = CGVectorMake(0, 0)
+                    // plane.physicsBody?.applyImpulse(CGVectorMake(0, 10))
+                }
+            }
+        }
     }
     
     override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
