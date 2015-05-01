@@ -148,7 +148,7 @@ extension MenuScene {
                 let scene = LevelScene(size: size)
                 self.view?.presentScene(scene, transition: SKTransition.doorsOpenHorizontalWithDuration(1.0))
             } else if infoNode.containsPoint(location) {
-                let infoScene = CreditsScene(size: size)
+                let infoScene = InfoScene(size: size)
                 self.view?.presentScene(infoScene)
             }
         }

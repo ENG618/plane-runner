@@ -17,7 +17,7 @@
 		5C4052F31AD7A12D0088EE70 /* backgroundTrack.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5C4052F21AD7A12C0088EE70 /* backgroundTrack.mp3 */; };
 		5C4052F61AD7A7710088EE70 /* planeCrash.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5C4052F51AD7A7710088EE70 /* planeCrash.mp3 */; };
 		5C4052F81AD841280088EE70 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C4052F71AD841280088EE70 /* AVFoundation.framework */; };
-		5C4C4F581AED334200624154 /* CreditsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4C4F571AED334200624154 /* CreditsScene.swift */; };
+		5C4C4F581AED334200624154 /* InfoScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4C4F571AED334200624154 /* InfoScene.swift */; };
 		5C4C4F5C1AEDA03300624154 /* Constancts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4C4F5B1AEDA03300624154 /* Constancts.swift */; };
 		5C50FA931AE5ABFE0068FD66 /* Plane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50FA921AE5ABFE0068FD66 /* Plane.swift */; };
 		5C50FA9A1AE5FF7E0068FD66 /* PlaneColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50FA991AE5FF7E0068FD66 /* PlaneColor.swift */; };
@@ -32,6 +32,7 @@
 		5CADD69F1AE8BA1600707677 /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CADD69E1AE8BA1600707677 /* HUD.swift */; };
 		5CADD6A51AE9DFFE00707677 /* LevelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CADD6A41AE9DFFE00707677 /* LevelHelper.swift */; };
 		5CADD6A71AEA0E9B00707677 /* distanceTick.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5CADD6A61AEA0E9B00707677 /* distanceTick.wav */; };
+		5CCA78401AF343DC00E52FBD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CCA783F1AF343DC00E52FBD /* Images.xcassets */; };
 		5CCD8DC11ADB8DFC0001362D /* Helicopter.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5CCD8DC01ADB8DFC0001362D /* Helicopter.mp3 */; };
 /* End PBXBuildFile section */
 
@@ -60,7 +61,7 @@
 		5C4052F21AD7A12C0088EE70 /* backgroundTrack.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = backgroundTrack.mp3; sourceTree = "<group>"; };
 		5C4052F51AD7A7710088EE70 /* planeCrash.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = planeCrash.mp3; sourceTree = "<group>"; };
 		5C4052F71AD841280088EE70 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		5C4C4F571AED334200624154 /* CreditsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreditsScene.swift; sourceTree = "<group>"; };
+		5C4C4F571AED334200624154 /* InfoScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoScene.swift; sourceTree = "<group>"; };
 		5C4C4F591AED33C300624154 /* kenvector_future_thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = kenvector_future_thin.ttf; sourceTree = "<group>"; };
 		5C4C4F5B1AEDA03300624154 /* Constancts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constancts.swift; sourceTree = "<group>"; };
 		5C50FA921AE5ABFE0068FD66 /* Plane.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plane.swift; sourceTree = "<group>"; };
@@ -76,6 +77,7 @@
 		5CADD69E1AE8BA1600707677 /* HUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HUD.swift; sourceTree = "<group>"; };
 		5CADD6A41AE9DFFE00707677 /* LevelHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelHelper.swift; sourceTree = "<group>"; };
 		5CADD6A61AEA0E9B00707677 /* distanceTick.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = distanceTick.wav; sourceTree = "<group>"; };
+		5CCA783F1AF343DC00E52FBD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		5CCD8DC01ADB8DFC0001362D /* Helicopter.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Helicopter.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -126,7 +128,8 @@
 				5C4052CE1AD73B260088EE70 /* AppDelegate.swift */,
 				5C4052D21AD73B260088EE70 /* MenuScene.swift */,
 				5C5516B31AF15AB500E35564 /* LevelScene.swift */,
-				5C4C4F571AED334200624154 /* CreditsScene.swift */,
+				5C4C4F571AED334200624154 /* InfoScene.swift */,
+				5CCA783F1AF343DC00E52FBD /* Images.xcassets */,
 				5C4052D41AD73B260088EE70 /* GameViewController.swift */,
 				5C4052D61AD73B260088EE70 /* Main.storyboard */,
 				5C4052DB1AD73B260088EE70 /* LaunchScreen.xib */,
@@ -291,6 +294,7 @@
 				5C4052DD1AD73B260088EE70 /* LaunchScreen.xib in Resources */,
 				5C4052F31AD7A12D0088EE70 /* backgroundTrack.mp3 in Resources */,
 				5CA474E71AE7573700E71BE7 /* obstacles.atlas in Resources */,
+				5CCA78401AF343DC00E52FBD /* Images.xcassets in Resources */,
 				5CA474E11AE7571A00E71BE7 /* background.atlas in Resources */,
 				5CCD8DC11ADB8DFC0001362D /* Helicopter.mp3 in Resources */,
 				5CA474E51AE7573200E71BE7 /* numbers.atlas in Resources */,
@@ -320,7 +324,7 @@
 			files = (
 				5C50FA9A1AE5FF7E0068FD66 /* PlaneColor.swift in Sources */,
 				5CADD69F1AE8BA1600707677 /* HUD.swift in Sources */,
-				5C4C4F581AED334200624154 /* CreditsScene.swift in Sources */,
+				5C4C4F581AED334200624154 /* InfoScene.swift in Sources */,
 				5C4052D31AD73B260088EE70 /* MenuScene.swift in Sources */,
 				5C5516B41AF15AB500E35564 /* LevelScene.swift in Sources */,
 				5C4052D51AD73B260088EE70 /* GameViewController.swift in Sources */,
