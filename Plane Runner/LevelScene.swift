@@ -39,6 +39,7 @@ class LevelScene: SKScene {
     private var backgroundLevelNode: SKSpriteNode!
     private var foregroundLevelNode: SKSpriteNode!
     private var plane: SKSpriteNode!
+    private var gameOverText: SKSpriteNode!
     
     // HUD
     private var hud = SKNode()
@@ -130,6 +131,9 @@ extension LevelScene {
         
         // Plane flying sound effect
         planeFlyingFX = SKAction.repeatAction(SKAction.playSoundFileNamed(PlaneFlyingSoundFX, waitForCompletion: true), count: 1)
+        
+        // Game Over
+        gameOverText = SKSpriteNode(texture: gameOverTexture)
     }
     
     func createHUD(view: SKView) {
@@ -350,6 +354,12 @@ extension LevelScene {
         }
     }
     
+    func updateDistance() {
+        runAction(distanceIncreasFX)
+        distanceFlown++
+        hudDistanceLabel.text = "Distance: \(distanceFlown) meters"
+    }
+    
     func won() {
         // TODO: Setup won conditions
     }
@@ -379,23 +389,9 @@ extension LevelScene {
                 }
             } else {
                 if gameOver {
-                    
-                    movingNodes.removeAllChildren()
-                    
-                    createBackground(view!)
-                    createGround(view!)
-                    distanceFlown = 0
-                    hudDistanceLabel.text = "Distance: \(distanceFlown) meters"
-                    
-                    plane.position = CGPointMake(size.width/4, size.height/2)
-                    plane.physicsBody?.velocity = CGVectorMake(0, 0)
-                    
-                    labelHolderGameOver.removeAllChildren()
-                    
-                    movingNodes.speed = 1
-                    
-                    gameOver = false
-                    
+                    // Reset scene
+                    let scene = LevelScene(size: size)
+                    self.view?.presentScene(scene)
                 } else if !self.paused {
                     // Used for contiuous flying while touching screen.
                     isTouching = true
@@ -423,7 +419,34 @@ extension LevelScene {
 // MARK: SKPhysicsContactDelegate
 extension LevelScene: SKPhysicsContactDelegate {
     func didBeginContact(contact: SKPhysicsContact) {
-        // TODO: Setup contact methods
+        var notPlane = SKPhysicsBody()
+        
+        if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask {
+            notPlane = contact.bodyB
+        } else {
+            notPlane = contact.bodyA
+        }
+        
+        if notPlane.categoryBitMask == PhysicsCategory.Distance {
+            println("distance increased")
+            updateDistance()
+        } else {
+            println("Plane crashed")
+            
+            runAction(planeCrashFX)
+            plane.physicsBody?.velocity = CGVectorMake(0, 0)
+            plane.physicsBody?.applyImpulse(CGVectorMake(0, -50))
+            
+            
+            if gameOver == false {
+                gameOver = true
+                movingNodes.speed = 0
+                
+                gameOverText.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))
+                
+                labelHolderGameOver.addChild(gameOverText)
+            }
+        }
     }
 }
 
