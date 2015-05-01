@@ -10,8 +10,8 @@ Full Sail University | MDVBS | 1504 MGD
 * [Video Review](https://youtu.be/tjtKz4rC6w8)
 
 ### Week 3 ###
-* Project link - To be posted
-* Video Review - To be posted
+* [Project link](https://bitbucket.org/eng618/plane-runner/commits/273c0c84f2681fe8a5122df43f14ad38168d973f)
+* [Video Review](https://www.youtube.com/watch?v=AEagwzNeHEg)
 
 ### Week 4 ###
 * Project link - To be posted
@@ -23,4 +23,6 @@ Full Sail University | MDVBS | 1504 MGD
 * Plane flying sound effect (Helicopter Against Missile Sound) from: [SoundBible.com](http://soundbible.com/2023-Helicopter-Against-Missile.html)
 * Game Art[Kenney.nl](http://opengameart.org/content/tappy-plane)
 * Game Icons [Kenney.nl](http://kenney.nl/assets/game-icons)
+* UI Click [Kenney.nl](http://kenney.nl)
+* Star from: [freeSFX](http://www.freesfx.co.uk)
 
