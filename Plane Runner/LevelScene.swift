@@ -34,6 +34,8 @@ class LevelScene: SKScene {
     private let planeTexture1 = SKTexture(imageNamed: PlaneTwoImage)
     private let planeTexture2 = SKTexture(imageNamed: PlaneThreeImage)
     private let gameOverTexture = SKTexture(imageNamed: TextGameOver)
+    private let pauseTexture = SKTexture(imageNamed: ButtonSmallImage)
+    private let pauseIconTexture = SKTexture(imageNamed: PauseIconImage)
     
     // Level Image Nodes
     private var backgroundLevelNode: SKSpriteNode!
@@ -45,7 +47,7 @@ class LevelScene: SKScene {
     private var hud = SKNode()
     private var hudDistanceLabel = SKLabelNode(fontNamed: GameFont)
     private var distanceFlown = 0
-    private var hudPauseButn = SKSpriteNode()
+    private var hudPauseButn = SKNode()
     
     // Sound Actions
     var planeCrashFX: SKAction!
@@ -140,9 +142,16 @@ extension LevelScene {
     
     func createHUD(view: SKView) {
         // Create pause button
-        let pauseTexture = SKTexture(imageNamed: ButtonSmallImage)
-        hudPauseButn = SKSpriteNode(texture: pauseTexture)
-        hudPauseButn.position = CGPoint(x: view.frame.width - hudPauseButn.size.width / 2 - 10, y: view.frame.height - hudPauseButn.size.height / 2 - 10)
+        let pauseButton = SKSpriteNode(texture: pauseTexture)
+        pauseButton.setScale(1.4)
+        pauseButton.position = CGPoint(x: view.frame.width - pauseButton.size.width / 2 - 10, y: view.frame.height - pauseButton.size.height / 2 - 10)
+        
+        // Create pause icon
+        let pauseIcon = SKSpriteNode(texture: pauseIconTexture)
+        pauseIcon.position = CGPoint(x: view.frame.width - pauseButton.size.width / 2 - 10, y: view.frame.height - pauseButton.size.height / 2 - 10)
+        
+        hudPauseButn.addChild(pauseButton)
+        hudPauseButn.addChild(pauseIcon)
         
         // Add to hud
         hud.addChild(hudPauseButn)
