@@ -15,10 +15,12 @@ class MenuScene: SKScene {
     let worldNode = SKNode()
     let titleNode = SKNode()
     let startNode = SKNode()
+    let infoNode = SKNode()
     
     // Textures
     let bgTexture = SKTexture(imageNamed: BackgroundImage)
     let buttonTexture = SKTexture(imageNamed: ButtonSmallImage)
+    let infoTexture = SKTexture(imageNamed: InfoIconImage)
     
     override func didMoveToView(view: SKView) {
         
@@ -33,6 +35,7 @@ class MenuScene: SKScene {
         createBackground(view)
         createTitle(view)
         createStartButton(view)
+        createInfoButton(view)
     }
 }
 
@@ -122,6 +125,15 @@ extension MenuScene {
         
         worldNode.addChild(startNode)
     }
+    
+    func createInfoButton(view: SKView) {
+        let infoBtn = SKSpriteNode(texture: infoTexture)
+        infoBtn.position = CGPoint(x: view.frame.width - infoBtn.size.width * 2, y: view.frame.height/2 - view.frame.height/3)
+        
+        infoNode.addChild(infoBtn)
+        
+        worldNode.addChild(infoNode)
+    }
 }
 
 // MARK: Input Methods
@@ -135,6 +147,9 @@ extension MenuScene {
 //                let scene = LevelOneScene(size: size)
                 let scene = LevelScene(size: size)
                 self.view?.presentScene(scene, transition: SKTransition.doorsOpenHorizontalWithDuration(1.0))
+            } else if infoNode.containsPoint(location) {
+                let infoScene = CreditsScene(size: size)
+                self.view?.presentScene(infoScene)
             }
         }
     }
