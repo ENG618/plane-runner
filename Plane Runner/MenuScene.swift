@@ -113,7 +113,7 @@ extension MenuScene {
         startBtn.zPosition = 0
         startNode.addChild(startBtn)
         
-        let startText = SKLabelNode(fontNamed: "kenvector_future_thin")
+        let startText = SKLabelNode(fontNamed: GameFont)
         startText.text = "Start"
         startText.color = SKColor.whiteColor()
         startText.position = CGPoint(x: view.frame.width/2, y: view.frame.height/2 - view.frame.height/3)
