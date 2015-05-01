@@ -7,6 +7,7 @@
 //
 
 import SpriteKit
+import AVFoundation
 
 class LevelScene: SKScene {
     
@@ -20,6 +21,9 @@ class LevelScene: SKScene {
     // Win distance
     var endLevelX = 0
     var sceneLength: CGFloat!
+    
+    // Audio Player
+    private var audioPlayer = AVAudioPlayer()
     
     // Level Textures
     private let backgroundTexture = SKTexture(imageNamed: BackgroundImage)
@@ -71,9 +75,19 @@ extension LevelScene {
         // Add moving nodes to world
         worldNode.addChild(movingNodes)
         
+        // Assign contact delegate to current class
+        self.physicsWorld.contactDelegate = self
+        
         // Change gravity
         self.physicsWorld.gravity = CGVectorMake(0, -2.0)
         self.physicsBody?.restitution = 0.0
+        
+        // Obtaine prepared audio player from helper class
+        audioPlayer = LevelHelper.prepareAudioPlayer(view)
+        // Insure its prepared and start playing background audio.
+        if audioPlayer.prepareToPlay() {
+            audioPlayer.play()
+        }
         
         loadResouces()
         createBoundry(view)
@@ -295,6 +309,14 @@ extension LevelScene {
     func resume() {
         // TODO: Setup resume
     }
+    
+    func won() {
+        // TODO: Setup won conditions
+    }
+    
+    func lost() {
+        // TODO: Setup lost condition
+    }
 }
 
 // MARK: Input methods
@@ -315,7 +337,7 @@ extension LevelScene {
     
     override func update(currentTime: NSTimeInterval) {
         if isTouching {
-            plane.physicsBody?.applyForce(CGVectorMake(0, 40))
+            plane.physicsBody?.applyForce(CGVectorMake(0, 50))
         }
     }
 }
