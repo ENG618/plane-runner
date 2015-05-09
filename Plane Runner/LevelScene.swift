@@ -294,8 +294,21 @@ extension LevelScene {
             
             println("Rock postion x:\(xPosition) y:\(yPosition)")
             
+            // Create path for physicsBody
+            var rockPath = CGPathCreateMutable()
+            
+            // Bottom left of rock
+            CGPathMoveToPoint(rockPath, nil, -rockNode.size.width/2, -rockNode.size.height/2)
+            // Top middle of rock
+            CGPathAddLineToPoint(rockPath, nil, 10, rockNode.size.height/2)
+            // Bottom right of rock
+            CGPathAddLineToPoint(rockPath, nil, rockNode.size.width/2, -rockNode.size.height/2)
+            // Close path
+            CGPathCloseSubpath(rockPath)
+            
+            
             // Set physics
-            rockNode.physicsBody = SKPhysicsBody(rectangleOfSize: rockNode.size)
+            rockNode.physicsBody = SKPhysicsBody(polygonFromPath: rockPath)
             rockNode.physicsBody?.dynamic = false
             rockNode.physicsBody?.restitution = 0.0
             rockNode.physicsBody?.categoryBitMask = PhysicsCategory.Collidable
@@ -321,8 +334,20 @@ extension LevelScene {
             
             println("RockDown postion x:\(xPosition) y:\(yPosition)")
             
+            // Create path for physicsBody
+            var rockDownPath = CGPathCreateMutable()
+            
+            // Top left of rockDown
+            CGPathMoveToPoint(rockDownPath, nil, -rockDownNode.size.width/2, rockDownNode.size.height/2)
+            // Bottom middle of rockDown
+            CGPathAddLineToPoint(rockDownPath, nil, 10, -rockDownNode.size.height/2)
+            // Top right of rockDown
+            CGPathAddLineToPoint(rockDownPath, nil, rockDownNode.size.width/2, rockDownNode.size.height/2)
+            // Close path
+            CGPathCloseSubpath(rockDownPath)
+            
             // Set physics
-            rockDownNode.physicsBody = SKPhysicsBody(rectangleOfSize: rockDownNode.size)
+            rockDownNode.physicsBody = SKPhysicsBody(polygonFromPath: rockDownPath)
             rockDownNode.physicsBody?.dynamic = false
             rockDownNode.physicsBody?.restitution = 0.0
             rockDownNode.physicsBody?.categoryBitMask = PhysicsCategory.Collidable
