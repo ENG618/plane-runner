@@ -149,7 +149,7 @@ extension MenuScene {
             if startNode.containsPoint(location) {
                 println("Start button touched")
                 self.runAction(clickFX)
-                let scene = LevelScene(size: size)
+                let scene = LevelScene(size: size, level: "Level01")
                 self.view?.presentScene(scene, transition: SKTransition.doorsOpenHorizontalWithDuration(1.0))
             } else if infoNode.containsPoint(location) {
                 self.runAction(clickFX)

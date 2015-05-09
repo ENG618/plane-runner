@@ -19,7 +19,8 @@ class LevelScene: SKScene {
     let tutorialNode = SKNode()
     
     // Level Dictionary
-    let levelPlist = NSBundle.mainBundle().pathForResource("Level01", ofType: "plist")
+    var levelPlistString: String!
+    var levelPlist: String!
     var levelData: NSDictionary!
     
     // Win distance
@@ -74,15 +75,17 @@ class LevelScene: SKScene {
     private var gamePaused = false
     private var gameOver = false
     private var isTouching = false
+    private var levelWon = false
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
-    override init(size: CGSize) {
+    required init(size: CGSize, level: String) {
         super.init(size: size)
-        levelData = NSDictionary(contentsOfFile: levelPlist!)
-        loadResouces()
+        levelPlistString =  level
+        levelPlist = NSBundle.mainBundle().pathForResource(level, ofType: "plist")!
+        levelData = NSDictionary(contentsOfFile: levelPlist)
     }
 }
 
@@ -482,6 +485,7 @@ extension LevelScene {
     func won() {
         // TODO: Setup won conditions
         println("WON!!")
+        levelWon = true
         movingNodes.speed = 0
         isTouching = false
         plane.physicsBody?.pinned = true
@@ -522,7 +526,7 @@ extension LevelScene {
             } else {
                 if gameOver {
                     // Reset scene
-                    let scene = LevelScene(size: size)
+                    let scene = LevelScene(size: size, level: levelPlistString)
                     self.view?.presentScene(scene)
                 } else if !self.paused {
                     // Used for contiuous flying while touching screen.
@@ -547,7 +551,9 @@ extension LevelScene {
         }
         
         if distanceFlown >= Int(sceneLength) / 10 {
-            won()
+            if !levelWon {
+                won()
+            }
         }
     }
 }
