@@ -528,12 +528,20 @@ extension LevelScene {
         plane.removeAllActions()
         
         // TODO: Create Win animation
-        let wonText = SKLabelNode(fontNamed: GameFont)
-        wonText.fontColor = SKColor.blackColor()
-        wonText.fontSize = 60
-        wonText.text = "YOU WON!!"
-        wonText.position = CGPoint(x: self.frame.width / 2, y: self.frame.height / 2)
-        self.addChild(wonText)
+        
+        
+        
+        
+        
+        
+        
+        
+//        let wonText = SKLabelNode(fontNamed: GameFont)
+//        wonText.fontColor = SKColor.blackColor()
+//        wonText.fontSize = 60
+//        wonText.text = "YOU WON!!"
+//        wonText.position = CGPoint(x: self.frame.width / 2, y: self.frame.height / 2)
+//        self.addChild(wonText)
     }
     
     func lost() {

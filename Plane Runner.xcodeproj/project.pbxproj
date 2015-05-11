@@ -37,7 +37,10 @@
 		5CCA78471AF373F400E52FBD /* star.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5CCA78461AF373F400E52FBD /* star.mp3 */; };
 		5CCD8DC11ADB8DFC0001362D /* Helicopter.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5CCD8DC01ADB8DFC0001362D /* Helicopter.mp3 */; };
 		5CED82541B012D5F00DA0CE4 /* SmokeParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5CED82521B012D5F00DA0CE4 /* SmokeParticle.sks */; };
-		5CED82551B012D5F00DA0CE4 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 5CED82531B012D5F00DA0CE4 /* spark.png */; };
+		5CED825A1B013AE200DA0CE4 /* BronzeParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5CED82581B013AE200DA0CE4 /* BronzeParticle.sks */; };
+		5CED825B1B013AE200DA0CE4 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 5CED82591B013AE200DA0CE4 /* spark.png */; };
+		5CED825D1B013CF800DA0CE4 /* SilverParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5CED825C1B013CF800DA0CE4 /* SilverParticle.sks */; };
+		5CED825F1B013D7600DA0CE4 /* GoldParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5CED825E1B013D7600DA0CE4 /* GoldParticle.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,7 +89,10 @@
 		5CCA78461AF373F400E52FBD /* star.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = star.mp3; sourceTree = "<group>"; };
 		5CCD8DC01ADB8DFC0001362D /* Helicopter.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Helicopter.mp3; sourceTree = "<group>"; };
 		5CED82521B012D5F00DA0CE4 /* SmokeParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SmokeParticle.sks; sourceTree = "<group>"; };
-		5CED82531B012D5F00DA0CE4 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
+		5CED82581B013AE200DA0CE4 /* BronzeParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BronzeParticle.sks; sourceTree = "<group>"; };
+		5CED82591B013AE200DA0CE4 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
+		5CED825C1B013CF800DA0CE4 /* SilverParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SilverParticle.sks; sourceTree = "<group>"; };
+		5CED825E1B013D7600DA0CE4 /* GoldParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GoldParticle.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,9 +141,12 @@
 				5CADD6991AE8016300707677 /* Levels */,
 				5C4052CE1AD73B260088EE70 /* AppDelegate.swift */,
 				5C4052D21AD73B260088EE70 /* MenuScene.swift */,
+				5CED82581B013AE200DA0CE4 /* BronzeParticle.sks */,
+				5CED825C1B013CF800DA0CE4 /* SilverParticle.sks */,
+				5CED825E1B013D7600DA0CE4 /* GoldParticle.sks */,
+				5CED82591B013AE200DA0CE4 /* spark.png */,
 				5C5516B31AF15AB500E35564 /* LevelScene.swift */,
 				5CED82521B012D5F00DA0CE4 /* SmokeParticle.sks */,
-				5CED82531B012D5F00DA0CE4 /* spark.png */,
 				5C4C4F571AED334200624154 /* InfoScene.swift */,
 				5C4052D41AD73B260088EE70 /* GameViewController.swift */,
 				5C4052D61AD73B260088EE70 /* Main.storyboard */,
@@ -304,14 +313,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				5CCA78471AF373F400E52FBD /* star.mp3 in Resources */,
-				5CED82551B012D5F00DA0CE4 /* spark.png in Resources */,
 				5C4052DD1AD73B260088EE70 /* LaunchScreen.xib in Resources */,
 				5C4052F31AD7A12D0088EE70 /* backgroundTrack.mp3 in Resources */,
+				5CED825A1B013AE200DA0CE4 /* BronzeParticle.sks in Resources */,
 				5CA474E71AE7573700E71BE7 /* obstacles.atlas in Resources */,
+				5CED825F1B013D7600DA0CE4 /* GoldParticle.sks in Resources */,
 				5CCA78401AF343DC00E52FBD /* Images.xcassets in Resources */,
+				5CED825B1B013AE200DA0CE4 /* spark.png in Resources */,
 				5CA474E11AE7571A00E71BE7 /* background.atlas in Resources */,
 				5CED82541B012D5F00DA0CE4 /* SmokeParticle.sks in Resources */,
 				5CCD8DC11ADB8DFC0001362D /* Helicopter.mp3 in Resources */,
+				5CED825D1B013CF800DA0CE4 /* SilverParticle.sks in Resources */,
 				5CA474E51AE7573200E71BE7 /* numbers.atlas in Resources */,
 				5CA474EF1AE75BE200E71BE7 /* letters.atlas in Resources */,
 				5C4052D81AD73B260088EE70 /* Main.storyboard in Resources */,
