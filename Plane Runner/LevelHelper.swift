@@ -29,6 +29,29 @@ class LevelHelper {
         return audioPlayer!
     }
     
+    class func getLetterTexture(letter: String) -> SKTexture {
+        let letterTextuer = SKTexture(imageNamed: letter)
+        return letterTextuer
+    }
+    
+    class func wonTextNode() -> SKSpriteNode {
+        var wonText = SKSpriteNode()
+        
+        let w = SKSpriteNode(texture: self.getLetterTexture("w"))
+        w.position = CGPoint(x: -52, y: 0)
+        wonText.addChild(w)
+        
+        let o = SKSpriteNode(texture: self.getLetterTexture("o"))
+        o.position = CGPoint(x: 0, y: 0)
+        wonText.addChild(o)
+        
+        let n = SKSpriteNode(texture: self.getLetterTexture("n"))
+        n.position = CGPoint(x: 52, y: 0)
+        wonText.addChild(n)
+        
+        return wonText
+    }
+    
     class func getReadyAction(view: SKView) -> (action: SKAction, getReadyNode: SKSpriteNode) {
         
         // Method resouces

@@ -53,6 +53,8 @@ struct ZLevel {
     static let PlaneSmoke   : CGFloat = 4.0
     static let Plane        : CGFloat = 5.0
     static let Tutorial     : CGFloat = 6.0
+    static let UiBackground : CGFloat = 7.0
+    static let UiAnnimation : CGFloat = 8.0
     static let Label        : CGFloat = 9.0
     static let HUD          : CGFloat = 10.0
     static let Pause        : CGFloat = 15.0

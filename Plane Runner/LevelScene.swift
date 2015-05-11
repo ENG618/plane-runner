@@ -46,11 +46,13 @@ class LevelScene: SKScene {
     private let pauseIconTexture = SKTexture(imageNamed: PauseIconImage)
     private let tapTexture = SKTexture(imageNamed: TapTick)
     private let starTexture = SKTexture(imageNamed: StarGold)
+    private let uiBackground = SKTexture(imageNamed: UIBackgroundImage)
     
     // Level Image Nodes
     private var backgroundLevelNode: SKSpriteNode!
     private var foregroundLevelNode: SKSpriteNode!
     private var plane: SKSpriteNode!
+    private var winDialog: SKSpriteNode!
     private var gameOverText: SKSpriteNode!
     
     // HUD
@@ -519,7 +521,6 @@ extension LevelScene {
     }
     
     func won() {
-        // TODO: Setup won conditions
         println("WON!!")
         levelWon = true
         movingNodes.speed = 0
@@ -528,12 +529,23 @@ extension LevelScene {
         plane.removeAllActions()
         
         // TODO: Create Win animation
+        let uiSize = self.view!.frame.height - 50
+        
+        winDialog = SKSpriteNode(texture: uiBackground)
+        winDialog.position = CGPoint(x: self.view!.frame.width / 2, y: self.view!.frame.height / 2)
+        winDialog.size = CGSizeMake(uiSize + 50, uiSize)
+        winDialog.zPosition = ZLevel.UiBackground
+        
+        let wonTextNode = LevelHelper.wonTextNode()
+        wonTextNode.position = CGPoint(x: self.view!.frame.width / 2, y: self.view!.frame.height / 2)
+        winDialog.zPosition = ZLevel.Label
+        
+        winDialog.addChild(wonTextNode)
         
         
-        
-        
-        
-        
+        // Add win dialog to world
+        worldNode.addChild(winDialog)
+
         
         
 //        let wonText = SKLabelNode(fontNamed: GameFont)

@@ -56,48 +56,48 @@ extension MenuScene {
     
     func createTitle(view: SKView) {
         // Plane
-        let p = SKSpriteNode(texture: getLetterTexture("p"))
+        let p = SKSpriteNode(texture: LevelHelper.getLetterTexture("p"))
         p.position = CGPoint(x: -156, y: 0)
         titleNode.addChild(p)
         
-        let l = SKSpriteNode(texture: getLetterTexture("l"))
+        let l = SKSpriteNode(texture: LevelHelper.getLetterTexture("l"))
         l.position = CGPoint(x: -130, y: 0)
         titleNode.addChild(l)
         
-        let a = SKSpriteNode(texture: getLetterTexture("a"))
+        let a = SKSpriteNode(texture: LevelHelper.getLetterTexture("a"))
         a.position = CGPoint(x: -104, y: 0)
         titleNode.addChild(a)
         
-        let n = SKSpriteNode(texture: getLetterTexture("n"))
+        let n = SKSpriteNode(texture: LevelHelper.getLetterTexture("n"))
         n.position = CGPoint(x: -78, y: 0)
         titleNode.addChild(n)
         
-        let e = SKSpriteNode(texture: getLetterTexture("e"))
+        let e = SKSpriteNode(texture: LevelHelper.getLetterTexture("e"))
         e.position = CGPoint(x: -52, y: 0)
         titleNode.addChild(e)
         
         // Runner
-        let r = SKSpriteNode(texture: getLetterTexture("r"))
+        let r = SKSpriteNode(texture: LevelHelper.getLetterTexture("r"))
         r.position = CGPoint(x: 0, y: 0)
         titleNode.addChild(r)
         
-        let u = SKSpriteNode(texture: getLetterTexture("u"))
+        let u = SKSpriteNode(texture: LevelHelper.getLetterTexture("u"))
         u.position = CGPoint(x: 26, y: 0)
         titleNode.addChild(u)
         
-        let n2 = SKSpriteNode(texture: getLetterTexture("n"))
+        let n2 = SKSpriteNode(texture: LevelHelper.getLetterTexture("n"))
         n2.position = CGPoint(x: 52, y: 0)
         titleNode.addChild(n2)
         
-        let n3 = SKSpriteNode(texture: getLetterTexture("n"))
+        let n3 = SKSpriteNode(texture: LevelHelper.getLetterTexture("n"))
         n3.position = CGPoint(x: 78, y: 0)
         titleNode.addChild(n3)
         
-        let e2 = SKSpriteNode(texture: getLetterTexture("e"))
+        let e2 = SKSpriteNode(texture: LevelHelper.getLetterTexture("e"))
         e2.position = CGPoint(x: 104, y: 0)
         titleNode.addChild(e2)
         
-        let r2 = SKSpriteNode(texture: getLetterTexture("r"))
+        let r2 = SKSpriteNode(texture: LevelHelper.getLetterTexture("r"))
         r2.position = CGPoint(x: 130, y: 0)
         titleNode.addChild(r2)
         
@@ -106,10 +106,10 @@ extension MenuScene {
         worldNode.addChild(titleNode)
     }
     
-    func getLetterTexture(letter: String) -> SKTexture {
-        let letterTextuer = SKTexture(imageNamed: letter)
-        return letterTextuer
-    }
+//    func getLetterTexture(letter: String) -> SKTexture {
+//        let letterTextuer = SKTexture(imageNamed: letter)
+//        return letterTextuer
+//    }
     
     func createStartButton(view: SKView) {
         let startBtn = SKSpriteNode(texture: buttonTexture)

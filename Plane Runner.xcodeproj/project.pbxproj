@@ -139,16 +139,12 @@
 				5CA474DF1AE7561700E71BE7 /* assets */,
 				5C50FA941AE5B4250068FD66 /* Data */,
 				5CADD6991AE8016300707677 /* Levels */,
+				5CED82601B014FAA00DA0CE4 /* Particles */,
 				5C4052CE1AD73B260088EE70 /* AppDelegate.swift */,
-				5C4052D21AD73B260088EE70 /* MenuScene.swift */,
-				5CED82581B013AE200DA0CE4 /* BronzeParticle.sks */,
-				5CED825C1B013CF800DA0CE4 /* SilverParticle.sks */,
-				5CED825E1B013D7600DA0CE4 /* GoldParticle.sks */,
-				5CED82591B013AE200DA0CE4 /* spark.png */,
-				5C5516B31AF15AB500E35564 /* LevelScene.swift */,
-				5CED82521B012D5F00DA0CE4 /* SmokeParticle.sks */,
-				5C4C4F571AED334200624154 /* InfoScene.swift */,
 				5C4052D41AD73B260088EE70 /* GameViewController.swift */,
+				5C4052D21AD73B260088EE70 /* MenuScene.swift */,
+				5C4C4F571AED334200624154 /* InfoScene.swift */,
+				5C5516B31AF15AB500E35564 /* LevelScene.swift */,
 				5C4052D61AD73B260088EE70 /* Main.storyboard */,
 				5C4052DB1AD73B260088EE70 /* LaunchScreen.xib */,
 				5CCA783F1AF343DC00E52FBD /* Images.xcassets */,
@@ -229,6 +225,18 @@
 				5C1CC7B11AF08DB700D795FD /* Level01.plist */,
 			);
 			name = Levels;
+			sourceTree = "<group>";
+		};
+		5CED82601B014FAA00DA0CE4 /* Particles */ = {
+			isa = PBXGroup;
+			children = (
+				5CED82591B013AE200DA0CE4 /* spark.png */,
+				5CED82581B013AE200DA0CE4 /* BronzeParticle.sks */,
+				5CED825C1B013CF800DA0CE4 /* SilverParticle.sks */,
+				5CED825E1B013D7600DA0CE4 /* GoldParticle.sks */,
+				5CED82521B012D5F00DA0CE4 /* SmokeParticle.sks */,
+			);
+			name = Particles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
