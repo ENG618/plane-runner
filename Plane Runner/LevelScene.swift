@@ -449,6 +449,28 @@ extension LevelScene {
         
         tutorialNode.addChild(tapTick)
     }
+    
+    func createWinDialog() {
+        let uiSize = self.view!.frame.height - 50
+        
+        let winUI = SKSpriteNode(texture: uiBackground)
+        winUI.position = CGPoint(x: self.view!.frame.width / 2, y: self.view!.frame.height / 2)
+        winUI.size = CGSizeMake(uiSize + 50, uiSize)
+        winUI.zPosition = ZLevel.UiBackground
+        
+        let winTextNode = LevelHelper.wonTextNode()
+        winTextNode.position = CGPoint(x: self.view!.frame.width / 2, y: self.view!.frame.height / 2)
+        winTextNode.zPosition = ZLevel.Label
+        
+        winDialog.addChild(winUI)
+        winDialog.addChild(winTextNode)
+        
+        // TODO: Create buttons for retry, next level, men menu
+        
+        
+        // Add win dialog to world
+        worldNode.addChild(winDialog)
+    }
 }
 
 // MARK: Game Events
@@ -528,33 +550,8 @@ extension LevelScene {
         plane.physicsBody?.pinned = true
         plane.removeAllActions()
         
-        // TODO: Create Win animation
-        let uiSize = self.view!.frame.height - 50
         
-        let winUI = SKSpriteNode(texture: uiBackground)
-        winUI.position = CGPoint(x: self.view!.frame.width / 2, y: self.view!.frame.height / 2)
-        winUI.size = CGSizeMake(uiSize + 50, uiSize)
-        winUI.zPosition = ZLevel.UiBackground
-        
-        let winTextNode = LevelHelper.wonTextNode()
-        winTextNode.position = CGPoint(x: self.view!.frame.width / 2, y: self.view!.frame.height / 2)
-        winTextNode.zPosition = ZLevel.Label
-        
-        winDialog.addChild(winUI)
-        winDialog.addChild(winTextNode)
-        
-        
-        // Add win dialog to world
-        worldNode.addChild(winDialog)
-
-        
-        
-//        let wonText = SKLabelNode(fontNamed: GameFont)
-//        wonText.fontColor = SKColor.blackColor()
-//        wonText.fontSize = 60
-//        wonText.text = "YOU WON!!"
-//        wonText.position = CGPoint(x: self.frame.width / 2, y: self.frame.height / 2)
-//        self.addChild(wonText)
+        createWinDialog()
     }
     
     func lost() {
