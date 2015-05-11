@@ -50,6 +50,7 @@ struct ZLevel {
     static let Ground       : CGFloat = 0.0
     static let Rocks        : CGFloat = 1.0
     static let Clouds       : CGFloat = 2.0
+    static let PlaneSmoke   : CGFloat = 4.0
     static let Plane        : CGFloat = 5.0
     static let Tutorial     : CGFloat = 6.0
     static let Label        : CGFloat = 9.0

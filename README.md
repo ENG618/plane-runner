@@ -21,11 +21,11 @@ Full Sail University | MDVBS
 * [Video Review]()
 
 ### Week 3 ###
-* [Project link](https://bitbucket.org/eng618/plane-runner/commits/273c0c84f2681fe8a5122df43f14ad38168d973f)
-* [Video Review](https://www.youtube.com/watch?v=AEagwzNeHEg)
+* [Project link]()
+* [Video Review]()
 
 ### Week 4 ###
-* [Project link](https://bitbucket.org/eng618/plane-runner/commits/fbb4912c4ebfd8c59cdb2bc615aa35eaada1bf45)
+* [Project link]()
 * Video Review - To be posted
 
 ## 1504 MGD ##
@@ -44,5 +44,5 @@ Full Sail University | MDVBS
 
 ### Week 4 ###
 * [Project link](https://bitbucket.org/eng618/plane-runner/commits/fbb4912c4ebfd8c59cdb2bc615aa35eaada1bf45)
-* Video Review - To be posted
+* [Video Review](https://www.youtube.com/watch?v=9NS6_6Q1T0c)
 

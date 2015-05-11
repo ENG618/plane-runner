@@ -30,6 +30,9 @@ class LevelScene: SKScene {
     // Audio Player
     private var audioPlayer = AVAudioPlayer()
     
+    // Smoke emitter
+    var planeEngine: SKEmitterNode!
+    
     // Level Textures
     private let backgroundTexture = SKTexture(imageNamed: BackgroundImage)
     private let groundTexture = SKTexture(imageNamed: GroundGrassImage)
@@ -145,6 +148,9 @@ extension LevelScene {
         foregroundLevelNode = SKSpriteNode()
         foregroundLevelNode.zPosition = ZLevel.Foreground
         
+        // Plane smoke emitter
+        planeEngine = NSKeyedUnarchiver.unarchiveObjectWithFile(NSBundle.mainBundle().pathForResource("SmokeParticle", ofType: "sks")!) as! SKEmitterNode
+        
         // Plane crash sound effect
         planeCrashFX = SKAction.repeatAction(SKAction.playSoundFileNamed(PlaneCrashSoundFX, waitForCompletion: true), count: 1)
         
@@ -235,7 +241,7 @@ extension LevelScene {
             
             let bg = SKSpriteNode(texture: backgroundTexture)
             bg.size = view.frame.size
-            bg.position = CGPoint(x: i, y: view.frame.height/2)
+            bg.position = CGPoint(x: i - 2, y: view.frame.height/2)
             bg.zPosition = ZLevel.Background
             
             backgroundLevelNode.addChild(bg)
@@ -252,7 +258,7 @@ extension LevelScene {
         
         var numGroundCreated = 0
         
-        while i < sceneLength + view.frame.width {
+        while i < sceneLength + view.frame.width + groundTexture.size().width {
             numGroundCreated++
             
             let ground = SKSpriteNode(texture: groundTexture)
@@ -420,6 +426,11 @@ extension LevelScene {
         plane.physicsBody?.pinned = true
         
         worldNode.addChild(plane)
+        
+        planeEngine.position = CGPointMake(-20, 0)
+        planeEngine.zPosition = ZLevel.PlaneSmoke
+        
+        plane.addChild(planeEngine)
     }
     
     func createTutorial(view: SKView) {
@@ -565,10 +576,12 @@ extension LevelScene {
                 }
             }
         }
+        planeEngine.numParticlesToEmit = 0
     }
     
     override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
         isTouching = false
+        planeEngine.numParticlesToEmit = 10
     }
     
     override func update(currentTime: NSTimeInterval) {
