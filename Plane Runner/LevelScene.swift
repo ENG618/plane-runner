@@ -52,7 +52,7 @@ class LevelScene: SKScene {
     private var backgroundLevelNode: SKSpriteNode!
     private var foregroundLevelNode: SKSpriteNode!
     private var plane: SKSpriteNode!
-    private var winDialog: SKSpriteNode!
+    private var winDialog = SKNode()
     private var gameOverText: SKSpriteNode!
     
     // HUD
@@ -531,16 +531,17 @@ extension LevelScene {
         // TODO: Create Win animation
         let uiSize = self.view!.frame.height - 50
         
-        winDialog = SKSpriteNode(texture: uiBackground)
-        winDialog.position = CGPoint(x: self.view!.frame.width / 2, y: self.view!.frame.height / 2)
-        winDialog.size = CGSizeMake(uiSize + 50, uiSize)
-        winDialog.zPosition = ZLevel.UiBackground
+        let winUI = SKSpriteNode(texture: uiBackground)
+        winUI.position = CGPoint(x: self.view!.frame.width / 2, y: self.view!.frame.height / 2)
+        winUI.size = CGSizeMake(uiSize + 50, uiSize)
+        winUI.zPosition = ZLevel.UiBackground
         
-        let wonTextNode = LevelHelper.wonTextNode()
-        wonTextNode.position = CGPoint(x: self.view!.frame.width / 2, y: self.view!.frame.height / 2)
-        winDialog.zPosition = ZLevel.Label
+        let winTextNode = LevelHelper.wonTextNode()
+        winTextNode.position = CGPoint(x: self.view!.frame.width / 2, y: self.view!.frame.height / 2)
+        winTextNode.zPosition = ZLevel.Label
         
-        winDialog.addChild(wonTextNode)
+        winDialog.addChild(winUI)
+        winDialog.addChild(winTextNode)
         
         
         // Add win dialog to world

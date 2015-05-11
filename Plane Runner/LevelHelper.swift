@@ -38,7 +38,7 @@ class LevelHelper {
         var wonText = SKSpriteNode()
         
         let w = SKSpriteNode(texture: self.getLetterTexture("w"))
-        w.position = CGPoint(x: -52, y: 0)
+        w.position = CGPoint(x: -25, y: 0)
         wonText.addChild(w)
         
         let o = SKSpriteNode(texture: self.getLetterTexture("o"))
@@ -46,7 +46,7 @@ class LevelHelper {
         wonText.addChild(o)
         
         let n = SKSpriteNode(texture: self.getLetterTexture("n"))
-        n.position = CGPoint(x: 52, y: 0)
+        n.position = CGPoint(x: 25, y: 0)
         wonText.addChild(n)
         
         return wonText
