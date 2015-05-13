@@ -34,19 +34,22 @@ class LevelScene: SKScene {
     var planeEngine: SKEmitterNode!
     
     // Level Textures
-    private let backgroundTexture = SKTexture(imageNamed: BackgroundImage)
-    private let groundTexture = SKTexture(imageNamed: GroundGrassImage)
-    private let rockTexture = SKTexture(imageNamed: RockGrassImage)
-    private let rockDownTexture = SKTexture(imageNamed: RockGrassDownImage)
-    private let planeTexture = SKTexture(imageNamed: PlaneOneImage)
-    private let planeTexture1 = SKTexture(imageNamed: PlaneTwoImage)
-    private let planeTexture2 = SKTexture(imageNamed: PlaneThreeImage)
-    private let gameOverTexture = SKTexture(imageNamed: TextGameOver)
-    private let pauseTexture = SKTexture(imageNamed: ButtonSmallImage)
-    private let pauseIconTexture = SKTexture(imageNamed: PauseIconImage)
-    private let tapTexture = SKTexture(imageNamed: TapTick)
-    private let starTexture = SKTexture(imageNamed: StarGold)
-    private let uiBackground = SKTexture(imageNamed: UIBackgroundImage)
+    private let backgroundTexture   = SKTexture(imageNamed: BackgroundImage)
+    private let groundTexture       = SKTexture(imageNamed: GroundGrassImage)
+    private let rockTexture         = SKTexture(imageNamed: RockGrassImage)
+    private let rockDownTexture     = SKTexture(imageNamed: RockGrassDownImage)
+    private let planeTexture        = SKTexture(imageNamed: PlaneOneImage)
+    private let planeTexture1       = SKTexture(imageNamed: PlaneTwoImage)
+    private let planeTexture2       = SKTexture(imageNamed: PlaneThreeImage)
+    private let gameOverTexture     = SKTexture(imageNamed: TextGameOver)
+    private let pauseTexture        = SKTexture(imageNamed: ButtonSmallImage)
+    private let pauseIconTexture    = SKTexture(imageNamed: PauseIconImage)
+    private let tapTexture          = SKTexture(imageNamed: TapTick)
+    private let starTexture         = SKTexture(imageNamed: StarGold)
+    private let uiBackground        = SKTexture(imageNamed: UIBackgroundImage)
+    private let replyBtnTexture     = SKTexture(imageNamed: Replay)
+    private let nextLevelBtnTexture = SKTexture(imageNamed: NextLevel)
+    private let LevelMenuTexture    = SKTexture(imageNamed: LevelMenu)
     
     // Level Image Nodes
     private var backgroundLevelNode: SKSpriteNode!
@@ -459,13 +462,22 @@ extension LevelScene {
         winUI.zPosition = ZLevel.UiBackground
         
         let winTextNode = LevelHelper.wonTextNode()
-        winTextNode.position = CGPoint(x: self.view!.frame.width / 2, y: self.view!.frame.height / 2)
+        winTextNode.position = CGPoint(x: self.view!.frame.width / 2, y: winUI.size.height * 0.90)
         winTextNode.zPosition = ZLevel.Label
         
         winDialog.addChild(winUI)
         winDialog.addChild(winTextNode)
         
         // TODO: Create buttons for retry, next level, men menu
+        
+        let buttonDistance = winUI.size.width / 4
+        
+        let replayBtn = SKSpriteNode(texture: replyBtnTexture)
+        let nextBtn = SKSpriteNode(texture: nextLevelBtnTexture)
+        let levelMenuBtn = SKSpriteNode(texture: LevelMenuTexture)
+        
+        
+        
         
         
         // Add win dialog to world
@@ -599,7 +611,7 @@ extension LevelScene {
     
     override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
         isTouching = false
-        planeEngine.numParticlesToEmit = 10
+        planeEngine.numParticlesToEmit = 100
     }
     
     override func update(currentTime: NSTimeInterval) {

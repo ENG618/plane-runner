@@ -29,6 +29,9 @@ let UIBackgroundImage = "Uibg"
 let OneImage = "1"
 let TwoImage = "2"
 let ThreeImage = "3"
+let Replay = "return"
+let NextLevel = "right"
+let LevelMenu = "menuGrid"
 
 // MARK: Sounds
 let PlaneFlyingSoundFX = "Helicopter.mp3"

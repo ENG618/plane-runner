@@ -41,6 +41,7 @@
 		5CED825B1B013AE200DA0CE4 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 5CED82591B013AE200DA0CE4 /* spark.png */; };
 		5CED825D1B013CF800DA0CE4 /* SilverParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5CED825C1B013CF800DA0CE4 /* SilverParticle.sks */; };
 		5CED825F1B013D7600DA0CE4 /* GoldParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5CED825E1B013D7600DA0CE4 /* GoldParticle.sks */; };
+		5CED82EE1B03D43300DA0CE4 /* buttons.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5CED82ED1B03D43300DA0CE4 /* buttons.atlas */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +94,7 @@
 		5CED82591B013AE200DA0CE4 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		5CED825C1B013CF800DA0CE4 /* SilverParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SilverParticle.sks; sourceTree = "<group>"; };
 		5CED825E1B013D7600DA0CE4 /* GoldParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GoldParticle.sks; sourceTree = "<group>"; };
+		5CED82ED1B03D43300DA0CE4 /* buttons.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = buttons.atlas; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,6 +212,7 @@
 				5C4C4F591AED33C300624154 /* kenvector_future_thin.ttf */,
 				5C4052F41AD7A1360088EE70 /* sounds */,
 				5CA474E01AE7571A00E71BE7 /* background.atlas */,
+				5CED82ED1B03D43300DA0CE4 /* buttons.atlas */,
 				5CA474EE1AE75BE200E71BE7 /* letters.atlas */,
 				5CA474E41AE7573200E71BE7 /* numbers.atlas */,
 				5CA474E61AE7573700E71BE7 /* obstacles.atlas */,
@@ -329,6 +332,7 @@
 				5CCA78401AF343DC00E52FBD /* Images.xcassets in Resources */,
 				5CED825B1B013AE200DA0CE4 /* spark.png in Resources */,
 				5CA474E11AE7571A00E71BE7 /* background.atlas in Resources */,
+				5CED82EE1B03D43300DA0CE4 /* buttons.atlas in Resources */,
 				5CED82541B012D5F00DA0CE4 /* SmokeParticle.sks in Resources */,
 				5CCD8DC11ADB8DFC0001362D /* Helicopter.mp3 in Resources */,
 				5CED825D1B013CF800DA0CE4 /* SilverParticle.sks in Resources */,
