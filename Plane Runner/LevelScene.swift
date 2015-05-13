@@ -30,8 +30,11 @@ class LevelScene: SKScene {
     // Audio Player
     private var audioPlayer = AVAudioPlayer()
     
-    // Smoke emitter
+    // Emitters
     var planeEngine: SKEmitterNode!
+    var starBronzeEmmiter: SKEmitterNode!
+    var starSilverEmmiter: SKEmitterNode!
+    var starGoldEmmiter:SKEmitterNode!
     
     // Level Textures
     private let backgroundTexture   = SKTexture(imageNamed: BackgroundImage)
@@ -50,13 +53,26 @@ class LevelScene: SKScene {
     private let replyBtnTexture     = SKTexture(imageNamed: Replay)
     private let nextLevelBtnTexture = SKTexture(imageNamed: NextLevel)
     private let LevelMenuTexture    = SKTexture(imageNamed: LevelMenu)
+    private let starEmptyTexture    = SKTexture(imageNamed: StarEmpty)
+    private let starBronzeTexture   = SKTexture(imageNamed: StarBronze)
+    private let starSilverTexture   = SKTexture(imageNamed: StarSilver)
+    private let starGoldTexture     = SKTexture(imageNamed: StarGold)
     
     // Level Image Nodes
     private var backgroundLevelNode: SKSpriteNode!
     private var foregroundLevelNode: SKSpriteNode!
     private var plane: SKSpriteNode!
-    private var winDialog = SKNode()
     private var gameOverText: SKSpriteNode!
+    
+    // Win Dialog Nodes
+    private var winDialog = SKNode()
+    var replayBtn: SKSpriteNode!
+    var nextBtn: SKSpriteNode!
+    var levelMenuBtn: SKSpriteNode!
+    var starEmptyNode: SKSpriteNode!
+    var starBronzeNode: SKSpriteNode!
+    var starSilver: SKSpriteNode!
+    var starGold: SKSpriteNode!
     
     // HUD
     private var hud = SKNode()
@@ -155,6 +171,11 @@ extension LevelScene {
         
         // Plane smoke emitter
         planeEngine = NSKeyedUnarchiver.unarchiveObjectWithFile(NSBundle.mainBundle().pathForResource("SmokeParticle", ofType: "sks")!) as! SKEmitterNode
+        
+        // Star emitters
+        starBronzeEmmiter = NSKeyedUnarchiver.unarchiveObjectWithFile(NSBundle.mainBundle().pathForResource("BronzeParticle", ofType: "sks")!) as! SKEmitterNode
+        starSilverEmmiter = NSKeyedUnarchiver.unarchiveObjectWithFile(NSBundle.mainBundle().pathForResource("SilverParticle", ofType: "sks")!) as! SKEmitterNode
+        starGoldEmmiter = NSKeyedUnarchiver.unarchiveObjectWithFile(NSBundle.mainBundle().pathForResource("GoldParticle", ofType: "sks")!) as! SKEmitterNode
         
         // Plane crash sound effect
         planeCrashFX = SKAction.repeatAction(SKAction.playSoundFileNamed(PlaneCrashSoundFX, waitForCompletion: true), count: 1)
@@ -461,21 +482,33 @@ extension LevelScene {
         winUI.size = CGSizeMake(uiSize + 50, uiSize)
         winUI.zPosition = ZLevel.UiBackground
         
+        winDialog.addChild(winUI)
+        
         let winTextNode = LevelHelper.wonTextNode()
-        winTextNode.position = CGPoint(x: self.view!.frame.width / 2, y: winUI.size.height * 0.90)
+        winTextNode.position = CGPoint(x: self.view!.frame.width / 2, y: self.view!.frame.height / 2 + (winUI.size.height * 0.40))
         winTextNode.zPosition = ZLevel.Label
         
-        winDialog.addChild(winUI)
         winDialog.addChild(winTextNode)
         
         // TODO: Create buttons for retry, next level, men menu
         
         let buttonDistance = winUI.size.width / 4
         
-        let replayBtn = SKSpriteNode(texture: replyBtnTexture)
-        let nextBtn = SKSpriteNode(texture: nextLevelBtnTexture)
-        let levelMenuBtn = SKSpriteNode(texture: LevelMenuTexture)
+        replayBtn = SKSpriteNode(texture: replyBtnTexture)
+        replayBtn.position = CGPoint(x: self.view!.frame.width / 2 - buttonDistance, y: self.view!.frame.height / 2 - (winUI.size.height * 0.40))
+        replayBtn.zPosition = ZLevel.Label
         
+        nextBtn = SKSpriteNode(texture: nextLevelBtnTexture)
+        nextBtn.position = CGPoint(x: self.view!.frame.width / 2, y: self.view!.frame.height / 2 - (winUI.size.height * 0.40))
+        nextBtn.zPosition = ZLevel.Label
+        
+        levelMenuBtn = SKSpriteNode(texture: LevelMenuTexture)
+        levelMenuBtn.position = CGPoint(x: self.view!.frame.width / 2 + buttonDistance, y: self.view!.frame.height / 2 - (winUI.size.height * 0.40))
+        levelMenuBtn.zPosition = ZLevel.Label
+        
+        winDialog.addChild(replayBtn)
+        winDialog.addChild(nextBtn)
+        winDialog.addChild(levelMenuBtn)
         
         
         
