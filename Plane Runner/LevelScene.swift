@@ -31,7 +31,6 @@ class LevelScene: SKScene {
     private var audioPlayer = AVAudioPlayer()
     
     // Emitters
-//    var planeEngine: SKEmitterNode!
     var starBronzeEmmiter: SKEmitterNode!
     var starSilverEmmiter: SKEmitterNode!
     var starGoldEmmiter:SKEmitterNode!
@@ -165,9 +164,6 @@ extension LevelScene {
         // Create scene foreground
         foregroundLevelNode = SKSpriteNode()
         foregroundLevelNode.zPosition = ZLevel.Foreground
-        
-        // Plane smoke emitter
-//        planeEngine = NSKeyedUnarchiver.unarchiveObjectWithFile(NSBundle.mainBundle().pathForResource("SmokeParticle", ofType: "sks")!) as! SKEmitterNode
         
         // Plane crash sound effect
         planeCrashFX = SKAction.repeatAction(SKAction.playSoundFileNamed(PlaneCrashSoundFX, waitForCompletion: true), count: 1)
@@ -444,11 +440,6 @@ extension LevelScene {
         plane.physicsBody?.pinned = true
         
         worldNode.addChild(plane)
-        
-//        planeEngine.position = CGPointMake(-20, 0)
-//        planeEngine.zPosition = ZLevel.PlaneSmoke
-//        
-//        plane.addChild(planeEngine)
     }
     
     func createTutorial(view: SKView) {
@@ -666,34 +657,22 @@ extension LevelScene {
                 } else if !gamePaused && !levelWon {
                     // Used for contiuous flying while touching screen.
                     isTouching = true
-                    runAction(planeFlyingFX)
                     
                     let addSmoke = SKAction.runBlock({
-                        let planeEngineTest = NSKeyedUnarchiver.unarchiveObjectWithFile(NSBundle.mainBundle().pathForResource("SmokeParticle", ofType: "sks")!) as! SKEmitterNode
-                        planeEngineTest.position = CGPoint(x: -20, y: 0)
-                        planeEngineTest.zPosition = ZLevel.PlaneSmoke
-                        self.plane.addChild(planeEngineTest)
+                        let planeEngineSmoke = NSKeyedUnarchiver.unarchiveObjectWithFile(NSBundle.mainBundle().pathForResource("SmokeParticle", ofType: "sks")!) as! SKEmitterNode
+                        planeEngineSmoke.position = CGPoint(x: -20, y: 0)
+                        planeEngineSmoke.zPosition = ZLevel.PlaneSmoke
+                        self.plane.addChild(planeEngineSmoke)
                     })
                     
-                    plane.runAction(addSmoke)
-                    
-                    
-//                    planeEngine.numParticlesToEmit = 0
-                    
-                    // Uncomment for single tap mode.
-                    // plane.physicsBody?.velocity = CGVectorMake(0, 0)
-                    // plane.physicsBody?.applyImpulse(CGVectorMake(0, 10))
+                    plane.runAction(SKAction.group([planeFlyingFX, addSmoke]))
                 }
             }
         }
-//        if !gameOver && !levelWon && !gamePaused {
-//            planeEngine.numParticlesToEmit = 0
-//        }
     }
     
     override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
         isTouching = false
-//        planeEngine.numParticlesToEmit = 100
     }
     
     override func update(currentTime: NSTimeInterval) {
