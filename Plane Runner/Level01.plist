@@ -33,24 +33,32 @@
 		<key>Positions</key>
 		<array>
 			<dict>
+				<key>scale</key>
+				<integer>2</integer>
 				<key>x</key>
 				<integer>500</integer>
 				<key>y</key>
 				<integer>0</integer>
 			</dict>
 			<dict>
+				<key>scale</key>
+				<integer>2</integer>
 				<key>x</key>
 				<integer>1000</integer>
 				<key>y</key>
 				<integer>0</integer>
 			</dict>
 			<dict>
+				<key>scale</key>
+				<integer>2</integer>
 				<key>x</key>
 				<integer>1500</integer>
 				<key>y</key>
 				<integer>0</integer>
 			</dict>
 			<dict>
+				<key>scale</key>
+				<integer>2</integer>
 				<key>x</key>
 				<integer>2000</integer>
 				<key>y</key>
@@ -63,18 +71,24 @@
 		<key>Positions</key>
 		<array>
 			<dict>
+				<key>scale</key>
+				<integer>2</integer>
 				<key>x</key>
 				<integer>750</integer>
 				<key>y</key>
 				<integer>375</integer>
 			</dict>
 			<dict>
+				<key>scale</key>
+				<integer>2</integer>
 				<key>x</key>
 				<real>1250</real>
 				<key>y</key>
 				<integer>375</integer>
 			</dict>
 			<dict>
+				<key>scale</key>
+				<integer>2</integer>
 				<key>x</key>
 				<integer>1750</integer>
 				<key>y</key>
