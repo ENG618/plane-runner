@@ -106,11 +106,6 @@ extension MenuScene {
         worldNode.addChild(titleNode)
     }
     
-//    func getLetterTexture(letter: String) -> SKTexture {
-//        let letterTextuer = SKTexture(imageNamed: letter)
-//        return letterTextuer
-//    }
-    
     func createStartButton(view: SKView) {
         let startBtn = SKSpriteNode(texture: buttonTexture)
         startBtn.setScale(2.0)

@@ -11,6 +11,9 @@ import AVFoundation
 
 class LevelScene: SKScene {
     
+    // Data manager
+    let levelManager = LevelManager.sharedInstance
+    
     // World Node
     let worldNode = SKNode()
     // Moving Node
@@ -62,8 +65,10 @@ class LevelScene: SKScene {
     private var foregroundLevelNode: SKSpriteNode!
     private var plane: SKSpriteNode!
     private var gameOverText: SKSpriteNode!
+    private var winTextNode: SKSpriteNode!
     
     // Win Dialog Nodes
+    private var winUI: SKSpriteNode!
     private var winDialog = SKNode()
     var replayBtn: SKSpriteNode!
     var nextBtn: SKSpriteNode!
@@ -460,14 +465,14 @@ extension LevelScene {
     func createWinDialog() {
         let uiSize = self.view!.frame.height - 50
         
-        let winUI = SKSpriteNode(texture: uiBackground)
+        winUI = SKSpriteNode(texture: uiBackground)
         winUI.position = CGPoint(x: self.view!.frame.width / 2, y: self.view!.frame.height / 2)
         winUI.size = CGSizeMake(uiSize + 50, uiSize)
         winUI.zPosition = ZLevel.UiBackground
         
         winDialog.addChild(winUI)
         
-        let winTextNode = LevelHelper.wonTextNode()
+        winTextNode = LevelHelper.wonTextNode()
         winTextNode.position = CGPoint(x: self.view!.frame.width / 2, y: self.view!.frame.height / 2 + (winUI.size.height * 0.25))
         winTextNode.zPosition = ZLevel.Label
         
@@ -538,10 +543,27 @@ extension LevelScene {
         let goldSequence = SKAction.sequence([delay, changeToGold, addGoldEmitter])
         
         
-        
-        
-        
-        starHolderNode.runAction(SKAction.sequence([bronzeSequence, silverSequence, goldSequence]))
+        switch starsCollected {
+        case 1:
+            starHolderNode.runAction(bronzeSequence)
+        case 2:
+            starHolderNode.runAction(SKAction.sequence([bronzeSequence, silverSequence]))
+        case 3:
+            starHolderNode.runAction(SKAction.sequence([bronzeSequence, silverSequence, goldSequence]))
+        default:
+            // TODO: Lost...try again
+            winTextNode.removeFromParent()
+            
+            nextBtn.hidden = true
+            
+            gameOverText.setScale(2)
+            gameOverText.zPosition = ZLevel.Label
+            gameOverText.position = CGPoint(x: self.view!.frame.width / 2, y: self.view!.frame.height / 2 + (winUI.size.height * 0.25))
+            
+            winDialog.addChild(gameOverText)
+            
+            println("Lost")
+        }
     }
     
     func restartLevel() {

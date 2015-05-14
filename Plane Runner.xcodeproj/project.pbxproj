@@ -43,6 +43,7 @@
 		5CED825F1B013D7600DA0CE4 /* GoldParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5CED825E1B013D7600DA0CE4 /* GoldParticle.sks */; };
 		5CED82EE1B03D43300DA0CE4 /* buttons.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5CED82ED1B03D43300DA0CE4 /* buttons.atlas */; };
 		5CED82F01B05100600DA0CE4 /* LevelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CED82EF1B05100500DA0CE4 /* LevelManager.swift */; };
+		5CED82F21B0561BF00DA0CE4 /* LevelMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CED82F11B0561BF00DA0CE4 /* LevelMenu.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +98,7 @@
 		5CED825E1B013D7600DA0CE4 /* GoldParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GoldParticle.sks; sourceTree = "<group>"; };
 		5CED82ED1B03D43300DA0CE4 /* buttons.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = buttons.atlas; sourceTree = "<group>"; };
 		5CED82EF1B05100500DA0CE4 /* LevelManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelManager.swift; sourceTree = "<group>"; };
+		5CED82F11B0561BF00DA0CE4 /* LevelMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelMenu.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,6 +207,7 @@
 				5CADD6A41AE9DFFE00707677 /* LevelHelper.swift */,
 				5C4C4F5B1AEDA03300624154 /* Constancts.swift */,
 				5CED82EF1B05100500DA0CE4 /* LevelManager.swift */,
+				5CED82F11B0561BF00DA0CE4 /* LevelMenu.swift */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -367,6 +370,7 @@
 			files = (
 				5C50FA9A1AE5FF7E0068FD66 /* PlaneColor.swift in Sources */,
 				5CADD69F1AE8BA1600707677 /* HUD.swift in Sources */,
+				5CED82F21B0561BF00DA0CE4 /* LevelMenu.swift in Sources */,
 				5C4C4F581AED334200624154 /* InfoScene.swift in Sources */,
 				5C4052D31AD73B260088EE70 /* MenuScene.swift in Sources */,
 				5CED82F01B05100600DA0CE4 /* LevelManager.swift in Sources */,
