@@ -31,7 +31,7 @@ class LevelScene: SKScene {
     private var audioPlayer = AVAudioPlayer()
     
     // Emitters
-    var planeEngine: SKEmitterNode!
+//    var planeEngine: SKEmitterNode!
     var starBronzeEmmiter: SKEmitterNode!
     var starSilverEmmiter: SKEmitterNode!
     var starGoldEmmiter:SKEmitterNode!
@@ -69,10 +69,7 @@ class LevelScene: SKScene {
     var replayBtn: SKSpriteNode!
     var nextBtn: SKSpriteNode!
     var levelMenuBtn: SKSpriteNode!
-    var starEmptyNode: SKSpriteNode!
-    var starBronzeNode: SKSpriteNode!
-    var starSilver: SKSpriteNode!
-    var starGold: SKSpriteNode!
+    var starHolderNode: SKSpriteNode!
     
     // HUD
     private var hud = SKNode()
@@ -170,12 +167,7 @@ extension LevelScene {
         foregroundLevelNode.zPosition = ZLevel.Foreground
         
         // Plane smoke emitter
-        planeEngine = NSKeyedUnarchiver.unarchiveObjectWithFile(NSBundle.mainBundle().pathForResource("SmokeParticle", ofType: "sks")!) as! SKEmitterNode
-        
-        // Star emitters
-        starBronzeEmmiter = NSKeyedUnarchiver.unarchiveObjectWithFile(NSBundle.mainBundle().pathForResource("BronzeParticle", ofType: "sks")!) as! SKEmitterNode
-        starSilverEmmiter = NSKeyedUnarchiver.unarchiveObjectWithFile(NSBundle.mainBundle().pathForResource("SilverParticle", ofType: "sks")!) as! SKEmitterNode
-        starGoldEmmiter = NSKeyedUnarchiver.unarchiveObjectWithFile(NSBundle.mainBundle().pathForResource("GoldParticle", ofType: "sks")!) as! SKEmitterNode
+//        planeEngine = NSKeyedUnarchiver.unarchiveObjectWithFile(NSBundle.mainBundle().pathForResource("SmokeParticle", ofType: "sks")!) as! SKEmitterNode
         
         // Plane crash sound effect
         planeCrashFX = SKAction.repeatAction(SKAction.playSoundFileNamed(PlaneCrashSoundFX, waitForCompletion: true), count: 1)
@@ -453,10 +445,10 @@ extension LevelScene {
         
         worldNode.addChild(plane)
         
-        planeEngine.position = CGPointMake(-20, 0)
-        planeEngine.zPosition = ZLevel.PlaneSmoke
-        
-        plane.addChild(planeEngine)
+//        planeEngine.position = CGPointMake(-20, 0)
+//        planeEngine.zPosition = ZLevel.PlaneSmoke
+//        
+//        plane.addChild(planeEngine)
     }
     
     func createTutorial(view: SKView) {
@@ -510,11 +502,55 @@ extension LevelScene {
         winDialog.addChild(nextBtn)
         winDialog.addChild(levelMenuBtn)
         
+        starHolderNode = SKSpriteNode(texture: starEmptyTexture)
+        starHolderNode.setScale(4)
+        starHolderNode.position = CGPoint(x: self.view!.frame.width / 2, y: self.view!.frame.height / 2)
+        starHolderNode.zPosition = ZLevel.Label
         
+        winDialog.addChild(starHolderNode)
         
         
         // Add win dialog to world
         worldNode.addChild(winDialog)
+        
+        animateStars()
+    }
+    
+    func animateStars() {
+        let delay = SKAction.waitForDuration(1)
+
+        // Bronze Actions
+        let changeToBronze = SKAction.setTexture(starBronzeTexture)
+        let addBronzeEmitter = SKAction.runBlock({
+            self.starBronzeEmmiter = NSKeyedUnarchiver.unarchiveObjectWithFile(NSBundle.mainBundle().pathForResource("BronzeParticle", ofType: "sks")!) as! SKEmitterNode
+            self.starBronzeEmmiter.zPosition = ZLevel.UiAnnimation
+            self.starHolderNode.addChild(self.starBronzeEmmiter)
+        })
+        let bronzeSequence = SKAction.sequence([delay, changeToBronze, addBronzeEmitter])
+        
+        // Silver Actions
+        let changeToSilver = SKAction.setTexture(starSilverTexture)
+        let addSilverEmitter = SKAction.runBlock({
+            self.starSilverEmmiter = NSKeyedUnarchiver.unarchiveObjectWithFile(NSBundle.mainBundle().pathForResource("SilverParticle", ofType: "sks")!) as! SKEmitterNode
+            self.starSilverEmmiter.zPosition = ZLevel.UiAnnimation
+            self.starHolderNode.addChild(self.starSilverEmmiter)
+        })
+        let silverSequence = SKAction.sequence([delay, changeToSilver, addSilverEmitter])
+        
+        // Gold Actions
+        let changeToGold = SKAction.setTexture(starGoldTexture)
+        let addGoldEmitter = SKAction.runBlock({
+            self.starGoldEmmiter = NSKeyedUnarchiver.unarchiveObjectWithFile(NSBundle.mainBundle().pathForResource("GoldParticle", ofType: "sks")!) as! SKEmitterNode
+            self.starGoldEmmiter.zPosition = ZLevel.UiAnnimation
+            self.starHolderNode.addChild(self.starGoldEmmiter)
+        })
+        let goldSequence = SKAction.sequence([delay, changeToGold, addGoldEmitter])
+        
+        
+        
+
+        
+        starHolderNode.runAction(SKAction.sequence([bronzeSequence, silverSequence, goldSequence]))
     }
 }
 
@@ -607,7 +643,6 @@ extension LevelScene {
 // MARK: Input methods
 extension LevelScene {
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        // TODO: Setup touches
         if !gameStarted {
             gameStarted = true
             play()
@@ -628,10 +663,22 @@ extension LevelScene {
                     // Reset scene
                     let scene = LevelScene(size: size, level: levelPlistString)
                     self.view?.presentScene(scene)
-                } else if !self.paused {
+                } else if !gamePaused && !levelWon {
                     // Used for contiuous flying while touching screen.
                     isTouching = true
                     runAction(planeFlyingFX)
+                    
+                    let addSmoke = SKAction.runBlock({
+                        let planeEngineTest = NSKeyedUnarchiver.unarchiveObjectWithFile(NSBundle.mainBundle().pathForResource("SmokeParticle", ofType: "sks")!) as! SKEmitterNode
+                        planeEngineTest.position = CGPoint(x: -20, y: 0)
+                        planeEngineTest.zPosition = ZLevel.PlaneSmoke
+                        self.plane.addChild(planeEngineTest)
+                    })
+                    
+                    plane.runAction(addSmoke)
+                    
+                    
+//                    planeEngine.numParticlesToEmit = 0
                     
                     // Uncomment for single tap mode.
                     // plane.physicsBody?.velocity = CGVectorMake(0, 0)
@@ -639,12 +686,14 @@ extension LevelScene {
                 }
             }
         }
-        planeEngine.numParticlesToEmit = 0
+//        if !gameOver && !levelWon && !gamePaused {
+//            planeEngine.numParticlesToEmit = 0
+//        }
     }
     
     override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
         isTouching = false
-        planeEngine.numParticlesToEmit = 100
+//        planeEngine.numParticlesToEmit = 100
     }
     
     override func update(currentTime: NSTimeInterval) {
