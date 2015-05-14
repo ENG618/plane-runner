@@ -543,6 +543,13 @@ extension LevelScene {
         
         starHolderNode.runAction(SKAction.sequence([bronzeSequence, silverSequence, goldSequence]))
     }
+    
+    func restartLevel() {
+        // Reset scene
+        audioPlayer.stop()
+        let scene = LevelScene(size: size, level: levelPlistString)
+        self.view?.presentScene(scene)
+    }
 }
 
 // MARK: Game Events
@@ -655,7 +662,7 @@ extension LevelScene {
             if levelWon {
                 
                 if replayBtn.containsPoint(location) {
-                    println("Replay level")
+                    restartLevel()
                 }
                 if nextBtn.containsPoint(location) {
                     println("Next Level")
@@ -667,9 +674,7 @@ extension LevelScene {
             }
             
             if gameOver {
-                // Reset scene
-                let scene = LevelScene(size: size, level: levelPlistString)
-                self.view?.presentScene(scene)
+                restartLevel()
             }
             
             if !gamePaused && !levelWon {
