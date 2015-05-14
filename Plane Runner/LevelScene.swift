@@ -19,8 +19,8 @@ class LevelScene: SKScene {
     let tutorialNode = SKNode()
     
     // Level Dictionary
-    var levelPlistString: String!
-    var levelPlist: String!
+    var levelString: String!
+    var levelPlistPath: String!
     var levelData: NSDictionary!
     
     // Win distance
@@ -103,9 +103,9 @@ class LevelScene: SKScene {
     
     required init(size: CGSize, level: String) {
         super.init(size: size)
-        levelPlistString =  level
-        levelPlist = NSBundle.mainBundle().pathForResource(level, ofType: "plist")!
-        levelData = NSDictionary(contentsOfFile: levelPlist)
+        levelString =  level
+        levelPlistPath = NSBundle.mainBundle().pathForResource(level, ofType: "plist")!
+        levelData = NSDictionary(contentsOfFile: levelPlistPath)
     }
 }
 
@@ -468,7 +468,7 @@ extension LevelScene {
         winDialog.addChild(winUI)
         
         let winTextNode = LevelHelper.wonTextNode()
-        winTextNode.position = CGPoint(x: self.view!.frame.width / 2, y: self.view!.frame.height / 2 + (winUI.size.height * 0.40))
+        winTextNode.position = CGPoint(x: self.view!.frame.width / 2, y: self.view!.frame.height / 2 + (winUI.size.height * 0.25))
         winTextNode.zPosition = ZLevel.Label
         
         winDialog.addChild(winTextNode)
@@ -478,15 +478,15 @@ extension LevelScene {
         let buttonDistance = winUI.size.width / 4
         
         replayBtn = SKSpriteNode(texture: replyBtnTexture)
-        replayBtn.position = CGPoint(x: self.view!.frame.width / 2 - buttonDistance, y: self.view!.frame.height / 2 - (winUI.size.height * 0.40))
+        replayBtn.position = CGPoint(x: self.view!.frame.width / 2 - buttonDistance, y: self.view!.frame.height / 2 - (winUI.size.height * 0.25))
         replayBtn.zPosition = ZLevel.Label
         
         nextBtn = SKSpriteNode(texture: nextLevelBtnTexture)
-        nextBtn.position = CGPoint(x: self.view!.frame.width / 2, y: self.view!.frame.height / 2 - (winUI.size.height * 0.40))
+        nextBtn.position = CGPoint(x: self.view!.frame.width / 2, y: self.view!.frame.height / 2 - (winUI.size.height * 0.25))
         nextBtn.zPosition = ZLevel.Label
         
         levelMenuBtn = SKSpriteNode(texture: LevelMenuTexture)
-        levelMenuBtn.position = CGPoint(x: self.view!.frame.width / 2 + buttonDistance, y: self.view!.frame.height / 2 - (winUI.size.height * 0.40))
+        levelMenuBtn.position = CGPoint(x: self.view!.frame.width / 2 + buttonDistance, y: self.view!.frame.height / 2 - (winUI.size.height * 0.25))
         levelMenuBtn.zPosition = ZLevel.Label
         
         winDialog.addChild(replayBtn)
@@ -547,7 +547,7 @@ extension LevelScene {
     func restartLevel() {
         // Reset scene
         audioPlayer.stop()
-        let scene = LevelScene(size: size, level: levelPlistString)
+        let scene = LevelScene(size: size, level: levelString)
         self.view?.presentScene(scene)
     }
 }
