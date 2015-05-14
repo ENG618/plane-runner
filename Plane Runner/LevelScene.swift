@@ -509,7 +509,7 @@ extension LevelScene {
     
     func animateStars() {
         let delay = SKAction.waitForDuration(1)
-
+        
         // Bronze Actions
         let changeToBronze = SKAction.setTexture(starBronzeTexture)
         let addBronzeEmitter = SKAction.runBlock({
@@ -539,7 +539,7 @@ extension LevelScene {
         
         
         
-
+        
         
         starHolderNode.runAction(SKAction.sequence([bronzeSequence, silverSequence, goldSequence]))
     }
@@ -602,7 +602,7 @@ extension LevelScene {
         self.runAction(starFX)
         
         let moveStar = SKAction.moveTo(CGPoint(x: 10, y: view!.frame.height - 20), duration: 1.5)
-//        let shrinkStar = SKAction.scaleXTo(0.5, duration: 1.5)
+        //        let shrinkStar = SKAction.scaleXTo(0.5, duration: 1.5)
         let shrinkStar = SKAction.resizeToWidth(star.frame.width / 2, height: star.frame.height / 2, duration: 1.5)
         let moveAndShring = SKAction.group([moveStar, shrinkStar])
         let removeStar = SKAction.removeFromParent()
@@ -641,6 +641,7 @@ extension LevelScene {
         
         for touch: AnyObject in touches {
             let location = touch.locationInNode(self)
+            
             if hudPauseButn.containsPoint(location) {
                 self.runAction(clickFX)
                 println("Pause/Play")
@@ -649,24 +650,41 @@ extension LevelScene {
                 } else {
                     pause()
                 }
-            } else {
-                if gameOver {
-                    // Reset scene
-                    let scene = LevelScene(size: size, level: levelPlistString)
-                    self.view?.presentScene(scene)
-                } else if !gamePaused && !levelWon {
-                    // Used for contiuous flying while touching screen.
-                    isTouching = true
-                    
-                    let addSmoke = SKAction.runBlock({
-                        let planeEngineSmoke = NSKeyedUnarchiver.unarchiveObjectWithFile(NSBundle.mainBundle().pathForResource("SmokeParticle", ofType: "sks")!) as! SKEmitterNode
-                        planeEngineSmoke.position = CGPoint(x: -20, y: 0)
-                        planeEngineSmoke.zPosition = ZLevel.PlaneSmoke
-                        self.plane.addChild(planeEngineSmoke)
-                    })
-                    
-                    plane.runAction(SKAction.group([planeFlyingFX, addSmoke]))
+            }
+            
+            if levelWon {
+                
+                if replayBtn.containsPoint(location) {
+                    println("Replay level")
                 }
+                if nextBtn.containsPoint(location) {
+                    println("Next Level")
+                }
+                
+                if levelMenuBtn.containsPoint(location) {
+                    println("Level Menu")
+                }
+            }
+            
+            if gameOver {
+                // Reset scene
+                let scene = LevelScene(size: size, level: levelPlistString)
+                self.view?.presentScene(scene)
+            }
+            
+            if !gamePaused && !levelWon {
+                // Used for contiuous flying while touching screen.
+                isTouching = true
+                
+                let addSmoke = SKAction.runBlock({
+                    let planeEngineSmoke = NSKeyedUnarchiver.unarchiveObjectWithFile(NSBundle.mainBundle().pathForResource("SmokeParticle", ofType: "sks")!) as! SKEmitterNode
+                    planeEngineSmoke.position = CGPoint(x: -20, y: 0)
+                    planeEngineSmoke.zPosition = ZLevel.PlaneSmoke
+                    self.plane.addChild(planeEngineSmoke)
+                })
+                plane.physicsBody?.velocity = CGVectorMake(0, 0)
+                plane.physicsBody?.applyImpulse(CGVectorMake(0, 8))
+                plane.runAction(SKAction.group([planeFlyingFX, addSmoke]))
             }
         }
     }
@@ -676,9 +694,9 @@ extension LevelScene {
     }
     
     override func update(currentTime: NSTimeInterval) {
-        if isTouching {
-            plane.physicsBody?.applyForce(CGVectorMake(0, 50))
-        }
+        //        if isTouching {
+        //            plane.physicsBody?.applyForce(CGVectorMake(0, 50))
+        //        }
         
         if distanceFlown >= Int(sceneLength) / 10 {
             if !levelWon {
