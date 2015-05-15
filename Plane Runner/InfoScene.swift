@@ -12,7 +12,7 @@ class InfoScene: SKScene {
     
     // Nodes
     let worldNode = SKNode()
-    let backNode = SKNode()
+    let backBtnNode = SKNode()
     let dialogNode = SKNode()
     
     // Textures
@@ -25,7 +25,7 @@ class InfoScene: SKScene {
     
     override func didMoveToView(view: SKView) {
         self.addChild(worldNode)
-        worldNode.addChild(backNode)
+        worldNode.addChild(backBtnNode)
         worldNode.addChild(dialogNode)
         
         self.physicsWorld.contactDelegate = self
@@ -53,7 +53,7 @@ extension InfoScene {
         let backBtn = SKSpriteNode(texture: backBtnTexture)
         backBtn.position = CGPoint(x: 10 + backBtnTexture.size().width / 2, y: -10 - backBtnTexture.size().height / 2 + view.frame.height)
         
-        backNode.addChild(backBtn)
+        backBtnNode.addChild(backBtn)
     }
     
     func createDialog(view: SKView) {
@@ -149,7 +149,7 @@ extension InfoScene {
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         for touch: AnyObject in touches {
             let location = touch.locationInNode(self)
-            if backNode.containsPoint(location) {
+            if backBtnNode.containsPoint(location) {
                 println("Start button touched")
                 self.runAction(clickFX)
                 

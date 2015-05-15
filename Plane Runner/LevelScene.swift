@@ -305,9 +305,10 @@ extension LevelScene {
         
         for rock in rocksArray {
             
+            let rockScale = rock["scale"] as! CGFloat
             
             let rockNode = SKSpriteNode(texture: rockTexture)
-            rockNode.setScale(2.0)
+            rockNode.setScale(rockScale)
             
             let x = rock["x"]?.floatValue
             let y = rock["y"]?.floatValue
@@ -347,8 +348,11 @@ extension LevelScene {
         
         for rockDown in rocksDownArray {
             
+            
+            let rockDownScale = rockDown["scale"] as! CGFloat
+            
             let rockDownNode = SKSpriteNode(texture: rockDownTexture)
-            rockDownNode.setScale(2.0)
+            rockDownNode.setScale(rockDownScale)
             
             let x = rockDown["x"]?.floatValue
             let xPosition = CGFloat(x!) - rockDownNode.size.width/2
@@ -692,6 +696,10 @@ extension LevelScene {
                 
                 if levelMenuBtn.containsPoint(location) {
                     println("Level Menu")
+                    // Reset scene
+                    audioPlayer.stop()
+                    let menuScene = LevelMenuScene(size: size)
+                    self.view?.presentScene(menuScene)
                 }
             }
             
