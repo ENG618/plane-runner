@@ -16,11 +16,14 @@ class MenuScene: SKScene {
     let titleNode = SKNode()
     let startNode = SKNode()
     let infoNode = SKNode()
+    let leaderNode = SKNode()
     
     // Textures
     let bgTexture = SKTexture(imageNamed: BackgroundImage)
     let buttonTexture = SKTexture(imageNamed: ButtonSmallImage)
     let infoTexture = SKTexture(imageNamed: InfoIconImage)
+    let leaderBoad = SKTexture(imageNamed: LeaderBoard)
+    
     
     var clickFX: SKAction!
     
@@ -41,6 +44,7 @@ class MenuScene: SKScene {
         createTitle(view)
         createStartButton(view)
         createInfoButton(view)
+        createLeaderBoardButton(view)
     }
 }
 
@@ -134,6 +138,14 @@ extension MenuScene {
         
         worldNode.addChild(infoNode)
     }
+    
+    func createLeaderBoardButton(view: SKView) {
+        let leaderBtn = SKSpriteNode(texture: leaderBoad)
+        leaderBtn.position = CGPoint(x: leaderBtn.size.width * 2, y: view.frame.height/2 - view.frame.height/3)
+        
+        leaderNode.addChild(leaderBtn)
+        worldNode.addChild(leaderNode)
+    }
 }
 
 // MARK: Input Methods
@@ -150,6 +162,9 @@ extension MenuScene {
                 self.runAction(clickFX)
                 let infoScene = InfoScene(size: size)
                 self.view?.presentScene(infoScene, transition: SKTransition.flipVerticalWithDuration(0.7))
+            } else if leaderNode.containsPoint(location) {
+                // TODO: Launch Game Center
+                println("Leaderboard touched")
             }
         }
     }

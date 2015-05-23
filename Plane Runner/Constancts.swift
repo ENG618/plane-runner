@@ -35,6 +35,7 @@ let ThreeImage = "3"
 let Replay = "return"
 let NextLevel = "right"
 let LevelMenu = "menuGrid"
+let LeaderBoard = "leaderboardsComplex"
 
 // MARK: Sounds
 let PlaneFlyingSoundFX = "Helicopter.mp3"
