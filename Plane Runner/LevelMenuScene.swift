@@ -23,6 +23,7 @@ class LevelMenuScene: SKScene {
     
     // Level Nodes
     private var levelOne: SKSpriteNode!
+    private var levelTwo: SKSpriteNode!
     
     var clickFX: SKAction!
     
@@ -64,7 +65,7 @@ extension LevelMenuScene {
     func createLevels(view: SKView) {
         let levelSeperation = self.view!.frame.width / 3
         
-        
+        // Level One
         levelOne = SKSpriteNode(texture: levelBackgroundTexture)
         levelOne.position = CGPoint(x: view.frame.width / 2 - levelSeperation, y: view.frame.height / 2)
         levelOne.zPosition = ZLevel.UiBackground
@@ -75,12 +76,26 @@ extension LevelMenuScene {
         let levelOneStar = SKSpriteNode(texture: starEmpty)
         levelOneStar.position = CGPoint(x: 0, y: -25)
         
-        
         levelOne.addChild(levelOneIcon)
         levelOne.addChild(levelOneStar)
         
-        
         worldNode.addChild(levelOne)
+        
+        // Level Two
+        levelTwo = SKSpriteNode(texture: levelBackgroundTexture)
+        levelTwo.position = CGPoint(x: view.frame.width / 2, y: view.frame.height / 2)
+        levelTwo.zPosition = ZLevel.UiBackground
+        
+        let levelTwoIcon = SKSpriteNode(texture: LevelHelper.getLetterTexture("2"))
+        levelTwoIcon.position = CGPoint(x: 0, y: 25)
+        
+        let levelTwoStar = SKSpriteNode(texture: starEmpty)
+        levelTwoStar.position = CGPoint(x: 0, y: -25)
+        
+        levelTwo.addChild(levelTwoIcon)
+        levelTwo.addChild(levelTwoStar)
+         
+        worldNode.addChild(levelTwo)
         
     }
 }
@@ -101,6 +116,12 @@ extension LevelMenuScene {
                 self.runAction(clickFX)
                 let levelOneScene = LevelScene(size: size, level: "Level01")
                 self.view?.presentScene(levelOneScene)
+            }
+            
+            if levelTwo.containsPoint(location){
+                self.runAction(clickFX)
+                let levelTwoScene = LevelScene(size: size, level: "Level02")
+                self.view?.presentScene(levelTwoScene)
             }
         }
     }

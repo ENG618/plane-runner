@@ -20,7 +20,7 @@ class GameViewController: UIViewController {
                 skView.showsFPS = true
                 skView.showsNodeCount = true
                 // Uncomment to show game physics
-                skView.showsPhysics = true
+                //skView.showsPhysics = true
                 skView.ignoresSiblingOrder = true
                 
                 scene.scaleMode = .Fill
