@@ -41,8 +41,6 @@ class LevelMenuScene: SKScene {
         createBackButton(view)
         createLevels(view)
     }
-
-   
 }
 
 // MARK: Scene Helpers
@@ -72,6 +70,7 @@ extension LevelMenuScene {
         
         let levelOneIcon = SKSpriteNode(texture: LevelHelper.getLetterTexture("1"))
         levelOneIcon.position = CGPoint(x: 0, y: 25)
+        levelOneIcon.zPosition = ZLevel.Label
         
         let levelOneStar = SKSpriteNode(texture: starEmpty)
         levelOneStar.position = CGPoint(x: 0, y: -25)
@@ -88,6 +87,7 @@ extension LevelMenuScene {
         
         let levelTwoIcon = SKSpriteNode(texture: LevelHelper.getLetterTexture("2"))
         levelTwoIcon.position = CGPoint(x: 0, y: 25)
+        levelTwoIcon.zPosition = ZLevel.Label
         
         let levelTwoStar = SKSpriteNode(texture: starEmpty)
         levelTwoStar.position = CGPoint(x: 0, y: -25)
