@@ -22,6 +22,8 @@
 		5C50FA931AE5ABFE0068FD66 /* Plane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50FA921AE5ABFE0068FD66 /* Plane.swift */; };
 		5C50FA9A1AE5FF7E0068FD66 /* PlaneColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50FA991AE5FF7E0068FD66 /* PlaneColor.swift */; };
 		5C5516B41AF15AB500E35564 /* LevelScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5516B31AF15AB500E35564 /* LevelScene.swift */; };
+		5C56DE111B114071001DA0D5 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C56DE101B114071001DA0D5 /* Player.swift */; };
+		5C56DE131B114903001DA0D5 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C56DE121B114903001DA0D5 /* GameKit.framework */; };
 		5CA474E11AE7571A00E71BE7 /* background.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5CA474E01AE7571A00E71BE7 /* background.atlas */; };
 		5CA474E51AE7573200E71BE7 /* numbers.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5CA474E41AE7573200E71BE7 /* numbers.atlas */; };
 		5CA474E71AE7573700E71BE7 /* obstacles.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5CA474E61AE7573700E71BE7 /* obstacles.atlas */; };
@@ -78,6 +80,8 @@
 		5C50FA921AE5ABFE0068FD66 /* Plane.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plane.swift; sourceTree = "<group>"; };
 		5C50FA991AE5FF7E0068FD66 /* PlaneColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaneColor.swift; sourceTree = "<group>"; };
 		5C5516B31AF15AB500E35564 /* LevelScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelScene.swift; sourceTree = "<group>"; };
+		5C56DE101B114071001DA0D5 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		5C56DE121B114903001DA0D5 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		5CA474E01AE7571A00E71BE7 /* background.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = background.atlas; sourceTree = "<group>"; };
 		5CA474E41AE7573200E71BE7 /* numbers.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = numbers.atlas; sourceTree = "<group>"; };
 		5CA474E61AE7573700E71BE7 /* obstacles.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = obstacles.atlas; sourceTree = "<group>"; };
@@ -109,6 +113,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C4052F81AD841280088EE70 /* AVFoundation.framework in Frameworks */,
+				5C56DE131B114903001DA0D5 /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,6 +130,7 @@
 		5C4052C01AD73B260088EE70 = {
 			isa = PBXGroup;
 			children = (
+				5C56DE121B114903001DA0D5 /* GameKit.framework */,
 				5C4052F71AD841280088EE70 /* AVFoundation.framework */,
 				5C4052CB1AD73B260088EE70 /* Plane Runner */,
 				5C4052E51AD73B260088EE70 /* Plane RunnerTests */,
@@ -210,6 +216,7 @@
 				5CADD6A41AE9DFFE00707677 /* LevelHelper.swift */,
 				5C4C4F5B1AEDA03300624154 /* Constancts.swift */,
 				5CED82EF1B05100500DA0CE4 /* LevelManager.swift */,
+				5C56DE101B114071001DA0D5 /* Player.swift */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -301,6 +308,11 @@
 					5C4052C81AD73B260088EE70 = {
 						CreatedOnToolsVersion = 6.2;
 						DevelopmentTeam = 62K9L5MXWH;
+						SystemCapabilities = {
+							com.apple.GameCenter = {
+								enabled = 1;
+							};
+						};
 					};
 					5C4052E11AD73B260088EE70 = {
 						CreatedOnToolsVersion = 6.2;
@@ -376,6 +388,7 @@
 				5CADD69F1AE8BA1600707677 /* HUD.swift in Sources */,
 				5C4C4F581AED334200624154 /* InfoScene.swift in Sources */,
 				5C4052D31AD73B260088EE70 /* MenuScene.swift in Sources */,
+				5C56DE111B114071001DA0D5 /* Player.swift in Sources */,
 				5CED82F01B05100600DA0CE4 /* LevelManager.swift in Sources */,
 				5C5516B41AF15AB500E35564 /* LevelScene.swift in Sources */,
 				5C4052D51AD73B260088EE70 /* GameViewController.swift in Sources */,
@@ -510,9 +523,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Plane Runner/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -521,9 +537,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Plane Runner/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

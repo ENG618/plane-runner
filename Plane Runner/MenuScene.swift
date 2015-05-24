@@ -6,10 +6,14 @@
 //  Copyright (c) 2015 Garcia Enterprise. All rights reserved.
 //
 
+import UIKit
 import SpriteKit
 import AVFoundation
+import GameKit
 
 class MenuScene: SKScene {
+    
+    var player: Player!
     
     // Nodes
     let worldNode = SKNode()
@@ -45,6 +49,9 @@ class MenuScene: SKScene {
         createStartButton(view)
         createInfoButton(view)
         createLeaderBoardButton(view)
+        
+//        player = Player.sharedInstance
+//        authLocalPlayer()
     }
 }
 
@@ -148,6 +155,22 @@ extension MenuScene {
     }
 }
 
+// MARK: Game Center Helpers
+extension MenuScene: GKGameCenterControllerDelegate {
+    
+    func showLeaderboard() {
+//        self.presentViewController(vc, andimated: true, completion: nil)
+        let vc = self.view?.window?.rootViewController
+        let gc = GKGameCenterViewController()
+        gc.gameCenterDelegate = self
+        vc?.presentViewController(gc, animated: true, completion: nil)
+    }
+    
+    func gameCenterViewControllerDidFinish(gameCenterViewController: GKGameCenterViewController!) {
+        gameCenterViewController.dismissViewControllerAnimated(true, completion: nil)
+    }
+}
+
 // MARK: Input Methods
 extension MenuScene {
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
@@ -165,6 +188,7 @@ extension MenuScene {
             } else if leaderNode.containsPoint(location) {
                 // TODO: Launch Game Center
                 println("Leaderboard touched")
+                showLeaderboard()
             }
         }
     }

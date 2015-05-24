@@ -8,6 +8,7 @@
 
 import UIKit
 import SpriteKit
+import GameKit
 
 class GameViewController: UIViewController {
     
@@ -26,6 +27,8 @@ class GameViewController: UIViewController {
                 scene.scaleMode = .Fill
                 
                 skView.presentScene(scene)
+                
+                authLocalPlayer()
             }
         }
     }
@@ -49,5 +52,25 @@ class GameViewController: UIViewController {
 
     override func prefersStatusBarHidden() -> Bool {
         return true
+    }
+}
+
+extension GameViewController {
+    
+    func authLocalPlayer() {
+        let player = Player.sharedInstance
+        
+        player.authLocalPlayer(self)
+        
+//        var localPlayer = GKLocalPlayer()
+//        println(localPlayer)
+//        localPlayer.authenticateHandler = {(viewController, error) -> Void in
+//            if ((viewController) != nil) {
+//                self.presentViewController(viewController, animated: true, completion: nil)
+//            }else{
+//                
+//                println((GKLocalPlayer.localPlayer().authenticated))
+//            }
+//        }
     }
 }
