@@ -523,7 +523,9 @@ extension LevelScene {
         // Add win dialog to world
         worldNode.addChild(levelDialog)
         
-        animateStars()
+        if didWin {
+            animateStars()
+        }
     }
     
     func animateStars() {
@@ -717,7 +719,7 @@ extension LevelScene {
                 }
             }
             
-            if levelWon {
+            if levelWon || gameOver {
                 
                 if replayBtn.containsPoint(location) {
                     restartLevel()
@@ -735,11 +737,11 @@ extension LevelScene {
                 }
             }
             
-            if gameOver {
-                restartLevel()
-            }
+//            if gameOver {
+//                restartLevel()
+//            }
             
-            if !gamePaused && !levelWon {
+            if !gamePaused && !levelWon && !gameOver {
                 // Used for contiuous flying while touching screen.
                 isTouching = true
                 
