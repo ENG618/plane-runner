@@ -81,11 +81,9 @@ class LevelScene: SKScene {
     // HUD
     var hud = SKNode()
     var hudDistanceLabel = SKLabelNode(fontNamed: GameFont)
-    var distanceFlown = 0
     var hudPauseButn = SKNode()
     var hudStarNode = SKNode()
     var hudStarLabel = SKLabelNode(fontNamed: GameFont)
-    var starsCollected = 0
     
     // Sound Actions
     var planeCrashFX: SKAction!
@@ -141,6 +139,10 @@ extension LevelScene {
             audioPlayer.play()
         }
         
+        // Reset points in levelManager
+        levelManager.reset()
+        
+        // Configure scene
         loadResouces()
         createHUD(view)
         createBoundry(view)
@@ -203,7 +205,7 @@ extension LevelScene {
         hud.addChild(hudPauseButn)
         
         // Create distance label
-        hudDistanceLabel.text = "Distance: \(distanceFlown) meters"
+        hudDistanceLabel.text = "Distance: \(levelManager.distance) meters"
         hudDistanceLabel.fontColor = SKColor.blackColor()
         hudDistanceLabel.fontSize = 14
         hudDistanceLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
@@ -217,7 +219,7 @@ extension LevelScene {
         let star = SKSpriteNode(texture: starTexture)
         star.position = CGPoint(x: 10 + star.size.width / 2, y: view.frame.height - hudDistanceLabel.frame.height - 20)
         
-        hudStarLabel.text = "= \(starsCollected)"
+        hudStarLabel.text = "= \(levelManager.starsCollected)"
         hudStarLabel.fontColor = SKColor.blackColor()
         hudStarLabel.fontSize = 14
         hudStarLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
@@ -559,7 +561,7 @@ extension LevelScene {
         let goldSequence = SKAction.sequence([delay, changeToGold, addGoldEmitter])
         
         
-        switch starsCollected {
+        switch levelManager.starsCollected {
         case 1:
             starHolderNode.runAction(bronzeSequence)
         case 2:
@@ -621,8 +623,9 @@ extension LevelScene {
     
     func updateDistance() {
         //        runAction(distanceIncreasFX)
-        distanceFlown++
-        hudDistanceLabel.text = "Distance: \(distanceFlown) meters"
+        levelManager.distance++
+//        distanceFlown++
+        hudDistanceLabel.text = "Distance: \(levelManager.distance) meters"
     }
     
     func collectStar(star: SKNode) {
@@ -644,8 +647,8 @@ extension LevelScene {
         
         star.runAction(moveAndRemoveStar)
         
-        starsCollected++
-        hudStarLabel.text = "= \(starsCollected)"
+        levelManager.starsCollected++
+        hudStarLabel.text = "= \(levelManager.starsCollected)"
     }
     
     func won() {
@@ -684,7 +687,7 @@ extension LevelScene {
             
             var starReporter = GKScore(leaderboardIdentifier: "planeRunnerLeaderboard")
             
-            starReporter.value = Int64(starsCollected)
+            starReporter.value = Int64(levelManager.starsCollected)
             
             var starArray: [GKScore] = [starReporter]
             
@@ -767,7 +770,7 @@ extension LevelScene {
         //            plane.physicsBody?.applyForce(CGVectorMake(0, 50))
         //        }
         
-        if distanceFlown >= Int(sceneLength) / 10 {
+        if levelManager.distance >= Int(sceneLength) / 10 {
             if !levelWon {
                 won()
             }

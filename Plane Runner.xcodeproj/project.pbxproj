@@ -154,11 +154,9 @@
 				5C50FA941AE5B4250068FD66 /* Data */,
 				5CADD6991AE8016300707677 /* Levels */,
 				5CED82601B014FAA00DA0CE4 /* Particles */,
+				5C56DE141B127450001DA0D5 /* Menus */,
 				5C4052CE1AD73B260088EE70 /* AppDelegate.swift */,
 				5C4052D41AD73B260088EE70 /* GameViewController.swift */,
-				5C4052D21AD73B260088EE70 /* MenuScene.swift */,
-				5C4C4F571AED334200624154 /* InfoScene.swift */,
-				5CED82F31B05653E00DA0CE4 /* LevelMenuScene.swift */,
 				5C5516B31AF15AB500E35564 /* LevelScene.swift */,
 				5C4052D61AD73B260088EE70 /* Main.storyboard */,
 				5C4052DB1AD73B260088EE70 /* LaunchScreen.xib */,
@@ -219,6 +217,16 @@
 				5C56DE101B114071001DA0D5 /* Player.swift */,
 			);
 			name = Data;
+			sourceTree = "<group>";
+		};
+		5C56DE141B127450001DA0D5 /* Menus */ = {
+			isa = PBXGroup;
+			children = (
+				5C4052D21AD73B260088EE70 /* MenuScene.swift */,
+				5C4C4F571AED334200624154 /* InfoScene.swift */,
+				5CED82F31B05653E00DA0CE4 /* LevelMenuScene.swift */,
+			);
+			name = Menus;
 			sourceTree = "<group>";
 		};
 		5CA474DF1AE7561700E71BE7 /* assets */ = {
