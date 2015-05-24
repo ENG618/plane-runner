@@ -8,8 +8,12 @@
 
 import SpriteKit
 import AVFoundation
+import GameKit
 
 class LevelScene: SKScene {
+    
+    // Game Center
+    let player = Player.sharedInstance
     
     // Data manager
     let levelManager = LevelManager.sharedInstance
@@ -31,7 +35,7 @@ class LevelScene: SKScene {
     var sceneLength: CGFloat!
     
     // Audio Player
-    private var audioPlayer = AVAudioPlayer()
+    var audioPlayer = AVAudioPlayer()
     
     // Emitters
     var starBronzeEmmiter: SKEmitterNode!
@@ -39,50 +43,49 @@ class LevelScene: SKScene {
     var starGoldEmmiter:SKEmitterNode!
     
     // Level Textures
-    private let backgroundTexture   = SKTexture(imageNamed: BackgroundImage)
-    private let groundTexture       = SKTexture(imageNamed: GroundGrassImage)
-    private let rockTexture         = SKTexture(imageNamed: RockGrassImage)
-    private let rockDownTexture     = SKTexture(imageNamed: RockGrassDownImage)
-    private let planeTexture        = SKTexture(imageNamed: PlaneOneImage)
-    private let planeTexture1       = SKTexture(imageNamed: PlaneTwoImage)
-    private let planeTexture2       = SKTexture(imageNamed: PlaneThreeImage)
-    private let gameOverTexture     = SKTexture(imageNamed: TextGameOver)
-    private let pauseTexture        = SKTexture(imageNamed: ButtonSmallImage)
-    private let pauseIconTexture    = SKTexture(imageNamed: PauseIconImage)
-    private let tapTexture          = SKTexture(imageNamed: TapTick)
-    private let starTexture         = SKTexture(imageNamed: StarGold)
-    private let uiBackground        = SKTexture(imageNamed: UIBackgroundImage)
-    private let replyBtnTexture     = SKTexture(imageNamed: Replay)
-    private let nextLevelBtnTexture = SKTexture(imageNamed: NextLevel)
-    private let LevelMenuTexture    = SKTexture(imageNamed: LevelMenu)
-    private let starEmptyTexture    = SKTexture(imageNamed: StarEmpty)
-    private let starBronzeTexture   = SKTexture(imageNamed: StarBronze)
-    private let starSilverTexture   = SKTexture(imageNamed: StarSilver)
-    private let starGoldTexture     = SKTexture(imageNamed: StarGold)
+    let backgroundTexture   = SKTexture(imageNamed: BackgroundImage)
+    let groundTexture       = SKTexture(imageNamed: GroundGrassImage)
+    let rockTexture         = SKTexture(imageNamed: RockGrassImage)
+    let rockDownTexture     = SKTexture(imageNamed: RockGrassDownImage)
+    let planeTexture        = SKTexture(imageNamed: PlaneOneImage)
+    let planeTexture1       = SKTexture(imageNamed: PlaneTwoImage)
+    let planeTexture2       = SKTexture(imageNamed: PlaneThreeImage)
+    let gameOverTexture     = SKTexture(imageNamed: TextGameOver)
+    let pauseTexture        = SKTexture(imageNamed: ButtonSmallImage)
+    let pauseIconTexture    = SKTexture(imageNamed: PauseIconImage)
+    let tapTexture          = SKTexture(imageNamed: TapTick)
+    let starTexture         = SKTexture(imageNamed: StarGold)
+    let uiBackground        = SKTexture(imageNamed: UIBackgroundImage)
+    let replyBtnTexture     = SKTexture(imageNamed: Replay)
+    let nextLevelBtnTexture = SKTexture(imageNamed: NextLevel)
+    let LevelMenuTexture    = SKTexture(imageNamed: LevelMenu)
+    let starEmptyTexture    = SKTexture(imageNamed: StarEmpty)
+    let starBronzeTexture   = SKTexture(imageNamed: StarBronze)
+    let starSilverTexture   = SKTexture(imageNamed: StarSilver)
+    let starGoldTexture     = SKTexture(imageNamed: StarGold)
     
     // Level Image Nodes
-    private var backgroundLevelNode: SKSpriteNode!
-    private var foregroundLevelNode: SKSpriteNode!
-    private var plane: SKSpriteNode!
-    private var gameOverText: SKSpriteNode!
-    private var winTextNode: SKSpriteNode!
+    var backgroundLevelNode: SKSpriteNode!
+    var foregroundLevelNode: SKSpriteNode!
+    var plane: SKSpriteNode!
     
-    // Win Dialog Nodes
-    private var winUI: SKSpriteNode!
-    private var winDialog = SKNode()
+    // Win/Lose Dialog Nodes
+    var levelUI: SKSpriteNode!
+    var levelDialog = SKNode()
+    var winLoseTextNode: SKSpriteNode!
     var replayBtn: SKSpriteNode!
     var nextBtn: SKSpriteNode!
     var levelMenuBtn: SKSpriteNode!
     var starHolderNode: SKSpriteNode!
     
     // HUD
-    private var hud = SKNode()
-    private var hudDistanceLabel = SKLabelNode(fontNamed: GameFont)
-    private var distanceFlown = 0
-    private var hudPauseButn = SKNode()
-    private var hudStarNode = SKNode()
-    private var hudStarLabel = SKLabelNode(fontNamed: GameFont)
-    private var starsCollected = 0
+    var hud = SKNode()
+    var hudDistanceLabel = SKLabelNode(fontNamed: GameFont)
+    var distanceFlown = 0
+    var hudPauseButn = SKNode()
+    var hudStarNode = SKNode()
+    var hudStarLabel = SKLabelNode(fontNamed: GameFont)
+    var starsCollected = 0
     
     // Sound Actions
     var planeCrashFX: SKAction!
@@ -92,15 +95,14 @@ class LevelScene: SKScene {
     var clickFX: SKAction!
     
     // Labels
-    private var labelHolderGameOver = SKSpriteNode()
-    private var labelHolderGetReady = SKSpriteNode()
+    var labelHolderGetReady = SKSpriteNode()
     
     // Booleans
-    private var gameStarted = false
-    private var gamePaused = false
-    private var gameOver = false
-    private var isTouching = false
-    private var levelWon = false
+    var gameStarted = false
+    var gamePaused = false
+    var gameOver = false
+    var isTouching = false
+    var levelWon = false
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -122,8 +124,6 @@ extension LevelScene {
         addChild(worldNode)
         // Add moving nodes to world
         worldNode.addChild(movingNodes)
-        // Add gameover node
-        worldNode.addChild(labelHolderGameOver)
         // Add tutorial node
         worldNode.addChild(tutorialNode)
         
@@ -184,9 +184,6 @@ extension LevelScene {
         
         // Click sound effect
         clickFX = SKAction.repeatAction(SKAction.playSoundFileNamed(ClickFX, waitForCompletion: true), count: 1)
-        
-        // Game Over
-        gameOverText = SKSpriteNode(texture: gameOverTexture)
     }
     
     func createHUD(view: SKView) {
@@ -466,52 +463,65 @@ extension LevelScene {
         tutorialNode.addChild(tapTick)
     }
     
-    func createWinDialog() {
+    func createWinLoseDialog(didWin: Bool) {
         let uiSize = self.view!.frame.height - 50
         
-        winUI = SKSpriteNode(texture: uiBackground)
-        winUI.position = CGPoint(x: self.view!.frame.width / 2, y: self.view!.frame.height / 2)
-        winUI.size = CGSizeMake(uiSize + 50, uiSize)
-        winUI.zPosition = ZLevel.UiBackground
+        levelUI = SKSpriteNode(texture: uiBackground)
+        levelUI.position = CGPoint(x: self.view!.frame.width / 2, y: self.view!.frame.height / 2)
+        levelUI.size = CGSizeMake(uiSize + 50, uiSize)
+        levelUI.zPosition = ZLevel.UiBackground
         
-        winDialog.addChild(winUI)
+        levelDialog.addChild(levelUI)
         
-        winTextNode = LevelHelper.wonTextNode()
-        winTextNode.position = CGPoint(x: self.view!.frame.width / 2, y: self.view!.frame.height / 2 + (winUI.size.height * 0.25))
-        winTextNode.zPosition = ZLevel.Label
+        // Check is win or lose
+        if didWin {
+            // Show Won
+            winLoseTextNode = LevelHelper.wonTextNode()
+            winLoseTextNode.position = CGPoint(x: self.view!.frame.width / 2, y: self.view!.frame.height / 2 + (levelUI.size.height * 0.25))
+            winLoseTextNode.zPosition = ZLevel.Label
+        } else {
+            // Show Gameover
+            winLoseTextNode = SKSpriteNode(texture: gameOverTexture)
+            winLoseTextNode.position = CGPoint(x: self.view!.frame.width / 2, y: self.view!.frame.height / 2 + (levelUI.size.height * 0.25))
+            winLoseTextNode.zPosition = ZLevel.Label
+        }
         
-        winDialog.addChild(winTextNode)
+        levelDialog.addChild(winLoseTextNode)
         
         // TODO: Create buttons for retry, next level, men menu
         
-        let buttonDistance = winUI.size.width / 4
+        let buttonDistance = levelUI.size.width / 4
         
         replayBtn = SKSpriteNode(texture: replyBtnTexture)
-        replayBtn.position = CGPoint(x: self.view!.frame.width / 2 - buttonDistance, y: self.view!.frame.height / 2 - (winUI.size.height * 0.25))
+        replayBtn.position = CGPoint(x: self.view!.frame.width / 2 - buttonDistance, y: self.view!.frame.height / 2 - (levelUI.size.height * 0.25))
         replayBtn.zPosition = ZLevel.Label
         
         nextBtn = SKSpriteNode(texture: nextLevelBtnTexture)
-        nextBtn.position = CGPoint(x: self.view!.frame.width / 2, y: self.view!.frame.height / 2 - (winUI.size.height * 0.25))
+        nextBtn.position = CGPoint(x: self.view!.frame.width / 2, y: self.view!.frame.height / 2 - (levelUI.size.height * 0.25))
         nextBtn.zPosition = ZLevel.Label
         
+        if !didWin {
+            nextBtn.hidden = true
+        }
+        
         levelMenuBtn = SKSpriteNode(texture: LevelMenuTexture)
-        levelMenuBtn.position = CGPoint(x: self.view!.frame.width / 2 + buttonDistance, y: self.view!.frame.height / 2 - (winUI.size.height * 0.25))
+        levelMenuBtn.position = CGPoint(x: self.view!.frame.width / 2 + buttonDistance, y: self.view!.frame.height / 2 - (levelUI.size.height * 0.25))
         levelMenuBtn.zPosition = ZLevel.Label
         
-        winDialog.addChild(replayBtn)
-        winDialog.addChild(nextBtn)
-        winDialog.addChild(levelMenuBtn)
+        levelDialog.addChild(replayBtn)
+        levelDialog.addChild(nextBtn)
+        levelDialog.addChild(levelMenuBtn)
         
         starHolderNode = SKSpriteNode(texture: starEmptyTexture)
         starHolderNode.setScale(4)
         starHolderNode.position = CGPoint(x: self.view!.frame.width / 2, y: self.view!.frame.height / 2)
         starHolderNode.zPosition = ZLevel.Label
         
-        winDialog.addChild(starHolderNode)
+        levelDialog.addChild(starHolderNode)
         
         
         // Add win dialog to world
-        worldNode.addChild(winDialog)
+        worldNode.addChild(levelDialog)
         
         animateStars()
     }
@@ -555,17 +565,6 @@ extension LevelScene {
         case 3:
             starHolderNode.runAction(SKAction.sequence([bronzeSequence, silverSequence, goldSequence]))
         default:
-            // TODO: Lost...try again
-            winTextNode.removeFromParent()
-            
-            nextBtn.hidden = true
-            
-            gameOverText.setScale(2)
-            gameOverText.zPosition = ZLevel.Label
-            gameOverText.position = CGPoint(x: self.view!.frame.width / 2, y: self.view!.frame.height / 2 + (winUI.size.height * 0.25))
-            
-            winDialog.addChild(gameOverText)
-            
             println("Lost")
         }
     }
@@ -656,12 +655,45 @@ extension LevelScene {
         plane.removeAllActions()
         
         
-        createWinDialog()
+        createWinLoseDialog(true)
+        saveHighScore()
     }
     
     func lost() {
         // TODO: Setup lost condition
+        gameOver = true
+        movingNodes.speed = 0
+        
+        isTouching = false
+        
+        // Stop propeller spinning
+        plane.removeAllActions()
+        
+        createWinLoseDialog(false)
     }
+}
+
+// MARK: Game Center methods
+extension LevelScene {
+    
+    func saveHighScore() {
+        if player.isAuthed() {
+            println("Saving High Score")
+            
+            var starReporter = GKScore(leaderboardIdentifier: "planeRunnerLeaderboard")
+            
+            starReporter.value = Int64(starsCollected)
+            
+            var starArray: [GKScore] = [starReporter]
+            
+            GKScore.reportScores(starArray, withCompletionHandler: {(error: NSError!) -> Void in
+                if error != nil {
+                    println("error: \(error.description)")
+                }
+            })
+        }
+    }
+    
 }
 
 // MARK: Input methods
@@ -757,10 +789,10 @@ extension LevelScene: SKPhysicsContactDelegate {
         
         switch notPlane.categoryBitMask {
         case PhysicsCategory.Distance:
-            println("distance increased")
+            println("Distance increased")
             updateDistance()
         case PhysicsCategory.Stars:
-            println("Touched a star")
+            println("Collected a star")
             collectStar(notPlaneNode)
         default:
             println("Plane crashed")
@@ -771,19 +803,7 @@ extension LevelScene: SKPhysicsContactDelegate {
             
             
             if gameOver == false {
-                gameOver = true
-                movingNodes.speed = 0
-                
-                isTouching = false
-                
-                // Stop propeller spinning
-                plane.removeAllActions()
-                
-                gameOverText.setScale(2.0)
-                gameOverText.zPosition = ZLevel.Label
-                gameOverText.position = CGPoint(x: view!.frame.width / 2, y: view!.frame.height / 2)
-                
-                labelHolderGameOver.addChild(gameOverText)
+                lost()
             }
         }
     }

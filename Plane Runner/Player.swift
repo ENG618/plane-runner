@@ -33,4 +33,11 @@ class Player {
             }
         }
     }
+    
+    func isAuthed() -> Bool {
+        if localPlayer.authenticated{
+            return true
+        }
+        return false
+    }
 }
