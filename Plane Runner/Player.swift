@@ -22,7 +22,7 @@ class Player {
     
     func authLocalPlayer(vc: UIViewController) {
         if !localPlayer.authenticated {
-            // TODO: Authenticate user
+            
             localPlayer.authenticateHandler = {(viewController, error) -> Void in
                 if viewController != nil {
                     // Show scene

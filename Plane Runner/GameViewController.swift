@@ -61,16 +61,5 @@ extension GameViewController {
         let player = Player.sharedInstance
         
         player.authLocalPlayer(self)
-        
-//        var localPlayer = GKLocalPlayer()
-//        println(localPlayer)
-//        localPlayer.authenticateHandler = {(viewController, error) -> Void in
-//            if ((viewController) != nil) {
-//                self.presentViewController(viewController, animated: true, completion: nil)
-//            }else{
-//                
-//                println((GKLocalPlayer.localPlayer().authenticated))
-//            }
-//        }
     }
 }
