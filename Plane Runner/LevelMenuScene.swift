@@ -114,13 +114,13 @@ extension LevelMenuScene {
             
             if levelOne.containsPoint(location) {
                 self.runAction(clickFX)
-                let levelOneScene = LevelScene(size: size, level: "Level01")
+                let levelOneScene = LevelScene(size: size, level: LevelNames.LevelOne)
                 self.view?.presentScene(levelOneScene)
             }
             
             if levelTwo.containsPoint(location){
                 self.runAction(clickFX)
-                let levelTwoScene = LevelScene(size: size, level: "Level02")
+                let levelTwoScene = LevelScene(size: size, level: LevelNames.LevelTwo)
                 self.view?.presentScene(levelTwoScene)
             }
         }

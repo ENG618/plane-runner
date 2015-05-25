@@ -51,6 +51,11 @@ let GameFont = "kenvector_future-thin.tff"
 // MARK: Other Resouces
 let BlurAmount = 10.0
 
+struct LevelNames {
+    static let LevelOne = "Level01"
+    static let LevelTwo = "Level02"
+}
+
 struct ZLevel {
     static let Background   : CGFloat = -2.0
     static let Foreground   : CGFloat = -1.0

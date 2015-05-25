@@ -661,7 +661,16 @@ extension LevelScene {
         
         
         createWinLoseDialog(true)
-        saveHighScore()
+        switch levelString {
+        case LevelNames.LevelOne:
+            levelManager.updateStars(Levels.LevelOne)
+        case LevelNames.LevelTwo:
+            levelManager.updateStars(Levels.LevelTwo)
+        default:
+            println("Need to set up new level")
+        }
+        
+//        saveHighScore()
     }
     
     func lost() {
