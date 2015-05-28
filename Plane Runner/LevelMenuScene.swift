@@ -23,12 +23,13 @@ class LevelMenuScene: SKScene {
     let starEmpty = SKTexture(imageNamed: StarEmpty)
     
     // Level Nodes
-    var levelOne: SKSpriteNode!
-    var levelTwo: SKSpriteNode!
-    var levelThree: SKSpriteNode!
-    var levelFour: SKSpriteNode!
-    var levelFive: SKSpriteNode!
-    var levelSix: SKSpriteNode!
+    // Naming: Stage1Level1 = s01l01
+    var s01l01: SKSpriteNode!
+    var s01l02: SKSpriteNode!
+    var s01l03: SKSpriteNode!
+    var s02l01: SKSpriteNode!
+    var s02l02: SKSpriteNode!
+    var s02l03: SKSpriteNode!
     
     
     var clickFX: SKAction!
@@ -100,55 +101,55 @@ extension LevelMenuScene {
         //
         
         // Level One
-        levelOne = SKSpriteNode(texture: levelBackgroundTexture)
-        levelOne.position = CGPoint(x: view.frame.width / 2 - levelWidthSeperation, y: levelHeightSeperation * 2)
-        levelOne.zPosition = ZLevel.UiBackground
+        s01l01 = SKSpriteNode(texture: levelBackgroundTexture)
+        s01l01.position = CGPoint(x: view.frame.width / 2 - levelWidthSeperation, y: levelHeightSeperation * 2)
+        s01l01.zPosition = ZLevel.UiBackground
         
-        let levelOneIcon = SKSpriteNode(texture: LevelHelper.getLetterTexture("1"))
-        levelOneIcon.position = CGPoint(x: 0, y: 25)
-        levelOneIcon.zPosition = ZLevel.Label
+        let s01l01Icon = SKSpriteNode(texture: LevelHelper.getLetterTexture("1"))
+        s01l01Icon.position = CGPoint(x: 0, y: 25)
+        s01l01Icon.zPosition = ZLevel.Label
         
-        let levelOneStar = SKSpriteNode(texture: starEmpty)
-        levelOneStar.position = CGPoint(x: 0, y: -25)
+        let s01l01Star = SKSpriteNode(texture: starEmpty)
+        s01l01Star.position = CGPoint(x: 0, y: -25)
         
-        levelOne.addChild(levelOneIcon)
-        levelOne.addChild(levelOneStar)
+        s01l01.addChild(s01l01Icon)
+        s01l01.addChild(s01l01Star)
         
-        levelsNode.addChild(levelOne)
+        levelsNode.addChild(s01l01)
         
         // Level Two
-        levelTwo = SKSpriteNode(texture: levelBackgroundTexture)
-        levelTwo.position = CGPoint(x: view.frame.width / 2, y: levelHeightSeperation * 2)
-        levelTwo.zPosition = ZLevel.UiBackground
+        s01l02 = SKSpriteNode(texture: levelBackgroundTexture)
+        s01l02.position = CGPoint(x: view.frame.width / 2, y: levelHeightSeperation * 2)
+        s01l02.zPosition = ZLevel.UiBackground
         
-        let levelTwoIcon = SKSpriteNode(texture: LevelHelper.getLetterTexture("2"))
-        levelTwoIcon.position = CGPoint(x: 0, y: 25)
-        levelTwoIcon.zPosition = ZLevel.Label
+        let s01l02Icon = SKSpriteNode(texture: LevelHelper.getLetterTexture("2"))
+        s01l02Icon.position = CGPoint(x: 0, y: 25)
+        s01l02Icon.zPosition = ZLevel.Label
         
-        let levelTwoStar = SKSpriteNode(texture: starEmpty)
-        levelTwoStar.position = CGPoint(x: 0, y: -25)
+        let s01l02Star = SKSpriteNode(texture: starEmpty)
+        s01l02Star.position = CGPoint(x: 0, y: -25)
         
-        levelTwo.addChild(levelTwoIcon)
-        levelTwo.addChild(levelTwoStar)
+        s01l02.addChild(s01l02Icon)
+        s01l02.addChild(s01l02Star)
         
-        levelsNode.addChild(levelTwo)
+        levelsNode.addChild(s01l02)
         
         // Level Three
-        levelThree = SKSpriteNode(texture: levelBackgroundTexture)
-        levelThree.position = CGPoint(x: view.frame.width / 2 + levelWidthSeperation, y: levelHeightSeperation * 2)
-        levelThree.zPosition = ZLevel.UiBackground
+        s01l03 = SKSpriteNode(texture: levelBackgroundTexture)
+        s01l03.position = CGPoint(x: view.frame.width / 2 + levelWidthSeperation, y: levelHeightSeperation * 2)
+        s01l03.zPosition = ZLevel.UiBackground
         
-        let levelThreeIcon = SKSpriteNode(texture: LevelHelper.getLetterTexture("3"))
-        levelThreeIcon.position = CGPoint(x: 0, y: 25)
-        levelThreeIcon.zPosition = ZLevel.Label
+        let s01l03Icon = SKSpriteNode(texture: LevelHelper.getLetterTexture("3"))
+        s01l03Icon.position = CGPoint(x: 0, y: 25)
+        s01l03Icon.zPosition = ZLevel.Label
         
-        let levelThreeStar = SKSpriteNode(texture: starEmpty)
-        levelThreeStar.position = CGPoint(x: 0, y: -25)
+        let s01l03Star = SKSpriteNode(texture: starEmpty)
+        s01l03Star.position = CGPoint(x: 0, y: -25)
         
-        levelThree.addChild(levelThreeIcon)
-        levelThree.addChild(levelThreeStar)
+        s01l03.addChild(s01l03Icon)
+        s01l03.addChild(s01l03Star)
         
-        levelsNode.addChild(levelThree)
+        levelsNode.addChild(s01l03)
     }
     
     func stageTwo(view: SKView, levelWidthSeperation: CGFloat, levelHeightSeperation: CGFloat) {
@@ -158,56 +159,56 @@ extension LevelMenuScene {
         
         let stageTwoXOrigin = view.frame.width
         
-        // Level Four
-        levelFour = SKSpriteNode(texture: levelBackgroundTexture)
-        levelFour.position = CGPoint(x: stageTwoXOrigin + view.frame.width / 2 - levelWidthSeperation, y: levelHeightSeperation * 2)
-        levelFour.zPosition = ZLevel.UiBackground
+        // Stage 2 Level 1
+        s02l01 = SKSpriteNode(texture: levelBackgroundTexture)
+        s02l01.position = CGPoint(x: stageTwoXOrigin + view.frame.width / 2 - levelWidthSeperation, y: levelHeightSeperation * 2)
+        s02l01.zPosition = ZLevel.UiBackground
         
-        let levelFourIcon = SKSpriteNode(texture: LevelHelper.getLetterTexture("1"))
-        levelFourIcon.position = CGPoint(x: 0, y: 25)
-        levelFourIcon.zPosition = ZLevel.Label
+        let s02l01Icon = SKSpriteNode(texture: LevelHelper.getLetterTexture("1"))
+        s02l01Icon.position = CGPoint(x: 0, y: 25)
+        s02l01Icon.zPosition = ZLevel.Label
         
-        let levelFourStar = SKSpriteNode(texture: starEmpty)
-        levelFourStar.position = CGPoint(x: 0, y: -25)
+        let s02l01Star = SKSpriteNode(texture: starEmpty)
+        s02l01Star.position = CGPoint(x: 0, y: -25)
         
-        levelFour.addChild(levelFourIcon)
-        levelFour.addChild(levelFourStar)
+        s02l01.addChild(s02l01Icon)
+        s02l01.addChild(s02l01Star)
         
-        levelsNode.addChild(levelFour)
+        levelsNode.addChild(s02l01)
         
-        // Level Five
-        levelTwo = SKSpriteNode(texture: levelBackgroundTexture)
-        levelTwo.position = CGPoint(x: stageTwoXOrigin + view.frame.width / 2, y: levelHeightSeperation * 2)
-        levelTwo.zPosition = ZLevel.UiBackground
+        // Stage 2 Level 2
+        s02l02 = SKSpriteNode(texture: levelBackgroundTexture)
+        s02l02.position = CGPoint(x: stageTwoXOrigin + view.frame.width / 2, y: levelHeightSeperation * 2)
+        s02l02.zPosition = ZLevel.UiBackground
         
-        let levelTwoIcon = SKSpriteNode(texture: LevelHelper.getLetterTexture("2"))
-        levelTwoIcon.position = CGPoint(x: 0, y: 25)
-        levelTwoIcon.zPosition = ZLevel.Label
+        let s02l02Icon = SKSpriteNode(texture: LevelHelper.getLetterTexture("2"))
+        s02l02Icon.position = CGPoint(x: 0, y: 25)
+        s02l02Icon.zPosition = ZLevel.Label
         
-        let levelTwoStar = SKSpriteNode(texture: starEmpty)
-        levelTwoStar.position = CGPoint(x: 0, y: -25)
+        let s02l02Star = SKSpriteNode(texture: starEmpty)
+        s02l02Star.position = CGPoint(x: 0, y: -25)
         
-        levelTwo.addChild(levelTwoIcon)
-        levelTwo.addChild(levelTwoStar)
+        s02l02.addChild(s02l02Icon)
+        s02l02.addChild(s02l02Star)
         
-        levelsNode.addChild(levelTwo)
+        levelsNode.addChild(s02l02)
         
-        // Level Six
-        levelThree = SKSpriteNode(texture: levelBackgroundTexture)
-        levelThree.position = CGPoint(x: stageTwoXOrigin + view.frame.width / 2 + levelWidthSeperation, y: levelHeightSeperation * 2)
-        levelThree.zPosition = ZLevel.UiBackground
+        // Stage 2 Level 3
+        s02l03 = SKSpriteNode(texture: levelBackgroundTexture)
+        s02l03.position = CGPoint(x: stageTwoXOrigin + view.frame.width / 2 + levelWidthSeperation, y: levelHeightSeperation * 2)
+        s02l03.zPosition = ZLevel.UiBackground
         
-        let levelThreeIcon = SKSpriteNode(texture: LevelHelper.getLetterTexture("3"))
-        levelThreeIcon.position = CGPoint(x: 0, y: 25)
-        levelThreeIcon.zPosition = ZLevel.Label
+        let s02l03Icon = SKSpriteNode(texture: LevelHelper.getLetterTexture("3"))
+        s02l03Icon.position = CGPoint(x: 0, y: 25)
+        s02l03Icon.zPosition = ZLevel.Label
         
-        let levelThreeStar = SKSpriteNode(texture: starEmpty)
-        levelThreeStar.position = CGPoint(x: 0, y: -25)
+        let s02l03Star = SKSpriteNode(texture: starEmpty)
+        s02l03Star.position = CGPoint(x: 0, y: -25)
         
-        levelThree.addChild(levelThreeIcon)
-        levelThree.addChild(levelThreeStar)
+        s02l03.addChild(s02l03Icon)
+        s02l03.addChild(s02l03Star)
         
-        levelsNode.addChild(levelThree)
+        levelsNode.addChild(s02l03)
     }
 }
 
@@ -224,13 +225,13 @@ extension LevelMenuScene {
                 self.view?.presentScene(scene, transition: SKTransition.doorsCloseHorizontalWithDuration(1))
             }
             
-            if levelOne.containsPoint(location) {
+            if s01l01.containsPoint(location) {
                 self.runAction(clickFX)
                 let levelOneScene = LevelScene(size: size, level: LevelNames.LevelOne)
                 self.view?.presentScene(levelOneScene)
             }
             
-            if levelTwo.containsPoint(location){
+            if s01l02.containsPoint(location){
                 self.runAction(clickFX)
                 let levelTwoScene = LevelScene(size: size, level: LevelNames.LevelTwo)
                 self.view?.presentScene(levelTwoScene)
