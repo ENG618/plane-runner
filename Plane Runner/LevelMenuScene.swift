@@ -37,6 +37,8 @@ class LevelMenuScene: SKScene {
         // Click sound effect
         clickFX = SKAction.repeatAction(SKAction.playSoundFileNamed(ClickFX, waitForCompletion: true), count: 1)
         
+        setupGestureRecognizers()
+        
         createBackground(view)
         createBackButton(view)
         createLevels(view)
@@ -45,6 +47,17 @@ class LevelMenuScene: SKScene {
 
 // MARK: Scene Helpers
 extension LevelMenuScene {
+    
+    func setupGestureRecognizers() {
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: Selector("swipedRight:"))
+        swipeRight.direction = .Right
+        view?.addGestureRecognizer(swipeRight)
+        
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: Selector("swipedLeft:"))
+        swipeLeft.direction = .Left
+        view?.addGestureRecognizer(swipeLeft)
+    }
+    
     func createBackground(view: SKView) {
         let bg = SKSpriteNode(texture: bgTexture)
         bg.position = CGPoint(x: view.frame.width/2, y: view.frame.height/2)
@@ -124,6 +137,14 @@ extension LevelMenuScene {
                 self.view?.presentScene(levelTwoScene)
             }
         }
+    }
+    
+    func swipedRight(sender: UISwipeGestureRecognizer) {
+        println("Swiped Right")
+    }
+    
+    func swipedLeft(sender: UISwipeGestureRecognizer) {
+        println("Swiped left")
     }
 }
 

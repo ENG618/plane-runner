@@ -157,7 +157,6 @@
 				5C56DE141B127450001DA0D5 /* Menus */,
 				5C4052CE1AD73B260088EE70 /* AppDelegate.swift */,
 				5C4052D41AD73B260088EE70 /* GameViewController.swift */,
-				5C5516B31AF15AB500E35564 /* LevelScene.swift */,
 				5C4052D61AD73B260088EE70 /* Main.storyboard */,
 				5C4052DB1AD73B260088EE70 /* LaunchScreen.xib */,
 				5CCA783F1AF343DC00E52FBD /* Images.xcassets */,
@@ -248,6 +247,7 @@
 		5CADD6991AE8016300707677 /* Levels */ = {
 			isa = PBXGroup;
 			children = (
+				5C5516B31AF15AB500E35564 /* LevelScene.swift */,
 				5C1CC7B11AF08DB700D795FD /* Level01.plist */,
 				5CED82F51B058A1B00DA0CE4 /* Level02.plist */,
 			);
