@@ -12,6 +12,7 @@ class LevelMenuScene: SKScene {
     
     let worldNode = SKNode()
     let backBtnNode = SKNode()
+    let levelsNode = SKNode()
     let dialogNode = SKNode()
     
     // Textures
@@ -27,9 +28,12 @@ class LevelMenuScene: SKScene {
     
     var clickFX: SKAction!
     
+    var onStageOne: Bool = true
+    
     override func didMoveToView(view: SKView) {
         self.addChild(worldNode)
         worldNode.addChild(backBtnNode)
+        worldNode.addChild(levelsNode)
         worldNode.addChild(dialogNode)
         
         self.physicsWorld.contactDelegate = self
@@ -91,7 +95,7 @@ extension LevelMenuScene {
         levelOne.addChild(levelOneIcon)
         levelOne.addChild(levelOneStar)
         
-        worldNode.addChild(levelOne)
+        levelsNode.addChild(levelOne)
         
         // Level Two
         levelTwo = SKSpriteNode(texture: levelBackgroundTexture)
@@ -108,7 +112,7 @@ extension LevelMenuScene {
         levelTwo.addChild(levelTwoIcon)
         levelTwo.addChild(levelTwoStar)
          
-        worldNode.addChild(levelTwo)
+        levelsNode.addChild(levelTwo)
         
     }
 }
@@ -142,10 +146,20 @@ extension LevelMenuScene {
     
     func swipedRight(sender: UISwipeGestureRecognizer) {
         println("Swiped Right")
+        if !onStageOne {
+            let moveToOne = SKAction.moveByX( self.frame.size.width, y: 0, duration: 0.5)
+            levelsNode.runAction(moveToOne)
+            onStageOne = true
+        }
     }
     
     func swipedLeft(sender: UISwipeGestureRecognizer) {
         println("Swiped left")
+        if onStageOne {
+            let moveToTwo = SKAction.moveByX( -self.frame.size.width, y: 0, duration: 0.5)
+            levelsNode.runAction(moveToTwo)
+            onStageOne = false
+        }
     }
 }
 
