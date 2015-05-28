@@ -115,29 +115,6 @@ extension LevelMenuScene {
 
 // Mark: Input Methods
 extension LevelMenuScene {
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-//        for touch: AnyObject in touches {
-//            let location = touch.locationInNode(self)
-//            if backBtnNode.containsPoint(location) {
-//                println("Back button pressed")
-//                self.runAction(clickFX)
-//                let scene = MenuScene(size: size)
-//                self.view?.presentScene(scene, transition: SKTransition.doorsCloseHorizontalWithDuration(1))
-//            }
-//            
-//            if levelOne.containsPoint(location) {
-//                self.runAction(clickFX)
-//                let levelOneScene = LevelScene(size: size, level: LevelNames.LevelOne)
-//                self.view?.presentScene(levelOneScene)
-//            }
-//            
-//            if levelTwo.containsPoint(location){
-//                self.runAction(clickFX)
-//                let levelTwoScene = LevelScene(size: size, level: LevelNames.LevelTwo)
-//                self.view?.presentScene(levelTwoScene)
-//            }
-//        }
-    }
     
     override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
         for touch: AnyObject in touches {
