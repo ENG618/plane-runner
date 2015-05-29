@@ -34,9 +34,17 @@
 		<array>
 			<dict>
 				<key>scale</key>
+				<integer>1</integer>
+				<key>x</key>
+				<integer>250</integer>
+				<key>y</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>scale</key>
 				<integer>2</integer>
 				<key>x</key>
-				<integer>500</integer>
+				<integer>750</integer>
 				<key>y</key>
 				<integer>0</integer>
 			</dict>
@@ -74,15 +82,7 @@
 				<key>scale</key>
 				<integer>1</integer>
 				<key>x</key>
-				<integer>200</integer>
-				<key>y</key>
-				<integer>0</integer>
-			</dict>
-			<dict>
-				<key>scale</key>
-				<integer>1</integer>
-				<key>x</key>
-				<integer>300</integer>
+				<integer>250</integer>
 				<key>y</key>
 				<integer>0</integer>
 			</dict>
@@ -90,7 +90,7 @@
 				<key>scale</key>
 				<integer>2</integer>
 				<key>x</key>
-				<integer>650</integer>
+				<integer>500</integer>
 				<key>y</key>
 				<integer>0</integer>
 			</dict>
@@ -115,6 +115,22 @@
 				<integer>1</integer>
 				<key>x</key>
 				<integer>2000</integer>
+				<key>y</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>scale</key>
+				<integer>2</integer>
+				<key>x</key>
+				<integer>2200</integer>
+				<key>y</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>scale</key>
+				<integer>1</integer>
+				<key>x</key>
+				<integer>2400</integer>
 				<key>y</key>
 				<integer>0</integer>
 			</dict>

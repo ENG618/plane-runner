@@ -24,6 +24,7 @@
 		5C5516B41AF15AB500E35564 /* LevelScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5516B31AF15AB500E35564 /* LevelScene.swift */; };
 		5C56DE111B114071001DA0D5 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C56DE101B114071001DA0D5 /* Player.swift */; };
 		5C56DE131B114903001DA0D5 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C56DE121B114903001DA0D5 /* GameKit.framework */; };
+		5C56DE161B1921D6001DA0D5 /* Level03.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5C56DE151B1921D4001DA0D5 /* Level03.plist */; };
 		5CA474E11AE7571A00E71BE7 /* background.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5CA474E01AE7571A00E71BE7 /* background.atlas */; };
 		5CA474E51AE7573200E71BE7 /* numbers.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5CA474E41AE7573200E71BE7 /* numbers.atlas */; };
 		5CA474E71AE7573700E71BE7 /* obstacles.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5CA474E61AE7573700E71BE7 /* obstacles.atlas */; };
@@ -82,6 +83,7 @@
 		5C5516B31AF15AB500E35564 /* LevelScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelScene.swift; sourceTree = "<group>"; };
 		5C56DE101B114071001DA0D5 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		5C56DE121B114903001DA0D5 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		5C56DE151B1921D4001DA0D5 /* Level03.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Level03.plist; sourceTree = "<group>"; };
 		5CA474E01AE7571A00E71BE7 /* background.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = background.atlas; sourceTree = "<group>"; };
 		5CA474E41AE7573200E71BE7 /* numbers.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = numbers.atlas; sourceTree = "<group>"; };
 		5CA474E61AE7573700E71BE7 /* obstacles.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = obstacles.atlas; sourceTree = "<group>"; };
@@ -250,6 +252,7 @@
 				5C5516B31AF15AB500E35564 /* LevelScene.swift */,
 				5C1CC7B11AF08DB700D795FD /* Level01.plist */,
 				5CED82F51B058A1B00DA0CE4 /* Level02.plist */,
+				5C56DE151B1921D4001DA0D5 /* Level03.plist */,
 			);
 			name = Levels;
 			sourceTree = "<group>";
@@ -354,6 +357,7 @@
 			files = (
 				5CCA78471AF373F400E52FBD /* star.mp3 in Resources */,
 				5C4052DD1AD73B260088EE70 /* LaunchScreen.xib in Resources */,
+				5C56DE161B1921D6001DA0D5 /* Level03.plist in Resources */,
 				5C4052F31AD7A12D0088EE70 /* backgroundTrack.mp3 in Resources */,
 				5CED825A1B013AE200DA0CE4 /* BronzeParticle.sks in Resources */,
 				5CA474E71AE7573700E71BE7 /* obstacles.atlas in Resources */,

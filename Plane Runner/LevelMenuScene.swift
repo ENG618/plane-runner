@@ -255,23 +255,25 @@ extension LevelMenuScene {
             if onStageOne{
                 println("Stage One")
                 self.runAction(clickFX)
-                let levelOneScene = LevelScene(size: size, level: LevelNames.LevelOne)
-                self.view?.presentScene(levelOneScene)
+                let levelScene = LevelScene(size: size, level: LevelNames.LevelOne)
+                self.view?.presentScene(levelScene)
             } else {
                 println("Stage Two")
             }
         case .Two:
             if onStageOne{
                 self.runAction(clickFX)
-                let levelTwoScene = LevelScene(size: size, level: LevelNames.LevelTwo)
-                self.view?.presentScene(levelTwoScene)
-
+                let levelScene = LevelScene(size: size, level: LevelNames.LevelTwo)
+                self.view?.presentScene(levelScene)
             } else {
                 println("Stage Two")
             }
         case .Three:
             if onStageOne{
                 println("Stage One")
+                self.runAction(clickFX)
+                let levelScene = LevelScene(size: size, level: LevelNames.LevelThree)
+                self.view?.presentScene(levelScene)
             } else {
                 println("Stage Two")
             }

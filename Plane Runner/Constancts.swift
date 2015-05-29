@@ -54,6 +54,7 @@ let BlurAmount = 10.0
 struct LevelNames {
     static let LevelOne = "Level01"
     static let LevelTwo = "Level02"
+    static let LevelThree = "Level03"
 }
 
 struct ZLevel {
