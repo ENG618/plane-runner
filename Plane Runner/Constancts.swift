@@ -52,9 +52,9 @@ let GameFont = "kenvector_future-thin.tff"
 let BlurAmount = 10.0
 
 struct LevelNames {
-    static let LevelOne = "Level01"
-    static let LevelTwo = "Level02"
-    static let LevelThree = "Level03"
+    static let LevelOne = "Level1-01"
+    static let LevelTwo = "Level1-02"
+    static let LevelThree = "Level1-03"
 }
 
 struct ZLevel {

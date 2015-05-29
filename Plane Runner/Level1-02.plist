@@ -64,6 +64,14 @@
 				<key>y</key>
 				<integer>0</integer>
 			</dict>
+			<dict>
+				<key>scale</key>
+				<integer>2</integer>
+				<key>x</key>
+				<integer>2250</integer>
+				<key>y</key>
+				<integer>0</integer>
+			</dict>
 		</array>
 	</dict>
 	<key>RocksDown</key>
@@ -115,6 +123,14 @@
 				<integer>1</integer>
 				<key>x</key>
 				<integer>2000</integer>
+				<key>y</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>scale</key>
+				<integer>2</integer>
+				<key>x</key>
+				<integer>2450</integer>
 				<key>y</key>
 				<integer>0</integer>
 			</dict>
