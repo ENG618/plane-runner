@@ -139,6 +139,7 @@ extension LevelManager {
             }
         }
         
+        save()
         saveHighScore()
     }
     
