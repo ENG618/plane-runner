@@ -81,6 +81,40 @@ enum StageLevel {
     }
 }
 
+enum Leaderboard {
+    case TotalStars
+    case TotalDistance
+    
+    var id: String {
+        switch self {
+        case .TotalStars:
+            return "planeRunnerLeaderboardTotalStars"
+        case .TotalDistance:
+            return "totalDistanceFlown"
+        }
+    }
+}
+
+enum Achievements {
+    case LevelOne
+    case LevelTwo
+    case LevelThree
+    case StageOne
+    
+    var id: String {
+        switch (self) {
+        case .LevelOne:
+            return "levelOneCompleted"
+        case .LevelTwo:
+            return "levelOneCompleted"
+        case .LevelThree:
+            return "levelThreeCompleted"
+        case .StageOne:
+            return "stageOneCompleted"
+        }
+    }
+}
+
 struct ZLevel {
     static let Background   : CGFloat = -2.0
     static let Foreground   : CGFloat = -1.0

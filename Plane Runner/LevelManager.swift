@@ -61,7 +61,7 @@ class LevelManager {
         secondTwoStars = defaults.integerForKey(PRStarsForStageTwoLevelTwoKey)
         secondThreeStars = defaults.integerForKey(PRStarsForStageTwoLevelthereKey)
         
-        updateAchievements()
+        loadAchievements()
     }
     
     func save() {
@@ -96,6 +96,8 @@ extension LevelManager {
                 totalStarsCollected = totalStarsCollected - firstOneStars + starsCollected
                 // Update level stars
                 firstOneStars = starsCollected
+                submitStarsLeaderboard()
+                submitProgress()
             }
             
         case .FirstTwo:
@@ -104,6 +106,8 @@ extension LevelManager {
                 totalStarsCollected = totalStarsCollected - firstTwoStars + starsCollected
                 // Update level stars
                 firstTwoStars = starsCollected
+                submitStarsLeaderboard()
+                submitProgress()
             }
             
         case .FirstThree:
@@ -112,6 +116,8 @@ extension LevelManager {
                 totalStarsCollected = totalStarsCollected - firstThreeStars + starsCollected
                 // Update level stars
                 firstThreeStars = starsCollected
+                submitStarsLeaderboard()
+                submitProgress()
             }
             
         case .SecondOne:
@@ -120,6 +126,8 @@ extension LevelManager {
                 totalStarsCollected = totalStarsCollected - secondOneStars + starsCollected
                 // Update level stars
                 secondOneStars = starsCollected
+                submitStarsLeaderboard()
+                submitProgress()
             }
             
         case .SecondTwo:
@@ -129,6 +137,8 @@ extension LevelManager {
                 totalStarsCollected = totalStarsCollected - secondTwoStars + starsCollected
                 // Update level stars
                 secondTwoStars = starsCollected
+                submitStarsLeaderboard()
+                submitProgress()
             }
             
         case .SecondThree:
@@ -138,22 +148,24 @@ extension LevelManager {
                 totalStarsCollected = totalStarsCollected - secondThreeStars + starsCollected
                 // Update level stars
                 secondThreeStars = starsCollected
+                submitStarsLeaderboard()
+                submitProgress()
             }
         }
         
         save()
-        saveHighScore()
     }
 }
 
 // MARK: Game Center
 extension LevelManager {
     
-    func saveHighScore() {
+    func submitStarsLeaderboard() {
         if player.isAuthed() {
-            println("Saving High Score")
+            println("Saving Stars high Score")
             
-            var starReporter = GKScore(leaderboardIdentifier: "planeRunnerLeaderboardTotalStars")
+            // Report total stars
+            let starReporter = GKScore(leaderboardIdentifier: Leaderboard.TotalStars.id)
             
             starReporter.value = Int64(totalStarsCollected)
             
@@ -161,13 +173,34 @@ extension LevelManager {
             
             GKScore.reportScores(starArray, withCompletionHandler: {(error: NSError!) -> Void in
                 if error != nil {
-                    println("error: \(error.description)")
+                    println("Stars LEaderboard error: \(error.description)")
                 }
             })
         }
     }
     
-    func updateAchievements() {
+    func submitDistanceLeaderboard() {
+        if player.isAuthed() {
+            println("Saving distance high Score")
+            
+            // Report updated total distance flown
+            let distanceReporter = GKScore(leaderboardIdentifier: Leaderboard.TotalDistance.id)
+            
+            distanceReporter.value = Int64(totalDistance)
+            
+            var distanceArray: [GKScore] = [distanceReporter]
+            
+            GKScore.reportScores(distanceArray, withCompletionHandler: { (error: NSError!) -> Void in
+                if error != nil {
+                    println("Distance Leaderboard error: \(error.description)")
+                }
+            })
+        }
+    }
+    
+    
+    
+    func loadAchievements() {
         
         GKAchievement.loadAchievementsWithCompletionHandler({ (achievements: [AnyObject]!, error: NSError!) -> Void in
             if error != nil {
@@ -191,6 +224,8 @@ extension LevelManager {
             }
         })
     }
+    
+    
     
     func submitProgress() {
         

@@ -621,6 +621,7 @@ extension LevelScene {
     func updateDistance() {
         //        runAction(distanceIncreasFX)
         levelManager.distance++
+        levelManager.totalDistance++
 //        distanceFlown++
         hudDistanceLabel.text = "Distance: \(levelManager.distance) meters"
     }
@@ -659,6 +660,7 @@ extension LevelScene {
         
         createWinLoseDialog(true)
         levelManager.updateStars(level)
+        levelManager.submitDistanceLeaderboard()
 
         
 //        saveHighScore()
