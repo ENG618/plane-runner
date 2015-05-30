@@ -75,16 +75,6 @@ class LevelManager {
         defaults.setInteger(secondTwoStars, forKey: PRStarsForStageTwoLevelTwoKey)
         defaults.setInteger(secondThreeStars, forKey: PRStarsForStageTwoLevelthereKey)
     }
-    
-//        var encodedData = NSKeyedArchiver.archivedDataWithRootObject(self)
-//        encodedData.writeToFile(filePath(), atomically: true)
-        
-//        func filePath() -> String! {
-//            if let filePath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true).first?.stringByAppendingPathComponent("gameData") {
-//                return filePath
-//            }
-//            return nil
-//        }
 }
 
 // MARK: Level Score logic
