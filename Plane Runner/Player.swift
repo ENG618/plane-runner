@@ -15,6 +15,18 @@ class Player {
     
     var enabeledGameCenter = true
     var localPlayer: GKLocalPlayer
+    var canUseGameCenter: Bool = false {
+        didSet{
+            if canUseGameCenter == true {
+                // Load previous achievements
+                //loadAchievements()
+            }
+        }
+    }
+    
+    // Achievements
+    var achievements: [(name: String, achievement: GKAchievement)] = []
+    var achievementStrings: [String] = []
     
     init() {
         self.localPlayer = GKLocalPlayer.localPlayer()
@@ -41,3 +53,31 @@ class Player {
         return false
     }
 }
+
+// MARK: Achievements
+//extension Player {
+//    
+//    
+//    func loadAchievements() {
+//        var achievements: [GKAchievement] = []
+//        
+//        GKAchievement.loadAchievementsWithCompletionHandler({ (achievements, error: NSError!) -> Void in
+//            if error != nil {
+//                println("Achievements error: \(error.description)")
+//            } else {
+//                for anAchievement in achievements {
+//                    if let achievement = anAchievement as? GKAchievement {
+//                        self.achievementStrings.append(achievement.identifier)
+//                    }
+//                    //                    let saveableAchievement = (achievement.identifier, achievement)
+//                    //                    self.player.achievements.append(saveableAchievement)
+//                    
+//                }
+//            }
+//        })
+//    }
+//    
+//    
+//    
+//    
+//}

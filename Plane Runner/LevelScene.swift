@@ -12,9 +12,6 @@ import GameKit
 
 class LevelScene: SKScene {
     
-    // Game Center
-    let player = Player.sharedInstance
-    
     // Data manager
     let levelManager = LevelManager.sharedInstance
     
@@ -679,29 +676,6 @@ extension LevelScene {
         
         createWinLoseDialog(false)
     }
-}
-
-// MARK: Game Center methods
-extension LevelScene {
-    
-    func saveHighScore() {
-        if player.isAuthed() {
-            println("Saving High Score")
-            
-            var starReporter = GKScore(leaderboardIdentifier: "planeRunnerLeaderboard")
-            
-            starReporter.value = Int64(levelManager.starsCollected)
-            
-            var starArray: [GKScore] = [starReporter]
-            
-            GKScore.reportScores(starArray, withCompletionHandler: {(error: NSError!) -> Void in
-                if error != nil {
-                    println("error: \(error.description)")
-                }
-            })
-        }
-    }
-    
 }
 
 // MARK: Input methods

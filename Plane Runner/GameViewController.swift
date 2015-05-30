@@ -12,6 +12,11 @@ import GameKit
 
 class GameViewController: UIViewController {
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        authLocalPlayer()
+    }
+    
     override func viewWillLayoutSubviews() {
         if let skView = self.view as? SKView {
             if skView.scene == nil {
@@ -28,7 +33,6 @@ class GameViewController: UIViewController {
                 
                 skView.presentScene(scene)
                 
-                authLocalPlayer()
             }
         }
     }

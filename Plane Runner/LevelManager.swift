@@ -8,7 +8,7 @@
 
 import Foundation
 import GameKit
-    
+
 
 class LevelManager {
     
@@ -60,6 +60,8 @@ class LevelManager {
         secondOneStars = defaults.integerForKey(PRStarsForStageTwoLevelOneKey)
         secondTwoStars = defaults.integerForKey(PRStarsForStageTwoLevelTwoKey)
         secondThreeStars = defaults.integerForKey(PRStarsForStageTwoLevelthereKey)
+        
+        updateAchievements()
     }
     
     func save() {
@@ -142,6 +144,10 @@ extension LevelManager {
         save()
         saveHighScore()
     }
+}
+
+// MARK: Game Center
+extension LevelManager {
     
     func saveHighScore() {
         if player.isAuthed() {
@@ -160,7 +166,39 @@ extension LevelManager {
             })
         }
     }
-
+    
+    func updateAchievements() {
+        
+        GKAchievement.loadAchievementsWithCompletionHandler({ (achievements: [AnyObject]!, error: NSError!) -> Void in
+            if error != nil {
+                println("Achievements error: \(error.description)")
+            } else {
+                if let recievedAchievements = achievements as? [GKAchievement] {
+                    for item in recievedAchievements {
+                        self.player.achievementStrings.append(item.identifier)
+                    }
+                }
+                if achievements != nil {
+                    for anAchievement in achievements {
+                        if let achievement = anAchievement as? GKAchievement {
+                            self.player.achievementStrings.append(achievement.identifier)
+                        }
+                        //                    let saveableAchievement = (achievement.identifier, achievement)
+                        //                    self.player.achievements.append(saveableAchievement)
+                        
+                    }
+                }
+            }
+        })
+    }
+    
+    func submitProgress() {
+        
+    }
+    
+    func saveAchievments() {
+        
+    }
 }
 
 

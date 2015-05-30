@@ -33,7 +33,6 @@ class MenuScene: SKScene {
     var clickFX: SKAction!
     
     override func didMoveToView(view: SKView) {
-        levelManager.load()
         
         println("Size height: \(size.height) Width: \(size.width)")
         println("View Height: \(view.bounds.height) Width: \(view.bounds.width)")
@@ -52,8 +51,7 @@ class MenuScene: SKScene {
         createInfoButton(view)
         createLeaderBoardButton(view)
         
-//        player = Player.sharedInstance
-//        authLocalPlayer()
+        levelManager.load()
     }
 }
 
