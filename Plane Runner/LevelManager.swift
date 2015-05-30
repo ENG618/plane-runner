@@ -10,7 +10,7 @@ import Foundation
 import GameKit
     
 
-class LevelManager: NSObject, NSCoding {
+class LevelManager {
     
     // Singleton
     static let sharedInstance = LevelManager()
@@ -19,11 +19,17 @@ class LevelManager: NSObject, NSCoding {
     let player = Player.sharedInstance
     
     // Key constants
-    let PRStarsForLevelKey = "StarsForLevel"
-    let PRLevelManagerTotalStarsKey = "totalStars"
-    let PRLevelManagerTotalDistanceKey = "totalDistance"
+    let PRStarsForStageOneLevelOneKey = "StarsStageOneLeveOne"
+    let PRStarsForStageOneLevelTwoKey = "StarsStageOneLeveTwo"
+    let PRStarsForStageOneLevelThreeKey = "StarsStageOneLeveThree"
+    let PRStarsForStageTwoLevelOneKey = "StarsStageTwoLeveOne"
+    let PRStarsForStageTwoLevelTwoKey = "StarsStageTwoLeveTwo"
+    let PRStarsForStageTwoLevelthereKey = "StarsStageTwoLeveThree"
+    let PRTotalStarsKey = "TotalStars"
+    let PRTotalDistanceKey = "TotalDistance"
     
-    // Score
+    
+    // Score for games in action
     var distance: Int = 0
     var starsCollected: Int = 0
     
@@ -42,41 +48,43 @@ class LevelManager: NSObject, NSCoding {
     // User Defaults
     let defaults = NSUserDefaults.standardUserDefaults()
     
-    override init() {
-        super.init()
+    func load() {
+        // Load totals
+        totalDistance = defaults.integerForKey(PRTotalDistanceKey)
+        totalStarsCollected = defaults.integerForKey(PRTotalStarsKey)
         
-    }
-    
-    required init(coder aDecoder: NSCoder) {
-        self.starsCollected = 0
-        self.distance = 0
-        self.totalStarsCollected = aDecoder.decodeIntegerForKey(self.PRLevelManagerTotalStarsKey)
-        self.totalDistance = aDecoder.decodeIntegerForKey(self.PRLevelManagerTotalDistanceKey)
-    }
-    
-    func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeInteger(totalStarsCollected, forKey: PRLevelManagerTotalStarsKey)
-        aCoder.encodeInteger(totalDistance, forKey: PRLevelManagerTotalDistanceKey)
-    }
-    
-    func loadInstance() -> LevelManager {
-        if let decodedData = NSFileManager.defaultManager().contentsAtPath(filePath()) {
-            return NSKeyedUnarchiver.unarchiveObjectWithData(decodedData) as! LevelManager
-        }
-        return LevelManager()
+        // Load level data
+        firstOneStars = defaults.integerForKey(PRStarsForStageOneLevelOneKey)
+        firstTwoStars = defaults.integerForKey(PRStarsForStageOneLevelTwoKey)
+        firstThreeStars = defaults.integerForKey(PRStarsForStageOneLevelThreeKey)
+        secondOneStars = defaults.integerForKey(PRStarsForStageTwoLevelOneKey)
+        secondTwoStars = defaults.integerForKey(PRStarsForStageTwoLevelTwoKey)
+        secondThreeStars = defaults.integerForKey(PRStarsForStageTwoLevelthereKey)
     }
     
     func save() {
-        var encodedData = NSKeyedArchiver.archivedDataWithRootObject(self)
-        encodedData.writeToFile(filePath(), atomically: true)
+        // Save totals
+        defaults.setInteger(totalDistance, forKey: PRTotalDistanceKey)
+        defaults.setInteger(totalStarsCollected, forKey: PRTotalStarsKey)
+        
+        // Save level data
+        defaults.setInteger(firstOneStars, forKey: PRStarsForStageOneLevelOneKey)
+        defaults.setInteger(firstTwoStars, forKey: PRStarsForStageOneLevelTwoKey)
+        defaults.setInteger(firstThreeStars, forKey: PRStarsForStageOneLevelThreeKey)
+        defaults.setInteger(secondOneStars, forKey: PRStarsForStageTwoLevelOneKey)
+        defaults.setInteger(secondTwoStars, forKey: PRStarsForStageTwoLevelTwoKey)
+        defaults.setInteger(secondThreeStars, forKey: PRStarsForStageTwoLevelthereKey)
     }
-
-    func filePath() -> String! {
-        if let filePath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true).first?.stringByAppendingPathComponent("gameData") {
-            return filePath
-        }
-        return nil
-    }
+    
+//        var encodedData = NSKeyedArchiver.archivedDataWithRootObject(self)
+//        encodedData.writeToFile(filePath(), atomically: true)
+        
+//        func filePath() -> String! {
+//            if let filePath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true).first?.stringByAppendingPathComponent("gameData") {
+//                return filePath
+//            }
+//            return nil
+//        }
 }
 
 // MARK: Level Score logic
