@@ -32,8 +32,12 @@ class LevelManager: NSObject, NSCoding {
     var totalStarsCollected: Int = 0
     
     // Level Totals
-    var levelOneStars: Int = 0
-    var levelTwoStars: Int = 0
+    var firstOneStars: Int = 0
+    var firstTwoStars: Int = 0
+    var firstThreeStars: Int = 0
+    var secondOneStars: Int = 0
+    var secondTwoStars: Int = 0
+    var secondThreeStars: Int = 0
     
     // User Defaults
     let defaults = NSUserDefaults.standardUserDefaults()
@@ -87,30 +91,54 @@ extension LevelManager {
         switch level {
             
         case .FirstOne:
-            println("LevelOne")
-            if starsCollected > levelOneStars {
+            if starsCollected > firstOneStars {
                 // Update total stars
-                totalStarsCollected = totalStarsCollected - levelOneStars + starsCollected
+                totalStarsCollected = totalStarsCollected - firstOneStars + starsCollected
                 // Update level stars
-                levelOneStars = starsCollected
+                firstOneStars = starsCollected
             }
             
         case .FirstTwo:
-            println("LevelTwo")
-            if starsCollected > levelTwoStars {
+            if starsCollected > firstTwoStars {
                 // Update total stars
-                totalStarsCollected = totalStarsCollected - levelTwoStars + starsCollected
+                totalStarsCollected = totalStarsCollected - firstTwoStars + starsCollected
                 // Update level stars
-                levelTwoStars = starsCollected
+                firstTwoStars = starsCollected
             }
+            
         case .FirstThree:
-            println("1-3 needs to be set up")
+            if starsCollected > firstThreeStars {
+                // Update total stars
+                totalStarsCollected = totalStarsCollected - firstThreeStars + starsCollected
+                // Update level stars
+                firstThreeStars = starsCollected
+            }
+            
         case .SecondOne:
-            println("2-1 needs to be set up")
+            if starsCollected > secondOneStars {
+                // Update total stars
+                totalStarsCollected = totalStarsCollected - secondOneStars + starsCollected
+                // Update level stars
+                secondOneStars = starsCollected
+            }
+            
         case .SecondTwo:
             println("2-2 needs to be set up")
+            if starsCollected > secondTwoStars {
+                // Update total stars
+                totalStarsCollected = totalStarsCollected - secondTwoStars + starsCollected
+                // Update level stars
+                secondTwoStars = starsCollected
+            }
+            
         case .SecondThree:
             println("2-3 needs to be set up")
+            if starsCollected > secondThreeStars {
+                // Update total stars
+                totalStarsCollected = totalStarsCollected - secondThreeStars + starsCollected
+                // Update level stars
+                secondThreeStars = starsCollected
+            }
         }
         
         saveHighScore()
