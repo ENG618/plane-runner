@@ -51,10 +51,34 @@ let GameFont = "kenvector_future-thin.tff"
 // MARK: Other Resouces
 let BlurAmount = 10.0
 
-struct LevelNames {
-    static let LevelOne = "Level1-01"
-    static let LevelTwo = "Level1-02"
-    static let LevelThree = "Level1-03"
+enum StageLevel {
+    // First Stage
+    case FirstOne
+    case FirstTwo
+    case FirstThree
+    // Second Stage
+    case SecondOne
+    case SecondTwo
+    case SecondThree
+    
+    var name: String {
+        get {
+            switch (self) {
+            case .FirstOne:
+                return "Level1-01"
+            case .FirstTwo:
+                return "Level1-02"
+            case .FirstThree:
+                return "Level1-03"
+            case .SecondOne:
+                return "Level2-01"
+            case .SecondTwo:
+                return "Level2-02"
+            case .SecondThree:
+                return "Level2-03"
+            }
+        }
+    }
 }
 
 struct ZLevel {

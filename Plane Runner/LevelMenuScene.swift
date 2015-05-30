@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-enum Level {
+enum LevelSelection {
     case One
     case Two
     case Three
@@ -233,51 +233,53 @@ extension LevelMenuScene {
             
             if sOneLOne.containsPoint(location) {
                 println("Level One")
-                showLevel(Level.One)
+                determineLevel(LevelSelection.One)
             }
             
             if sOnelTwo.containsPoint(location){
                 println("Level Two")
-                showLevel(Level.Two)
+                determineLevel(LevelSelection.Two)
             }
             
             if sOnel0Three.containsPoint(location) {
-//                println("Stage: 1 Level: 3")
+                //                println("Stage: 1 Level: 3")
                 println("Level Three")
-                showLevel(Level.Three)
+                determineLevel(LevelSelection.Three)
             }
         }
     }
     
-    func showLevel(level: Level) {
+    func determineLevel(level: LevelSelection) {
         switch level {
+            
+        // First Stage
         case .One:
+            self.runAction(clickFX)
             if onStageOne{
-                println("Stage One")
-                self.runAction(clickFX)
-                let levelScene = LevelScene(size: size, level: LevelNames.LevelOne)
-                self.view?.presentScene(levelScene)
+                showLevel(StageLevel.FirstOne)
             } else {
-                println("Stage Two")
+                showLevel(StageLevel.SecondOne)
             }
         case .Two:
+            self.runAction(clickFX)
             if onStageOne{
-                self.runAction(clickFX)
-                let levelScene = LevelScene(size: size, level: LevelNames.LevelTwo)
-                self.view?.presentScene(levelScene)
+                showLevel(StageLevel.FirstTwo)
             } else {
-                println("Stage Two")
+                showLevel(StageLevel.SecondTwo)
             }
         case .Three:
+            self.runAction(clickFX)
             if onStageOne{
-                println("Stage One")
-                self.runAction(clickFX)
-                let levelScene = LevelScene(size: size, level: LevelNames.LevelThree)
-                self.view?.presentScene(levelScene)
+                showLevel(StageLevel.FirstThree)
             } else {
-                println("Stage Two")
+                showLevel(StageLevel.SecondThree)
             }
         }
+    }
+    
+    func showLevel(level: StageLevel) {
+        let levelScene = LevelScene(size: size, level: level)
+        self.view?.presentScene(levelScene)
     }
     
     func swipedRight(sender: UISwipeGestureRecognizer) {

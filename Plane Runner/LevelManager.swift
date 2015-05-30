@@ -8,11 +8,6 @@
 
 import Foundation
 import GameKit
-
-enum Levels {
-    case LevelOne
-    case LevelTwo
-}
     
 
 class LevelManager: NSObject, NSCoding {
@@ -88,10 +83,10 @@ extension LevelManager {
         self.starsCollected = 0
     }
     
-    func updateStars(level: Levels) {
+    func updateStars(level: StageLevel) {
         switch level {
             
-        case .LevelOne:
+        case .FirstOne:
             println("LevelOne")
             if starsCollected > levelOneStars {
                 // Update total stars
@@ -100,7 +95,7 @@ extension LevelManager {
                 levelOneStars = starsCollected
             }
             
-        case .LevelTwo:
+        case .FirstTwo:
             println("LevelTwo")
             if starsCollected > levelTwoStars {
                 // Update total stars
@@ -108,7 +103,14 @@ extension LevelManager {
                 // Update level stars
                 levelTwoStars = starsCollected
             }
-            
+        case .FirstThree:
+            println("1-3 needs to be set up")
+        case .SecondOne:
+            println("2-1 needs to be set up")
+        case .SecondTwo:
+            println("2-2 needs to be set up")
+        case .SecondThree:
+            println("2-3 needs to be set up")
         }
         
         saveHighScore()

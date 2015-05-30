@@ -26,7 +26,7 @@ class LevelScene: SKScene {
     let tutorialNode = SKNode()
     
     // Level Dictionary
-    var levelString: String!
+    var level: StageLevel!
     var levelPlistPath: String!
     var levelData: NSDictionary!
     
@@ -106,10 +106,10 @@ class LevelScene: SKScene {
         super.init(coder: aDecoder)
     }
     
-    required init(size: CGSize, level: String) {
+    required init(size: CGSize, level: StageLevel) {
         super.init(size: size)
-        levelString =  level
-        levelPlistPath = NSBundle.mainBundle().pathForResource(level, ofType: "plist")!
+        self.level = level
+        levelPlistPath = NSBundle.mainBundle().pathForResource(level.name, ofType: "plist")!
         levelData = NSDictionary(contentsOfFile: levelPlistPath)
     }
 }
@@ -576,7 +576,7 @@ extension LevelScene {
     func restartLevel() {
         // Reset scene
         audioPlayer.stop()
-        let scene = LevelScene(size: size, level: levelString)
+        let scene = LevelScene(size: size, level: level)
         self.view?.presentScene(scene)
     }
 }
@@ -661,14 +661,8 @@ extension LevelScene {
         
         
         createWinLoseDialog(true)
-        switch levelString {
-        case LevelNames.LevelOne:
-            levelManager.updateStars(Levels.LevelOne)
-        case LevelNames.LevelTwo:
-            levelManager.updateStars(Levels.LevelTwo)
-        default:
-            println("Need to set up new level")
-        }
+        levelManager.updateStars(level)
+
         
 //        saveHighScore()
     }
