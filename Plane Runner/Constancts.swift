@@ -51,6 +51,13 @@ let GameFont = "kenvector_future-thin.tff"
 // MARK: Other Resouces
 let BlurAmount = 10.0
 
+enum Star {
+    case Empty
+    case Bronze
+    case Silver
+    case Gold
+}
+
 enum StageLevel {
     // First Stage
     case FirstOne

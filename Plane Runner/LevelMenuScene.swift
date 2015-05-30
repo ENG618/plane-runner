@@ -14,13 +14,6 @@ enum LevelSelection {
     case Three
 }
 
-enum Star {
-    case Empty
-    case Bronze
-    case Silver
-    case Gold
-}
-
 class LevelMenuScene: SKScene {
     
     let worldNode = SKNode()

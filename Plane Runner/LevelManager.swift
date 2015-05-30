@@ -97,7 +97,7 @@ extension LevelManager {
                 // Update level stars
                 firstOneStars = starsCollected
                 submitStarsLeaderboard()
-                submitProgress()
+                submitProgress(Achievements.LevelOne)
             }
             
         case .FirstTwo:
@@ -107,9 +107,9 @@ extension LevelManager {
                 // Update level stars
                 firstTwoStars = starsCollected
                 submitStarsLeaderboard()
-                submitProgress()
+                submitProgress(Achievements.LevelTwo)
             }
-            
+            submitProgress(Achievements.LevelTwo)
         case .FirstThree:
             if starsCollected > firstThreeStars {
                 // Update total stars
@@ -117,7 +117,7 @@ extension LevelManager {
                 // Update level stars
                 firstThreeStars = starsCollected
                 submitStarsLeaderboard()
-                submitProgress()
+                submitProgress(Achievements.LevelThree)
             }
             
         case .SecondOne:
@@ -127,7 +127,7 @@ extension LevelManager {
                 // Update level stars
                 secondOneStars = starsCollected
                 submitStarsLeaderboard()
-                submitProgress()
+//                submitProgress()
             }
             
         case .SecondTwo:
@@ -138,7 +138,7 @@ extension LevelManager {
                 // Update level stars
                 secondTwoStars = starsCollected
                 submitStarsLeaderboard()
-                submitProgress()
+//                submitProgress()
             }
             
         case .SecondThree:
@@ -149,7 +149,7 @@ extension LevelManager {
                 // Update level stars
                 secondThreeStars = starsCollected
                 submitStarsLeaderboard()
-                submitProgress()
+//                submitProgress()
             }
         }
         
@@ -198,8 +198,6 @@ extension LevelManager {
         }
     }
     
-    
-    
     func loadAchievements() {
         
         GKAchievement.loadAchievementsWithCompletionHandler({ (achievements: [AnyObject]!, error: NSError!) -> Void in
@@ -225,10 +223,58 @@ extension LevelManager {
         })
     }
     
-    
-    
-    func submitProgress() {
+    func achievementProgress(numStars: Int, achievement: GKAchievement) -> GKAchievement {
+        // TODO: determin percent completed
         
+        switch numStars {
+        case 1:
+            achievement.percentComplete = Double(33.0)
+            return achievement
+        case 2:
+            achievement.percentComplete = Double(66.0)
+            return achievement
+        case 3:
+            achievement.percentComplete = Double(100.0)
+            return achievement
+        default:
+            achievement.percentComplete = Double(0.0)
+            return achievement
+        }
+    }
+    
+    func submitProgress(achievement: Achievements) {
+        // TODO: Update achievement progress
+        var achieveUpdateArray: [GKAchievement] = []
+        
+        switch achievement {
+            
+        case .LevelOne:
+            let current = GKAchievement(identifier: Achievements.LevelOne.id)
+            current.showsCompletionBanner = true
+            achieveUpdateArray.append(achievementProgress(firstOneStars, achievement: current))
+            
+        case .LevelTwo:
+            let current = GKAchievement(identifier: achievement.id)
+            current.showsCompletionBanner = true
+            achieveUpdateArray.append(achievementProgress(firstTwoStars, achievement: current))
+            
+        case .LevelThree:
+            let current = GKAchievement(identifier: achievement.id)
+            current.showsCompletionBanner = true
+            achieveUpdateArray.append(achievementProgress(firstThreeStars, achievement: current))
+            
+        case .StageOne:
+            println("StageOne Needs configuring")
+            if firstOneStars == 3 && firstTwoStars == 3 && firstThreeStars == 3 {
+                let completedAchievement = GKAchievement(identifier: achievement.id)
+                completedAchievement.percentComplete = Double(100.00)
+                achieveUpdateArray.append(completedAchievement)
+            }
+        }
+        
+        if achieveUpdateArray.count > 0 {
+            GKAchievement.reportAchievements(achieveUpdateArray, withCompletionHandler: nil)
+        }
     }
     
     func saveAchievments() {
