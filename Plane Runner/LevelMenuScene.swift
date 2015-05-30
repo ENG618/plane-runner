@@ -14,6 +14,13 @@ enum LevelSelection {
     case Three
 }
 
+enum Star {
+    case Empty
+    case Bronze
+    case Silver
+    case Gold
+}
+
 class LevelMenuScene: SKScene {
     
     let worldNode = SKNode()
@@ -21,12 +28,17 @@ class LevelMenuScene: SKScene {
     let levelsNode = SKNode()
     let dialogNode = SKNode()
     
+    let levelManager = LevelManager.sharedInstance
+    
     // Textures
     let bgTexture = SKTexture(imageNamed: BackgroundImage)
     let buttonTexture = SKTexture(imageNamed: ButtonSmallImage)
     let backBtnTexture = SKTexture(imageNamed: BackIconImage)
     let levelBackgroundTexture = SKTexture(imageNamed: UIBackgroundImage)
     let starEmpty = SKTexture(imageNamed: StarEmpty)
+    let starBronze = SKTexture(imageNamed: StarBronze)
+    let starSilver = SKTexture(imageNamed: StarSilver)
+    let starGold = SKTexture(imageNamed: StarGold)
     
     // Level Nodes
     // Naming: Stage1Level1 = s01l01
@@ -101,6 +113,96 @@ extension LevelMenuScene {
         stageTwo(view, levelWidthSeperation: levelWidthSeperation, levelHeightSeperation: levelHeightSeperation)
     }
     
+    func getstarTexture(starColor: Star) -> SKTexture {
+        switch starColor {
+        case .Empty:
+            return starEmpty
+        case .Bronze:
+            return starBronze
+        case .Silver:
+            return starSilver
+        case .Gold:
+            return starGold
+        }
+    }
+    
+    func getCorrectStar(level: StageLevel) -> SKSpriteNode {
+        switch level {
+        case .FirstOne :
+            let numStars = levelManager.firstOneStars
+            switch numStars {
+            case 1:
+                return SKSpriteNode(texture: getstarTexture(.Bronze))
+            case 2:
+                return SKSpriteNode(texture: getstarTexture(.Silver))
+            case 3:
+                return SKSpriteNode(texture: getstarTexture(.Gold))
+            default:
+                return SKSpriteNode(texture: getstarTexture(.Empty))
+            }
+        case .FirstTwo:
+            let numStars = levelManager.firstTwoStars
+            switch numStars {
+            case 1:
+                return SKSpriteNode(texture: getstarTexture(.Bronze))
+            case 2:
+                return SKSpriteNode(texture: getstarTexture(.Silver))
+            case 3:
+                return SKSpriteNode(texture: getstarTexture(.Gold))
+            default:
+                return SKSpriteNode(texture: getstarTexture(.Empty))
+            }
+        case .FirstThree:
+            let numStars = levelManager.firstThreeStars
+            switch numStars {
+            case 1:
+                return SKSpriteNode(texture: getstarTexture(.Bronze))
+            case 2:
+                return SKSpriteNode(texture: getstarTexture(.Silver))
+            case 3:
+                return SKSpriteNode(texture: getstarTexture(.Gold))
+            default:
+                return SKSpriteNode(texture: getstarTexture(.Empty))
+            }
+        case .SecondOne:
+            let numStars = levelManager.secondOneStars
+            switch numStars {
+            case 1:
+                return SKSpriteNode(texture: getstarTexture(.Bronze))
+            case 2:
+                return SKSpriteNode(texture: getstarTexture(.Silver))
+            case 3:
+                return SKSpriteNode(texture: getstarTexture(.Gold))
+            default:
+                return SKSpriteNode(texture: getstarTexture(.Empty))
+            }
+        case .SecondTwo:
+            let numStars = levelManager.secondTwoStars
+            switch numStars {
+            case 1:
+                return SKSpriteNode(texture: getstarTexture(.Bronze))
+            case 2:
+                return SKSpriteNode(texture: getstarTexture(.Silver))
+            case 3:
+                return SKSpriteNode(texture: getstarTexture(.Gold))
+            default:
+                return SKSpriteNode(texture: getstarTexture(.Empty))
+            }
+        case .SecondThree:
+            let numStars = levelManager.secondThreeStars
+            switch numStars {
+            case 1:
+                return SKSpriteNode(texture: getstarTexture(.Bronze))
+            case 2:
+                return SKSpriteNode(texture: getstarTexture(.Silver))
+            case 3:
+                return SKSpriteNode(texture: getstarTexture(.Gold))
+            default:
+                return SKSpriteNode(texture: getstarTexture(.Empty))
+            }
+        }
+    }
+    
     func stageOne(view: SKView, levelWidthSeperation: CGFloat, levelHeightSeperation: CGFloat) {
         //
         // Stage One Levels
@@ -115,7 +217,7 @@ extension LevelMenuScene {
         sOneLOneIcon.position = CGPoint(x: 0, y: 25)
         sOneLOneIcon.zPosition = ZLevel.Label
         
-        let sOneLOneStar = SKSpriteNode(texture: starEmpty)
+        let sOneLOneStar = getCorrectStar(StageLevel.FirstOne)
         sOneLOneStar.position = CGPoint(x: 0, y: -25)
         
         sOneLOne.addChild(sOneLOneIcon)
@@ -132,7 +234,7 @@ extension LevelMenuScene {
         sOnelTwoIcon.position = CGPoint(x: 0, y: 25)
         sOnelTwoIcon.zPosition = ZLevel.Label
         
-        let sOnelTwoStar = SKSpriteNode(texture: starEmpty)
+        let sOnelTwoStar = getCorrectStar(StageLevel.FirstTwo)
         sOnelTwoStar.position = CGPoint(x: 0, y: -25)
         
         sOnelTwo.addChild(sOnelTwoIcon)
@@ -149,7 +251,7 @@ extension LevelMenuScene {
         sOnel0ThreeIcon.position = CGPoint(x: 0, y: 25)
         sOnel0ThreeIcon.zPosition = ZLevel.Label
         
-        let sOnel0ThreeStar = SKSpriteNode(texture: starEmpty)
+        let sOnel0ThreeStar = getCorrectStar(StageLevel.FirstThree)
         sOnel0ThreeStar.position = CGPoint(x: 0, y: -25)
         
         sOnel0Three.addChild(sOnel0ThreeIcon)
@@ -174,7 +276,7 @@ extension LevelMenuScene {
         s02l01Icon.position = CGPoint(x: 0, y: 25)
         s02l01Icon.zPosition = ZLevel.Label
         
-        let s02l01Star = SKSpriteNode(texture: starEmpty)
+        let s02l01Star = getCorrectStar(StageLevel.SecondOne)
         s02l01Star.position = CGPoint(x: 0, y: -25)
         
         s02l01.addChild(s02l01Icon)
@@ -191,7 +293,7 @@ extension LevelMenuScene {
         s02l02Icon.position = CGPoint(x: 0, y: 25)
         s02l02Icon.zPosition = ZLevel.Label
         
-        let s02l02Star = SKSpriteNode(texture: starEmpty)
+        let s02l02Star = getCorrectStar(StageLevel.SecondTwo)
         s02l02Star.position = CGPoint(x: 0, y: -25)
         
         s02l02.addChild(s02l02Icon)
@@ -208,7 +310,7 @@ extension LevelMenuScene {
         s02l03Icon.position = CGPoint(x: 0, y: 25)
         s02l03Icon.zPosition = ZLevel.Label
         
-        let s02l03Star = SKSpriteNode(texture: starEmpty)
+        let s02l03Star = getCorrectStar(StageLevel.SecondThree)
         s02l03Star.position = CGPoint(x: 0, y: -25)
         
         s02l03.addChild(s02l03Icon)

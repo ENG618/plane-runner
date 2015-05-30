@@ -14,6 +14,7 @@ import GameKit
 class MenuScene: SKScene {
     
     var player: Player!
+    let levelManager = LevelManager.sharedInstance
     
     // Nodes
     let worldNode = SKNode()
@@ -32,6 +33,7 @@ class MenuScene: SKScene {
     var clickFX: SKAction!
     
     override func didMoveToView(view: SKView) {
+        levelManager.load()
         
         println("Size height: \(size.height) Width: \(size.width)")
         println("View Height: \(view.bounds.height) Width: \(view.bounds.width)")
