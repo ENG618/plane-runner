@@ -113,7 +113,7 @@ enum Achievements {
         case .LevelOne:
             return "levelOneCompleted"
         case .LevelTwo:
-            return "levelOneCompleted"
+            return "levelTwoCompleted"
         case .LevelThree:
             return "levelThreeCompleted"
         case .StageOne:

@@ -127,7 +127,6 @@ extension LevelManager {
                 // Update level stars
                 secondOneStars = starsCollected
                 submitStarsLeaderboard()
-//                submitProgress()
             }
             
         case .SecondTwo:
@@ -138,7 +137,6 @@ extension LevelManager {
                 // Update level stars
                 secondTwoStars = starsCollected
                 submitStarsLeaderboard()
-//                submitProgress()
             }
             
         case .SecondThree:
@@ -149,7 +147,6 @@ extension LevelManager {
                 // Update level stars
                 secondThreeStars = starsCollected
                 submitStarsLeaderboard()
-//                submitProgress()
             }
         }
         
@@ -224,8 +221,13 @@ extension LevelManager {
     }
     
     func achievementProgress(numStars: Int, achievement: GKAchievement) -> GKAchievement {
-        // TODO: determin percent completed
         
+        // Check if stage one is completed
+        if firstOneStars == 3 && firstTwoStars == 3 && firstThreeStars == 3 {
+            submitProgress(Achievements.StageOne)
+        }
+        
+        // Determin percent completed
         switch numStars {
         case 1:
             achievement.percentComplete = Double(33.0)
@@ -249,24 +251,24 @@ extension LevelManager {
         switch achievement {
             
         case .LevelOne:
-            let current = GKAchievement(identifier: Achievements.LevelOne.id)
+            var current = GKAchievement(identifier: Achievements.LevelOne.id)
             current.showsCompletionBanner = true
             achieveUpdateArray.append(achievementProgress(firstOneStars, achievement: current))
             
         case .LevelTwo:
-            let current = GKAchievement(identifier: achievement.id)
+            var current = GKAchievement(identifier: achievement.id)
             current.showsCompletionBanner = true
             achieveUpdateArray.append(achievementProgress(firstTwoStars, achievement: current))
             
         case .LevelThree:
-            let current = GKAchievement(identifier: achievement.id)
+            var current = GKAchievement(identifier: achievement.id)
             current.showsCompletionBanner = true
             achieveUpdateArray.append(achievementProgress(firstThreeStars, achievement: current))
             
         case .StageOne:
-            println("StageOne Needs configuring")
             if firstOneStars == 3 && firstTwoStars == 3 && firstThreeStars == 3 {
                 let completedAchievement = GKAchievement(identifier: achievement.id)
+                completedAchievement.showsCompletionBanner = true
                 completedAchievement.percentComplete = Double(100.00)
                 achieveUpdateArray.append(completedAchievement)
             }
