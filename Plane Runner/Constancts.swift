@@ -107,6 +107,7 @@ enum Achievements {
     case LevelTwo
     case LevelThree
     case StageOne
+    case Fly1000
     
     var id: String {
         switch (self) {
@@ -118,6 +119,8 @@ enum Achievements {
             return "levelThreeCompleted"
         case .StageOne:
             return "stageOneCompleted"
+        case .Fly1000:
+            return "fly100Meters"
         }
     }
 }

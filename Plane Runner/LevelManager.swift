@@ -27,6 +27,7 @@ class LevelManager {
     let PRStarsForStageTwoLevelthereKey = "StarsStageTwoLeveThree"
     let PRTotalStarsKey = "TotalStars"
     let PRTotalDistanceKey = "TotalDistance"
+    let PRDidFly1000Key = "DidFly1000"
     
     
     // Score for games in action
@@ -48,6 +49,9 @@ class LevelManager {
     // User Defaults
     let defaults = NSUserDefaults.standardUserDefaults()
     
+    // Achievement Bools
+    var didFly1000: Bool = false
+    
     func load() {
         // Load totals
         totalDistance = defaults.integerForKey(PRTotalDistanceKey)
@@ -60,6 +64,8 @@ class LevelManager {
         secondOneStars = defaults.integerForKey(PRStarsForStageTwoLevelOneKey)
         secondTwoStars = defaults.integerForKey(PRStarsForStageTwoLevelTwoKey)
         secondThreeStars = defaults.integerForKey(PRStarsForStageTwoLevelthereKey)
+        
+        didFly1000 = defaults.boolForKey(PRDidFly1000Key)
         
         loadAchievements()
     }
@@ -76,6 +82,8 @@ class LevelManager {
         defaults.setInteger(secondOneStars, forKey: PRStarsForStageTwoLevelOneKey)
         defaults.setInteger(secondTwoStars, forKey: PRStarsForStageTwoLevelTwoKey)
         defaults.setInteger(secondThreeStars, forKey: PRStarsForStageTwoLevelthereKey)
+        
+        defaults.setBool(didFly1000, forKey: PRDidFly1000Key)
     }
 }
 
@@ -193,6 +201,7 @@ extension LevelManager {
                 }
             })
         }
+        submitProgress(Achievements.Fly1000)
     }
     
     func loadAchievements() {
@@ -245,13 +254,18 @@ extension LevelManager {
     }
     
     func submitProgress(achievement: Achievements) {
+        
+        if player.isAuthed() == false {
+            return // stop function is player is not authed
+        }
+        
         // TODO: Update achievement progress
         var achieveUpdateArray: [GKAchievement] = []
         
         switch achievement {
             
         case .LevelOne:
-            var current = GKAchievement(identifier: Achievements.LevelOne.id)
+            var current = GKAchievement(identifier: achievement.id)
             current.showsCompletionBanner = true
             achieveUpdateArray.append(achievementProgress(firstOneStars, achievement: current))
             
@@ -271,6 +285,20 @@ extension LevelManager {
                 completedAchievement.showsCompletionBanner = true
                 completedAchievement.percentComplete = Double(100.00)
                 achieveUpdateArray.append(completedAchievement)
+            }
+        case .Fly1000:
+            let fly1000 = GKAchievement(identifier: achievement.id)
+            fly1000.showsCompletionBanner = true
+            
+            if totalDistance < 1000 && !didFly1000 {
+                fly1000.percentComplete = Double(totalDistance) / Double(1000.00)
+                achieveUpdateArray.append(fly1000)
+            }
+            
+            if totalDistance >= 1000 && !didFly1000 {
+                didFly1000 = true
+                fly1000.percentComplete = Double(100.00)
+                achieveUpdateArray.append(fly1000)
             }
         }
         
