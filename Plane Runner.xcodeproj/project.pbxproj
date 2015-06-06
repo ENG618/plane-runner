@@ -31,6 +31,8 @@
 		5CA474E91AE7573D00E71BE7 /* planes.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5CA474E81AE7573D00E71BE7 /* planes.atlas */; };
 		5CA474EB1AE7574400E71BE7 /* ui.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5CA474EA1AE7574400E71BE7 /* ui.atlas */; };
 		5CA474EF1AE75BE200E71BE7 /* letters.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5CA474EE1AE75BE200E71BE7 /* letters.atlas */; };
+		5CA84F841B2291DF00C87569 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CA84F821B2291DF00C87569 /* Fabric.framework */; };
+		5CA84F851B2291DF00C87569 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CA84F831B2291DF00C87569 /* Crashlytics.framework */; };
 		5CADD69B1AE80C9100707677 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CADD69A1AE80C9100707677 /* GameOverScene.swift */; };
 		5CADD69F1AE8BA1600707677 /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CADD69E1AE8BA1600707677 /* HUD.swift */; };
 		5CADD6A51AE9DFFE00707677 /* LevelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CADD6A41AE9DFFE00707677 /* LevelHelper.swift */; };
@@ -90,6 +92,8 @@
 		5CA474E81AE7573D00E71BE7 /* planes.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = planes.atlas; sourceTree = "<group>"; };
 		5CA474EA1AE7574400E71BE7 /* ui.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = ui.atlas; sourceTree = "<group>"; };
 		5CA474EE1AE75BE200E71BE7 /* letters.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = letters.atlas; sourceTree = "<group>"; };
+		5CA84F821B2291DF00C87569 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		5CA84F831B2291DF00C87569 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		5CADD69A1AE80C9100707677 /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
 		5CADD69E1AE8BA1600707677 /* HUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HUD.swift; sourceTree = "<group>"; };
 		5CADD6A41AE9DFFE00707677 /* LevelHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelHelper.swift; sourceTree = "<group>"; };
@@ -116,6 +120,8 @@
 			files = (
 				5C4052F81AD841280088EE70 /* AVFoundation.framework in Frameworks */,
 				5C56DE131B114903001DA0D5 /* GameKit.framework in Frameworks */,
+				5CA84F851B2291DF00C87569 /* Crashlytics.framework in Frameworks */,
+				5CA84F841B2291DF00C87569 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,6 +177,8 @@
 		5C4052CC1AD73B260088EE70 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5CA84F821B2291DF00C87569 /* Fabric.framework */,
+				5CA84F831B2291DF00C87569 /* Crashlytics.framework */,
 				5C4052CD1AD73B260088EE70 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -279,6 +287,7 @@
 				5C4052C51AD73B260088EE70 /* Sources */,
 				5C4052C61AD73B260088EE70 /* Frameworks */,
 				5C4052C71AD73B260088EE70 /* Resources */,
+				5CA84F811B2291B800C87569 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -390,6 +399,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5CA84F811B2291B800C87569 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run 6f3969ef03924d20897e5b46bfe3140262d49a3e f19110da933e516b39eedbaaf52e1fb10dddf2820cfbbb6e64cf2cbb8bf00e45";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5C4052C51AD73B260088EE70 /* Sources */ = {
@@ -536,6 +561,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Plane",
+					Runner,
+				);
 				INFOPLIST_FILE = "Plane Runner/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -550,6 +580,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Plane",
+					Runner,
+				);
 				INFOPLIST_FILE = "Plane Runner/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
