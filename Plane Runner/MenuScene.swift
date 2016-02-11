@@ -34,9 +34,9 @@ class MenuScene: SKScene {
     
     override func didMoveToView(view: SKView) {
         
-        println("Size height: \(size.height) Width: \(size.width)")
-        println("View Height: \(view.bounds.height) Width: \(view.bounds.width)")
-        println("Frame: \(self.frame), View.frame.width: \(view.frame.width) View.frame.height: \(view.frame.height)")
+        print("Size height: \(size.height) Width: \(size.width)")
+        print("View Height: \(view.bounds.height) Width: \(view.bounds.width)")
+        print("Frame: \(self.frame), View.frame.width: \(view.frame.width) View.frame.height: \(view.frame.height)")
         
         self.addChild(worldNode)
         
@@ -166,18 +166,18 @@ extension MenuScene: GKGameCenterControllerDelegate {
         vc?.presentViewController(gc, animated: true, completion: nil)
     }
     
-    func gameCenterViewControllerDidFinish(gameCenterViewController: GKGameCenterViewController!) {
+    func gameCenterViewControllerDidFinish(gameCenterViewController: GKGameCenterViewController) {
         gameCenterViewController.dismissViewControllerAnimated(true, completion: nil)
     }
 }
 
 // MARK: Input Methods
 extension MenuScene {
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         for touch: AnyObject in touches {
             let location = touch.locationInNode(self)
             if startNode.containsPoint(location) {
-                println("Start button touched")
+                print("Start button touched")
                 self.runAction(clickFX)
                 let levelMenuScene = LevelMenuScene(size: size)
                 self.view?.presentScene(levelMenuScene, transition: SKTransition.doorsOpenHorizontalWithDuration(1.0))
@@ -187,7 +187,7 @@ extension MenuScene {
                 self.view?.presentScene(infoScene, transition: SKTransition.flipVerticalWithDuration(0.7))
             } else if leaderNode.containsPoint(location) {
                 // TODO: Launch Game Center
-                println("Leaderboard touched")
+                print("Leaderboard touched")
                 showLeaderboard()
             }
         }
@@ -197,6 +197,6 @@ extension MenuScene {
 // MARK: SKPhysicsDelegate
 extension MenuScene: SKPhysicsContactDelegate {
     func didBeginContact(contact: SKPhysicsContact) {
-        println("button pressed")
+        print("button pressed")
     }
 }

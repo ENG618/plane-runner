@@ -15,10 +15,10 @@ class GameOverScene: SKScene {
         
         if won {
             // Level was won
-            println("Player won")
+            print("Player won")
         } else {
             // Level was lost
-            println("Player lost")
+            print("Player lost")
         }
     }
 

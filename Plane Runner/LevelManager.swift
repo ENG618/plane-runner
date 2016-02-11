@@ -138,7 +138,7 @@ extension LevelManager {
             }
             
         case .SecondTwo:
-            println("2-2 needs to be set up")
+            print("2-2 needs to be set up")
             if starsCollected > secondTwoStars {
                 // Update total stars
                 totalStarsCollected = totalStarsCollected - secondTwoStars + starsCollected
@@ -148,7 +148,7 @@ extension LevelManager {
             }
             
         case .SecondThree:
-            println("2-3 needs to be set up")
+            print("2-3 needs to be set up")
             if starsCollected > secondThreeStars {
                 // Update total stars
                 totalStarsCollected = totalStarsCollected - secondThreeStars + starsCollected
@@ -167,7 +167,7 @@ extension LevelManager {
     
     func submitStarsLeaderboard() {
         if player.isAuthed() {
-            println("Saving Stars high Score")
+            print("Saving Stars high Score")
             
             // Report total stars
             let starReporter = GKScore(leaderboardIdentifier: Leaderboard.TotalStars.id)
@@ -176,9 +176,9 @@ extension LevelManager {
             
             var starArray: [GKScore] = [starReporter]
             
-            GKScore.reportScores(starArray, withCompletionHandler: {(error: NSError!) -> Void in
+            GKScore.reportScores(starArray, withCompletionHandler: {(error: NSError?) -> Void in
                 if error != nil {
-                    println("Stars LEaderboard error: \(error.description)")
+                    print("Stars LEaderboard error: \(error.description)")
                 }
             })
         }
@@ -186,7 +186,7 @@ extension LevelManager {
     
     func submitDistanceLeaderboard() {
         if player.isAuthed() {
-            println("Saving distance high Score")
+            print("Saving distance high Score")
             
             // Report updated total distance flown
             let distanceReporter = GKScore(leaderboardIdentifier: Leaderboard.TotalDistance.id)
@@ -195,9 +195,9 @@ extension LevelManager {
             
             var distanceArray: [GKScore] = [distanceReporter]
             
-            GKScore.reportScores(distanceArray, withCompletionHandler: { (error: NSError!) -> Void in
+            GKScore.reportScores(distanceArray, withCompletionHandler: { (error: NSError?) -> Void in
                 if error != nil {
-                    println("Distance Leaderboard error: \(error.description)")
+                    print("Distance Leaderboard error: \(error.description)")
                 }
             })
         }
@@ -206,9 +206,9 @@ extension LevelManager {
     
     func loadAchievements() {
         
-        GKAchievement.loadAchievementsWithCompletionHandler({ (achievements: [AnyObject]!, error: NSError!) -> Void in
+        GKAchievement.loadAchievementsWithCompletionHandler({ (achievements: [GKAchievement]?, error: NSError?) -> Void in
             if error != nil {
-                println("Achievements error: \(error.description)")
+                print("Achievements error: \(error.description)")
             } else {
                 if let recievedAchievements = achievements as? [GKAchievement] {
                     for item in recievedAchievements {
@@ -265,17 +265,17 @@ extension LevelManager {
         switch achievement {
             
         case .LevelOne:
-            var current = GKAchievement(identifier: achievement.id)
+            let current = GKAchievement(identifier: achievement.id)
             current.showsCompletionBanner = true
             achieveUpdateArray.append(achievementProgress(firstOneStars, achievement: current))
             
         case .LevelTwo:
-            var current = GKAchievement(identifier: achievement.id)
+            let current = GKAchievement(identifier: achievement.id)
             current.showsCompletionBanner = true
             achieveUpdateArray.append(achievementProgress(firstTwoStars, achievement: current))
             
         case .LevelThree:
-            var current = GKAchievement(identifier: achievement.id)
+            let current = GKAchievement(identifier: achievement.id)
             current.showsCompletionBanner = true
             achieveUpdateArray.append(achievementProgress(firstThreeStars, achievement: current))
             

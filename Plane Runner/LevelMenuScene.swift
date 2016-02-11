@@ -316,29 +316,29 @@ extension LevelMenuScene {
 // Mark: Input Methods
 extension LevelMenuScene {
     
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         for touch: AnyObject in touches {
             let location = touch.locationInNode(self)
             if backBtnNode.containsPoint(location) {
-                println("Back button pressed")
+                print("Back button pressed")
                 self.runAction(clickFX)
                 let scene = MenuScene(size: size)
                 self.view?.presentScene(scene, transition: SKTransition.doorsCloseHorizontalWithDuration(1))
             }
             
             if sOneLOne.containsPoint(location) {
-                println("Level One")
+                print("Level One")
                 determineLevel(LevelSelection.One)
             }
             
             if sOnelTwo.containsPoint(location){
-                println("Level Two")
+                print("Level Two")
                 determineLevel(LevelSelection.Two)
             }
             
             if sOnel0Three.containsPoint(location) {
                 //                println("Stage: 1 Level: 3")
-                println("Level Three")
+                print("Level Three")
                 determineLevel(LevelSelection.Three)
             }
         }
@@ -378,7 +378,7 @@ extension LevelMenuScene {
     }
     
     func swipedRight(sender: UISwipeGestureRecognizer) {
-        println("Swiped Right")
+        print("Swiped Right")
         if !onStageOne {
             let moveToOne = SKAction.moveByX( self.frame.size.width, y: 0, duration: 0.5)
             levelsNode.runAction(moveToOne)
@@ -387,7 +387,7 @@ extension LevelMenuScene {
     }
     
     func swipedLeft(sender: UISwipeGestureRecognizer) {
-        println("Swiped left")
+        print("Swiped left")
         if onStageOne {
             let moveToTwo = SKAction.moveByX( -self.frame.size.width, y: 0, duration: 0.5)
             levelsNode.runAction(moveToTwo)
@@ -399,6 +399,6 @@ extension LevelMenuScene {
 // : SKPhysicsContactDelegate
 extension LevelMenuScene: SKPhysicsContactDelegate {
     func didBeginContact(contact: SKPhysicsContact) {
-        println("Button Pressed")
+        print("Button Pressed")
     }
 }

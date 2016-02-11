@@ -264,7 +264,7 @@ extension LevelScene {
             i = i + bg.size.width
         }
         
-        println("Number of backgrounds created \(numBgCreated)")
+        print("Number of backgrounds created \(numBgCreated)")
         movingNodes.addChild(backgroundLevelNode)
     }
     
@@ -290,7 +290,7 @@ extension LevelScene {
             
             i = i + ground.size.width
         }
-        println("Number of grounds created \(numGroundCreated)")
+        print("Number of grounds created \(numGroundCreated)")
     }
     
     func createObsticles(view: SKView) {
@@ -314,10 +314,10 @@ extension LevelScene {
             rockNode.position = CGPoint(x: xPosition, y: yPosition)
             rockNode.zPosition = ZLevel.Rocks
             
-            println("Rock postion x:\(xPosition) y:\(yPosition)")
+            print("Rock postion x:\(xPosition) y:\(yPosition)")
             
             // Create path for physicsBody
-            var rockPath = CGPathCreateMutable()
+            let rockPath = CGPathCreateMutable()
             
             // Bottom left of rock
             CGPathMoveToPoint(rockPath, nil, -rockNode.size.width/2, -rockNode.size.height/2)
@@ -357,10 +357,10 @@ extension LevelScene {
             rockDownNode.position = CGPoint(x: xPosition, y: yPosition)
             rockDownNode.zPosition = ZLevel.Rocks
             
-            println("RockDown postion x:\(xPosition) y:\(yPosition)")
+            print("RockDown postion x:\(xPosition) y:\(yPosition)")
             
             // Create path for physicsBody
-            var rockDownPath = CGPathCreateMutable()
+            let rockDownPath = CGPathCreateMutable()
             
             // Top left of rockDown
             CGPathMoveToPoint(rockDownPath, nil, -rockDownNode.size.width/2, rockDownNode.size.height/2)
@@ -395,7 +395,7 @@ extension LevelScene {
             let xPositoin = CGFloat(x!)
             let yPosition = CGFloat(y!)
             
-            println("Star postioion x:\(xPositoin) y:\(yPosition)")
+            print("Star postioion x:\(xPositoin) y:\(yPosition)")
             starNode.position = CGPoint(x: xPositoin, y: yPosition)
             
             // Set physics
@@ -566,7 +566,7 @@ extension LevelScene {
         case 3:
             starHolderNode.runAction(SKAction.sequence([bronzeSequence, silverSequence, goldSequence]))
         default:
-            println("Lost")
+            print("Lost")
         }
     }
     
@@ -650,7 +650,7 @@ extension LevelScene {
     }
     
     func won() {
-        println("WON!!")
+        print("WON!!")
         levelWon = true
         movingNodes.speed = 0
         isTouching = false
@@ -682,7 +682,7 @@ extension LevelScene {
 
 // MARK: Input methods
 extension LevelScene {
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         if !gameStarted {
             gameStarted = true
             play()
@@ -693,7 +693,7 @@ extension LevelScene {
             
             if hudPauseButn.containsPoint(location) {
                 self.runAction(clickFX)
-                println("Pause/Play")
+                print("Pause/Play")
                 if self.paused {
                     resume()
                 } else {
@@ -707,11 +707,11 @@ extension LevelScene {
                     restartLevel()
                 }
                 if nextBtn.containsPoint(location) {
-                    println("Next Level")
+                    print("Next Level")
                 }
                 
                 if levelMenuBtn.containsPoint(location) {
-                    println("Level Menu")
+                    print("Level Menu")
                     // Reset scene
                     audioPlayer.stop()
                     let menuScene = LevelMenuScene(size: size)
@@ -740,7 +740,7 @@ extension LevelScene {
         }
     }
     
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         isTouching = false
     }
     
@@ -773,13 +773,13 @@ extension LevelScene: SKPhysicsContactDelegate {
         
         switch notPlane.categoryBitMask {
         case PhysicsCategory.Distance:
-            println("Distance increased")
+            print("Distance increased")
             updateDistance()
         case PhysicsCategory.Stars:
-            println("Collected a star")
+            print("Collected a star")
             collectStar(notPlaneNode)
         default:
-            println("Plane crashed")
+            print("Plane crashed")
             
             runAction(planeCrashFX)
             plane.physicsBody?.velocity = CGVectorMake(0, 0)

@@ -19,7 +19,12 @@ class LevelHelper {
             let url = NSURL.fileURLWithPath(path)
             var error: NSError?
             
-            audioPlayer = AVAudioPlayer(contentsOfURL: url, error: &error)
+            do {
+                audioPlayer = try AVAudioPlayer(contentsOfURL: url)
+            } catch let error1 as NSError {
+                error = error1
+                audioPlayer = nil
+            }
             audioPlayer!.volume = 0.2
             audioPlayer!.numberOfLoops = -1
             audioPlayer!.prepareToPlay()
@@ -35,7 +40,7 @@ class LevelHelper {
     }
     
     class func wonTextNode() -> SKSpriteNode {
-        var wonText = SKSpriteNode()
+        let wonText = SKSpriteNode()
         
         let w = SKSpriteNode(texture: self.getLetterTexture("w"))
         w.position = CGPoint(x: -25, y: 0)
@@ -65,7 +70,7 @@ class LevelHelper {
         
         let getReadyAndRemoveAction = SKAction.sequence([getReadyAction, removeNode])
         
-        var getReadyNode = SKSpriteNode(texture: getReadyTexture)
+        let getReadyNode = SKSpriteNode(texture: getReadyTexture)
         
         return (getReadyAndRemoveAction, getReadyNode)
     }

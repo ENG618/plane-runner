@@ -40,7 +40,7 @@ class Player {
                     // Show scene
                     vc.presentViewController(viewController, animated: true, completion: nil)
                 } else {
-                    println((GKLocalPlayer.localPlayer().authenticated))
+                    print((GKLocalPlayer.localPlayer().authenticated))
                 }
             }
         }

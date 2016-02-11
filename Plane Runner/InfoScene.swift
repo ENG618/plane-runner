@@ -62,70 +62,70 @@ extension InfoScene {
         dialogBackground.position = CGPoint(x: view.frame.width / 2, y: view.frame.height / 2)
         
         var lineHeight = view.frame.height - 80
-        println("Line height: \(lineHeight)")
+        print("Line height: \(lineHeight)")
         
-        var developerText = SKLabelNode(fontNamed: GameFont)
+        let developerText = SKLabelNode(fontNamed: GameFont)
         developerText.fontColor = SKColor.blackColor()
         developerText.text = "Developer: Eric Garcia"
         developerText.position = CGPoint(x: view.frame.width / 2, y: lineHeight)
         
         lineHeight = lineHeight - developerText.frame.size.height - 25
-        println("Line height: \(lineHeight)")
+        print("Line height: \(lineHeight)")
         
-        var creditsText = SKLabelNode(fontNamed: GameFont)
+        let creditsText = SKLabelNode(fontNamed: GameFont)
         creditsText.fontColor = SKColor.blackColor()
         creditsText.text = "Credits"
         creditsText.position = CGPoint(x: view.frame.width / 2, y: lineHeight)
         
         lineHeight = lineHeight - creditsText.frame.size.height - 10
-        println("Line height: \(lineHeight)")
+        print("Line height: \(lineHeight)")
         
-        var artCreditText = SKLabelNode(fontNamed: GameFont)
+        let artCreditText = SKLabelNode(fontNamed: GameFont)
         artCreditText.fontColor = SKColor.blackColor()
         artCreditText.fontSize = 18
         artCreditText.text = "Image assets: Kenny.nl"
         artCreditText.position = CGPoint(x: view.frame.width / 2, y: lineHeight)
         
         lineHeight = lineHeight - artCreditText.frame.size.height - 10
-        println("Line height: \(lineHeight)")
+        print("Line height: \(lineHeight)")
         
-        var bgAudioCreditText = SKLabelNode(fontNamed: GameFont)
+        let bgAudioCreditText = SKLabelNode(fontNamed: GameFont)
         bgAudioCreditText.fontColor = SKColor.blackColor()
         bgAudioCreditText.fontSize = 18
         bgAudioCreditText.text = "Background audio: David Brenner on Melody Loops"
         bgAudioCreditText.position = CGPoint(x: view.frame.width / 2, y: lineHeight)
         
         lineHeight = lineHeight - bgAudioCreditText.frame.size.height - 10
-        println("Line height: \(lineHeight)")
+        print("Line height: \(lineHeight)")
         
-        var planeCrashAudioCreditText = SKLabelNode(fontNamed: GameFont)
+        let planeCrashAudioCreditText = SKLabelNode(fontNamed: GameFont)
         planeCrashAudioCreditText.fontColor = SKColor.blackColor()
         planeCrashAudioCreditText.fontSize = 18
         planeCrashAudioCreditText.text = "Plane Crashing: http://www.freefx.co.uk"
         planeCrashAudioCreditText.position = CGPoint(x: view.frame.width / 2, y: lineHeight)
         
         lineHeight = lineHeight - planeCrashAudioCreditText.frame.size.height - 10
-        println("Line height: \(lineHeight)")
+        print("Line height: \(lineHeight)")
         
-        var planeFlyingAudioCreditText = SKLabelNode(fontNamed: GameFont)
+        let planeFlyingAudioCreditText = SKLabelNode(fontNamed: GameFont)
         planeFlyingAudioCreditText.fontColor = SKColor.blackColor()
         planeFlyingAudioCreditText.fontSize = 18
         planeFlyingAudioCreditText.text = "Plane Flying: SoundBible.com"
         planeFlyingAudioCreditText.position = CGPoint(x: view.frame.width / 2, y: lineHeight)
         
         lineHeight = lineHeight - planeFlyingAudioCreditText.frame.size.height - 10
-        println("Line height: \(lineHeight)")
+        print("Line height: \(lineHeight)")
         
-        var starAudioCreditText = SKLabelNode(fontNamed: GameFont)
+        let starAudioCreditText = SKLabelNode(fontNamed: GameFont)
         starAudioCreditText.fontColor = SKColor.blackColor()
         starAudioCreditText.fontSize = 18
         starAudioCreditText.text = "Star: http://www.freefx.co.uk"
         starAudioCreditText.position = CGPoint(x: view.frame.width / 2, y: lineHeight)
         
         lineHeight = lineHeight - starAudioCreditText.frame.size.height - 10
-        println("Line height: \(lineHeight)")
+        print("Line height: \(lineHeight)")
         
-        var clickAudioCreditText = SKLabelNode(fontNamed: GameFont)
+        let clickAudioCreditText = SKLabelNode(fontNamed: GameFont)
         clickAudioCreditText.fontColor = SKColor.blackColor()
         clickAudioCreditText.fontSize = 18
         clickAudioCreditText.text = "Click: Kenney.nl"
@@ -146,11 +146,11 @@ extension InfoScene {
 
 // MARK: Input Methods
 extension InfoScene {
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         for touch: AnyObject in touches {
             let location = touch.locationInNode(self)
             if backBtnNode.containsPoint(location) {
-                println("Start button touched")
+                print("Start button touched")
                 self.runAction(clickFX)
                 
                 let scene = MenuScene(size: size)
@@ -163,6 +163,6 @@ extension InfoScene {
 // MARK: SKPhysicsDelegate
 extension InfoScene: SKPhysicsContactDelegate {
     func didBeginContact(contact: SKPhysicsContact) {
-        println("Button pressed")
+        print("Button pressed")
     }
 }
