@@ -377,7 +377,7 @@ extension LevelMenuScene {
         self.view?.presentScene(levelScene)
     }
     
-    func swipedRight(_ sender: UISwipeGestureRecognizer) {
+    @objc func swipedRight(_ sender: UISwipeGestureRecognizer) {
         print("Swiped Right")
         if !onStageOne {
             let moveToOne = SKAction.moveBy( x: self.frame.size.width, y: 0, duration: 0.5)
@@ -386,7 +386,7 @@ extension LevelMenuScene {
         }
     }
     
-    func swipedLeft(_ sender: UISwipeGestureRecognizer) {
+    @objc func swipedLeft(_ sender: UISwipeGestureRecognizer) {
         print("Swiped left")
         if onStageOne {
             let moveToTwo = SKAction.moveBy( x: -self.frame.size.width, y: 0, duration: 0.5)
