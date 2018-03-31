@@ -9,9 +9,9 @@
 import SpriteKit
 
 enum LevelSelection {
-    case One
-    case Two
-    case Three
+    case one
+    case two
+    case three
 }
 
 class LevelMenuScene: SKScene {
@@ -47,7 +47,7 @@ class LevelMenuScene: SKScene {
     
     var onStageOne: Bool = true
     
-    override func didMoveToView(view: SKView) {
+    override func didMove(to view: SKView) {
         self.addChild(worldNode)
         worldNode.addChild(backBtnNode)
         worldNode.addChild(levelsNode)
@@ -56,7 +56,7 @@ class LevelMenuScene: SKScene {
         self.physicsWorld.contactDelegate = self
         
         // Click sound effect
-        clickFX = SKAction.repeatAction(SKAction.playSoundFileNamed(ClickFX, waitForCompletion: true), count: 1)
+        clickFX = SKAction.repeat(SKAction.playSoundFileNamed(ClickFX, waitForCompletion: true), count: 1)
         
         setupGestureRecognizers()
         
@@ -70,16 +70,16 @@ class LevelMenuScene: SKScene {
 extension LevelMenuScene {
     
     func setupGestureRecognizers() {
-        let swipeRight = UISwipeGestureRecognizer(target: self, action: Selector("swipedRight:"))
-        swipeRight.direction = .Right
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(LevelMenuScene.swipedRight(_:)))
+        swipeRight.direction = .right
         view?.addGestureRecognizer(swipeRight)
         
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: Selector("swipedLeft:"))
-        swipeLeft.direction = .Left
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(LevelMenuScene.swipedLeft(_:)))
+        swipeLeft.direction = .left
         view?.addGestureRecognizer(swipeLeft)
     }
     
-    func createBackground(view: SKView) {
+    func createBackground(_ view: SKView) {
         let bg = SKSpriteNode(texture: bgTexture)
         bg.position = CGPoint(x: view.frame.width/2, y: view.frame.height/2)
         bg.zPosition = ZLevel.Background
@@ -87,18 +87,18 @@ extension LevelMenuScene {
         worldNode.addChild(bg)
     }
     
-    func createBackButton(view: SKView) {
+    func createBackButton(_ view: SKView) {
         let backBtn = SKSpriteNode(texture: backBtnTexture)
         backBtn.position = CGPoint(x: 10 + backBtnTexture.size().width / 2, y: -10 - backBtnTexture.size().height / 2 + view.frame.height)
         
         backBtnNode.addChild(backBtn)
     }
     
-    func createLabels(view: SKView) {
+    func createLabels(_ view: SKView) {
         // TODO: Setup "Stage One" and "Stage Two" lables, and pagination.
     }
     
-    func createLevels(view: SKView) {
+    func createLevels(_ view: SKView) {
         let levelWidthSeperation = view.frame.width / 3
         let levelHeightSeperation = view.frame.height / 3
         
@@ -106,97 +106,97 @@ extension LevelMenuScene {
         stageTwo(view, levelWidthSeperation: levelWidthSeperation, levelHeightSeperation: levelHeightSeperation)
     }
     
-    func getstarTexture(starColor: Star) -> SKTexture {
+    func getstarTexture(_ starColor: Star) -> SKTexture {
         switch starColor {
-        case .Empty:
+        case .empty:
             return starEmpty
-        case .Bronze:
+        case .bronze:
             return starBronze
-        case .Silver:
+        case .silver:
             return starSilver
-        case .Gold:
+        case .gold:
             return starGold
         }
     }
     
-    func getCorrectStar(level: StageLevel) -> SKSpriteNode {
+    func getCorrectStar(_ level: StageLevel) -> SKSpriteNode {
         switch level {
-        case .FirstOne :
+        case .firstOne :
             let numStars = levelManager.firstOneStars
             switch numStars {
             case 1:
-                return SKSpriteNode(texture: getstarTexture(.Bronze))
+                return SKSpriteNode(texture: getstarTexture(.bronze))
             case 2:
-                return SKSpriteNode(texture: getstarTexture(.Silver))
+                return SKSpriteNode(texture: getstarTexture(.silver))
             case 3:
-                return SKSpriteNode(texture: getstarTexture(.Gold))
+                return SKSpriteNode(texture: getstarTexture(.gold))
             default:
-                return SKSpriteNode(texture: getstarTexture(.Empty))
+                return SKSpriteNode(texture: getstarTexture(.empty))
             }
-        case .FirstTwo:
+        case .firstTwo:
             let numStars = levelManager.firstTwoStars
             switch numStars {
             case 1:
-                return SKSpriteNode(texture: getstarTexture(.Bronze))
+                return SKSpriteNode(texture: getstarTexture(.bronze))
             case 2:
-                return SKSpriteNode(texture: getstarTexture(.Silver))
+                return SKSpriteNode(texture: getstarTexture(.silver))
             case 3:
-                return SKSpriteNode(texture: getstarTexture(.Gold))
+                return SKSpriteNode(texture: getstarTexture(.gold))
             default:
-                return SKSpriteNode(texture: getstarTexture(.Empty))
+                return SKSpriteNode(texture: getstarTexture(.empty))
             }
-        case .FirstThree:
+        case .firstThree:
             let numStars = levelManager.firstThreeStars
             switch numStars {
             case 1:
-                return SKSpriteNode(texture: getstarTexture(.Bronze))
+                return SKSpriteNode(texture: getstarTexture(.bronze))
             case 2:
-                return SKSpriteNode(texture: getstarTexture(.Silver))
+                return SKSpriteNode(texture: getstarTexture(.silver))
             case 3:
-                return SKSpriteNode(texture: getstarTexture(.Gold))
+                return SKSpriteNode(texture: getstarTexture(.gold))
             default:
-                return SKSpriteNode(texture: getstarTexture(.Empty))
+                return SKSpriteNode(texture: getstarTexture(.empty))
             }
-        case .SecondOne:
+        case .secondOne:
             let numStars = levelManager.secondOneStars
             switch numStars {
             case 1:
-                return SKSpriteNode(texture: getstarTexture(.Bronze))
+                return SKSpriteNode(texture: getstarTexture(.bronze))
             case 2:
-                return SKSpriteNode(texture: getstarTexture(.Silver))
+                return SKSpriteNode(texture: getstarTexture(.silver))
             case 3:
-                return SKSpriteNode(texture: getstarTexture(.Gold))
+                return SKSpriteNode(texture: getstarTexture(.gold))
             default:
-                return SKSpriteNode(texture: getstarTexture(.Empty))
+                return SKSpriteNode(texture: getstarTexture(.empty))
             }
-        case .SecondTwo:
+        case .secondTwo:
             let numStars = levelManager.secondTwoStars
             switch numStars {
             case 1:
-                return SKSpriteNode(texture: getstarTexture(.Bronze))
+                return SKSpriteNode(texture: getstarTexture(.bronze))
             case 2:
-                return SKSpriteNode(texture: getstarTexture(.Silver))
+                return SKSpriteNode(texture: getstarTexture(.silver))
             case 3:
-                return SKSpriteNode(texture: getstarTexture(.Gold))
+                return SKSpriteNode(texture: getstarTexture(.gold))
             default:
-                return SKSpriteNode(texture: getstarTexture(.Empty))
+                return SKSpriteNode(texture: getstarTexture(.empty))
             }
-        case .SecondThree:
+        case .secondThree:
             let numStars = levelManager.secondThreeStars
             switch numStars {
             case 1:
-                return SKSpriteNode(texture: getstarTexture(.Bronze))
+                return SKSpriteNode(texture: getstarTexture(.bronze))
             case 2:
-                return SKSpriteNode(texture: getstarTexture(.Silver))
+                return SKSpriteNode(texture: getstarTexture(.silver))
             case 3:
-                return SKSpriteNode(texture: getstarTexture(.Gold))
+                return SKSpriteNode(texture: getstarTexture(.gold))
             default:
-                return SKSpriteNode(texture: getstarTexture(.Empty))
+                return SKSpriteNode(texture: getstarTexture(.empty))
             }
         }
     }
     
-    func stageOne(view: SKView, levelWidthSeperation: CGFloat, levelHeightSeperation: CGFloat) {
+    func stageOne(_ view: SKView, levelWidthSeperation: CGFloat, levelHeightSeperation: CGFloat) {
         //
         // Stage One Levels
         //
@@ -210,7 +210,7 @@ extension LevelMenuScene {
         sOneLOneIcon.position = CGPoint(x: 0, y: 25)
         sOneLOneIcon.zPosition = ZLevel.Label
         
-        let sOneLOneStar = getCorrectStar(StageLevel.FirstOne)
+        let sOneLOneStar = getCorrectStar(StageLevel.firstOne)
         sOneLOneStar.position = CGPoint(x: 0, y: -25)
         
         sOneLOne.addChild(sOneLOneIcon)
@@ -227,7 +227,7 @@ extension LevelMenuScene {
         sOnelTwoIcon.position = CGPoint(x: 0, y: 25)
         sOnelTwoIcon.zPosition = ZLevel.Label
         
-        let sOnelTwoStar = getCorrectStar(StageLevel.FirstTwo)
+        let sOnelTwoStar = getCorrectStar(StageLevel.firstTwo)
         sOnelTwoStar.position = CGPoint(x: 0, y: -25)
         
         sOnelTwo.addChild(sOnelTwoIcon)
@@ -244,7 +244,7 @@ extension LevelMenuScene {
         sOnel0ThreeIcon.position = CGPoint(x: 0, y: 25)
         sOnel0ThreeIcon.zPosition = ZLevel.Label
         
-        let sOnel0ThreeStar = getCorrectStar(StageLevel.FirstThree)
+        let sOnel0ThreeStar = getCorrectStar(StageLevel.firstThree)
         sOnel0ThreeStar.position = CGPoint(x: 0, y: -25)
         
         sOnel0Three.addChild(sOnel0ThreeIcon)
@@ -253,7 +253,7 @@ extension LevelMenuScene {
         levelsNode.addChild(sOnel0Three)
     }
     
-    func stageTwo(view: SKView, levelWidthSeperation: CGFloat, levelHeightSeperation: CGFloat) {
+    func stageTwo(_ view: SKView, levelWidthSeperation: CGFloat, levelHeightSeperation: CGFloat) {
         //
         // Stage Two Levels
         //
@@ -269,7 +269,7 @@ extension LevelMenuScene {
         s02l01Icon.position = CGPoint(x: 0, y: 25)
         s02l01Icon.zPosition = ZLevel.Label
         
-        let s02l01Star = getCorrectStar(StageLevel.SecondOne)
+        let s02l01Star = getCorrectStar(StageLevel.secondOne)
         s02l01Star.position = CGPoint(x: 0, y: -25)
         
         s02l01.addChild(s02l01Icon)
@@ -286,7 +286,7 @@ extension LevelMenuScene {
         s02l02Icon.position = CGPoint(x: 0, y: 25)
         s02l02Icon.zPosition = ZLevel.Label
         
-        let s02l02Star = getCorrectStar(StageLevel.SecondTwo)
+        let s02l02Star = getCorrectStar(StageLevel.secondTwo)
         s02l02Star.position = CGPoint(x: 0, y: -25)
         
         s02l02.addChild(s02l02Icon)
@@ -303,7 +303,7 @@ extension LevelMenuScene {
         s02l03Icon.position = CGPoint(x: 0, y: 25)
         s02l03Icon.zPosition = ZLevel.Label
         
-        let s02l03Star = getCorrectStar(StageLevel.SecondThree)
+        let s02l03Star = getCorrectStar(StageLevel.secondThree)
         s02l03Star.position = CGPoint(x: 0, y: -25)
         
         s02l03.addChild(s02l03Icon)
@@ -316,81 +316,81 @@ extension LevelMenuScene {
 // Mark: Input Methods
 extension LevelMenuScene {
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch: AnyObject in touches {
-            let location = touch.locationInNode(self)
-            if backBtnNode.containsPoint(location) {
+            let location = touch.location(in: self)
+            if backBtnNode.contains(location) {
                 print("Back button pressed")
-                self.runAction(clickFX)
+                self.run(clickFX)
                 let scene = MenuScene(size: size)
-                self.view?.presentScene(scene, transition: SKTransition.doorsCloseHorizontalWithDuration(1))
+                self.view?.presentScene(scene, transition: SKTransition.doorsCloseHorizontal(withDuration: 1))
             }
             
-            if sOneLOne.containsPoint(location) {
+            if sOneLOne.contains(location) {
                 print("Level One")
-                determineLevel(LevelSelection.One)
+                determineLevel(LevelSelection.one)
             }
             
-            if sOnelTwo.containsPoint(location){
+            if sOnelTwo.contains(location){
                 print("Level Two")
-                determineLevel(LevelSelection.Two)
+                determineLevel(LevelSelection.two)
             }
             
-            if sOnel0Three.containsPoint(location) {
+            if sOnel0Three.contains(location) {
                 //                println("Stage: 1 Level: 3")
                 print("Level Three")
-                determineLevel(LevelSelection.Three)
+                determineLevel(LevelSelection.three)
             }
         }
     }
     
-    func determineLevel(level: LevelSelection) {
+    func determineLevel(_ level: LevelSelection) {
         switch level {
             
         // First Stage
-        case .One:
-            self.runAction(clickFX)
+        case .one:
+            self.run(clickFX)
             if onStageOne{
-                showLevel(StageLevel.FirstOne)
+                showLevel(StageLevel.firstOne)
             } else {
-                showLevel(StageLevel.SecondOne)
+                showLevel(StageLevel.secondOne)
             }
-        case .Two:
-            self.runAction(clickFX)
+        case .two:
+            self.run(clickFX)
             if onStageOne{
-                showLevel(StageLevel.FirstTwo)
+                showLevel(StageLevel.firstTwo)
             } else {
-                showLevel(StageLevel.SecondTwo)
+                showLevel(StageLevel.secondTwo)
             }
-        case .Three:
-            self.runAction(clickFX)
+        case .three:
+            self.run(clickFX)
             if onStageOne{
-                showLevel(StageLevel.FirstThree)
+                showLevel(StageLevel.firstThree)
             } else {
-                showLevel(StageLevel.SecondThree)
+                showLevel(StageLevel.secondThree)
             }
         }
     }
     
-    func showLevel(level: StageLevel) {
+    func showLevel(_ level: StageLevel) {
         let levelScene = LevelScene(size: size, level: level)
         self.view?.presentScene(levelScene)
     }
     
-    func swipedRight(sender: UISwipeGestureRecognizer) {
+    func swipedRight(_ sender: UISwipeGestureRecognizer) {
         print("Swiped Right")
         if !onStageOne {
-            let moveToOne = SKAction.moveByX( self.frame.size.width, y: 0, duration: 0.5)
-            levelsNode.runAction(moveToOne)
+            let moveToOne = SKAction.moveBy( x: self.frame.size.width, y: 0, duration: 0.5)
+            levelsNode.run(moveToOne)
             onStageOne = true
         }
     }
     
-    func swipedLeft(sender: UISwipeGestureRecognizer) {
+    func swipedLeft(_ sender: UISwipeGestureRecognizer) {
         print("Swiped left")
         if onStageOne {
-            let moveToTwo = SKAction.moveByX( -self.frame.size.width, y: 0, duration: 0.5)
-            levelsNode.runAction(moveToTwo)
+            let moveToTwo = SKAction.moveBy( x: -self.frame.size.width, y: 0, duration: 0.5)
+            levelsNode.run(moveToTwo)
             onStageOne = false
         }
     }
@@ -398,7 +398,7 @@ extension LevelMenuScene {
 
 // : SKPhysicsContactDelegate
 extension LevelMenuScene: SKPhysicsContactDelegate {
-    func didBeginContact(contact: SKPhysicsContact) {
+    func didBegin(_ contact: SKPhysicsContact) {
         print("Button Pressed")
     }
 }

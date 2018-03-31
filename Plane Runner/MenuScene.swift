@@ -32,7 +32,7 @@ class MenuScene: SKScene {
     
     var clickFX: SKAction!
     
-    override func didMoveToView(view: SKView) {
+    override func didMove(to view: SKView) {
         
         print("Size height: \(size.height) Width: \(size.width)")
         print("View Height: \(view.bounds.height) Width: \(view.bounds.width)")
@@ -43,7 +43,7 @@ class MenuScene: SKScene {
         self.physicsWorld.contactDelegate = self
         
         // Click sound effect
-        clickFX = SKAction.repeatAction(SKAction.playSoundFileNamed(ClickFX, waitForCompletion: true), count: 1)
+        clickFX = SKAction.repeat(SKAction.playSoundFileNamed(ClickFX, waitForCompletion: true), count: 1)
         
         createBackground(view)
         createTitle(view)
@@ -57,7 +57,7 @@ class MenuScene: SKScene {
 
 // MARK: Setup Helpers
 extension MenuScene {
-    func createBackground(view: SKView) {
+    func createBackground(_ view: SKView) {
         let bg = SKSpriteNode(texture: bgTexture)
         bg.position = CGPoint(x: view.frame.width/2, y: view.frame.height/2)
         bg.zPosition = ZLevel.Background
@@ -65,7 +65,7 @@ extension MenuScene {
         worldNode.addChild(bg)
     }
     
-    func createTitle(view: SKView) {
+    func createTitle(_ view: SKView) {
         // Plane
         let p = SKSpriteNode(texture: LevelHelper.getLetterTexture("p"))
         p.position = CGPoint(x: -156, y: 0)
@@ -117,7 +117,7 @@ extension MenuScene {
         worldNode.addChild(titleNode)
     }
     
-    func createStartButton(view: SKView) {
+    func createStartButton(_ view: SKView) {
         let startBtn = SKSpriteNode(texture: buttonTexture)
         startBtn.setScale(2.0)
         startBtn.position = CGPoint(x: view.frame.width/2, y: view.frame.height/2 - view.frame.height/3 + 7)
@@ -126,7 +126,7 @@ extension MenuScene {
         
         let startText = SKLabelNode(fontNamed: GameFont)
         startText.text = "Start"
-        startText.color = SKColor.whiteColor()
+        startText.color = SKColor.white
         startText.position = CGPoint(x: view.frame.width/2, y: view.frame.height/2 - view.frame.height/3)
         startText.zPosition = 1
         startNode.addChild(startText)
@@ -137,7 +137,7 @@ extension MenuScene {
         worldNode.addChild(startNode)
     }
     
-    func createInfoButton(view: SKView) {
+    func createInfoButton(_ view: SKView) {
         let infoBtn = SKSpriteNode(texture: infoTexture)
         infoBtn.position = CGPoint(x: view.frame.width - infoBtn.size.width * 2, y: view.frame.height/2 - view.frame.height/3)
         
@@ -146,7 +146,7 @@ extension MenuScene {
         worldNode.addChild(infoNode)
     }
     
-    func createLeaderBoardButton(view: SKView) {
+    func createLeaderBoardButton(_ view: SKView) {
         let leaderBtn = SKSpriteNode(texture: leaderBoad)
         leaderBtn.position = CGPoint(x: leaderBtn.size.width * 2, y: view.frame.height/2 - view.frame.height/3)
         
@@ -163,29 +163,29 @@ extension MenuScene: GKGameCenterControllerDelegate {
         let vc = self.view?.window?.rootViewController
         let gc = GKGameCenterViewController()
         gc.gameCenterDelegate = self
-        vc?.presentViewController(gc, animated: true, completion: nil)
+        vc?.present(gc, animated: true, completion: nil)
     }
     
-    func gameCenterViewControllerDidFinish(gameCenterViewController: GKGameCenterViewController) {
-        gameCenterViewController.dismissViewControllerAnimated(true, completion: nil)
+    func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
+        gameCenterViewController.dismiss(animated: true, completion: nil)
     }
 }
 
 // MARK: Input Methods
 extension MenuScene {
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch: AnyObject in touches {
-            let location = touch.locationInNode(self)
-            if startNode.containsPoint(location) {
+            let location = touch.location(in: self)
+            if startNode.contains(location) {
                 print("Start button touched")
-                self.runAction(clickFX)
+                self.run(clickFX)
                 let levelMenuScene = LevelMenuScene(size: size)
-                self.view?.presentScene(levelMenuScene, transition: SKTransition.doorsOpenHorizontalWithDuration(1.0))
-            } else if infoNode.containsPoint(location) {
-                self.runAction(clickFX)
+                self.view?.presentScene(levelMenuScene, transition: SKTransition.doorsOpenHorizontal(withDuration: 1.0))
+            } else if infoNode.contains(location) {
+                self.run(clickFX)
                 let infoScene = InfoScene(size: size)
-                self.view?.presentScene(infoScene, transition: SKTransition.flipVerticalWithDuration(0.7))
-            } else if leaderNode.containsPoint(location) {
+                self.view?.presentScene(infoScene, transition: SKTransition.flipVertical(withDuration: 0.7))
+            } else if leaderNode.contains(location) {
                 // TODO: Launch Game Center
                 print("Leaderboard touched")
                 showLeaderboard()
@@ -196,7 +196,7 @@ extension MenuScene {
 
 // MARK: SKPhysicsDelegate
 extension MenuScene: SKPhysicsContactDelegate {
-    func didBeginContact(contact: SKPhysicsContact) {
+    func didBegin(_ contact: SKPhysicsContact) {
         print("button pressed")
     }
 }

@@ -106,7 +106,7 @@ class LevelScene: SKScene {
     required init(size: CGSize, level: StageLevel) {
         super.init(size: size)
         self.level = level
-        levelPlistPath = NSBundle.mainBundle().pathForResource(level.name, ofType: "plist")!
+        levelPlistPath = Bundle.main.path(forResource: level.name, ofType: "plist")!
         levelData = NSDictionary(contentsOfFile: levelPlistPath)
     }
 }
@@ -114,7 +114,7 @@ class LevelScene: SKScene {
 // MARK: Lifecycle methods
 extension LevelScene {
     
-    override func didMoveToView(view: SKView) {
+    override func didMove(to view: SKView) {
         // Add world node to main scene
         addChild(worldNode)
         // Add moving nodes to world
@@ -126,7 +126,7 @@ extension LevelScene {
         self.physicsWorld.contactDelegate = self
         
         // Change gravity
-        self.physicsWorld.gravity = CGVectorMake(0, -2.0)
+        self.physicsWorld.gravity = CGVector(dx: 0, dy: -2.0)
         self.physicsBody?.restitution = 0.0
         
         // Obtaine prepared audio player from helper class
@@ -159,7 +159,7 @@ extension LevelScene {
     
     func loadResouces(){
         // Get total length of level from dictionary
-        endLevelX = levelData["EndX"]!.integerValue!
+        endLevelX = (levelData["EndX"]! as AnyObject).intValue!
         sceneLength = CGFloat(endLevelX)
         
         // Create scene background
@@ -170,22 +170,22 @@ extension LevelScene {
         foregroundLevelNode.zPosition = ZLevel.Foreground
         
         // Plane crash sound effect
-        planeCrashFX = SKAction.repeatAction(SKAction.playSoundFileNamed(PlaneCrashSoundFX, waitForCompletion: true), count: 1)
+        planeCrashFX = SKAction.repeat(SKAction.playSoundFileNamed(PlaneCrashSoundFX, waitForCompletion: true), count: 1)
         
         // Distance increase sound effect
-        distanceIncreasFX = SKAction.repeatAction(SKAction.playSoundFileNamed(DistanceIncreaseSoundFX, waitForCompletion: true), count: 1)
+        distanceIncreasFX = SKAction.repeat(SKAction.playSoundFileNamed(DistanceIncreaseSoundFX, waitForCompletion: true), count: 1)
         
         // Plane flying sound effect
-        planeFlyingFX = SKAction.repeatAction(SKAction.playSoundFileNamed(PlaneFlyingSoundFX, waitForCompletion: true), count: 1)
+        planeFlyingFX = SKAction.repeat(SKAction.playSoundFileNamed(PlaneFlyingSoundFX, waitForCompletion: true), count: 1)
         
         // Star sound effect
-        starFX = SKAction.repeatAction(SKAction.playSoundFileNamed(StarFX, waitForCompletion: true), count: 1)
+        starFX = SKAction.repeat(SKAction.playSoundFileNamed(StarFX, waitForCompletion: true), count: 1)
         
         // Click sound effect
-        clickFX = SKAction.repeatAction(SKAction.playSoundFileNamed(ClickFX, waitForCompletion: true), count: 1)
+        clickFX = SKAction.repeat(SKAction.playSoundFileNamed(ClickFX, waitForCompletion: true), count: 1)
     }
     
-    func createHUD(view: SKView) {
+    func createHUD(_ view: SKView) {
         // Create pause button
         let pauseButton = SKSpriteNode(texture: pauseTexture)
         pauseButton.setScale(1.4)
@@ -203,11 +203,11 @@ extension LevelScene {
         
         // Create distance label
         hudDistanceLabel.text = "Distance: \(levelManager.distance) meters"
-        hudDistanceLabel.fontColor = SKColor.blackColor()
+        hudDistanceLabel.fontColor = SKColor.black
         hudDistanceLabel.fontSize = 14
-        hudDistanceLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
-        hudDistanceLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Top
-        hudDistanceLabel.position = CGPoint(x: 10, y: CGRectGetMaxY(self.frame) - 10)
+        hudDistanceLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
+        hudDistanceLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.top
+        hudDistanceLabel.position = CGPoint(x: 10, y: self.frame.maxY - 10)
         
         // Add to hud
         hud.addChild(hudDistanceLabel)
@@ -217,10 +217,10 @@ extension LevelScene {
         star.position = CGPoint(x: 10 + star.size.width / 2, y: view.frame.height - hudDistanceLabel.frame.height - 20)
         
         hudStarLabel.text = "= \(levelManager.starsCollected)"
-        hudStarLabel.fontColor = SKColor.blackColor()
+        hudStarLabel.fontColor = SKColor.black
         hudStarLabel.fontSize = 14
-        hudStarLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
-        hudStarLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Center
+        hudStarLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
+        hudStarLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
         hudStarLabel.position = CGPoint(x: 10 + star.size.width, y: view.frame.height - hudDistanceLabel.frame.height - 20)
         
         hudStarNode.addChild(star)
@@ -233,17 +233,17 @@ extension LevelScene {
         worldNode.addChild(hud)
     }
     
-    func createBoundry(view: SKView) {
+    func createBoundry(_ view: SKView) {
         let boundry = SKNode()
-        boundry.physicsBody = SKPhysicsBody(edgeLoopFromRect: view.frame)
-        boundry.physicsBody?.dynamic = false
+        boundry.physicsBody = SKPhysicsBody(edgeLoopFrom: view.frame)
+        boundry.physicsBody?.isDynamic = false
         boundry.physicsBody?.restitution = 0.0
         boundry.physicsBody?.categoryBitMask = PhysicsCategory.Boundary
         
         worldNode.addChild(boundry)
     }
     
-    func createBackground(view: SKView) {
+    func createBackground(_ view: SKView) {
         
         // Set up variables for while loop
         var i: CGFloat = 0
@@ -252,7 +252,7 @@ extension LevelScene {
         var numBgCreated = 0
         
         while i < sceneLength + view.frame.width {
-            numBgCreated++
+            numBgCreated += 1
             
             let bg = SKSpriteNode(texture: backgroundTexture)
             bg.size = view.frame.size
@@ -268,21 +268,21 @@ extension LevelScene {
         movingNodes.addChild(backgroundLevelNode)
     }
     
-    func createGround(view: SKView) {
+    func createGround(_ view: SKView) {
         var i: CGFloat = 0
         
         var numGroundCreated = 0
         
         while i < sceneLength + view.frame.width + groundTexture.size().width {
-            numGroundCreated++
+            numGroundCreated += 1
             
             let ground = SKSpriteNode(texture: groundTexture)
             ground.position = CGPoint(x: i, y: ground.frame.height/2)
             ground.zPosition = ZLevel.Ground
             
             // Set physics
-            ground.physicsBody = SKPhysicsBody(rectangleOfSize: ground.size)
-            ground.physicsBody?.dynamic = false
+            ground.physicsBody = SKPhysicsBody(rectangleOf: ground.size)
+            ground.physicsBody?.isDynamic = false
             ground.physicsBody?.restitution = 0.0
             ground.physicsBody?.categoryBitMask = PhysicsCategory.Ground
             
@@ -293,7 +293,7 @@ extension LevelScene {
         print("Number of grounds created \(numGroundCreated)")
     }
     
-    func createObsticles(view: SKView) {
+    func createObsticles(_ view: SKView) {
         
         // Create lower rocks
         let rocksDictionary = levelData["Rocks"] as! NSDictionary
@@ -306,8 +306,8 @@ extension LevelScene {
             let rockNode = SKSpriteNode(texture: rockTexture)
             rockNode.setScale(rockScale)
             
-            let x = rock["x"]?.floatValue
-            let y = rock["y"]?.floatValue
+            let x = (rock["x"] as AnyObject).floatValue
+            let y = (rock["y"] as AnyObject).floatValue
             let xPosition = CGFloat(x!) - rockNode.size.width/2
             let yPosition = CGFloat(y!) + rockNode.size.height/2
             
@@ -317,7 +317,7 @@ extension LevelScene {
             print("Rock postion x:\(xPosition) y:\(yPosition)")
             
             // Create path for physicsBody
-            let rockPath = CGPathCreateMutable()
+            let rockPath = CGMutablePath()
             
             // Bottom left of rock
             CGPathMoveToPoint(rockPath, nil, -rockNode.size.width/2, -rockNode.size.height/2)
@@ -326,12 +326,12 @@ extension LevelScene {
             // Bottom right of rock
             CGPathAddLineToPoint(rockPath, nil, rockNode.size.width/2, -rockNode.size.height/2)
             // Close path
-            CGPathCloseSubpath(rockPath)
+            rockPath.closeSubpath()
             
             
             // Set physics
-            rockNode.physicsBody = SKPhysicsBody(polygonFromPath: rockPath)
-            rockNode.physicsBody?.dynamic = false
+            rockNode.physicsBody = SKPhysicsBody(polygonFrom: rockPath)
+            rockNode.physicsBody?.isDynamic = false
             rockNode.physicsBody?.restitution = 0.0
             rockNode.physicsBody?.categoryBitMask = PhysicsCategory.Collidable
             
@@ -350,7 +350,7 @@ extension LevelScene {
             let rockDownNode = SKSpriteNode(texture: rockDownTexture)
             rockDownNode.setScale(rockDownScale)
             
-            let x = rockDown["x"]?.floatValue
+            let x = (rockDown["x"] as AnyObject).floatValue
             let xPosition = CGFloat(x!) - rockDownNode.size.width/2
             let yPosition = view.frame.height - rockDownNode.size.height/2
             
@@ -360,7 +360,7 @@ extension LevelScene {
             print("RockDown postion x:\(xPosition) y:\(yPosition)")
             
             // Create path for physicsBody
-            let rockDownPath = CGPathCreateMutable()
+            let rockDownPath = CGMutablePath()
             
             // Top left of rockDown
             CGPathMoveToPoint(rockDownPath, nil, -rockDownNode.size.width/2, rockDownNode.size.height/2)
@@ -369,11 +369,11 @@ extension LevelScene {
             // Top right of rockDown
             CGPathAddLineToPoint(rockDownPath, nil, rockDownNode.size.width/2, rockDownNode.size.height/2)
             // Close path
-            CGPathCloseSubpath(rockDownPath)
+            rockDownPath.closeSubpath()
             
             // Set physics
-            rockDownNode.physicsBody = SKPhysicsBody(polygonFromPath: rockDownPath)
-            rockDownNode.physicsBody?.dynamic = false
+            rockDownNode.physicsBody = SKPhysicsBody(polygonFrom: rockDownPath)
+            rockDownNode.physicsBody?.isDynamic = false
             rockDownNode.physicsBody?.restitution = 0.0
             rockDownNode.physicsBody?.categoryBitMask = PhysicsCategory.Collidable
             
@@ -382,7 +382,7 @@ extension LevelScene {
         movingNodes.addChild(foregroundLevelNode)
     }
     
-    func createStars(view: SKView) {
+    func createStars(_ view: SKView) {
         let starDictionary = levelData["Stars"] as! NSDictionary
         let positionsArray = starDictionary["Positions"] as! [NSDictionary]
         
@@ -390,8 +390,8 @@ extension LevelScene {
             let starNode = SKSpriteNode(texture: starTexture)
             starNode.setScale(2.0)
             
-            let x = star["x"]?.floatValue
-            let y = star["y"]?.floatValue
+            let x = (star["x"] as AnyObject).floatValue
+            let y = (star["y"] as AnyObject).floatValue
             let xPositoin = CGFloat(x!)
             let yPosition = CGFloat(y!)
             
@@ -399,8 +399,8 @@ extension LevelScene {
             starNode.position = CGPoint(x: xPositoin, y: yPosition)
             
             // Set physics
-            starNode.physicsBody = SKPhysicsBody(rectangleOfSize: starNode.size)
-            starNode.physicsBody?.dynamic = false
+            starNode.physicsBody = SKPhysicsBody(rectangleOf: starNode.size)
+            starNode.physicsBody?.isDynamic = false
             starNode.physicsBody?.categoryBitMask = PhysicsCategory.Stars
             starNode.physicsBody?.contactTestBitMask = PhysicsCategory.Plane
             
@@ -408,17 +408,17 @@ extension LevelScene {
         }
     }
     
-    func createClouds(view: SKView) {
+    func createClouds(_ view: SKView) {
         // TODO: Create clouds
     }
     
-    func createDistanceMarkers(view: SKView) {
+    func createDistanceMarkers(_ view: SKView) {
         var i: CGFloat = view.frame.width / 4 + planeTexture.size().width/2 + 10
         
         while i < sceneLength + view.frame.width {
             let distanceMarkerNode = SKNode()
-            distanceMarkerNode.physicsBody = SKPhysicsBody(edgeFromPoint: CGPoint(x: i, y: 0), toPoint: CGPoint(x: i, y: view.frame.height))
-            distanceMarkerNode.physicsBody?.dynamic = false
+            distanceMarkerNode.physicsBody = SKPhysicsBody(edgeFrom: CGPoint(x: i, y: 0), to: CGPoint(x: i, y: view.frame.height))
+            distanceMarkerNode.physicsBody?.isDynamic = false
             distanceMarkerNode.physicsBody?.categoryBitMask = PhysicsCategory.Distance
             distanceMarkerNode.physicsBody?.contactTestBitMask = PhysicsCategory.Plane
             
@@ -428,14 +428,14 @@ extension LevelScene {
         }
     }
     
-    func createPlane(view: SKView) {
+    func createPlane(_ view: SKView) {
         plane = SKSpriteNode(texture: planeTexture)
         plane.position = CGPoint(x: view.frame.width/4, y: view.frame.height/2)
         plane.zPosition = ZLevel.Plane
         
         // Set physics
-        plane.physicsBody = SKPhysicsBody(rectangleOfSize: plane.size)
-        plane.physicsBody?.dynamic = true
+        plane.physicsBody = SKPhysicsBody(rectangleOf: plane.size)
+        plane.physicsBody?.isDynamic = true
         plane.physicsBody?.allowsRotation = false
         plane.physicsBody?.restitution = 0.0
         plane.physicsBody?.categoryBitMask = PhysicsCategory.Plane
@@ -447,27 +447,27 @@ extension LevelScene {
         worldNode.addChild(plane)
     }
     
-    func createTutorial(view: SKView) {
-        let scaleUp = SKAction.resizeByWidth(50, height: 50, duration: 0.5)
-        let scaleDown = SKAction.resizeByWidth(-50, height: -50, duration: 0.5)
-        let repeatScaling = SKAction.repeatActionForever(SKAction.sequence([scaleUp, scaleDown]))
+    func createTutorial(_ view: SKView) {
+        let scaleUp = SKAction.resize(byWidth: 50, height: 50, duration: 0.5)
+        let scaleDown = SKAction.resize(byWidth: -50, height: -50, duration: 0.5)
+        let repeatScaling = SKAction.repeatForever(SKAction.sequence([scaleUp, scaleDown]))
         
         
         let tapTick = SKSpriteNode(texture: tapTexture)
         tapTick.position = CGPoint(x: view.frame.width / 2, y: view.frame.height / 2)
         tapTick.zPosition = ZLevel.Tutorial
         
-        tapTick.runAction(repeatScaling)
+        tapTick.run(repeatScaling)
         
         tutorialNode.addChild(tapTick)
     }
     
-    func createWinLoseDialog(didWin: Bool) {
+    func createWinLoseDialog(_ didWin: Bool) {
         let uiSize = self.view!.frame.height - 50
         
         levelUI = SKSpriteNode(texture: uiBackground)
         levelUI.position = CGPoint(x: self.view!.frame.width / 2, y: self.view!.frame.height / 2)
-        levelUI.size = CGSizeMake(uiSize + 50, uiSize)
+        levelUI.size = CGSize(width: uiSize + 50, height: uiSize)
         levelUI.zPosition = ZLevel.UiBackground
         
         levelDialog.addChild(levelUI)
@@ -500,7 +500,7 @@ extension LevelScene {
         nextBtn.zPosition = ZLevel.Label
         
         if !didWin {
-            nextBtn.hidden = true
+            nextBtn.isHidden = true
         }
         
         levelMenuBtn = SKSpriteNode(texture: LevelMenuTexture)
@@ -528,12 +528,12 @@ extension LevelScene {
     }
     
     func animateStars() {
-        let delay = SKAction.waitForDuration(1)
+        let delay = SKAction.wait(forDuration: 1)
         
         // Bronze Actions
         let changeToBronze = SKAction.setTexture(starBronzeTexture)
-        let addBronzeEmitter = SKAction.runBlock({
-            self.starBronzeEmmiter = NSKeyedUnarchiver.unarchiveObjectWithFile(NSBundle.mainBundle().pathForResource("BronzeParticle", ofType: "sks")!) as! SKEmitterNode
+        let addBronzeEmitter = SKAction.run({
+            self.starBronzeEmmiter = NSKeyedUnarchiver.unarchiveObject(withFile: Bundle.main.path(forResource: "BronzeParticle", ofType: "sks")!) as! SKEmitterNode
             self.starBronzeEmmiter.zPosition = ZLevel.UiAnnimation
             self.starHolderNode.addChild(self.starBronzeEmmiter)
         })
@@ -541,8 +541,8 @@ extension LevelScene {
         
         // Silver Actions
         let changeToSilver = SKAction.setTexture(starSilverTexture)
-        let addSilverEmitter = SKAction.runBlock({
-            self.starSilverEmmiter = NSKeyedUnarchiver.unarchiveObjectWithFile(NSBundle.mainBundle().pathForResource("SilverParticle", ofType: "sks")!) as! SKEmitterNode
+        let addSilverEmitter = SKAction.run({
+            self.starSilverEmmiter = NSKeyedUnarchiver.unarchiveObject(withFile: Bundle.main.path(forResource: "SilverParticle", ofType: "sks")!) as! SKEmitterNode
             self.starSilverEmmiter.zPosition = ZLevel.UiAnnimation
             self.starHolderNode.addChild(self.starSilverEmmiter)
         })
@@ -550,8 +550,8 @@ extension LevelScene {
         
         // Gold Actions
         let changeToGold = SKAction.setTexture(starGoldTexture)
-        let addGoldEmitter = SKAction.runBlock({
-            self.starGoldEmmiter = NSKeyedUnarchiver.unarchiveObjectWithFile(NSBundle.mainBundle().pathForResource("GoldParticle", ofType: "sks")!) as! SKEmitterNode
+        let addGoldEmitter = SKAction.run({
+            self.starGoldEmmiter = NSKeyedUnarchiver.unarchiveObject(withFile: Bundle.main.path(forResource: "GoldParticle", ofType: "sks")!) as! SKEmitterNode
             self.starGoldEmmiter.zPosition = ZLevel.UiAnnimation
             self.starHolderNode.addChild(self.starGoldEmmiter)
         })
@@ -560,11 +560,11 @@ extension LevelScene {
         
         switch levelManager.starsCollected {
         case 1:
-            starHolderNode.runAction(bronzeSequence)
+            starHolderNode.run(bronzeSequence)
         case 2:
-            starHolderNode.runAction(SKAction.sequence([bronzeSequence, silverSequence]))
+            starHolderNode.run(SKAction.sequence([bronzeSequence, silverSequence]))
         case 3:
-            starHolderNode.runAction(SKAction.sequence([bronzeSequence, silverSequence, goldSequence]))
+            starHolderNode.run(SKAction.sequence([bronzeSequence, silverSequence, goldSequence]))
         default:
             print("Lost")
         }
@@ -583,17 +583,17 @@ extension LevelScene {
     
     func play(){
         // Action to move background
-        let moveBg = SKAction.moveByX(-sceneLength, y: 0, duration: NSTimeInterval(sceneLength/50))
-        backgroundLevelNode.runAction(moveBg)
+        let moveBg = SKAction.moveBy(x: -sceneLength, y: 0, duration: TimeInterval(sceneLength/50))
+        backgroundLevelNode.run(moveBg)
         
         // Action to move foreground
-        let moveFg = SKAction.moveByX(-sceneLength, y: 0, duration: NSTimeInterval(sceneLength/150))
-        foregroundLevelNode.runAction(moveFg)
+        let moveFg = SKAction.moveBy(x: -sceneLength, y: 0, duration: TimeInterval(sceneLength/150))
+        foregroundLevelNode.run(moveFg)
         
         // Animate plans propeller
-        let animation = SKAction.animateWithTextures([planeTexture, planeTexture1, planeTexture2], timePerFrame: 0.05)
-        let makePropellerSpin = SKAction.repeatActionForever(animation)
-        plane.runAction(makePropellerSpin)
+        let animation = SKAction.animate(with: [planeTexture, planeTexture1, planeTexture2], timePerFrame: 0.05)
+        let makePropellerSpin = SKAction.repeatForever(animation)
+        plane.run(makePropellerSpin)
         
         plane.physicsBody?.pinned = false
         
@@ -603,8 +603,8 @@ extension LevelScene {
     func pause() {
         gamePaused = true
         // pause physics
-        self.paused = true
-        if audioPlayer.playing{
+        self.isPaused = true
+        if audioPlayer.isPlaying{
             audioPlayer.pause()
         }
     }
@@ -612,21 +612,21 @@ extension LevelScene {
     func resume() {
         gamePaused = false
         // Unpause physics
-        self.paused = false
-        if !audioPlayer.playing {
+        self.isPaused = false
+        if !audioPlayer.isPlaying {
             audioPlayer.play()
         }
     }
     
     func updateDistance() {
         //        runAction(distanceIncreasFX)
-        levelManager.distance++
-        levelManager.totalDistance++
+        levelManager.distance += 1
+        levelManager.totalDistance += 1
 //        distanceFlown++
         hudDistanceLabel.text = "Distance: \(levelManager.distance) meters"
     }
     
-    func collectStar(star: SKNode) {
+    func collectStar(_ star: SKNode) {
         star.removeFromParent()
         hudStarNode.addChild(star)
         star.physicsBody = nil
@@ -634,18 +634,18 @@ extension LevelScene {
         star.position = CGPoint(x: self.frame.size.width / 3, y: 100)
         
         
-        self.runAction(starFX)
+        self.run(starFX)
         
-        let moveStar = SKAction.moveTo(CGPoint(x: 10, y: view!.frame.height - 20), duration: 1.5)
+        let moveStar = SKAction.move(to: CGPoint(x: 10, y: view!.frame.height - 20), duration: 1.5)
         //        let shrinkStar = SKAction.scaleXTo(0.5, duration: 1.5)
-        let shrinkStar = SKAction.resizeToWidth(star.frame.width / 2, height: star.frame.height / 2, duration: 1.5)
+        let shrinkStar = SKAction.resize(toWidth: star.frame.width / 2, height: star.frame.height / 2, duration: 1.5)
         let moveAndShring = SKAction.group([moveStar, shrinkStar])
         let removeStar = SKAction.removeFromParent()
         let moveAndRemoveStar = SKAction.sequence([moveAndShring, removeStar])
         
-        star.runAction(moveAndRemoveStar)
+        star.run(moveAndRemoveStar)
         
-        levelManager.starsCollected++
+        levelManager.starsCollected += 1
         hudStarLabel.text = "= \(levelManager.starsCollected)"
     }
     
@@ -682,19 +682,19 @@ extension LevelScene {
 
 // MARK: Input methods
 extension LevelScene {
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if !gameStarted {
             gameStarted = true
             play()
         }
         
         for touch: AnyObject in touches {
-            let location = touch.locationInNode(self)
+            let location = touch.location(in: self)
             
-            if hudPauseButn.containsPoint(location) {
-                self.runAction(clickFX)
+            if hudPauseButn.contains(location) {
+                self.run(clickFX)
                 print("Pause/Play")
-                if self.paused {
+                if self.isPaused {
                     resume()
                 } else {
                     pause()
@@ -703,14 +703,14 @@ extension LevelScene {
             
             if levelWon || gameOver {
                 
-                if replayBtn.containsPoint(location) {
+                if replayBtn.contains(location) {
                     restartLevel()
                 }
-                if nextBtn.containsPoint(location) {
+                if nextBtn.contains(location) {
                     print("Next Level")
                 }
                 
-                if levelMenuBtn.containsPoint(location) {
+                if levelMenuBtn.contains(location) {
                     print("Level Menu")
                     // Reset scene
                     audioPlayer.stop()
@@ -727,24 +727,24 @@ extension LevelScene {
                 // Used for contiuous flying while touching screen.
                 isTouching = true
                 
-                let addSmoke = SKAction.runBlock({
-                    let planeEngineSmoke = NSKeyedUnarchiver.unarchiveObjectWithFile(NSBundle.mainBundle().pathForResource("SmokeParticle", ofType: "sks")!) as! SKEmitterNode
+                let addSmoke = SKAction.run({
+                    let planeEngineSmoke = NSKeyedUnarchiver.unarchiveObject(withFile: Bundle.main.path(forResource: "SmokeParticle", ofType: "sks")!) as! SKEmitterNode
                     planeEngineSmoke.position = CGPoint(x: -20, y: 0)
                     planeEngineSmoke.zPosition = ZLevel.PlaneSmoke
                     self.plane.addChild(planeEngineSmoke)
                 })
-                plane.physicsBody?.velocity = CGVectorMake(0, 0)
-                plane.physicsBody?.applyImpulse(CGVectorMake(0, 8))
-                plane.runAction(SKAction.group([planeFlyingFX, addSmoke]))
+                plane.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
+                plane.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 8))
+                plane.run(SKAction.group([planeFlyingFX, addSmoke]))
             }
         }
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         isTouching = false
     }
     
-    override func update(currentTime: NSTimeInterval) {
+    override func update(_ currentTime: TimeInterval) {
         //        if isTouching {
         //            plane.physicsBody?.applyForce(CGVectorMake(0, 50))
         //        }
@@ -759,7 +759,7 @@ extension LevelScene {
 
 // MARK: SKPhysicsContactDelegate
 extension LevelScene: SKPhysicsContactDelegate {
-    func didBeginContact(contact: SKPhysicsContact) {
+    func didBegin(_ contact: SKPhysicsContact) {
         var notPlane = SKPhysicsBody()
         var notPlaneNode = SKNode()
         
@@ -781,9 +781,9 @@ extension LevelScene: SKPhysicsContactDelegate {
         default:
             print("Plane crashed")
             
-            runAction(planeCrashFX)
-            plane.physicsBody?.velocity = CGVectorMake(0, 0)
-            plane.physicsBody?.applyImpulse(CGVectorMake(0, -50))
+            run(planeCrashFX)
+            plane.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
+            plane.physicsBody?.applyImpulse(CGVector(dx: 0, dy: -50))
             
             
             if gameOver == false {

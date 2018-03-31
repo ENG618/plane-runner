@@ -30,34 +30,34 @@ class HUD {
     }
     
     // MARK: Distance
-    private func setUpDistanceLable(parent: SKNode) {
+    fileprivate func setUpDistanceLable(_ parent: SKNode) {
         // TODO: Setup label node
     }
     
     func increaseDistance() {
         // Adds yard to distance traveled
-        distanceTraveled++
+        distanceTraveled += 1
         // Update label
         updateDistanceLabel()
     }
     
-    private func updateDistanceLabel() {
+    fileprivate func updateDistanceLabel() {
         // TODO: Update distance label
     }
     
     // MARK: Stars
-    private func setUpStarsLabel(parent: SKNode) {
+    fileprivate func setUpStarsLabel(_ parent: SKNode) {
         // TODO: Setup stars label
     }
     
     func increaseStar() {
         if starsCollected < 3 {
-            starsCollected++
+            starsCollected += 1
             updateStarsLabel()
         }
     }
     
-    private func updateStarsLabel() {
+    fileprivate func updateStarsLabel() {
         // TODO: Update stars label
     }
 }

@@ -23,7 +23,7 @@ class InfoScene: SKScene {
     
     var clickFX: SKAction!
     
-    override func didMoveToView(view: SKView) {
+    override func didMove(to view: SKView) {
         self.addChild(worldNode)
         worldNode.addChild(backBtnNode)
         worldNode.addChild(dialogNode)
@@ -31,7 +31,7 @@ class InfoScene: SKScene {
         self.physicsWorld.contactDelegate = self
         
         // Click sound effect
-        clickFX = SKAction.repeatAction(SKAction.playSoundFileNamed(ClickFX, waitForCompletion: true), count: 1)
+        clickFX = SKAction.repeat(SKAction.playSoundFileNamed(ClickFX, waitForCompletion: true), count: 1)
         
         createBackground(view)
         createBackButton(view)
@@ -41,7 +41,7 @@ class InfoScene: SKScene {
 
 // MARK: Setup Helpers
 extension InfoScene {
-    func createBackground(view: SKView) {
+    func createBackground(_ view: SKView) {
         let bg = SKSpriteNode(texture: bgTexture)
         bg.position = CGPoint(x: view.frame.width/2, y: view.frame.height/2)
         bg.zPosition = ZLevel.Background
@@ -49,14 +49,14 @@ extension InfoScene {
         worldNode.addChild(bg)
     }
     
-    func createBackButton(view: SKView) {
+    func createBackButton(_ view: SKView) {
         let backBtn = SKSpriteNode(texture: backBtnTexture)
         backBtn.position = CGPoint(x: 10 + backBtnTexture.size().width / 2, y: -10 - backBtnTexture.size().height / 2 + view.frame.height)
         
         backBtnNode.addChild(backBtn)
     }
     
-    func createDialog(view: SKView) {
+    func createDialog(_ view: SKView) {
         let dialogBackground = SKSpriteNode(texture: dialogBackgroundTexture)
         dialogBackground.size = CGSize(width: view.frame.width - 150, height: view.frame.height - 40)
         dialogBackground.position = CGPoint(x: view.frame.width / 2, y: view.frame.height / 2)
@@ -65,7 +65,7 @@ extension InfoScene {
         print("Line height: \(lineHeight)")
         
         let developerText = SKLabelNode(fontNamed: GameFont)
-        developerText.fontColor = SKColor.blackColor()
+        developerText.fontColor = SKColor.black
         developerText.text = "Developer: Eric Garcia"
         developerText.position = CGPoint(x: view.frame.width / 2, y: lineHeight)
         
@@ -73,7 +73,7 @@ extension InfoScene {
         print("Line height: \(lineHeight)")
         
         let creditsText = SKLabelNode(fontNamed: GameFont)
-        creditsText.fontColor = SKColor.blackColor()
+        creditsText.fontColor = SKColor.black
         creditsText.text = "Credits"
         creditsText.position = CGPoint(x: view.frame.width / 2, y: lineHeight)
         
@@ -81,7 +81,7 @@ extension InfoScene {
         print("Line height: \(lineHeight)")
         
         let artCreditText = SKLabelNode(fontNamed: GameFont)
-        artCreditText.fontColor = SKColor.blackColor()
+        artCreditText.fontColor = SKColor.black
         artCreditText.fontSize = 18
         artCreditText.text = "Image assets: Kenny.nl"
         artCreditText.position = CGPoint(x: view.frame.width / 2, y: lineHeight)
@@ -90,7 +90,7 @@ extension InfoScene {
         print("Line height: \(lineHeight)")
         
         let bgAudioCreditText = SKLabelNode(fontNamed: GameFont)
-        bgAudioCreditText.fontColor = SKColor.blackColor()
+        bgAudioCreditText.fontColor = SKColor.black
         bgAudioCreditText.fontSize = 18
         bgAudioCreditText.text = "Background audio: David Brenner on Melody Loops"
         bgAudioCreditText.position = CGPoint(x: view.frame.width / 2, y: lineHeight)
@@ -99,7 +99,7 @@ extension InfoScene {
         print("Line height: \(lineHeight)")
         
         let planeCrashAudioCreditText = SKLabelNode(fontNamed: GameFont)
-        planeCrashAudioCreditText.fontColor = SKColor.blackColor()
+        planeCrashAudioCreditText.fontColor = SKColor.black
         planeCrashAudioCreditText.fontSize = 18
         planeCrashAudioCreditText.text = "Plane Crashing: http://www.freefx.co.uk"
         planeCrashAudioCreditText.position = CGPoint(x: view.frame.width / 2, y: lineHeight)
@@ -108,7 +108,7 @@ extension InfoScene {
         print("Line height: \(lineHeight)")
         
         let planeFlyingAudioCreditText = SKLabelNode(fontNamed: GameFont)
-        planeFlyingAudioCreditText.fontColor = SKColor.blackColor()
+        planeFlyingAudioCreditText.fontColor = SKColor.black
         planeFlyingAudioCreditText.fontSize = 18
         planeFlyingAudioCreditText.text = "Plane Flying: SoundBible.com"
         planeFlyingAudioCreditText.position = CGPoint(x: view.frame.width / 2, y: lineHeight)
@@ -117,7 +117,7 @@ extension InfoScene {
         print("Line height: \(lineHeight)")
         
         let starAudioCreditText = SKLabelNode(fontNamed: GameFont)
-        starAudioCreditText.fontColor = SKColor.blackColor()
+        starAudioCreditText.fontColor = SKColor.black
         starAudioCreditText.fontSize = 18
         starAudioCreditText.text = "Star: http://www.freefx.co.uk"
         starAudioCreditText.position = CGPoint(x: view.frame.width / 2, y: lineHeight)
@@ -126,7 +126,7 @@ extension InfoScene {
         print("Line height: \(lineHeight)")
         
         let clickAudioCreditText = SKLabelNode(fontNamed: GameFont)
-        clickAudioCreditText.fontColor = SKColor.blackColor()
+        clickAudioCreditText.fontColor = SKColor.black
         clickAudioCreditText.fontSize = 18
         clickAudioCreditText.text = "Click: Kenney.nl"
         clickAudioCreditText.position = CGPoint(x: view.frame.width / 2, y: lineHeight)
@@ -146,15 +146,15 @@ extension InfoScene {
 
 // MARK: Input Methods
 extension InfoScene {
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch: AnyObject in touches {
-            let location = touch.locationInNode(self)
-            if backBtnNode.containsPoint(location) {
+            let location = touch.location(in: self)
+            if backBtnNode.contains(location) {
                 print("Start button touched")
-                self.runAction(clickFX)
+                self.run(clickFX)
                 
                 let scene = MenuScene(size: size)
-                self.view?.presentScene(scene, transition: SKTransition.flipVerticalWithDuration(0.7))
+                self.view?.presentScene(scene, transition: SKTransition.flipVertical(withDuration: 0.7))
             }
         }
     }
@@ -162,7 +162,7 @@ extension InfoScene {
 
 // MARK: SKPhysicsDelegate
 extension InfoScene: SKPhysicsContactDelegate {
-    func didBeginContact(contact: SKPhysicsContact) {
+    func didBegin(_ contact: SKPhysicsContact) {
         print("Button pressed")
     }
 }

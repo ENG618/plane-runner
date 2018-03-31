@@ -29,7 +29,7 @@ class GameViewController: UIViewController {
                 //skView.showsPhysics = true
                 skView.ignoresSiblingOrder = true
                 
-                scene.scaleMode = .Fill
+                scene.scaleMode = .fill
                 
                 skView.presentScene(scene)
                 
@@ -37,15 +37,15 @@ class GameViewController: UIViewController {
         }
     }
 
-    override func shouldAutorotate() -> Bool {
+    override var shouldAutorotate : Bool {
         return true
     }
 
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
-            return UIInterfaceOrientationMask.Landscape
+    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            return UIInterfaceOrientationMask.landscape
         } else {
-            return UIInterfaceOrientationMask.Landscape
+            return UIInterfaceOrientationMask.landscape
         }
     }
 
@@ -54,7 +54,7 @@ class GameViewController: UIViewController {
         // Release any cached data, images, etc that aren't in use.
     }
 
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return true
     }
 }

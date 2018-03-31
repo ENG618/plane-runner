@@ -11,16 +11,16 @@ import AVFoundation
 
 class LevelHelper {
     
-    class func prepareAudioPlayer(view: SKView) -> AVAudioPlayer {
+    class func prepareAudioPlayer(_ view: SKView) -> AVAudioPlayer {
         
         var audioPlayer: AVAudioPlayer? = AVAudioPlayer()
         
-        if let path = NSBundle.mainBundle().pathForResource("backgroundTrack", ofType: ".mp3") {
-            let url = NSURL.fileURLWithPath(path)
+        if let path = Bundle.main.path(forResource: "backgroundTrack", ofType: ".mp3") {
+            let url = URL(fileURLWithPath: path)
             var error: NSError?
             
             do {
-                audioPlayer = try AVAudioPlayer(contentsOfURL: url)
+                audioPlayer = try AVAudioPlayer(contentsOf: url)
             } catch let error1 as NSError {
                 error = error1
                 audioPlayer = nil
@@ -34,7 +34,7 @@ class LevelHelper {
         return audioPlayer!
     }
     
-    class func getLetterTexture(letter: String) -> SKTexture {
+    class func getLetterTexture(_ letter: String) -> SKTexture {
         let letterTextuer = SKTexture(imageNamed: letter)
         return letterTextuer
     }
@@ -57,7 +57,7 @@ class LevelHelper {
         return wonText
     }
     
-    class func getReadyAction(view: SKView) -> (action: SKAction, getReadyNode: SKSpriteNode) {
+    class func getReadyAction(_ view: SKView) -> (action: SKAction, getReadyNode: SKSpriteNode) {
         
         // Method resouces
         let getReadyTexture = SKTexture(imageNamed: TextGetReady)
@@ -65,7 +65,7 @@ class LevelHelper {
         let two = SKTexture(imageNamed: TwoImage)
         let three = SKTexture(imageNamed: ThreeImage)
         
-        let getReadyAction = SKAction.animateWithTextures([getReadyTexture, three, two, one], timePerFrame: 1.0)
+        let getReadyAction = SKAction.animate(with: [getReadyTexture, three, two, one], timePerFrame: 1.0)
         let removeNode = SKAction.removeFromParent()
         
         let getReadyAndRemoveAction = SKAction.sequence([getReadyAction, removeNode])

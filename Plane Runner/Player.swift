@@ -32,22 +32,22 @@ class Player {
         self.localPlayer = GKLocalPlayer.localPlayer()
     }
     
-    func authLocalPlayer(vc: UIViewController) {
-        if !localPlayer.authenticated {
+    func authLocalPlayer(_ vc: UIViewController) {
+        if !localPlayer.isAuthenticated {
             
             localPlayer.authenticateHandler = {(viewController, error) -> Void in
                 if viewController != nil {
                     // Show scene
-                    vc.presentViewController(viewController, animated: true, completion: nil)
+                    vc.present(viewController!, animated: true, completion: nil)
                 } else {
-                    print((GKLocalPlayer.localPlayer().authenticated))
+                    print((GKLocalPlayer.localPlayer().isAuthenticated))
                 }
             }
         }
     }
     
     func isAuthed() -> Bool {
-        if localPlayer.authenticated{
+        if localPlayer.isAuthenticated{
             return true
         }
         return false

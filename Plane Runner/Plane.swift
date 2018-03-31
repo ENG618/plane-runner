@@ -10,8 +10,8 @@ import SpriteKit
 
 class Plane {
     
-    private let textureNames: [String]
-    private var planeNode: SKSpriteNode
+    fileprivate let textureNames: [String]
+    fileprivate var planeNode: SKSpriteNode
     
     var position:CGPoint {
         get {
@@ -40,10 +40,10 @@ class Plane {
         return planeNode
     }
     
-    private func setPhysics(plane: SKSpriteNode) {
+    fileprivate func setPhysics(_ plane: SKSpriteNode) {
         
-        plane.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(plane.size.width, plane.size.height))
-        plane.physicsBody?.dynamic = true
+        plane.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: plane.size.width, height: plane.size.height))
+        plane.physicsBody?.isDynamic = true
         plane.physicsBody?.allowsRotation = false
         plane.physicsBody?.restitution = 0.0
         plane.physicsBody?.categoryBitMask = PhysicsCategory.Plane
@@ -64,7 +64,7 @@ class Plane {
         return planeNode
     }
     
-    private func animate() {
+    fileprivate func animate() {
         // Animate plans propeller
         let animation = SKAction.animateWithTextures(textureNames, timePerFrame: 0.05)
         let makePropellerSpin = SKAction.repeatActionForever(animation)

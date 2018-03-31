@@ -47,43 +47,43 @@ class LevelManager {
     var secondThreeStars: Int = 0
     
     // User Defaults
-    let defaults = NSUserDefaults.standardUserDefaults()
+    let defaults = UserDefaults.standard
     
     // Achievement Bools
     var didFly1000: Bool = false
     
     func load() {
         // Load totals
-        totalDistance = defaults.integerForKey(PRTotalDistanceKey)
-        totalStarsCollected = defaults.integerForKey(PRTotalStarsKey)
+        totalDistance = defaults.integer(forKey: PRTotalDistanceKey)
+        totalStarsCollected = defaults.integer(forKey: PRTotalStarsKey)
         
         // Load level data
-        firstOneStars = defaults.integerForKey(PRStarsForStageOneLevelOneKey)
-        firstTwoStars = defaults.integerForKey(PRStarsForStageOneLevelTwoKey)
-        firstThreeStars = defaults.integerForKey(PRStarsForStageOneLevelThreeKey)
-        secondOneStars = defaults.integerForKey(PRStarsForStageTwoLevelOneKey)
-        secondTwoStars = defaults.integerForKey(PRStarsForStageTwoLevelTwoKey)
-        secondThreeStars = defaults.integerForKey(PRStarsForStageTwoLevelthereKey)
+        firstOneStars = defaults.integer(forKey: PRStarsForStageOneLevelOneKey)
+        firstTwoStars = defaults.integer(forKey: PRStarsForStageOneLevelTwoKey)
+        firstThreeStars = defaults.integer(forKey: PRStarsForStageOneLevelThreeKey)
+        secondOneStars = defaults.integer(forKey: PRStarsForStageTwoLevelOneKey)
+        secondTwoStars = defaults.integer(forKey: PRStarsForStageTwoLevelTwoKey)
+        secondThreeStars = defaults.integer(forKey: PRStarsForStageTwoLevelthereKey)
         
-        didFly1000 = defaults.boolForKey(PRDidFly1000Key)
+        didFly1000 = defaults.bool(forKey: PRDidFly1000Key)
         
         loadAchievements()
     }
     
     func save() {
         // Save totals
-        defaults.setInteger(totalDistance, forKey: PRTotalDistanceKey)
-        defaults.setInteger(totalStarsCollected, forKey: PRTotalStarsKey)
+        defaults.set(totalDistance, forKey: PRTotalDistanceKey)
+        defaults.set(totalStarsCollected, forKey: PRTotalStarsKey)
         
         // Save level data
-        defaults.setInteger(firstOneStars, forKey: PRStarsForStageOneLevelOneKey)
-        defaults.setInteger(firstTwoStars, forKey: PRStarsForStageOneLevelTwoKey)
-        defaults.setInteger(firstThreeStars, forKey: PRStarsForStageOneLevelThreeKey)
-        defaults.setInteger(secondOneStars, forKey: PRStarsForStageTwoLevelOneKey)
-        defaults.setInteger(secondTwoStars, forKey: PRStarsForStageTwoLevelTwoKey)
-        defaults.setInteger(secondThreeStars, forKey: PRStarsForStageTwoLevelthereKey)
+        defaults.set(firstOneStars, forKey: PRStarsForStageOneLevelOneKey)
+        defaults.set(firstTwoStars, forKey: PRStarsForStageOneLevelTwoKey)
+        defaults.set(firstThreeStars, forKey: PRStarsForStageOneLevelThreeKey)
+        defaults.set(secondOneStars, forKey: PRStarsForStageTwoLevelOneKey)
+        defaults.set(secondTwoStars, forKey: PRStarsForStageTwoLevelTwoKey)
+        defaults.set(secondThreeStars, forKey: PRStarsForStageTwoLevelthereKey)
         
-        defaults.setBool(didFly1000, forKey: PRDidFly1000Key)
+        defaults.set(didFly1000, forKey: PRDidFly1000Key)
     }
 }
 
@@ -95,40 +95,40 @@ extension LevelManager {
         self.starsCollected = 0
     }
     
-    func updateStars(level: StageLevel) {
+    func updateStars(_ level: StageLevel) {
         switch level {
             
-        case .FirstOne:
+        case .firstOne:
             if starsCollected > firstOneStars {
                 // Update total stars
                 totalStarsCollected = totalStarsCollected - firstOneStars + starsCollected
                 // Update level stars
                 firstOneStars = starsCollected
                 submitStarsLeaderboard()
-                submitProgress(Achievements.LevelOne)
+                submitProgress(Achievements.levelOne)
             }
             
-        case .FirstTwo:
+        case .firstTwo:
             if starsCollected > firstTwoStars {
                 // Update total stars
                 totalStarsCollected = totalStarsCollected - firstTwoStars + starsCollected
                 // Update level stars
                 firstTwoStars = starsCollected
                 submitStarsLeaderboard()
-                submitProgress(Achievements.LevelTwo)
+                submitProgress(Achievements.levelTwo)
             }
-            submitProgress(Achievements.LevelTwo)
-        case .FirstThree:
+            submitProgress(Achievements.levelTwo)
+        case .firstThree:
             if starsCollected > firstThreeStars {
                 // Update total stars
                 totalStarsCollected = totalStarsCollected - firstThreeStars + starsCollected
                 // Update level stars
                 firstThreeStars = starsCollected
                 submitStarsLeaderboard()
-                submitProgress(Achievements.LevelThree)
+                submitProgress(Achievements.levelThree)
             }
             
-        case .SecondOne:
+        case .secondOne:
             if starsCollected > secondOneStars {
                 // Update total stars
                 totalStarsCollected = totalStarsCollected - secondOneStars + starsCollected
@@ -137,7 +137,7 @@ extension LevelManager {
                 submitStarsLeaderboard()
             }
             
-        case .SecondTwo:
+        case .secondTwo:
             print("2-2 needs to be set up")
             if starsCollected > secondTwoStars {
                 // Update total stars
@@ -147,7 +147,7 @@ extension LevelManager {
                 submitStarsLeaderboard()
             }
             
-        case .SecondThree:
+        case .secondThree:
             print("2-3 needs to be set up")
             if starsCollected > secondThreeStars {
                 // Update total stars
@@ -170,17 +170,17 @@ extension LevelManager {
             print("Saving Stars high Score")
             
             // Report total stars
-            let starReporter = GKScore(leaderboardIdentifier: Leaderboard.TotalStars.id)
+            let starReporter = GKScore(leaderboardIdentifier: Leaderboard.totalStars.id)
             
             starReporter.value = Int64(totalStarsCollected)
             
             var starArray: [GKScore] = [starReporter]
             
-            GKScore.reportScores(starArray, withCompletionHandler: {(error: NSError?) -> Void in
+            GKScore.report(starArray, withCompletionHandler: {(error: NSError?) -> Void in
                 if error != nil {
-                    print("Stars LEaderboard error: \(error.description)")
+                    print("Stars LEaderboard error: \(error?.description)")
                 }
-            })
+            } as! (Error?) -> Void)
         }
     }
     
@@ -189,36 +189,36 @@ extension LevelManager {
             print("Saving distance high Score")
             
             // Report updated total distance flown
-            let distanceReporter = GKScore(leaderboardIdentifier: Leaderboard.TotalDistance.id)
+            let distanceReporter = GKScore(leaderboardIdentifier: Leaderboard.totalDistance.id)
             
             distanceReporter.value = Int64(totalDistance)
             
             var distanceArray: [GKScore] = [distanceReporter]
             
-            GKScore.reportScores(distanceArray, withCompletionHandler: { (error: NSError?) -> Void in
+            GKScore.report(distanceArray, withCompletionHandler: { (error: NSError?) -> Void in
                 if error != nil {
-                    print("Distance Leaderboard error: \(error.description)")
+                    print("Distance Leaderboard error: \(error?.description)")
                 }
-            })
+            } as! (Error?) -> Void)
         }
-        submitProgress(Achievements.Fly1000)
+        submitProgress(Achievements.fly1000)
     }
     
     func loadAchievements() {
         
-        GKAchievement.loadAchievementsWithCompletionHandler({ (achievements: [GKAchievement]?, error: NSError?) -> Void in
+        GKAchievement.loadAchievements(completionHandler: { (achievements: [GKAchievement]?, error: NSError?) -> Void in
             if error != nil {
-                print("Achievements error: \(error.description)")
+                print("Achievements error: \(error?.description)")
             } else {
                 if let recievedAchievements = achievements as? [GKAchievement] {
                     for item in recievedAchievements {
-                        self.player.achievementStrings.append(item.identifier)
+                        self.player.achievementStrings.append(item.identifier!)
                     }
                 }
                 if achievements != nil {
-                    for anAchievement in achievements {
+                    for anAchievement in achievements! {
                         if let achievement = anAchievement as? GKAchievement {
-                            self.player.achievementStrings.append(achievement.identifier)
+                            self.player.achievementStrings.append(achievement.identifier!)
                         }
                         //                    let saveableAchievement = (achievement.identifier, achievement)
                         //                    self.player.achievements.append(saveableAchievement)
@@ -226,14 +226,14 @@ extension LevelManager {
                     }
                 }
             }
-        })
+        } as! ([GKAchievement]?, Error?) -> Void)
     }
     
-    func achievementProgress(numStars: Int, achievement: GKAchievement) -> GKAchievement {
+    func achievementProgress(_ numStars: Int, achievement: GKAchievement) -> GKAchievement {
         
         // Check if stage one is completed
         if firstOneStars == 3 && firstTwoStars == 3 && firstThreeStars == 3 {
-            submitProgress(Achievements.StageOne)
+            submitProgress(Achievements.stageOne)
         }
         
         // Determin percent completed
@@ -253,7 +253,7 @@ extension LevelManager {
         }
     }
     
-    func submitProgress(achievement: Achievements) {
+    func submitProgress(_ achievement: Achievements) {
         
         if player.isAuthed() == false {
             return // stop function is player is not authed
@@ -264,29 +264,29 @@ extension LevelManager {
         
         switch achievement {
             
-        case .LevelOne:
+        case .levelOne:
             let current = GKAchievement(identifier: achievement.id)
             current.showsCompletionBanner = true
             achieveUpdateArray.append(achievementProgress(firstOneStars, achievement: current))
             
-        case .LevelTwo:
+        case .levelTwo:
             let current = GKAchievement(identifier: achievement.id)
             current.showsCompletionBanner = true
             achieveUpdateArray.append(achievementProgress(firstTwoStars, achievement: current))
             
-        case .LevelThree:
+        case .levelThree:
             let current = GKAchievement(identifier: achievement.id)
             current.showsCompletionBanner = true
             achieveUpdateArray.append(achievementProgress(firstThreeStars, achievement: current))
             
-        case .StageOne:
+        case .stageOne:
             if firstOneStars == 3 && firstTwoStars == 3 && firstThreeStars == 3 {
                 let completedAchievement = GKAchievement(identifier: achievement.id)
                 completedAchievement.showsCompletionBanner = true
                 completedAchievement.percentComplete = Double(100.00)
                 achieveUpdateArray.append(completedAchievement)
             }
-        case .Fly1000:
+        case .fly1000:
             let fly1000 = GKAchievement(identifier: achievement.id)
             fly1000.showsCompletionBanner = true
             
@@ -303,7 +303,7 @@ extension LevelManager {
         }
         
         if achieveUpdateArray.count > 0 {
-            GKAchievement.reportAchievements(achieveUpdateArray, withCompletionHandler: nil)
+            GKAchievement.report(achieveUpdateArray, withCompletionHandler: nil)
         }
     }
     

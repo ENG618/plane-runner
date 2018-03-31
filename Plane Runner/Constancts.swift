@@ -52,36 +52,36 @@ let GameFont = "kenvector_future-thin.tff"
 let BlurAmount = 10.0
 
 enum Star {
-    case Empty
-    case Bronze
-    case Silver
-    case Gold
+    case empty
+    case bronze
+    case silver
+    case gold
 }
 
 enum StageLevel {
     // First Stage
-    case FirstOne
-    case FirstTwo
-    case FirstThree
+    case firstOne
+    case firstTwo
+    case firstThree
     // Second Stage
-    case SecondOne
-    case SecondTwo
-    case SecondThree
+    case secondOne
+    case secondTwo
+    case secondThree
     
     var name: String {
         get {
             switch (self) {
-            case .FirstOne:
+            case .firstOne:
                 return "Level1-01"
-            case .FirstTwo:
+            case .firstTwo:
                 return "Level1-02"
-            case .FirstThree:
+            case .firstThree:
                 return "Level1-03"
-            case .SecondOne:
+            case .secondOne:
                 return "Level2-01"
-            case .SecondTwo:
+            case .secondTwo:
                 return "Level2-02"
-            case .SecondThree:
+            case .secondThree:
                 return "Level2-03"
             }
         }
@@ -89,37 +89,37 @@ enum StageLevel {
 }
 
 enum Leaderboard {
-    case TotalStars
-    case TotalDistance
+    case totalStars
+    case totalDistance
     
     var id: String {
         switch self {
-        case .TotalStars:
+        case .totalStars:
             return "planeRunnerLeaderboardTotalStars"
-        case .TotalDistance:
+        case .totalDistance:
             return "totalDistanceFlown"
         }
     }
 }
 
 enum Achievements {
-    case LevelOne
-    case LevelTwo
-    case LevelThree
-    case StageOne
-    case Fly1000
+    case levelOne
+    case levelTwo
+    case levelThree
+    case stageOne
+    case fly1000
     
     var id: String {
         switch (self) {
-        case .LevelOne:
+        case .levelOne:
             return "levelOneCompleted"
-        case .LevelTwo:
+        case .levelTwo:
             return "levelTwoCompleted"
-        case .LevelThree:
+        case .levelThree:
             return "levelThreeCompleted"
-        case .StageOne:
+        case .stageOne:
             return "stageOneCompleted"
-        case .Fly1000:
+        case .fly1000:
             return "fly100Meters"
         }
     }
