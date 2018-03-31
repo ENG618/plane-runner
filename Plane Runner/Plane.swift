@@ -11,6 +11,7 @@ import SpriteKit
 class Plane {
     
     fileprivate let textureNames: [String]
+    fileprivate var textures: [SKTexture] = []
     fileprivate var planeNode: SKSpriteNode
     
     var position:CGPoint {
@@ -24,6 +25,19 @@ class Plane {
     
     init(textureNames: [String]) {
         self.textureNames = textureNames
+        
+        
+        for textureName in textureNames {
+            let texture = SKTexture(imageNamed: textureName)
+            textures.append(texture)
+        }
+        
+        
+        
+        
+        
+        
+        
 //        plane = SKSpriteNode(imageNamed: textureNames.first!)
         let planeTexture = SKTexture(imageNamed: textureNames.first!)
         planeNode = SKSpriteNode(texture: planeTexture)
@@ -66,8 +80,11 @@ class Plane {
     
     fileprivate func animate() {
         // Animate plans propeller
-        let animation = SKAction.animateWithTextures(textureNames, timePerFrame: 0.05)
-        let makePropellerSpin = SKAction.repeatActionForever(animation)
-        planeNode.runAction(makePropellerSpin)
+//        let animation = SKAction.animateWithTextures(textureNames, timePerFrame: 0.05)
+//        let animation = SKAction.animate(withNormalTextures: textureNames, timePerFrame: 0.05)
+        let animation = SKAction.animate(with: textures, timePerFrame: 0.05)
+        
+        let makePropellerSpin = SKAction.repeatForever(animation)
+        planeNode.run(makePropellerSpin)
     }
 }

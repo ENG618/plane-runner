@@ -320,11 +320,17 @@ extension LevelScene {
             let rockPath = CGMutablePath()
             
             // Bottom left of rock
-            CGPathMoveToPoint(rockPath, nil, -rockNode.size.width/2, -rockNode.size.height/2)
+//            CGPathMoveToPoint(rockPath, nil, -rockNode.size.width/2, -rockNode.size.height/2)
+            rockPath.move(to: CGPoint(x: -rockNode.size.width/2, y: -rockNode.size.height/2))
+            
+            
+            
             // Top middle of rock
-            CGPathAddLineToPoint(rockPath, nil, 10, rockNode.size.height/2)
+//            CGPathAddLineToPoint(rockPath, nil, 10, rockNode.size.height/2)
+            rockPath.move(to: CGPoint(x: 10, y: rockNode.size.height/2))
             // Bottom right of rock
-            CGPathAddLineToPoint(rockPath, nil, rockNode.size.width/2, -rockNode.size.height/2)
+//            CGPathAddLineToPoint(rockPath, nil, rockNode.size.width/2, -rockNode.size.height/2)
+            rockPath.addLine(to: CGPoint(x: rockNode.size.width/2, y: -rockNode.size.height/2))
             // Close path
             rockPath.closeSubpath()
             
@@ -363,11 +369,16 @@ extension LevelScene {
             let rockDownPath = CGMutablePath()
             
             // Top left of rockDown
-            CGPathMoveToPoint(rockDownPath, nil, -rockDownNode.size.width/2, rockDownNode.size.height/2)
+//            CGPathMoveToPoint(rockDownPath, nil, -rockDownNode.size.width/2, rockDownNode.size.height/2)
+            rockDownPath.move(to: CGPoint(x: -rockDownNode.size.width/2, y: rockDownNode.size.height/2))
+            
+            
             // Bottom middle of rockDown
-            CGPathAddLineToPoint(rockDownPath, nil, 10, -rockDownNode.size.height/2)
+//            CGPathAddLineToPoint(rockDownPath, nil, 10, -rockDownNode.size.height/2)
+            rockDownPath.move(to: CGPoint(x: 10, y: -rockDownNode.size.height/2))
             // Top right of rockDown
-            CGPathAddLineToPoint(rockDownPath, nil, rockDownNode.size.width/2, rockDownNode.size.height/2)
+//            CGPathAddLineToPoint(rockDownPath, nil, rockDownNode.size.width/2, rockDownNode.size.height/2)
+            rockDownPath.addLine(to: CGPoint(x: rockDownNode.size.width/2, y: rockDownNode.size.height/2))
             // Close path
             rockDownPath.closeSubpath()
             

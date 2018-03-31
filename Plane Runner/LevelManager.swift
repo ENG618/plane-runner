@@ -174,13 +174,13 @@ extension LevelManager {
             
             starReporter.value = Int64(totalStarsCollected)
             
-            var starArray: [GKScore] = [starReporter]
+            let starArray: [GKScore] = [starReporter]
             
             GKScore.report(starArray, withCompletionHandler: {(error: NSError?) -> Void in
                 if error != nil {
-                    print("Stars LEaderboard error: \(error?.description)")
+                    print("Stars LEaderboard error: \(String(describing: error?.description))")
                 }
-            } as! (Error?) -> Void)
+                } as? (Error?) -> Void)
         }
     }
     
@@ -193,13 +193,13 @@ extension LevelManager {
             
             distanceReporter.value = Int64(totalDistance)
             
-            var distanceArray: [GKScore] = [distanceReporter]
+            let distanceArray: [GKScore] = [distanceReporter]
             
             GKScore.report(distanceArray, withCompletionHandler: { (error: NSError?) -> Void in
                 if error != nil {
-                    print("Distance Leaderboard error: \(error?.description)")
+                    print("Distance Leaderboard error: \(String(describing: error?.description))")
                 }
-            } as! (Error?) -> Void)
+                } as? (Error?) -> Void)
         }
         submitProgress(Achievements.fly1000)
     }
@@ -208,9 +208,9 @@ extension LevelManager {
         
         GKAchievement.loadAchievements(completionHandler: { (achievements: [GKAchievement]?, error: NSError?) -> Void in
             if error != nil {
-                print("Achievements error: \(error?.description)")
+                print("Achievements error: \(String(describing: error?.description))")
             } else {
-                if let recievedAchievements = achievements as? [GKAchievement] {
+                if let recievedAchievements = achievements {
                     for item in recievedAchievements {
                         self.player.achievementStrings.append(item.identifier!)
                     }
@@ -226,7 +226,7 @@ extension LevelManager {
                     }
                 }
             }
-        } as! ([GKAchievement]?, Error?) -> Void)
+            } as? ([GKAchievement]?, Error?) -> Void)
     }
     
     func achievementProgress(_ numStars: Int, achievement: GKAchievement) -> GKAchievement {
